@@ -7,14 +7,14 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import welcomeReducer from './welcome/welcome-reducer';
 import createSagaMiddleware from 'redux-saga';
-import authentication from './welcome/authentication-saga';
+//import authentication from './welcome/authentication-saga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(welcomeReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
-sagaMiddleware.run(authentication);
+//sagaMiddleware.run(authentication);
 
 ReactDOM.render(
 	<Provider store={store}>

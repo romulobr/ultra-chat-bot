@@ -290,7 +290,7 @@ module.exports = {
 							],
 							cacheDirectory: true,
 							// Save disk space when time isn't as important
-							cacheCompression: true,
+							cacheCompression: false,
 							compact: true
 						}
 					},

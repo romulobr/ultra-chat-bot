@@ -7,8 +7,9 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/server/app.js"
+            "cwd": "${workspaceFolder}/server",
+            "name": "Debug server",
+            "program": "${workspaceFolder}/server/src/index.js"
         }
     ]
 }

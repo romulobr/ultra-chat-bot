@@ -1,11 +1,11 @@
-const { authenticate } = require("@feathersjs/authentication").hooks;
-const userReader = require("./user-reader");
+const { authenticate } = require('@feathersjs/authentication').hooks;
+const userReader = require('./user-reader');
 
 module.exports = {
   before: {
     all: [],
     find: [
-      authenticate("jwt"),
+      authenticate('jwt'),
       context => {
         if (context.arguments[0].user) {
           context.params.query = {
@@ -15,18 +15,18 @@ module.exports = {
         }
       }
     ],
-    get: [authenticate("jwt")],
+    get: [authenticate('jwt')],
     create: [],
-    update: [authenticate("jwt")],
-    patch: [authenticate("jwt")],
-    remove: [authenticate("jwt")]
+    update: [authenticate('jwt')],
+    patch: [authenticate('jwt')],
+    remove: [authenticate('jwt')]
   },
 
   after: {
     all: [],
     find: [
       context => {
-        context.result = userReader.getUserIn(context.arguments[0].user);
+        context.result = userReader.getSimplifiedUserIn(context.result.data[0]);
       }
     ],
     get: [],

@@ -5,9 +5,10 @@ const defaultState = {
 function welcomeReducer(state, action) {
 	switch (action.type) {
 		case 'AUTHENTICATION_SUCCESS': {
+			console.log('success:',action);
 			return {
 				connected: true,
-				user: action.user
+				user: {...action}
 			};
 		}
 		case 'AUTHENTICATION_FAILED': {
