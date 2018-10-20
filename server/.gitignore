@@ -1,7 +1,8 @@
 public-ui/build
 server/config
-server/public
+server/public/static
 server/twitch-credentials.js
+server/node_modules
 # Logs
 logs
 *.log

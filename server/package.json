@@ -26,7 +26,8 @@
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "dev": "nodemon src/",
     "start": "node src/",
-    "mocha": "mocha test/ --recursive --exit"
+    "mocha": "mocha test/ --recursive --exit",
+    "watch": "mocha test/ --recursive --watch"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.11",
@@ -46,10 +47,13 @@
     "passport-google-oauth20": "^1.0.0",
     "passport-twitch.js": "0.0.2",
     "serve-favicon": "^2.5.0",
+    "sinon": "^7.0.0",
     "winston": "^3.1.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "eslint": "^5.7.0",
+    "expect.js": "^0.3.1",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
     "request": "^2.88.0",

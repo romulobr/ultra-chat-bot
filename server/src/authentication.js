@@ -3,6 +3,7 @@ const jwt = require('@feathersjs/authentication-jwt');
 
 const oauth2 = require('@feathersjs/authentication-oauth2');
 const TwitchStrategy = require('passport-twitch.js').Strategy;
+const YoutubeV3Strategy = require('passport-youtube-v3').Strategy;
 
 module.exports = function (app) {
   const config = app.get('authentication');
@@ -15,6 +16,11 @@ module.exports = function (app) {
     name: 'twitch',
     Strategy: TwitchStrategy
   }, config.twitch)));
+
+  app.configure(oauth2(Object.assign({
+    name: 'youtube',
+    Strategy: YoutubeV3Strategy
+  }, config.youtube)));
 
   // The `authentication` service is used to create a JWT.
   // The before `create` hook registers strategies that can be used

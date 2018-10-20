@@ -27,6 +27,12 @@
 			"successRedirect": "/index.html",
 			"scope": [ "chat_login user:read:email user_read" ]
 		},
+		"youtube": {
+			"clientID": "255569712867-eaan91sirn5qi050gu4s29rl3tjjoemp.apps.googleusercontent.com",
+			"clientSecret": "gk32SorWn1bQvl2FJkcDmPDr",
+			"successRedirect": "/index.html",
+			"scope": [ "https://www.googleapis.com/auth/youtube" ]
+		},
 		"cookie": {
 			"enabled": true,
 			"name": "feathers-jwt",
