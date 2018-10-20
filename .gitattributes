@@ -1,2 +1,1 @@
-* text=auto
-git config --global core.eol lf
+* text=auto eol=lf
