@@ -10,17 +10,13 @@ function toMediaItemJSX(item, index) {
       className="media-panel media-panel__media-item"
       key={'media-item-' + index}
     >
-      <div className="media-panel__media-item__delete-button">
-      Delete
-      </div>
+      <div className="media-panel__media-item__delete-button">Delete</div>
       <MyInput
         className="media-panel__media-item__command"
         name={'media-item-command-' + index}
         value={item.command}
       />
-      <div className="media-panel__media-item__arrow">
-      >
-      </div>
+      <div className="media-panel__media-item__arrow">➡</div>
       <MyInput
         className="media-panel__media-item__url"
         name={'media-item-url-' + index}
@@ -61,13 +57,13 @@ class MediaPanel extends Component {
     //console.log('props: ', this.props);
     return (
       <div className="media-panel">
-        <h2>Media</h2>
+        <h2>Media List</h2>
         <Formsy
           onValidSubmit={this.submit}
           onValid={this.enableButton}
           onInvalid={this.disableButton}
         >
-          <div className="media-panel__media-list">
+          <div className="media-panel__media-list">            
             {this.renderItems(this.props.items)}
           </div>
           <button>New</button>
