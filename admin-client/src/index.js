@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import welcomeReducer from './welcome/welcome-reducer';
+import authenticationReducer from './authentication/authentication-reducer';
+import mediaReducer from './media/media-reducer';
 import createSagaMiddleware from 'redux-saga';
-//import authentication from './welcome/authentication-saga';
+import authentication from './authentication/authentication-saga';
+import { reducer as formReducer } from 'redux-form'
 
 const sagaMiddleware = createSagaMiddleware();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(welcomeReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
+const store = createStore(combineReducers({authentication:authenticationReducer,media:mediaReducer,form:formReducer}), composeEnhancers(applyMiddleware(sagaMiddleware)));
 
-//sagaMiddleware.run(authentication);
+sagaMiddleware.run(authentication);
 
 ReactDOM.render(
 	<Provider store={store}>

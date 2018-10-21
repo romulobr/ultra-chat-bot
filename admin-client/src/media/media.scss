@@ -1,0 +1,55 @@
+.media-panel {
+  padding: 16px;
+
+  &__media-item {
+    display: flex;
+    width:100%;
+    margin: 2px 0 0 10px;
+    border: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    float: left;
+
+    &__command {
+      min-width: 100px;
+      width: 10%;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    &__url {
+        border-radius: 8px;
+        min-width: 200px;
+        width: 80%;
+        text-align: center;
+    }
+    
+    &__delete-button{
+        border-radius: 16px 0 0 16px;
+        min-width: 20px;
+        min-height: 20px;
+        background-color: #661111;
+        color:white;
+        border: solid 1px #dddddd;
+        text-align: center;        
+        padding: 0 16px;
+        margin: 2px;
+    }
+    
+    &__arrow{
+        min-width: 20px;
+        min-height: 20px;
+        border-radius: 50%;
+        background-color: #dddddd;
+        border: solid 1px white;
+        text-align: center;
+        font-weight: bolder;
+    }
+  }
+
+  button {
+    margin: 16px 16px;
+    width: 30%;
+  }
+}

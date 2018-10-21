@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './welcome.scss';
+import './authentication.scss';
 import deauthenticate from './deauthentication';
 import { connect } from 'react-redux';
 
-class WelcomePanel extends Component {
+class AuthenticationPanel extends Component {
   componentDidMount() {
-    // this.props.authenticate();
+    this.props.authenticate();
   }
   render() {
     return (
@@ -58,4 +58,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(WelcomePanel);
+)(AuthenticationPanel);

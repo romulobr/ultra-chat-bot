@@ -2,13 +2,13 @@ const defaultState = {
 	connected: false
 };
 
-function welcomeReducer(state, action) {
+function authenticationReducer(state, action) {
 	switch (action.type) {
 		case 'AUTHENTICATION_SUCCESS': {
 			console.log('success:',action);
 			return {
 				connected: true,
-				user: {...action}
+				user: action.user
 			};
 		}
 		case 'AUTHENTICATION_FAILED': {
@@ -27,4 +27,4 @@ function welcomeReducer(state, action) {
 	}
 }
 
-export default welcomeReducer;
+export default authenticationReducer;
