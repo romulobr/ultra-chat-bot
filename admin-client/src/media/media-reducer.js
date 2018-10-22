@@ -1,36 +1,5 @@
 const defaultState = {
-  items: [
-    {
-      command: '0',
-      url:
-        'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
-    },
-    {
-      command: '1',
-      url:
-        'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
-    },
-    {
-      command: '2',
-      url:
-        'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
-    },
-    {
-      command: '3',
-      url:
-        'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
-    },
-    {
-      command: '4',
-      url:
-        'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
-    },
-    {
-      command: '5',
-      url:
-        'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
-    }
-  ]
+  items: []
 };
 
 function mediaReducer(state, action) {
@@ -45,12 +14,21 @@ function mediaReducer(state, action) {
     }
     case 'DELETE_MEDIA_ITEM': {
       console.log('deleted media:', action);
-      const newItems = state.items.slice(0,action.mediaIndex);
-      Array.prototype.push.apply(newItems,state.items.slice(action.mediaIndex+1,state.items.lenght-1));
+      const newItems = state.items.slice(0, action.mediaIndex);
+      Array.prototype.push.apply(
+        newItems,
+        state.items.slice(action.mediaIndex + 1, state.items.lenght - 1)
+      );
       return {
         items: newItems
       };
-    }    
+    }
+    case 'MEDIA_FETCHED': {
+      console.log('fetched media items:', action.items);
+      return {
+        items: action.items
+      };
+    }
     default:
       return state || defaultState;
   }

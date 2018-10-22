@@ -1,33 +1,40 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const userReader = require('./user-reader');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
-    find: [      
+    all: [authenticate('jwt')],
+    find: [
       context => {
         if (context.arguments[0].user) {
           context.params.query = {
-            _id: context.arguments[0].user._id,
+            ownerId: context.arguments[0].user._id,
             $limit: 1
           };
         }
       }
     ],
     get: [],
-    create: [],
-    update: [],
+    create: [
+      context => {
+        //console.log(context.params.user);
+        context.data.ownerId = context.params.user._id;
+        //console.log('creating media data:', context.data);
+      }
+    ],
+    update: [
+      context => {
+        //console.log(context.params.user);
+        context.data.ownerId = context.params.user._id;
+        //console.log('creating media data:', context.data);
+      }
+    ],
     patch: [],
     remove: []
   },
 
   after: {
     all: [],
-    find: [
-      context => {
-        context.result = userReader.getSimplifiedUserIn(context.result.data[0]);
-      }
-    ],
+    find: [],
     get: [],
     create: [],
     update: [],

@@ -16,6 +16,7 @@ function* authenticate() {
       headers: { Authorization: 'Bearer ' + jwt }
     });
     yield put({ type: 'AUTHENTICATION_SUCCESS', user: response.data });
+    yield put({ type: 'FETCH_MEDIA' });
     console.log('got a response:', response.data);
   } catch (e) {
     yield put({ type: 'AUTHENTICATION_FAILED', error: e });
