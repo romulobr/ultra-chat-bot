@@ -56,18 +56,24 @@
     }
 
     &__delete-button {
-      border-radius: 16px 0 0 16px;
+      border-radius: 16px;
+      text-align: center;
       text-overflow: clip;
       overflow: hidden;
       white-space: nowrap;
-      min-width: 40px;
+      min-width: 60px;
       line-height: 40px;
       color: black;
       background-color: #eeeeee;
       border: solid 1px #aaaaaa;
       text-align: center;
-      padding: 0 16px;
-      margin: 0 10px 0 0;
+      padding: 0 8px;
+      margin: 0 10px;
+      cursor: pointer;
+      &:hover{
+        background-color: #ffdddd;
+        cursor: pointer;
+      }
     }
 
     &__arrow {
@@ -83,7 +89,21 @@
   }
 
   button {
-    margin: 16px 16px;
-    width: 30%;
+    border-radius: 16px;
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+    min-width: 40px;
+    line-height: 32px;
+    color: black;
+    background-color: #eeeeee;
+    border: solid 1px #aaaaaa;
+    text-align: center;
+    padding: 0 64px;
+    margin: 0 10px;
+    &:hover {
+      background-color: #ddffdd;
+      cursor: pointer;
+    }
   }
 }

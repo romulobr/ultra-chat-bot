@@ -1,32 +1,32 @@
 const defaultState = {
   items: [
     {
-      command: 'ai',
+      command: '0',
       url:
         'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
     },
     {
-      command: 'churrasqueira',
+      command: '1',
       url:
         'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
     },
     {
-      command: 'fogo',
+      command: '2',
       url:
         'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
     },
     {
-      command: 'churrasqueira',
+      command: '3',
       url:
         'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
     },
     {
-      command: 'aiai',
+      command: '4',
       url:
         'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
     },
     {
-      command: 'aiaiai',
+      command: '5',
       url:
         'https://shapeshed.com/examples/HTML5-video-element/video/320x240.m4v'
     }
