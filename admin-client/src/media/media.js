@@ -15,14 +15,13 @@ class MediaPanel extends Component {
     this.toMediaItemJSX = this.toMediaItemJSX.bind(this);
     this.submit = this.submit.bind(this);
     this.state = {
-      
-      items: this.props.items || []
+      items: this.props.items
     };
   }
 
-  componentWillReceiveProps(nextProps){
-    this.setState ({      
-      items: nextProps.items || []
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      items: nextProps.items
     });
   }
   toMediaItemJSX(item, index) {
@@ -73,16 +72,29 @@ class MediaPanel extends Component {
     };
   }
 
-  submit() {
-    this.props.saveMediaList(this.state.items);
-  }
-
   disableButton() {
     this.setState({ canSubmit: false });
   }
 
   enableButton() {
     this.setState({ canSubmit: true });
+  }
+
+  submit(model) {
+    let index = 0;
+    function modelToItems(model) {
+      const items = [];
+      for (index = 0; index < Object.keys(model).length / 2; index++) {
+        items.push({
+          command: model['media-item-command-' + index],
+          url: model['media-item-url-' + index]
+        });
+      }
+      return items;
+    }
+    const items = modelToItems(model);
+    console.log('model to items:', model, '\n\nitems:', items, '\n\n\n');
+    this.props.saveMedia(items);
   }
 
   renderItems(items) {
@@ -99,12 +111,16 @@ class MediaPanel extends Component {
           onValidSubmit={this.submit}
           onValid={this.enableButton}
           onInvalid={this.disableButton}
+          onSubmit={this.submit}
         >
           <div className="media-panel__media-list">
             {this.renderItems(this.state.items)}
           </div>
-          <button onClick={this.createMediaItem}>New</button>
-          <button disabled={!this.state.canSubmit}>
+          <button type="button" onClick={this.createMediaItem}>
+            New
+          </button>
+
+          <button type="submit" disabled={!this.state.canSubmit}>
             Save
           </button>
         </Formsy>
@@ -115,13 +131,14 @@ class MediaPanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    items: state.media.items
+    items: state.media.items || [],
+    user: state.users
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveMediaList: items => {
+    saveMedia: items => {
       dispatch({
         type: 'SAVE_MEDIA',
         items

@@ -13,6 +13,7 @@ function* fetchMedia(action) {
     const response = yield axios.get('http://localhost:3000/media', {
       headers: { Authorization: 'Bearer ' + jwt }
     });
+    console.log(response)
     yield put({ type: 'MEDIA_FETCHED', items:response.data.data[0].items });
     console.log(response);
   } catch (e) {

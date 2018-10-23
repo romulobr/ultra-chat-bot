@@ -6,7 +6,7 @@ function validateItems(items) {
   const validation = { hasErrors: false, items: [] };
   items.forEach(item => {
     if (!item.url || !item.command) {
-      validation.item.push({
+      validation.items.push({
         ...item,
         hasValidationError: true,
         validationError: 'no-blank'
@@ -20,7 +20,7 @@ function validateItems(items) {
 }
 
 function* saveMedia(action) {
-  console.log('trying to save media');
+  console.log('trying to save media \n\n',action);
   try {
     const validation = validateItems(action.items);
     if (validation.hasErrors) {
@@ -32,7 +32,8 @@ function* saveMedia(action) {
         yield put({ type: 'NOT_AUTHENTICATED' });
         return;
       }
-      const response = yield axios.post('http://localhost:3000/media', {items:action.items},{
+      console.log('action', action)
+      const response = yield axios.put('http://localhost:3000/media', {id:'macaco',items:action.items},{
         headers: { Authorization: 'Bearer ' + jwt }
       });
       yield put({ type: 'MEDIA_SAVED', response });

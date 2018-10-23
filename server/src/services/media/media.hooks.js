@@ -3,14 +3,15 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 function addUserToQuery(context) {
   if (context.arguments[0].user) {
     context.params.query = {
-      ownerId: context.arguments[0].user._id,
+      _id: context.arguments[0].user._id,
       $limit: 1
     };
+    context.params.mongodb = {upsert:true};
   }
 }
 
 function adduserIdToData(context) {
-  context.data.ownerId = context.params.user._id;
+  context.data._id = context.params.user._id;
 }
 
 module.exports = {
@@ -18,8 +19,11 @@ module.exports = {
     all: [authenticate('jwt')],
     find: [addUserToQuery],
     get: [addUserToQuery],
-    create: [adduserIdToData],
-    update: [adduserIdToData],
+    create: [adduserIdToData,addUserToQuery],
+    update: [(context)=>{
+      console.log('\n\n\n\n',context,'\n\n\n\n');
+      context.arguments.id=context.params.user._id;
+    }],
     patch: [],
     remove: []
   },
