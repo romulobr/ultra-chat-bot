@@ -3,6 +3,7 @@ server/config
 server/public/static
 server/twitch-credentials.js
 server/node_modules
+server/public
 # Logs
 logs
 *.log

@@ -20,7 +20,7 @@ function* fetchMedia(action) {
         items: getResponse.data.data[0].items
       });
     } else {
-      const postResponse = yield axios.post(
+      yield axios.post(
         'http://localhost:3000/media',
         { items: [] },
         {
