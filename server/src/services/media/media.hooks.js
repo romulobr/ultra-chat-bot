@@ -21,11 +21,14 @@ module.exports = {
     get: [addUserToQuery],
     create: [adduserIdToData,addUserToQuery],
     update: [(context)=>{
-      console.log('\n\n\n\n',context,'\n\n\n\n');
-      context.arguments.id=context.params.user._id;
+      context.id=context.params.user._id;
     }],
     patch: [],
-    remove: []
+    remove: [
+      (context)=>{
+        context.id=context.params.user._id;
+      }
+    ]
   },
 
   after: {

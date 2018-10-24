@@ -32,8 +32,8 @@ function* saveMedia(action) {
         yield put({ type: 'NOT_AUTHENTICATED' });
         return;
       }
-      console.log('action', action)
-      const response = yield axios.put('http://localhost:3000/media', {id:'macaco',items:action.items},{
+      console.log('saving media: ', action)
+      const response = yield axios.put('http://localhost:3000/media', {items:action.items},{
         headers: { Authorization: 'Bearer ' + jwt }
       });
       yield put({ type: 'MEDIA_SAVED', response });
