@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import authenticationReducer from './authentication/authentication-reducer';
 import mediaReducer from './media/media-reducer';
+import environmentReducer from './environment/environment-reducer';
 import createSagaMiddleware from 'redux-saga';
 import watchAuthentication from './authentication/authentication-saga';
 import watchSaveMedia from './media/save-media-saga';
@@ -20,7 +21,8 @@ const store = createStore(
   combineReducers({
     authentication: authenticationReducer,
     media: mediaReducer,
-    form: formReducer
+    form: formReducer,
+    environment: environmentReducer
   }),
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );

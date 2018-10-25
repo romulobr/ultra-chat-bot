@@ -19,6 +19,20 @@
   &__media-list {
     display: flex;
     flex-direction: column;
+
+    &__hidden {
+      display: none;
+    }
+  }
+
+  &__media-loading {
+    display: block;
+    img {
+      height: 100px;
+    }
+    &__hidden {
+      display: none;
+    }
   }
 
   &__media-list::after {
@@ -70,7 +84,7 @@
       padding: 0 8px;
       margin: 0 10px;
       cursor: pointer;
-      &:hover{
+      &:hover {
         background-color: #ffdddd;
         cursor: pointer;
       }
@@ -105,5 +119,9 @@
       background-color: #ddffdd;
       cursor: pointer;
     }
+  }
+
+  &__button__hidden{
+    display:none;
   }
 }

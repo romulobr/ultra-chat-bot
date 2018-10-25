@@ -2,5 +2,5 @@
 rm -rf server/public/
 cd server
 mkdir public
-cd ../admin-client
+cd ../web-app
 npm run build && cp -R ./build/* ../server/public/

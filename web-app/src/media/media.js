@@ -96,10 +96,22 @@ class MediaPanel extends Component {
     console.log('model to items:', model, '\n\nitems:', items, '\n\n\n');
     this.props.saveMedia(items);
   }
-
+  
   renderItems(items) {
     console.log('items:', items);
     return items ? items.map(this.toMediaItemJSX) : null;
+  }
+
+  getMediaListClass(props){
+    return props.loading ? 'media-panel__media-list__hidden' : 'media-panel__media-list';
+  }
+
+  getMediaLoadingClass(props){
+    return props.loading ? 'media-panel__media-loading' : 'media-panel__media-loading__hidden';
+  }
+
+  getButtonClass(props){
+    return props.loading ? 'media-panel__button__hidden' : 'media-panel__button'
   }
 
   render() {
@@ -113,14 +125,17 @@ class MediaPanel extends Component {
           onInvalid={this.disableButton}
           onSubmit={this.submit}
         >
-          <div className="media-panel__media-list">
+          <div className={this.getMediaLoadingClass(this.props)}>
+            <img src="/img/loading.gif" alt="loading spinner"></img>
+          </div>
+          <div className={this.getMediaListClass(this.props)}>
             {this.renderItems(this.state.items)}
           </div>
-          <button type="button" onClick={this.createMediaItem}>
+          <button className={this.getButtonClass(this.props)} disabled={this.props.loading} type="button" onClick={this.createMediaItem}>
             New
           </button>
 
-          <button type="submit" disabled={!this.state.canSubmit}>
+          <button className={this.getButtonClass(this.props)} type="submit" disabled={this.props.loading}>
             Save
           </button>
         </Formsy>
@@ -131,8 +146,8 @@ class MediaPanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    items: state.media.items || [],
-    user: state.users
+    ...state.media,
+    user: state.users,
   };
 }
 

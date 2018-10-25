@@ -7,17 +7,20 @@ class AuthenticationPanel extends Component {
   componentDidMount() {
     this.props.authenticate();
   }
+  getLoadingClassName(props) {
+    return props.loading
+      ? 'welcome-panel__status-bar'
+      : 'welcome-panel__status-bar welcome-panel__status-bar__hidden'
+  }
   getConnectedClassName(props) {
-    return props.user
-      ? `welcome-panel__status-bar welcome-panel__status-bar__${
-          props.user.origin
-        }`
+    return props.connected
+      ? `welcome-panel__status-bar welcome-panel__status-bar__${props.user.origin}`
       : 'welcome-panel__status-bar welcome-panel__status-bar__hidden';
   }
   getDisconnectedClassName(props) {
-    return props.user
-      ? 'welcome-panel__status-bar welcome-panel__status-bar__hidden'
-      : 'welcome-panel__status-bar';
+    return !props.connected && !props.loading
+      ? 'welcome-panel__status-bar'
+      : 'welcome-panel__status-bar welcome-panel__status-bar__hidden';
   }
   getImageDivStyle(props) {
     return props.user
@@ -27,14 +30,27 @@ class AuthenticationPanel extends Component {
   render() {
     return (
       <div className="welcome-panel">
+        <div className={this.getLoadingClassName(this.props)}>
+          <div
+            className={'welcome-panel__status-bar__disconnected-information'}
+          >
+            Checking connection...
+          </div>
+        </div>
         <div className={this.getDisconnectedClassName(this.props)}>
-          <div className={'welcome-panel__status-bar__disconnected-information'}>
+          <div
+            className={'welcome-panel__status-bar__disconnected-information'}
+          >
             You are not connected yet
           </div>
-          <div className={'welcome-panel__status-bar__disconnected-information'}>
+          <div
+            className={'welcome-panel__status-bar__disconnected-information'}
+          >
             <a href="/auth/twitch">Connect with twitch</a>
           </div>
-          <div className={'welcome-panel__status-bar__disconnected-information'}>
+          <div
+            className={'welcome-panel__status-bar__disconnected-information'}
+          >
             <a href="/auth/youtube">Connect with youtube</a>
           </div>
         </div>
