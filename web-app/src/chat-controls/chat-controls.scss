@@ -1,0 +1,24 @@
+.chat-controls{
+    &__button {
+        border-radius: 16px;
+        text-overflow: clip;
+        overflow: hidden;
+        white-space: nowrap;
+        min-width: 40px;
+        line-height: 32px;
+        color: black;
+        background-color: #eeeeee;
+        border: solid 1px #aaaaaa;
+        text-align: center;
+        padding: 0 64px;
+        margin: 0 10px;
+        &:hover {
+          background-color: #ddffdd;
+          cursor: pointer;
+        }
+      }
+    
+      &__button__hidden{
+        display:none;
+      }
+}
