@@ -2,8 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import cookies from 'browser-cookies';
 
-function* fetchMedia(action) {
-  console.log('trying to fetch media');
+function* fetchMedia() {
   try {
     const jwt = cookies.get('feathers-jwt');
     if (!jwt) {
@@ -13,7 +12,6 @@ function* fetchMedia(action) {
     const getResponse = yield axios.get('http://localhost:3000/media', {
       headers: { Authorization: 'Bearer ' + jwt }
     });
-    console.log('got a response fetching media:', getResponse);
     if (getResponse.data.data[0]) {
       yield put({
         type: 'MEDIA_FETCHED',

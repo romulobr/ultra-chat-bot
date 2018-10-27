@@ -65,6 +65,7 @@
 		"webpack": "4.19.1",
 		"webpack-dev-server": "3.1.9",
 		"webpack-manifest-plugin": "2.0.4",
+		"webpack-target-electron-renderer": "^0.4.0",
 		"workbox-webpack-plugin": "3.6.2"
 	},
 	"scripts": {
@@ -125,6 +126,9 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-		"electron": "^3.0.5"
+		"electron": "^3.0.5",
+		"electron-devtools-installer": "^2.2.4",
+		"electron-redux-devtools": "^0.3.4",
+		"webpack-externals-plugin": "^1.0.0"
 	}
 }

@@ -6,7 +6,6 @@ const defaultState = {
 function authenticationReducer(state, action) {
   switch (action.type) {
     case 'AUTHENTICATION_SUCCESS': {
-      console.log('success:', action);
       return {
         connected: true,
         loading: false,

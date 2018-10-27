@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 class ChatControls extends Component {
   render() {
     return (
-      <div class="chat-controls">
-        <h2> Chat Controls</h2>
-        <div> <img src="/img/chat.png"/></div>
+      <div className="chat-controls">
+        <div> <img src="/img/chat.png" alt="chat icon"/></div>
         <div> Disconnected </div>
-        <div> <button class="chat-controls__button">Connect</button> </div>
+        <div> <button onClick={this.props.connectToChat} className="chat-controls__button">Connect</button> </div>
       </div>
     );
   }
@@ -24,6 +23,7 @@ function mapStateToProps(state) {
   const mapDispatchToProps = dispatch => {
     return {
       connectToChat: () => {
+          console.log('connecting to chat');
         dispatch({
           type: 'CONNECT_TO_CHAT'
 

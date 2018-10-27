@@ -36,7 +36,6 @@ function mediaReducer(state, action) {
       };
     }
     case 'MEDIA_FETCHED': {
-      console.log('fetched media items:', action.items);
       return {
         loading: false,
         items: action.items

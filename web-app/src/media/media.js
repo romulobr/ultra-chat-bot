@@ -93,12 +93,10 @@ class MediaPanel extends Component {
       return items;
     }
     const items = modelToItems(model);
-    console.log('model to items:', model, '\n\nitems:', items, '\n\n\n');
     this.props.saveMedia(items);
   }
   
   renderItems(items) {
-    console.log('items:', items);
     return items ? items.map(this.toMediaItemJSX) : null;
   }
 
