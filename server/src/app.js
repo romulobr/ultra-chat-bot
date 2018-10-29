@@ -10,6 +10,9 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
+const {app} = require('electron');
+
+const request = require('request');
 
 const middleware = require('./middleware');
 const services = require('./services');
@@ -18,40 +21,45 @@ const channels = require('./channels');
 
 const authentication = require('./authentication');
 
-const mongodb = require('./mongodb');
+const mediaFolder = app.getPath('documents') + '/v3-media';
 
-const app = express(feathers());
+const expressApp = express(feathers());
 
 // Load app configuration
-app.configure(configuration());
+expressApp.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
-app.use(helmet());
-app.use(cors());
-app.use(compress());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
+expressApp.use(helmet());
+expressApp.use(cors());
+expressApp.use(compress());
+expressApp.use(express.json());
+expressApp.use(express.urlencoded({extended: true}));
+expressApp.use(favicon(path.join(expressApp.get('public'), 'favicon.ico')));
 // Host the public folder
-app.use('/', express.static(app.get('public')));
+// app.use('/', express.static(app.get('public')));
+
+expressApp.use('/media', express.static(mediaFolder));
 
 // Set up Plugins and providers
-app.configure(express.rest());
-app.configure(socketio());
-
-app.configure(mongodb);
+expressApp.configure(express.rest());
+expressApp.configure(socketio());
 
 // Configure other middleware (see `middleware/index.js`)
-app.configure(middleware);
-app.configure(authentication);
+expressApp.configure(middleware);
+expressApp.configure(authentication);
 // Set up our services (see `services/index.js`)
-app.configure(services);
+expressApp.configure(services);
 // Set up event channels (see channels.js)
-app.configure(channels);
+expressApp.configure(channels);
 
 // Configure a middleware for 404s and the error handler
-app.use(express.notFound());
-app.use(express.errorHandler({ logger }));
+expressApp.use('*', function (req, res) {
+  //modify the url in any way you want
+  var newurl = 'http://localhost:3001' + req.baseUrl;
+  request(newurl).pipe(res);
+});
+expressApp.use(express.notFound());
+expressApp.use(express.errorHandler({logger}));
 
-app.hooks(appHooks);
+expressApp.hooks(appHooks);
 
-module.exports = app;
+module.exports = expressApp;

@@ -12,7 +12,9 @@ import chatControlsReducer from './chat-controls/chat-controls-reducer';
 import createSagaMiddleware from 'redux-saga';
 import watchAuthentication from './authentication/authentication-saga';
 import watchSaveMedia from './media/save-media-saga';
+import watchOpenMediaFolder from './media/open-media-folder-saga';
 import watchFetchMedia from './media/fetch-media-saga';
+import watchImportMedia from './media/import-media-saga';
 import watchStartChat from './chat-controls/start-chat-saga';
 import {reducer as formReducer} from 'redux-form';
 
@@ -34,6 +36,8 @@ sagaMiddleware.run(watchAuthentication);
 sagaMiddleware.run(watchSaveMedia);
 sagaMiddleware.run(watchFetchMedia);
 sagaMiddleware.run(watchStartChat);
+sagaMiddleware.run(watchImportMedia);
+sagaMiddleware.run(watchOpenMediaFolder);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -42,7 +46,4 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();

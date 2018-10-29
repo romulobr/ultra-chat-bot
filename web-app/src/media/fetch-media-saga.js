@@ -1,10 +1,10 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import cookies from 'browser-cookies';
+import getSavedToken from './../authentication/jwt';
 
 function* fetchMedia() {
   try {
-    const jwt = cookies.get('feathers-jwt');
+    const jwt = getSavedToken();
     if (!jwt) {
       yield put({ type: 'NOT_AUTHENTICATED' });
       return;
@@ -12,10 +12,11 @@ function* fetchMedia() {
     const getResponse = yield axios.get('http://localhost:3000/media', {
       headers: { Authorization: 'Bearer ' + jwt }
     });
-    if (getResponse.data.data[0]) {
+
+    if (getResponse.data && getResponse.data[0]) {
       yield put({
         type: 'MEDIA_FETCHED',
-        items: getResponse.data.data[0].items
+        items: getResponse.data && getResponse.data[0].items || []
       });
     } else {
       yield axios.post(

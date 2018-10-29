@@ -1,10 +1,10 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
+const {authenticate} = require('@feathersjs/authentication').hooks;
 const userReader = require('./user-reader');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
-    find: [      
+    all: [authenticate('jwt')],
+    find: [
       context => {
         if (context.arguments[0].user) {
           context.params.query = {
@@ -25,7 +25,9 @@ module.exports = {
     all: [],
     find: [
       context => {
-        context.result = userReader.getSimplifiedUserIn(context.result.data[0]);
+        if (context.result && context.result[0]) {
+          context.result = userReader.getUserIn(context.result[0]);
+        }
       }
     ],
     get: [],

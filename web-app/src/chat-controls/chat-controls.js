@@ -23,7 +23,6 @@ function mapStateToProps(state) {
   const mapDispatchToProps = dispatch => {
     return {
       connectToChat: () => {
-          console.log('connecting to chat');
         dispatch({
           type: 'CONNECT_TO_CHAT'
 

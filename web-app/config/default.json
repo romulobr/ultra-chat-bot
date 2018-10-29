@@ -39,6 +39,5 @@
 			"httpOnly": false,
 			"secure": false
 		}
-	},
-	"mongodb": "mongodb://romulino:dev123@ds125381.mlab.com:25381/dev"
+	}
 }

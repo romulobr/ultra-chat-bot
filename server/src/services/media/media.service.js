@@ -1,21 +1,15 @@
-// Initializes the `media` service on path `/media`
-const createService = require('feathers-mongodb');
 const hooks = require('./media.hooks');
+const NeDB = require('nedb');
+const service = require('feathers-nedb');
+
+
+const Model = new NeDB({
+  filename: './data/media.db',
+  autoload: true
+});
 
 module.exports = function (app) {
-  const paginate = app.get('paginate');
-  const mongoClient = app.get('mongoClient');
-  const options = { paginate };
+  app.use('/media', service({Model}));
 
-  // Initialize our service with any options it requires
-  app.use('/media', createService(options));
-
-  // Get our initialized service so that we can register hooks and filters
-  const service = app.service('media');
-
-  mongoClient.then(db => {
-    service.Model = db.collection('media');
-  });
-
-  service.hooks(hooks);
-};
+  app.service('/media').hooks(hooks);
+}

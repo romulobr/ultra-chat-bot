@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
-import cookies from 'browser-cookies';
+import getSavedToken from '../authentication/jwt';
 
 function validateItems(items) {
   const validation = { hasErrors: false, items: [] };
@@ -27,8 +27,8 @@ function* saveMedia(action) {
       yield put({ type: 'MEDIA_VALIDATION_ERRORS', validation });
       return;
     } else {
-      const jwt = cookies.get('feathers-jwt');
-      if (!jwt) {
+      const jwt = getSavedToken();
+        if (!jwt) {
         yield put({ type: 'NOT_AUTHENTICATED' });
         return;
       }
@@ -36,7 +36,7 @@ function* saveMedia(action) {
       const response = yield axios.put('http://localhost:3000/media', {items:action.items},{
         headers: { Authorization: 'Bearer ' + jwt }
       });
-      yield put({ type: 'MEDIA_SAVED', response });
+      yield put({ type: 'MEDIA_SAVED', items:response.data.items });
       console.log(response);
     }
   } catch (e) {
