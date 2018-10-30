@@ -4,11 +4,10 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const logger = require('./logger');
-
+const socketio = require('@feathersjs/socketio');
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
-const socketio = require('@feathersjs/socketio');
 
 const {app} = require('electron');
 
@@ -22,14 +21,15 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const mediaFolder = app.getPath('documents') + '/v3-media';
-
-const expressApp = express(feathers());
+const server = feathers();
+const expressApp = express(server);
 
 // Load app configuration
 expressApp.configure(configuration());
 // Enable security, CORS, compression, favicon and body parsing
 expressApp.use(helmet());
 expressApp.use(cors());
+
 expressApp.use(compress());
 expressApp.use(express.json());
 expressApp.use(express.urlencoded({extended: true}));
@@ -41,7 +41,7 @@ expressApp.use('/media', express.static(mediaFolder));
 
 // Set up Plugins and providers
 expressApp.configure(express.rest());
-expressApp.configure(socketio());
+//expressApp.configure(socketio());
 
 // Configure other middleware (see `middleware/index.js`)
 expressApp.configure(middleware);
@@ -60,6 +60,9 @@ expressApp.use('*', function (req, res) {
 expressApp.use(express.notFound());
 expressApp.use(express.errorHandler({logger}));
 
+expressApp.configure(socketio());
+
 expressApp.hooks(appHooks);
+
 
 module.exports = expressApp;

@@ -1,15 +1,13 @@
 .chat-controls{
   padding:16px;
     &__button {
-        border-radius: 16px;
         text-overflow: clip;
         overflow: hidden;
         white-space: nowrap;
-        min-width: 40px;
-        line-height: 32px;
+        line-height: 18px;
         color: black;
         background-color: #eeeeee;
-        border: solid 1px #aaaaaa;
+
         text-align: center;
         padding: 0 64px;
         margin: 0 10px;
@@ -21,5 +19,9 @@
     
       &__button__hidden{
         display:none;
+      }
+
+      img{
+        height: 16px;
       }
 }

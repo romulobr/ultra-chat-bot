@@ -6,9 +6,7 @@ class ChatControls extends Component {
   render() {
     return (
       <div className="chat-controls">
-        <div> <img src="/img/chat.png" alt="chat icon"/></div>
-        <div> Disconnected </div>
-        <div> <button onClick={this.props.connectToChat} className="chat-controls__button">Connect</button> </div>
+        <div> <button onClick={this.props.connectToChat} className="chat-controls__button"><img src="/img/chat.png" alt="chat icon"/> Connect</button> </div>
       </div>
     );
   }

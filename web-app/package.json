@@ -61,6 +61,7 @@
 		"redux-saga": "^0.16.2",
 		"resolve": "1.8.1",
 		"sass-loader": "7.1.0",
+		"socket.io": "^2.1.1",
 		"style-loader": "0.23.0",
 		"terser-webpack-plugin": "1.1.0",
 		"twitch-js": "^1.2.14",
@@ -129,6 +130,7 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+		"electron": "^3.0.6",
 		"electron-devtools-installer": "^2.2.4",
 		"electron-redux-devtools": "^0.3.4",
 		"webpack-externals-plugin": "^1.0.0"
