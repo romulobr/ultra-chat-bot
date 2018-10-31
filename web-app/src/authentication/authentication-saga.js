@@ -1,3 +1,4 @@
+import {userApi} from '../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from './jwt';
@@ -9,7 +10,7 @@ function* authenticate() {
             yield put({type: 'NOT_AUTHENTICATED'});
             return;
         }
-        const response = yield axios.get('http://localhost:3000/api/users', {
+        const response = yield axios.get(userApi, {
             headers: {Authorization: 'Bearer ' + token}
         });
         yield put({type: 'AUTHENTICATION_SUCCESS', user: response.data});

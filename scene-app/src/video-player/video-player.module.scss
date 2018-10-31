@@ -1,0 +1,10 @@
+.videoPlayer {
+  text-align: center;
+  display: inline-block;
+  width: 100vw;
+  background-color: black;
+
+  video{
+    background-size: contain;
+  }
+}
