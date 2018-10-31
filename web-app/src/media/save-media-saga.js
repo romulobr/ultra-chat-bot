@@ -33,7 +33,7 @@ function* saveMedia(action) {
         return;
       }
       console.log('saving media: ', action)
-      const response = yield axios.put('http://localhost:3000/media', {items:action.items},{
+      const response = yield axios.put('http://localhost:3000/api/media', {items:action.items},{
         headers: { Authorization: 'Bearer ' + jwt }
       });
       yield put({ type: 'MEDIA_SAVED', items:response.data.items });

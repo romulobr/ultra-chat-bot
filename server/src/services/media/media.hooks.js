@@ -1,10 +1,9 @@
 const userReader = require('../users/user-reader');
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
-function addUserToQuery(context) {  
+function addUserToQuery(context) {
   if (context.params.user) {
     const user = userReader.getUserIn(context.params.user);
-    console.log('user:\n\n\n',user);
     context.params.query = {
       _id: user.id,
       $limit: 1
@@ -13,9 +12,8 @@ function addUserToQuery(context) {
   }
 }
 
-function adduserIdToData(context) {  
+function adduserIdToData(context) {
   const user = userReader.getUserIn(context.params.user);
-  console.log('user:\n\n\n',user);
   context.data._id = user.id;
 }
 

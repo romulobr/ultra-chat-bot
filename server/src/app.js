@@ -4,10 +4,11 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const logger = require('./logger');
-const socketio = require('@feathersjs/socketio');
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
+const socketIoMessenger = require('./socket-io/socket-io-messenger');
+//const bodyParser = require('body-parser');
 
 const {app} = require('electron');
 
@@ -21,48 +22,46 @@ const channels = require('./channels');
 const authentication = require('./authentication');
 
 const mediaFolder = app.getPath('documents') + '/v3-media';
-const server = feathers();
-const expressApp = express(server);
 
-// Load app configuration
-expressApp.configure(configuration());
-// Enable security, CORS, compression, favicon and body parsing
-expressApp.use(helmet());
-expressApp.use(cors());
+const corsOptions = {
+  credentials: true, // This is important.
+  origin: 'http://localhost:3002'
+}
 
-expressApp.use(compress());
-expressApp.use(express.json());
-expressApp.use(express.urlencoded({extended: true}));
-expressApp.use(favicon(path.join(expressApp.get('public'), 'favicon.ico')));
-// Host the public folder
-// app.use('/', express.static(app.get('public')));
+const api = express(feathers())
+  .configure(configuration())
+  .configure(express.rest())
+  .configure(middleware)
+  .configure(authentication)
+  .configure(services)
+  .configure(channels)
+  .hooks(appHooks)
+  .use(helmet())
+  .use(cors(corsOptions))
+  .use(compress())
+  .use(express.json())
+  .use(express.urlencoded({extended: true}));
 
-expressApp.use('/media', express.static(mediaFolder));
+const mainApp = express().use('/api', api);
 
-// Set up Plugins and providers
-expressApp.configure(express.rest());
-//expressApp.configure(socketio());
+mainApp.use(express.json());
+mainApp.use(express.urlencoded({ extended: false }));
+mainApp.use(compress());
 
-// Configure other middleware (see `middleware/index.js`)
-expressApp.configure(middleware);
-expressApp.configure(authentication);
-// Set up our services (see `services/index.js`)
-expressApp.configure(services);
-// Set up event channels (see channels.js)
-expressApp.configure(channels);
+mainApp.use('/media', express.static(mediaFolder));
 
-// Configure a middleware for 404s and the error handler
-expressApp.use('*', function (req, res) {
-  //modify the url in any way you want
-  var newurl = 'http://localhost:3001' + req.baseUrl;
-  request(newurl).pipe(res);
+const server = mainApp.listen(3000);
+socketIoMessenger.initialize(server, mainApp);
+
+mainApp.use('*', function (req, res) {
+  const newUrl = 'http://localhost:3001' + req.baseUrl;
+  request(newUrl).pipe(res);
 });
-expressApp.use(express.notFound());
-expressApp.use(express.errorHandler({logger}));
-
-expressApp.configure(socketio());
-
-expressApp.hooks(appHooks);
 
 
-module.exports = expressApp;
+mainApp.use(express.notFound());
+mainApp.use(express.errorHandler({logger}));
+
+api.setup(server);
+
+module.exports = api;

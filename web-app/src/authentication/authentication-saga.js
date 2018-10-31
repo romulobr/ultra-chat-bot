@@ -9,7 +9,7 @@ function* authenticate() {
             yield put({type: 'NOT_AUTHENTICATED'});
             return;
         }
-        const response = yield axios.get('http://localhost:3000/users', {
+        const response = yield axios.get('http://localhost:3000/api/users', {
             headers: {Authorization: 'Bearer ' + token}
         });
         yield put({type: 'AUTHENTICATION_SUCCESS', user: response.data});

@@ -9,7 +9,7 @@ function* fetchMedia() {
       yield put({ type: 'NOT_AUTHENTICATED' });
       return;
     }
-    const getResponse = yield axios.get('http://localhost:3000/media', {
+    const getResponse = yield axios.get('http://localhost:3000/api/media', {
       headers: { Authorization: 'Bearer ' + jwt }
     });
 
