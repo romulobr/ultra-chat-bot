@@ -9,15 +9,14 @@ import AppView from '../navigator/app-view'
 class MediaPanel extends Component {
     constructor(props) {
         super(props);
-        this.disableButton = this.disableButton.bind(this);
-        this.enableButton = this.enableButton.bind(this);
         this.createMediaItem = this.createMediaItem.bind(this);
         this.deleteMediaItems = this.deleteMediaItems.bind(this);
         this.renderItems = this.renderItems.bind(this);
         this.toMediaItemJSX = this.toMediaItemJSX.bind(this);
-        this.submit = this.submit.bind(this);
         this.toggleCheckedForDeletion = this.toggleCheckedForDeletion.bind(this);
         this.toggleAllCheckedForDeletion = this.toggleAllCheckedForDeletion.bind(this);
+        this.handleCommandChange = this.handleCommandChange.bind(this);
+        this.handleMediaInputChange = this.handleMediaInputChange.bind(this);
         this.state = {
             items: this.props.items,
             checkedForDeletion: []
@@ -75,12 +74,14 @@ class MediaPanel extends Component {
                     <input type="text"
                            name={'media-item-command-' + index}
                            value={item.command}
+                           onChange={this.handleCommandChange}
                     />
                 </td>
                 <td>
                     <input type="text"
                            name={'media-item-url-' + index}
                            value={item.url}
+                           onChange={this.handleMediaInputChange}
                     />
                 </td>
             </tr>
@@ -95,7 +96,8 @@ class MediaPanel extends Component {
 
     deleteMediaItems() {
         const newItems = [...this.state.items];
-        this.state.checkedForDeletion.forEach(indexForDeletion => {
+        const sortedArray = this.state.checkedForDeletion.sort((a, b) => b - a);
+        sortedArray.forEach(indexForDeletion => {
             newItems.splice(indexForDeletion, 1);
         });
         this.setState({
@@ -105,30 +107,18 @@ class MediaPanel extends Component {
 
     }
 
-    disableButton() {
-        this.setState({canSubmit: false});
+    handleCommandChange(e) {
+        let newItems = [...this.state.items];
+        const index = e.target.name.split('media-item-command-')[1];
+        newItems[index].command = e.target.value;
+        this.setState({...this.state, items: newItems})
     }
 
-    enableButton() {
-        this.setState({canSubmit: true});
-    }
-
-    submit(model) {
-        let index = 0;
-
-        function modelToItems(model) {
-            const items = [];
-            for (index = 0; index < Object.keys(model).length / 2; index++) {
-                items.push({
-                    command: model['media-item-command-' + index],
-                    url: model['media-item-url-' + index]
-                });
-            }
-            return items;
-        }
-
-        const items = modelToItems(model);
-        this.props.saveMedia(items);
+    handleMediaInputChange(e) {
+        let newItems = [...this.state.items];
+        const index = e.target.name.split('media-item-url-')[1];
+        newItems[index].command = e.target.value;
+        this.setState({...this.state, items: newItems})
     }
 
     renderItems(items) {
@@ -169,7 +159,10 @@ class MediaPanel extends Component {
                     New
                 </button>
 
-                <button className={styles.button} type="submit" disabled={this.props.loading}>
+                <button className={styles.button} type="button" disabled={this.props.loading}
+                        onClick={() => {
+                            this.props.saveMedia(this.state.items)
+                        }}>
                     Save
                 </button>
                 <button className={styles.button} type="button" disabled={this.props.loading}

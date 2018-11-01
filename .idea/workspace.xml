@@ -4,13 +4,7 @@
     <list default="true" id="3048865a-1218-452e-841d-3f5b71369644" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/data/media.db" afterPath="$PROJECT_DIR$/web-app/data/media.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-message-handlers.js" afterPath="$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-message-handlers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media-remote/media-remote.js" afterPath="$PROJECT_DIR$/web-app/src/media-remote/media-remote.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media-actions.js" afterPath="$PROJECT_DIR$/web-app/src/media/media-actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media-message-handlers.js" afterPath="$PROJECT_DIR$/web-app/src/media/media-message-handlers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media-reducer.js" afterPath="$PROJECT_DIR$/web-app/src/media/media-reducer.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media.js" afterPath="$PROJECT_DIR$/web-app/src/media/media.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js" afterPath="$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,11 +63,10 @@
       <file leaf-file-name="media.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web-app/src/media/media.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="972">
-              <caret line="174" column="16" lean-forward="true" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+            <state relative-caret-position="218">
+              <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
-                <element signature="e#6177#6380#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -125,12 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>static</find>
-      <find>$USER_HOME$/.npm/_logs/2018-10-31T01_34_43_589Z-debug.log</find>
-      <find>&quot;plugins&quot;</find>
-      <find>css-loader</find>
-      <find>\.css</find>
-      <find>cssRegex</find>
       <find>.mp4</find>
       <find>getCSSModuleLocalIdent</find>
       <find>importMedia</find>
@@ -155,6 +142,12 @@
       <find>'importMedia'</find>
       <find>'mediaImported'</find>
       <find>svg</find>
+      <find>disable</find>
+      <find>handle</find>
+      <find>input</find>
+      <find>handleinp</find>
+      <find>handleInputChange</find>
+      <find>handleInputChange</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -480,7 +473,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31922612" sideWeight="0.5200286" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3263434" sideWeight="0.47997138" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3263434" sideWeight="0.47997138" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34338138" sideWeight="0.47997138" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -960,11 +953,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/src/media/media.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="972">
-          <caret line="174" column="16" lean-forward="true" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+        <state relative-caret-position="218">
+          <caret line="99" column="49" lean-forward="true" selection-start-line="99" selection-start-column="49" selection-end-line="99" selection-end-column="49" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-            <element signature="e#6177#6380#0" expanded="false" />
           </folding>
         </state>
       </provider>
