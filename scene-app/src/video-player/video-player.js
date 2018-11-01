@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import styles from './video-player.module.scss';
 import posed from 'react-pose';
 
-
 const Box = posed.div({
     hidden: {opacity: 0, width:0},
     visible: {opacity: 1,width:'100%'}

@@ -1,35 +1,27 @@
-const defaultState = {
-  connected: false,
-  loading: true
-};
+import {createReducer} from 'redux-act';
+import actions from './authentication-actions';
 
-function authenticationReducer(state, action) {
-  switch (action.type) {
-    case 'AUTHENTICATION_SUCCESS': {
-      return {
+const authenticationReducer = createReducer({
+    [actions.authenticationSucess]: (state, payload) => ({
         connected: true,
         loading: false,
-        user: action.user
-      };
-    }
-    case 'AUTHENTICATION_FAILED': {
-      return {
+        user: payload.user
+    }),
+    [actions.authenticationFailed]: (state, payload) => ({
         connected: false,
         loading: false,
         connectionError: {
-          ...action.error
+            ...payload.error
         }
-      };
-    }
-    case 'NOT_AUTHENTICATED': {
-      return {
-        connected: false,
-        loading: false
-      };
-    }
-    default:
-      return state || defaultState;
-  }
-}
+    }),
+    [actions.notAuthenticated]: (state, payload) => (
+        {
+            connected: false,
+            loading: false
+        })
+}, {
+    connected: false,
+    loading: true
+});
 
 export default authenticationReducer;

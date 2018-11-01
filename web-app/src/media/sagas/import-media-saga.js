@@ -1,6 +1,6 @@
 import {put, takeEvery} from 'redux-saga/effects';
 import {ipcRenderer} from 'electron';
-import getSavedToken from './../authentication/jwt';
+import getSavedToken from '../../authentication/jwt';
 
 function* importMedia() {
     console.log('trying to importMedia');

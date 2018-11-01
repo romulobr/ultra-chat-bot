@@ -2,13 +2,16 @@ const server = 'http://localhost:3000';
 const api = 'http://localhost:3000/api';
 const mediaApi = 'http://localhost:3000/api/media';
 const userApi = 'http://localhost:3000/api/users';
-
+const messageApi = 'http://localhost:3000/message';
+const mediaUrl = 'http://localhost:3000/media';
 
 export {server};
 export {api};
 export {mediaApi};
+export {mediaUrl};
 export {userApi};
+export {messageApi};
 
 export default {
-    server, api, mediaApi, userApi
+    server, api, mediaApi, userApi, messageApi, mediaUrl
 };

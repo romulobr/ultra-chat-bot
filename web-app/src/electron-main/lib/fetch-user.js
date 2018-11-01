@@ -1,7 +1,8 @@
+const userApi = require('../urls').userApi;
 const axios = require('axios');
 
 function fetchUser(jwt) {
-    return axios.get('http://localhost:3000/users', {
+    return axios.get(userApi, {
         headers: {Authorization: 'Bearer ' + jwt}
     });
 }

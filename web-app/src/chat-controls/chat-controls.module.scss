@@ -1,0 +1,27 @@
+.chatControls {
+  padding: 16px;
+  background: linear-gradient(to bottom, #FFD200, #F7971E);
+  min-height: 100vh;
+  width: 100%;
+}
+
+.button {
+  text-overflow: clip;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 18px;
+  color: black;
+  background-color: #eeeeee;
+
+  text-align: center;
+  padding: 0 64px;
+  margin: 0 10px;
+
+  &:hover {
+    background-color: #ddffdd;
+    cursor: pointer;
+  }
+  img {
+    height: 16px;
+  }
+}

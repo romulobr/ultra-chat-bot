@@ -1,21 +1,25 @@
 import React, {Component} from 'react';
-import './media-remote.scss';
+import styles from './media-remote.module.scss';
 import {connect} from 'react-redux';
+import actions from './media-remote-actions.js';
 
 class MediaRemote extends Component {
-
     renderMediaItems(items) {
         return items.map((item, index) => {
+            console.log(item);
             return (
-                <h2 key={`media-item-${index}`}>{item.command}</h2>
+                <button className={styles.mediaItem} key={`media-item-${index}`} onClick={() => {
+                    this.props.playMedia(item)
+                }}>
+                    {item.command}
+                </button>
             );
         });
     }
 
     render() {
         return (
-            <div>
-                <h1>Media Remote</h1>
+            <div className={styles.mediaRemote}>
                 {this.renderMediaItems(this.props.items)}
             </div>)
     }
@@ -30,11 +34,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => {
     return {
-        playMedia: items => {
-            dispatch({
-                type: 'PLAY_MEDIA',
-                items
-            });
+        playMedia: item => {
+            dispatch(actions.playMedia(item));
         }
     };
 };

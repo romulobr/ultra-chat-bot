@@ -26,21 +26,21 @@ const mediaFolder = app.getPath('documents') + '/v3-media';
 const corsOptions = {
   credentials: true, // This is important.
   origin: 'http://localhost:3002'
-}
+};
 
 const api = express(feathers())
   .configure(configuration())
   .configure(express.rest())
   .configure(middleware)
   .configure(authentication)
+  .use(express.json())
+  .use(express.urlencoded({extended: true}))
   .configure(services)
   .configure(channels)
   .hooks(appHooks)
   .use(helmet())
   .use(cors(corsOptions))
-  .use(compress())
-  .use(express.json())
-  .use(express.urlencoded({extended: true}));
+  .use(compress());
 
 const mainApp = express().use('/api', api);
 

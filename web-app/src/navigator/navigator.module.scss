@@ -1,0 +1,18 @@
+.navigator {
+  padding: 0;
+  width: 100%;
+}
+
+.viewPicker {
+  line-height: 3em;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  font-weight: bold;
+  background-color: #5614B0;
+}
+
+.navigationItem {
+  flex-grow: 1;
+  color: white;
+}

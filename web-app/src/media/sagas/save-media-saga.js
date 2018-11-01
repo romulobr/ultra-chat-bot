@@ -1,8 +1,9 @@
-import {mediaApi} from '../urls';
+import {mediaApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
-import getSavedToken from '../authentication/jwt';
-
+import getSavedToken from '../../authentication/jwt';
+import actions from '../media-actions';
+import {notAuthenticated} from '../../authentication/authentication-actions'
 
 function validateItems(items) {
     const validation = {hasErrors: false, items: []};
@@ -24,31 +25,29 @@ function validateItems(items) {
 function* saveMedia(action) {
     console.log('trying to save media \n\n', action);
     try {
-        const validation = validateItems(action.items);
+        const validation = validateItems(action.payload);
         if (validation.hasErrors) {
-            yield put({type: 'MEDIA_VALIDATION_ERRORS', validation});
-            return;
+            yield put(actions.mediaValidationFailed(validation));
         } else {
             const jwt = getSavedToken();
             if (!jwt) {
-                yield put({type: 'NOT_AUTHENTICATED'});
+                yield put(notAuthenticated());
                 return;
             }
             console.log('saving media: ', action);
-            const response = yield axios.put(mediaApi, {items: action.items}, {
+            const response = yield axios.put(mediaApi, {items: action.payload}, {
                 headers: {Authorization: 'Bearer ' + jwt}
             });
-            yield put({type: 'MEDIA_SAVED', items: response.data.items});
-            console.log(response);
+            yield put(actions.mediaSaved({items: response.data.items}));
         }
     } catch (e) {
-        yield put({type: 'MEDIA_SAVING_ERROR', error: e});
-        console.log('got an error:', e);
+        console.log('error saving media',e);
+        yield put(actions.mediaSaveFailed({error: e}));
     }
 }
 
 function* watchSaveMedia() {
-    yield takeEvery('SAVE_MEDIA', saveMedia);
+    yield takeEvery(actions.saveMedia, saveMedia);
 }
 
 export default watchSaveMedia;

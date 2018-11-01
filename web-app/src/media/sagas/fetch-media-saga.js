@@ -1,13 +1,15 @@
-import {mediaApi} from '../urls';
+import {mediaApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
-import getSavedToken from './../authentication/jwt';
+import getSavedToken from '../../authentication/jwt';
+import actions from '../media-actions';
+import {notAuthenticated} from '../../authentication/authentication-actions'
 
 function* fetchMedia() {
     try {
         const jwt = getSavedToken();
         if (!jwt) {
-            yield put({type: 'NOT_AUTHENTICATED'});
+            yield put(notAuthenticated());
             return;
         }
         const getResponse = yield axios.get(mediaApi, {
@@ -15,17 +17,14 @@ function* fetchMedia() {
         });
 
         if (getResponse.data && getResponse.data[0]) {
-            yield put({
-                type: 'MEDIA_FETCHED',
-                items: getResponse.data && getResponse.data[0].items || []
-            });
+            yield put(actions.mediaFetched({items: getResponse.data && getResponse.data[0].items || []}));
         } else {
             yield axios.post(mediaApi, {items: []}, {headers: {Authorization: 'Bearer ' + jwt}}
             );
-            yield put({type: 'FETCH_MEDIA'});
+            yield put(actions.fetchMedia());
         }
     } catch (e) {
-        yield put({type: 'MEDIA_FETCH_ERROR', error: e});
+        yield put(actions.mediaFetchFailed({error: e}));
         console.log('got an error:', e);
     }
 }

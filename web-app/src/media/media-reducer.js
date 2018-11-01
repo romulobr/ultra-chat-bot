@@ -1,56 +1,20 @@
-const defaultState = {
+import actions from './media-actions';
+import {createReducer} from 'redux-act';
+
+const initialState = {
     items: [],
     loading: true
 };
 
-function mediaReducer(state, action) {
-    switch (action.type) {
-        case 'SAVE_MEDIA' : {
-            return {
-                ...state,
-                loading: true
-            }
-        }
-        case 'MEDIA_VALIDATION_ERRORS' : {
-            return {
-                ...state,
-                loading: false
-            }
-        }
-        case 'MEDIA_SAVED' : {
-            console.log(action);
-            return {
-                items: action.items,
-                loading: false
-            }
-        }
-        case 'MEDIA_SAVING_ERROR' : {
-            return {
-                ...state,
-                loading: false
-            }
-        }
-        case 'FETCH_MEDIA ': {
-            return {
-                loading: true,
-                items: action.items
-            };
-        }
-        case 'MEDIA_FETCHED': {
-            return {
-                loading: false,
-                items: action.items
-            };
-        }
-        case 'MEDIA_IMPORTED': {
-            return {
-                loading: false,
-                items: state.items.concat(action.items)
-            };
-        }
-        default:
-            return state || defaultState;
-    }
-}
+const mediaReducer = createReducer({
+        [actions.saveMedia]: (state, payload) => ({...state, loading: true}),
+        [actions.mediaValidationFailed]: (state, payload) => ({...state, loading: false}),
+        [actions.mediaSaved]: (state, payload) => ({items: payload.items, loading: false}),
+        [actions.mediaSaveFailed]: (state, payload) => ({...state, loading: false,error:payload}),
+        [actions.fetchMedia]: (state, payload) => ({...state, loading: true}),
+        [actions.mediaFetched]: (state, payload) => ({items: payload.items, loading: false}),
+        [actions.mediaImported]: (state, payload) => ({items: state.items.concat(payload.items), loading: false}),
+    }, initialState
+);
 
 export default mediaReducer;

@@ -1,0 +1,35 @@
+.welcomePanel {
+  background: linear-gradient(to bottom, #FFD200, #F7971E);
+  min-height: 100vh;
+  width: 100%;
+  color: white;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  text-shadow: rgba(0,0,0,0.5) 2px 2px 3px;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+
+  div{
+    margin:10px;
+    font-size: 1.5em;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.profilePicture {
+  margin: 20px;
+  text-align: center;
+  background: no-repeat center;
+  background-size: contain;
+  width: 100%;
+  display: inline-block;
+  height: 200px;
+}
+
