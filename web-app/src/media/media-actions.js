@@ -10,12 +10,14 @@ const mediaFetchFailed = createAction('MEDIA_FETCH_FAILED');
 const mediaImported = createAction('MEDIA_IMPORTED');
 const importMedia = createAction('IMPORT_MEDIA');
 const openMediaFolder = createAction('OPEN_MEDIA_FOLDER');
+const importMediaFailed = createAction('IMPORT_MEDIA_FAILED');
 
 export {saveMedia};
 export {mediaFetched};
 export {mediaFetchFailed};
 export {mediaImported};
 export {importMedia};
+export {importMediaFailed};
 export {mediaSaveFailed};
 export {mediaSaved};
 export {mediaValidationFailed};
@@ -32,5 +34,6 @@ export default {
     mediaFetchFailed,
     mediaImported,
     openMediaFolder,
-    importMedia
+    importMedia,
+    importMediaFailed
 };

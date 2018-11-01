@@ -3,13 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="3048865a-1218-452e-841d-3f5b71369644" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/data/users.db" afterPath="$PROJECT_DIR$/web-app/data/users.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/chat-controls/chat-controls.js" afterPath="$PROJECT_DIR$/web-app/src/chat-controls/chat-controls.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/chat-controls/chat-controls.module.scss" afterPath="$PROJECT_DIR$/web-app/src/chat-controls/chat-controls.module.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/electron-main/lib/chat-bot-creator.js" afterPath="$PROJECT_DIR$/web-app/src/electron-main/lib/chat-bot-creator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/electron-main/lib/chat/chat-message-handler.js" afterPath="$PROJECT_DIR$/web-app/src/electron-main/lib/chat/chat-message-handler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/electron-main/lib/twitch/twitch-chat-client.js" afterPath="$PROJECT_DIR$/web-app/src/electron-main/lib/twitch/twitch-chat-client.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/electron-main/urls.js" afterPath="$PROJECT_DIR$/web-app/src/electron-main/urls.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/data/media.db" afterPath="$PROJECT_DIR$/web-app/data/media.db" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-message-handlers.js" afterPath="$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-message-handlers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media-remote/media-remote.js" afterPath="$PROJECT_DIR$/web-app/src/media-remote/media-remote.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media-actions.js" afterPath="$PROJECT_DIR$/web-app/src/media/media-actions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media-message-handlers.js" afterPath="$PROJECT_DIR$/web-app/src/media/media-message-handlers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media-reducer.js" afterPath="$PROJECT_DIR$/web-app/src/media/media-reducer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/media.js" afterPath="$PROJECT_DIR$/web-app/src/media/media.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js" afterPath="$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,36 +24,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="chat-bot-creator.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/chat-bot-creator.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="chat-message-handler.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/chat/chat-message-handler.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fetch-user.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/fetch-user.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="9" lean-forward="false" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="media-player-chat-app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/media-player/media-player-chat-app.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -63,54 +34,89 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="command-in-text.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="command-in-text.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/util/command-in-text.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="1" column="94" lean-forward="true" selection-start-line="1" selection-start-column="94" selection-end-line="1" selection-end-column="94" />
+            <state relative-caret-position="230">
+              <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="send-screen-message.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/util/send-screen-message.js">
+      <file leaf-file-name="import-media-saga.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="3" column="32" lean-forward="false" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
+            <state relative-caret-position="270">
+              <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+              <folding>
+                <element signature="e#0#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="media-message-handlers.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-message-handlers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="socket-io-messenger.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/socket-io/socket-io-messenger.js">
+      <file leaf-file-name="media.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web-app/src/media/media.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="972">
+              <caret line="174" column="16" lean-forward="true" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#6177#6380#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="media-remote.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/src/media-remote/media-remote.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="media-reducer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/src/media/media-reducer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="17" column="78" lean-forward="true" selection-start-line="17" selection-start-column="78" selection-end-line="17" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="media-message-handlers.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/src/media/media-message-handlers.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="138">
-              <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="media-player-chat-app-creator.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/media-player/media-player-chat-app-creator.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="49" selection-end-line="9" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fetch-media-saga.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/src/media/sagas/fetch-media-saga.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="16" column="11" lean-forward="true" selection-start-line="14" selection-start-column="8" selection-end-line="16" selection-end-column="11" />
+              <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
               <folding>
-                <element signature="e#0#36#0" expanded="true" />
+                <element signature="e#0#37#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="media-actions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/src/media/media-actions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -119,10 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.use</find>
-      <find>socketIoMessenger</find>
-      <find>mainapp</find>
-      <find>media</find>
       <find>static</find>
       <find>$USER_HOME$/.npm/_logs/2018-10-31T01_34_43_589Z-debug.log</find>
       <find>&quot;plugins&quot;</find>
@@ -149,6 +151,10 @@
       <find>deleteMediaItem</find>
       <find>authentic</find>
       <find>appView</find>
+      <find>mediaImported</find>
+      <find>'importMedia'</find>
+      <find>'mediaImported'</find>
+      <find>svg</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -162,8 +168,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web-app/src/server-urls.js" />
-        <option value="$PROJECT_DIR$/web-app/src/server-url.js" />
         <option value="$PROJECT_DIR$/web-app/src/authentication/authentication-actions.js" />
         <option value="$PROJECT_DIR$/web-app/src/authentication/authentication-reducer.js" />
         <option value="$PROJECT_DIR$/web-app/src/authentication/authentication-saga.js" />
@@ -181,13 +185,9 @@
         <option value="$PROJECT_DIR$/web-app/src/navigator/navigator.module.scss" />
         <option value="$PROJECT_DIR$/web-app/src/media/spinner.module.scss" />
         <option value="$PROJECT_DIR$/web-app/src/electron-main/lib/fetch-user.js" />
-        <option value="$PROJECT_DIR$/web-app/src/media/media-actions.js" />
-        <option value="$PROJECT_DIR$/web-app/src/media/media-reducer.js" />
-        <option value="$PROJECT_DIR$/web-app/src/media/media-message-handlers.js" />
         <option value="$PROJECT_DIR$/web-app/src/media-remote/media-remote-actions.js" />
         <option value="$PROJECT_DIR$/web-app/src/media-remote/media-remote-reducer.js" />
         <option value="$PROJECT_DIR$/web-app/src/index.js" />
-        <option value="$PROJECT_DIR$/web-app/src/media-remote/media-remote.js" />
         <option value="$PROJECT_DIR$/web-app/src/urls.js" />
         <option value="$PROJECT_DIR$/web-app/src/media-remote/play-media-saga.js" />
         <option value="$PROJECT_DIR$/web-app/src/media-remote/media-remote.module.scss" />
@@ -198,7 +198,6 @@
         <option value="$PROJECT_DIR$/web-app/src/navigator/navigator-reducer.js" />
         <option value="$PROJECT_DIR$/web-app/src/authentication/deauthentication.js" />
         <option value="$PROJECT_DIR$/web-app/src/App.scss" />
-        <option value="$PROJECT_DIR$/web-app/src/media/media.js" />
         <option value="$PROJECT_DIR$/web-app/src/media/media.module.scss" />
         <option value="$PROJECT_DIR$/web-app/src/chat-controls/chat-controls.module.scss" />
         <option value="$PROJECT_DIR$/web-app/src/chat-controls/chat-controls.js" />
@@ -213,6 +212,13 @@
         <option value="$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/media-player/media-player-chat-app-creator.js" />
         <option value="$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/util/command-in-text.js" />
         <option value="$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/media-player/media-player-chat-app.js" />
+        <option value="$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-message-handlers.js" />
+        <option value="$PROJECT_DIR$/web-app/src/media/media-actions.js" />
+        <option value="$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js" />
+        <option value="$PROJECT_DIR$/web-app/src/media-remote/media-remote.js" />
+        <option value="$PROJECT_DIR$/web-app/src/media/media-message-handlers.js" />
+        <option value="$PROJECT_DIR$/web-app/src/media/media-reducer.js" />
+        <option value="$PROJECT_DIR$/web-app/src/media/media.js" />
       </list>
     </option>
   </component>
@@ -318,6 +324,21 @@
               <item name="electron-main" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
               <item name="twitch" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="v3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="v3" type="462c0819:PsiDirectoryNode" />
+              <item name="web-app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="v3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="v3" type="462c0819:PsiDirectoryNode" />
+              <item name="web-app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
+              <item name="sagas" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -464,7 +485,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34338138" sideWeight="0.47997138" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25822604" sideWeight="0.4925926" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32799014" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.327654" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43643513" sideWeight="0.4914163" order="3" side_tool="false" content_ui="tabs" />
@@ -514,41 +535,11 @@
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="42" />
+      <option name="time" value="46" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scene-app/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="19" lean-forward="true" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/authentication/authentication-reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/authentication/authentication-saga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="18" column="28" lean-forward="false" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-app/src/navigator/navigation-actions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
@@ -645,42 +636,6 @@
           <caret line="14" column="61" lean-forward="true" selection-start-line="14" selection-start-column="61" selection-end-line="14" selection-end-column="61" />
           <folding>
             <element signature="e#0#50#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/media/media-reducer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="15" column="73" lean-forward="true" selection-start-line="15" selection-start-column="73" selection-end-line="15" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/media/media-message-handlers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="4" column="54" lean-forward="false" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
-          <folding>
-            <element signature="e#0#37#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/media/media-actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="32" column="11" lean-forward="false" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -787,16 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/media/media.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="54" column="35" lean-forward="false" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-app/src/media/media.module.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
@@ -820,14 +765,6 @@
           <folding>
             <element signature="e#0#39#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-app/src/media-remote/media-remote.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="37" column="33" lean-forward="true" selection-start-line="37" selection-start-column="33" selection-end-line="37" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -947,9 +884,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/chat-apps/util/command-in-text.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="94" lean-forward="true" selection-start-line="1" selection-start-column="94" selection-end-line="1" selection-end-column="94" />
+        <state relative-caret-position="230">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/media-remote/media-remote.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/media/sagas/import-media-saga.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-importer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="42" lean-forward="false" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/electron-main/lib/media/media-message-handlers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="23" column="12" lean-forward="true" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/media/media-actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/media/media-message-handlers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/media/media-reducer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="17" column="78" lean-forward="true" selection-start-line="17" selection-start-column="78" selection-end-line="17" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/media/my-input.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="33" column="15" lean-forward="false" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/src/media/media.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="174" column="16" lean-forward="true" selection-start-line="174" selection-start-column="16" selection-end-line="174" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#6177#6380#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

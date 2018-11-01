@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import styles from './media.module.scss';
 import spinnerStyles from './spinner.module.scss'
 import {connect} from 'react-redux';
-import Formsy from 'formsy-react';
-import MyInput from './my-input';
 import registerRendererEvents from './media-message-handlers';
 import actions from './media-actions';
 import AppView from '../navigator/app-view'
@@ -73,18 +71,16 @@ class MediaPanel extends Component {
                         this.toggleCheckedForDeletion(index)
                     }}/>
                 </td>
-                <td
-                    key={'media-item-' + index}
-                >
-                    <MyInput
-                        name={'media-item-command-' + index}
-                        value={item.command}
+                <td>
+                    <input type="text"
+                           name={'media-item-command-' + index}
+                           value={item.command}
                     />
                 </td>
                 <td>
-                    <MyInput
-                        name={'media-item-url-' + index}
-                        value={item.url}
+                    <input type="text"
+                           name={'media-item-url-' + index}
+                           value={item.url}
                     />
                 </td>
             </tr>
@@ -143,55 +139,48 @@ class MediaPanel extends Component {
         //console.log('props: ', this.props);
         return (
             <div className={styles.mediaPanel}>
-                <Formsy
-                    onValidSubmit={this.submit}
-                    onValid={this.enableButton}
-                    onInvalid={this.disableButton}
-                >
+                <AppView className={spinnerStyles.loader} hidden={!this.props.loading}>
+                    <svg className={spinnerStyles.circular}>
+                        <circle className={spinnerStyles.path} cx="50" cy="50" r="20" fill="none" strokeWidth="2"
+                                strokeMiterlimit="10"/>
+                    </svg>
+                </AppView>
 
-                    <AppView className={spinnerStyles.loader} hidden={!this.props.loading}>
-                        <svg className={spinnerStyles.circular}>
-                            <circle className={spinnerStyles.path} cx="50" cy="50" r="20" fill="none" stroke-width="2"
-                                    stroke-miterlimit="10"/>
-                        </svg>
-                    </AppView>
+                <div className={styles.mediaList}>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th onClick={this.toggleAllCheckedForDeletion}>Media</th>
+                            <th>Command</th>
+                            <th>File</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.renderItems(this.state.items)}
+                        </tbody>
+                    </table>
+                </div>
+                <button className={styles.button} disabled={this.props.loading} type="button"
+                        onClick={this.deleteMediaItems}>
+                    Delete
+                </button>
+                <button className={styles.button} disabled={this.props.loading} type="button"
+                        onClick={this.createMediaItem}>
+                    New
+                </button>
 
-                    <div className={styles.mediaList}>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th onClick={this.toggleAllCheckedForDeletion}>Media</th>
-                                <th>Command</th>
-                                <th>File</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.renderItems(this.state.items)}
-                            </tbody>
-                        </table>
-                    </div>
-                    <button className={styles.button} disabled={this.props.loading} type="button"
-                            onClick={this.deleteMediaItems}>
-                        Delete
-                    </button>
-                    <button className={styles.button} disabled={this.props.loading} type="button"
-                            onClick={this.createMediaItem}>
-                        New
-                    </button>
+                <button className={styles.button} type="submit" disabled={this.props.loading}>
+                    Save
+                </button>
+                <button className={styles.button} type="button" disabled={this.props.loading}
+                        onClick={this.props.importMedia}>
+                    Import from media folder
+                </button>
 
-                    <button className={styles.button} type="submit" disabled={this.props.loading}>
-                        Save
-                    </button>
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={this.props.importMedia}>
-                        Import from media folder
-                    </button>
-
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={this.props.openMediaFolder}>
-                        Open media folder
-                    </button>
-                </Formsy>
+                <button className={styles.button} type="button" disabled={this.props.loading}
+                        onClick={this.props.openMediaFolder}>
+                    Open media folder
+                </button>
             </div>
         );
     }

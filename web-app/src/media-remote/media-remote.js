@@ -6,7 +6,6 @@ import actions from './media-remote-actions.js';
 class MediaRemote extends Component {
     renderMediaItems(items) {
         return items.map((item, index) => {
-            console.log(item);
             return (
                 <button className={styles.mediaItem} key={`media-item-${index}`} onClick={() => {
                     this.props.playMedia(item)
