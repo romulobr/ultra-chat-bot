@@ -1,7 +1,7 @@
 const normalizeTwitchChatMessage = require('../twitch/twitch-chat-message-normalizer');
 const twitchJs = require("twitch-js");
 
-function create(user) {
+function create(user, apps) {
     const channel = user.name;
     const options = {
         channels: [`#${channel}`],
@@ -11,7 +11,7 @@ function create(user) {
         },
         connection: {
             reconnect: true,
-            secure:false
+            secure: false
         }
     };
 
@@ -24,7 +24,11 @@ function create(user) {
 
     let showedConnectionStatus = false;
     client.on('chat', (channel, userState, message, self) => {
-        console.log('got message from chat\n', normalizeTwitchChatMessage({message,userState,channel,self}))
+        let normalizedMessage = normalizeTwitchChatMessage({message, userState, channel, self});
+        apps.forEach(app => {
+            app.handleMessage(normalizedMessage)
+        });
+        console.log(`Got message| ${normalizedMessage.author.name}: ${normalizedMessage.text}`);
     });
     client.on('join', function (channel) {
         if (!showedConnectionStatus) {
