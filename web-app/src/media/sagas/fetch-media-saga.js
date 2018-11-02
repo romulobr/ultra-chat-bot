@@ -17,7 +17,7 @@ function* fetchMedia() {
         });
 
         if (getResponse.data && getResponse.data[0]) {
-            yield put(actions.mediaFetched({items: getResponse.data && getResponse.data[0].items || []}));
+            yield put(actions.mediaFetched({items: (getResponse.data && getResponse.data[0].items) || []}));
         } else {
             yield axios.post(mediaApi, {items: []}, {headers: {Authorization: 'Bearer ' + jwt}}
             );

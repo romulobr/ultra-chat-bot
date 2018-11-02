@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styles from './authentication.module.scss';
 import posed, {PoseGroup} from 'react-pose';
-import getSavedToken from './jwt';
 import deauthenticate from './deauthentication';
 import {connect} from 'react-redux';
 
@@ -24,10 +23,11 @@ const Panel = posed.div({
 });
 
 class AuthenticationPanel extends Component {
-    constructor(){
+    constructor() {
         super();
         this.poolToken = this.poolToken.bind(this);
     }
+
     componentDidMount() {
         this.props.authenticate();
     }
