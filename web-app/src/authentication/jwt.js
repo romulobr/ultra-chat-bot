@@ -1,7 +1,7 @@
 import cookies from 'browser-cookies';
 
-function getSavedToken(){
-    return cookies.get('feathers-jwt') || "eyJhbGciOiJIUzI1NiIsInR5cCI6ImFjY2VzcyJ9.eyJ1c2VySWQiOiI1YmQ1MTVkOGRiNTE5YjNkNjAzMTVjZmQiLCJpYXQiOjE1NDA2OTE0MTcsImV4cCI6MTU0MDc3NzgxNywiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzAwMCIsImlzcyI6ImZlYXRoZXJzIiwic3ViIjoiYW5vbnltb3VzIiwianRpIjoiN2ExMzczODYtMmFkYS00NTIyLWI3ZmUtOWZmZTU1YmU3NGNhIn0.OM1dZMuPFaxJrejFCSOv34tln-G4uQIJXATF88s7jfg";
+function getSavedToken() {
+    return cookies.get('feathers-jwt');
 }
 
 export default getSavedToken;
