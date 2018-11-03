@@ -30,7 +30,7 @@ function* fetchMedia() {
 }
 
 function* watchFetchMedia() {
-    yield takeEvery('FETCH_MEDIA', fetchMedia);
+    yield takeEvery(actions.fetchMedia, fetchMedia);
 }
 
 export default watchFetchMedia;

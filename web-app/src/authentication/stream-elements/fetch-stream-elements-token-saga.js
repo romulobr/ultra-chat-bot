@@ -1,20 +1,28 @@
 import {streamElementsTokenApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
-import getSavedToken from '../jwt';
-import actions from './stream-elements-actions';
+import getSavedToken from '../../authentication/jwt';
+import actions from '../stream-elements/stream-elements-actions';
+import {notAuthenticated} from '../../authentication/authentication-actions'
 
 function* fetchToken() {
     try {
-        const jwtToken = getSavedToken();
-        if (!jwtToken) {
-            yield put(actions.notAuthenticated());
+        const jwt = getSavedToken();
+        if (!jwt) {
+            yield put(notAuthenticated());
             return;
         }
-        const response = yield axios.get(streamElementsTokenApi, {
-            headers: {Authorization: 'Bearer ' + jwtToken}
+        const getResponse = yield axios.get(streamElementsTokenApi, {
+            headers: {Authorization: 'Bearer ' + jwt}
         });
-        yield put(actions.fetchTokenSuccess({user: response.data}));
+
+        if (getResponse.data && getResponse.data[0]) {
+            yield put(actions.fetchTokenSuccess({token: getResponse.data[0].token}));
+        } else {
+            yield axios.post(streamElementsTokenApi, {items: []}, {headers: {Authorization: 'Bearer ' + jwt}}
+            );
+            yield put(actions.fetchToken());
+        }
     } catch (e) {
         yield put(actions.fetchTokenFailed({error: e}));
         console.log('got an error:', e);
