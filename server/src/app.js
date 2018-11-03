@@ -8,6 +8,7 @@ const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketIoMessenger = require('./socket-io/socket-io-messenger');
+const streamElements = require('./stream-elements/stream-elements');
 //const bodyParser = require('body-parser');
 
 const {app} = require('electron');
@@ -45,13 +46,14 @@ const api = express(feathers())
 const mainApp = express().use('/api', api);
 
 mainApp.use(express.json());
-mainApp.use(express.urlencoded({ extended: false }));
+mainApp.use(express.urlencoded({extended: false}));
 mainApp.use(compress());
 
 mainApp.use('/media', express.static(mediaFolder));
 
 const server = mainApp.listen(3000);
 socketIoMessenger.initialize(server, mainApp);
+streamElements.initialize(mainApp);
 
 mainApp.use('*', function (req, res) {
   const newUrl = 'http://localhost:3001' + req.baseUrl;
