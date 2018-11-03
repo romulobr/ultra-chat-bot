@@ -9,7 +9,9 @@ import authenticationReducer from './authentication/authentication-reducer';
 import mediaReducer from './media/media-reducer';
 import environmentReducer from './environment/environment-reducer';
 import chatControlsReducer from './chat-controls/chat-controls-reducer';
+import streamElementsReducer from './authentication/stream-elements/stream-elements-reducer';
 import createSagaMiddleware from 'redux-saga';
+
 import watchAuthentication from './authentication/authentication-saga';
 import watchSaveMedia from './media/sagas/save-media-saga';
 import watchOpenMediaFolder from './media/sagas/open-media-folder-saga';
@@ -17,6 +19,8 @@ import watchFetchMedia from './media/sagas/fetch-media-saga';
 import watchImportMedia from './media/sagas/import-media-saga';
 import watchStartChat from './chat-controls/start-chat-saga';
 import watchPlayMedia from './media-remote/play-media-saga';
+import watchFetchStreamElementsToken from './authentication/stream-elements/fetch-stream-elements-token-saga';
+import watchSaveStreamElementsToken from './authentication/stream-elements/save-stream-elements-token-saga';
 import {reducer as formReducer} from 'redux-form';
 import navigatorReducer from './navigator/navigator-reducer';
 
@@ -31,6 +35,7 @@ const store = createStore(
         environment: environmentReducer,
         chatControls: chatControlsReducer,
         navigator: navigatorReducer,
+        streamElements: streamElementsReducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -42,6 +47,8 @@ sagaMiddleware.run(watchStartChat);
 sagaMiddleware.run(watchImportMedia);
 sagaMiddleware.run(watchOpenMediaFolder);
 sagaMiddleware.run(watchPlayMedia);
+sagaMiddleware.run(watchFetchStreamElementsToken);
+sagaMiddleware.run(watchSaveStreamElementsToken);
 
 ReactDOM.render(
     <Provider store={store}>

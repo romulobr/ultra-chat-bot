@@ -1,23 +1,29 @@
-body{
+body {
   background: linear-gradient(to bottom, #FFD200, #F7971E);
 }
 
 .App {
   margin: 0;
-  padding:0;
+  padding: 0;
   width: 100vw;
-  height: 100vh;
 }
 
 button {
   background-color: #5614B0;
-  color:white;
+  color: white;
   text-align: center;
   padding: 0 20px;
   margin: 10px 5px;
   font-size: 1em;
   height: 1.5em;
-  border:none;
-  box-shadow: rgba(0,0,0,0.5) 3px 3px 3px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
   transition: all 0.2s ease-in;
+  &:disabled, &[disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    transition: all 0.2s ease-in;
+  }
+
 }

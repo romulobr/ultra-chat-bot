@@ -1,30 +1,64 @@
 .welcomePanel {
-  background: linear-gradient(to bottom, #FFD200, #F7971E);
-  min-height: 100vh;
-  width: 100%;
-  color: white;
   flex-direction: column;
   text-align: center;
-  padding: 20px;
-  text-shadow: rgba(0,0,0,0.5) 2px 2px 3px;
+  padding: 0;
+  margin: 0;
+  transition: all 0.5s ease-in;
+}
+
+.offline {
+  background: linear-gradient(to right, #2F0743, #41295a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  width: 100vw;
+  height: 100vh;
+}
+
+.accountInformation {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 0;
+  border-radius: 50%;
+  padding: 0;
+  text-align: center;
+  background: no-repeat center;
+  background-size: contain;
+  min-width: 200px;
+  min-height: 200px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  font-size: 1.3em;
+}
+
+.userName {
+  color: black;
+  background-color: rgba(255, 255, 255, 1);
+  font-weight: bolder;
+  padding: 8px 24px;
+  border-radius: 8px;
+  transform: rotate(-5deg) translate(0, 70px);
+  border: 2px solid rgba(0, 0, 0, 1);
 }
 
 .information {
+  flex-wrap: wrap;
+  flex-grow: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
 
-  div{
-    margin:10px;
-    font-size: 1.5em;
+  div {
+    margin: 10px 0;
   }
 }
 
-.hidden {
-  display: none;
-}
-
 .profilePicture {
-  margin: 20px;
+  margin: 0;
+  padding: 0;
   text-align: center;
   background: no-repeat center;
   background-size: contain;
@@ -32,4 +66,3 @@
   display: inline-block;
   height: 200px;
 }
-

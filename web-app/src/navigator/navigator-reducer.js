@@ -4,8 +4,8 @@ import {createReducer} from 'redux-act';
 
 const navigatorReducer = createReducer({
     [authenticationActions.notAuthenticated]: (state, payload) => ({view: 'authentication'}),
-    [authenticationActions.authenticationSucess]: (state, payload) => ({view: 'authentication'}),
+    [authenticationActions.authenticationSuccess]: (state, payload) => ({view: 'authentication'}),
     [actions.navigateTo]: (state, payload) => ({view: payload})
-},{view:'authentication'});
+}, {view: 'authentication'});
 
 export default navigatorReducer;

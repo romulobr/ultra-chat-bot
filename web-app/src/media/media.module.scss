@@ -1,9 +1,8 @@
 .mediaPanel {
-  padding: 16px 8px;
-  background: linear-gradient(to bottom, #FFD200, #F7971E);
-  min-height: 100vh;
+  padding: 0;
   width: 100%;
   color: black;
+
   h2 {
     text-align: left;
     margin: 0;
@@ -21,8 +20,11 @@
 }
 
 .mediaList {
-
+  width: 98%;
+  margin:auto;
+  text-align: center;
   table {
+    margin-top: 8px;
     width: 100%;
     background-color: rgba(255,255,255,0.95);
     border: 1px solid #dddddd;

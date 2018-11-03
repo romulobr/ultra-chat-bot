@@ -1,10 +1,9 @@
 .mediaRemote {
-  background: linear-gradient(to bottom, #FFD200, #F7971E);
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .mediaItem {

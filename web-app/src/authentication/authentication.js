@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import styles from './authentication.module.scss';
 import posed, {PoseGroup} from 'react-pose';
 import deauthenticate from './deauthentication';
+import actions from './authentication-actions';
+import StreamElements from './stream-elements/stream-elements';
 import {connect} from 'react-redux';
-
 
 const Panel = posed.div({
     enter: {
@@ -45,21 +46,23 @@ class AuthenticationPanel extends Component {
 
     render() {
         const myPanel = this.props.connected ?
-            (<Panel className={styles.information} initialPose={'hidden'} key="connected-panel">
-                <div className={styles.profilePicture}
-                     style={this.props.user && {backgroundImage: `url(${this.props.user.profilePictureUrl})`}}/>
-                <div>
-                    Welcome back - You are connected as
-                </div>
-                <div>
-                    {this.props.hasUser && this.props.user.displayName}
-                    from {this.props.hasUser && this.props.user.origin}
-                </div>
-                <div>
-                    <button onClick={this.props.deauthenticate}>Disconnect</button>
+            (<Panel initialPose={'hidden'} key="connected-panel">
+                <div className={styles.information}>
+                    <div>
+                        <div className={styles.accountInformation}
+                             style={this.props.user && {backgroundImage: `url(${this.props.user.profilePictureUrl})`}}>
+                            <div className={styles.userName}>
+                                {this.props.hasUser && this.props.user.displayName}
+                            </div>
+                        </div>
+                        <div>
+                            <button onClick={this.props.deauthenticate}>Disconnect</button>
+                        </div>
+                    </div>
+                    <StreamElements isEditing={this.props.isEditing} token={this.props.token} editToken={this.props.editToken}/>
                 </div>
             </Panel>) :
-            (<Panel className={styles.information} key="disconnected-panel">
+            (<Panel className={styles.information + ' ' + styles.offline} key="disconnected-panel">
                 <div>Welcome - You are not connected yet</div>
                 <div>
                     <button onClick={() => {
@@ -103,7 +106,7 @@ const mapDispatchToProps = dispatch => {
             deauthenticate(dispatch);
         },
         authenticate: () => {
-            dispatch({type: 'AUTHENTICATION'});
+            dispatch(actions.authentication());
         }
     };
 };

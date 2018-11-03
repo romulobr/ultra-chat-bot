@@ -8,8 +8,21 @@ import ChatControls from '../chat-controls/chat-controls';
 import actions from './navigation-actions';
 
 import styles from './navigator.module.scss';
+import posed, {PoseGroup} from 'react-pose';
 
-import AppView from './app-view';
+const Panel = posed.div({
+    enter: {
+        opacity: 1,
+        transition: {
+            y: {type: 'spring', stiffness: 1000, damping: 15},
+            default: {duration: 300}
+        }
+    },
+    exit: {
+        opacity: 0,
+        transition: {duration: 300}
+    }
+});
 
 class Navigator extends Component {
     render() {
@@ -33,18 +46,22 @@ class Navigator extends Component {
                     }}>Chat-Bot
                     </div>
                 </div>
-                <AppView hidden={this.props.view !== 'authentication'}>
-                    <AuthenticationPanel/>
-                </AppView>
-                <AppView hidden={this.props.view !== 'media-remote'}>
-                    <MediaRemote/>
-                </AppView>
-                <AppView hidden={this.props.view !== 'chat-controls'}>
-                    <ChatControls/>
-                </AppView>
-                <AppView hidden={this.props.view !== 'media'}>
-                    <MediaPanel/>
-                </AppView>
+                <PoseGroup>
+                    {this.props.view === 'authentication' && (
+                        <Panel key="authentication">
+                            <AuthenticationPanel/>
+                        </Panel>)}
+                    {this.props.view === 'media-remote' && (
+                        <Panel key="media-remote">
+                            <MediaRemote/>
+                        </Panel>)}
+                    {this.props.view === 'chat-controls' && (<Panel key="chatControls">
+                        <ChatControls/>
+                    </Panel>)}
+                    {this.props.view === 'media' && (<Panel key="media">
+                        <MediaPanel/>
+                    </Panel>)}
+                </PoseGroup>
             </div>
         )
     }

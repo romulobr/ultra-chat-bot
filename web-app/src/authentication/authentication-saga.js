@@ -15,7 +15,7 @@ function* authenticate() {
         const response = yield axios.get(userApi, {
             headers: {Authorization: 'Bearer ' + token}
         });
-        yield put(actions.authenticationSucess({user: response.data}));
+        yield put(actions.authenticationSuccess({user: response.data}));
         yield put(fetchMedia());
     } catch (e) {
         yield put(actions.authenticationFailed({error: e}));
@@ -24,7 +24,7 @@ function* authenticate() {
 }
 
 function* watchAuthentication() {
-    yield takeEvery('AUTHENTICATION', authenticate);
+    yield takeEvery(actions.authentication, authenticate);
 }
 
 export default watchAuthentication;
