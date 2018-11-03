@@ -31,19 +31,19 @@ class Navigator extends Component {
                 <div className={styles.viewPicker}>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('authentication')
-                    }}>Account
+                    }}>⚙ Settings
                     </div>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('media')
-                    }}>Media
+                    }}>📺 Media
                     </div>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('media-remote')
-                    }}>Remote
+                    }}>📱 Remote
                     </div>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('chat-controls')
-                    }}>Chat-Bot
+                    }}>💬 Chat-Bot
                     </div>
                 </div>
                 <PoseGroup>

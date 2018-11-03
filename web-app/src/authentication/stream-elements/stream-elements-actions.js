@@ -8,6 +8,8 @@ const saveTokenFailed = createAction('SAVE_TOKEN_FAILED');
 const fetchToken = createAction('FETCH_STREAM_ELEMENTS_TOKEN');
 const fetchTokenSuccess = createAction('FETCH_STREAM_ELEMENTS_TOKEN_SUCCESS');
 const fetchTokenFailed = createAction('FETCH_STREAM_ELEMENTS_TOKEN_FAILED');
+const tokenVerificationSuccess = createAction('STREAM_ELEMENTS_TOKEN_VERIFICATION_SUCCESS');
+const tokenVerificationFailed = createAction('STREAM_ELEMENTS_TOKEN_VERIFICATION_FAILED');
 
 export {editToken};
 export {editTokenCancelled}
@@ -17,6 +19,8 @@ export {saveTokenFailed}
 export {fetchToken}
 export {fetchTokenSuccess}
 export {fetchTokenFailed}
+export {tokenVerificationSuccess}
+export {tokenVerificationFailed}
 
 export default {
     editToken,
@@ -26,5 +30,7 @@ export default {
     saveTokenSuccess,
     fetchToken,
     fetchTokenFailed,
-    fetchTokenSuccess
+    fetchTokenSuccess,
+    tokenVerificationFailed,
+    tokenVerificationSuccess
 }

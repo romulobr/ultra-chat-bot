@@ -1,4 +1,4 @@
-import {streamElementsTokenApi} from '../../urls';
+import {streamElementsTokenApi, streamElementsApiCheck} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
@@ -17,7 +17,15 @@ function* saveToken(action) {
         const response = yield axios.put(streamElementsTokenApi, {token: action.payload}, {
             headers: {Authorization: 'Bearer ' + jwt}
         });
-        yield put(actions.saveTokenSuccess({items: response.data.token}));
+        yield put(actions.saveTokenSuccess({token: response.data.token}));
+        try {
+            const streamElementsUser = yield axios.get(streamElementsApiCheck, {
+                headers: {Authorization: 'Bearer ' + response.data.token}
+            });
+            yield put(actions.tokenVerificationSuccess(streamElementsUser.data.channels["0"].displayName));
+        } catch (e) {
+            yield put(actions.tokenVerificationFailed({error: e}));
+        }
 
     } catch (e) {
         console.log('error saving token', e);

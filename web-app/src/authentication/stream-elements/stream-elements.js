@@ -59,7 +59,7 @@ class SteamElements extends Component {
                     filter: this.props.token ? '' : 'grayscale(100%)'
                 }}>
                     <div className={styles.token}>
-                        {this.props.isLoading ? 'Loading...' : (this.props.token ? 'Ready' : 'No Token')}
+                        {this.props.isLoading ? 'Loading...' : (this.props.tokenUser) || (this.props.token ? 'Ready' : 'No Token')}
                     </div>
                 </div>
                 <div>
