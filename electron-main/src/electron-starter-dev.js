@@ -1,6 +1,6 @@
 const {app, BrowserWindow} = require('electron');
 const {default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS} = require('electron-devtools-installer');
-const serverUrl = require('./electron-main/urls').server;
+const serverUrl = require('./urls').server;
 
 let splashScreenUrl = serverUrl+'/splash.html';
 
@@ -21,20 +21,10 @@ function createWindow() {
         show: false
     });
     mainWindowState.manage(mainWindow);
-    mainWindow.loadURL(serverUrl);
-    // mainWindow.loadURL('http://localhost:3001'+'/index.html');
+    mainWindow.loadURL('http://localhost:3000');
 
-    splashScreen = new BrowserWindow({width: 800, height: 600, frame: false, show: false});
-    splashScreen.loadURL(splashScreenUrl);
-
-    splashScreen.once('ready-to-show', () => {
-        splashScreen.show();
-    });
     mainWindow.once('ready-to-show', () => {
-        setTimeout(() => {
-            splashScreen.destroy();
             mainWindow.show();
-        }, 5000);
     });
 
     // Open the DevTools.
@@ -85,4 +75,4 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-require('./electron-main/index');
+require('./server/index-dev');

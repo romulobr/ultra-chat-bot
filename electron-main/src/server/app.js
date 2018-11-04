@@ -50,7 +50,7 @@ mainApp.use(express.urlencoded({extended: false}));
 mainApp.use(compress());
 
 mainApp.use('/media', express.static(mediaFolder));
-mainApp.use(express.static('public-dist'))
+mainApp.use(express.static('public-dist'));
 
 const server = mainApp.listen(3000);
 socketIoMessenger.initialize(server, mainApp);

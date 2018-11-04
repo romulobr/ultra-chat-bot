@@ -1,6 +1,6 @@
 const axios = require('axios');
-const streamElementsTokenApi = require('../../../web-app/src/electron-main/urls').streamElementsTokenApi;
-const userApi = require('../../../web-app/src/electron-main/urls').userApi;
+const streamElementsTokenApi = require('../../urls').streamElementsTokenApi;
+const userApi = require('../../urls').userApi;
 const streamElementsUserApiUrl = 'https://api.streamelements.com/kappa/v2/users/current';
 const streamElementsPointsApiUrl = 'https://api.streamelements.com/kappa/v2/points';
 let localUserResult;
