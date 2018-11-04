@@ -19,9 +19,9 @@ class SteamElements extends Component {
         this.textAreaRef = React.createRef();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         this.state.token = this.props.token;
-        if (this.props.isEditing) {
+        if (!prevProps.isEditing && this.props.isEditing) {
             this.textAreaRef.current.focus();
             this.textAreaRef.current.select();
         }

@@ -26,7 +26,7 @@ const mediaFolder = app.getPath('documents') + '/v3-media';
 
 const corsOptions = {
   credentials: true, // This is important.
-  origin: 'http://romulino.com'
+  origin: 'http://localhost:3002'
 };
 
 const api = express(feathers())
@@ -50,16 +50,15 @@ mainApp.use(express.urlencoded({extended: false}));
 mainApp.use(compress());
 
 mainApp.use('/media', express.static(mediaFolder));
-mainApp.use(express.static('public-dist'))
 
 const server = mainApp.listen(3000);
 socketIoMessenger.initialize(server, mainApp);
 streamElements.initialize(mainApp);
 
-// mainApp.use('*', function (req, res) {
-//   const newUrl = 'http://localhost:3001' + req.baseUrl;
-//   request(newUrl).pipe(res);
-// });
+mainApp.use('*', function (req, res) {
+  const newUrl = 'http://localhost:3001' + req.baseUrl;
+  request(newUrl).pipe(res);
+});
 
 
 mainApp.use(express.notFound());

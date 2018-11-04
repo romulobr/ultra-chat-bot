@@ -21,8 +21,7 @@ function createWindow() {
         show: false
     });
     mainWindowState.manage(mainWindow);
-    mainWindow.loadURL(serverUrl);
-    // mainWindow.loadURL('http://localhost:3001'+'/index.html');
+    mainWindow.loadURL('http://localhost:3000');
 
     splashScreen = new BrowserWindow({width: 800, height: 600, frame: false, show: false});
     splashScreen.loadURL(splashScreenUrl);
@@ -85,4 +84,4 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-require('./electron-main/index');
+require('./electron-main/index-dev');
