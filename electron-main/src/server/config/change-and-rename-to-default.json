@@ -1,10 +1,12 @@
 {
+  "host": "localhost:3000",
+  "port": "PORT",
   "paginate": {
     "default": 10,
     "max": 50
   },
   "authentication": {
-    "secret": "293db5021f47232ed852655efcffaed3535cf6c970e3cf32cdb332141c74840fc982ab5fd0810c30924dd6eaadbe485b40ea8595bb260cb059e7748bcdc9024acd61cbcb192c17bc06d9f443b702e8f2ffa5c89277db8a19982e03a3314a194986254906191fe503902224eef2ba1c41b42d9da1845c3be7de1e70eac41ecaeb12e8b5df4494396dabe0b2fa8e175ba74d590c78ee50de750ab43315ec1affb19f11721e396c0bf187814c916e91738e97b655d95ed555ce602b95c6dfbd4bb7a87027ab5ac1684cf269ba2f45d86efbaf17e7ab91a190c334e2358b0d602ce7cb84b4785dea3b81d0412731065c48778269a28a7039ef2709ccfaa8c58308ab",
+    "secret": "add some big secret string here",
     "strategies": [
       "jwt"
     ],
@@ -21,8 +23,9 @@
       "expiresIn": "7d"
     },
     "twitch": {
-      "clientID": "lo8otzdldve9jo662qmxk2m1eofjs8",
-      "clientSecret": "lvi3xsneaxooie700fs7qylevxrgkd",
+      "username": "your twitch username",
+      "clientID": "get it from twitch",
+      "clientSecret": "get it from twitch",
       "successRedirect": "/index.html",
       "callbackURL": "http://localhost:3000/api/auth/twitch/callback",
       "scope": [
@@ -30,8 +33,8 @@
       ]
     },
     "youtube": {
-      "clientID": "255569712867-eaan91sirn5qi050gu4s29rl3tjjoemp.apps.googleusercontent.com",
-      "clientSecret": "gk32SorWn1bQvl2FJkcDmPDr",
+      "clientID": "get it from google",
+      "clientSecret": "get it from google",
       "successRedirect": "/index.html",
       "scope": [
         "https://www.googleapis.com/auth/youtube"

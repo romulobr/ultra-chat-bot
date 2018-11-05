@@ -1,6 +1,5 @@
-config/
-twitch-credentials.js/
 node_modules/
+src/server/config/default.json
 public/
 # Logs
 logs

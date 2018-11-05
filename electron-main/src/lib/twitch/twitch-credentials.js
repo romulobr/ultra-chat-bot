@@ -1,8 +1,9 @@
-'use strict';
+const config = require('../../server/config/default.json').authentication.twitch;
 
-const username='romulinoTV';
-const clientId = 'lo8otzdldve9jo662qmxk2m1eofjs8';
-const clientSecret = 'lvi3xsneaxooie700fs7qylevxrgkd';
-const redirectUrl = 'http://localhost:3000/auth/twitch/callback';
-const scope = ['chat_login','user:read:email','user_read'];
+const username = config.userName;
+const clientId = config.clientID;
+const clientSecret = config.clientSecret;
+const redirectUrl = config.callbackURL;
+const scope = config.scope;
+
 module.exports = {clientId, clientSecret, redirectUrl, scope, username};
