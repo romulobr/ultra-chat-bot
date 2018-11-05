@@ -1,7 +1,9 @@
 {
   "name": "v3",
-  "version": "0.1.0",
+  "version": "0.3.3",
   "private": true,
+  "author": "romulino",
+  "description": "super vaca v3",
   "dependencies": {
     "electron-window-state": "^5.0.2",
     "twitch-js": "^1.2.15",
@@ -20,7 +22,6 @@
     "feathers-localstorage": "^3.0.0",
     "feathers-mongodb": "^3.3.0",
     "feathers-nedb": "^3.1.0",
-    "formsy-react": "^1.1.5",
     "helmet": "^3.14.0",
     "mongodb": "^3.1.8",
     "mongodb-core": "^3.1.7",
@@ -45,9 +46,12 @@
   },
   "build": {
     "appId": "com.romulino.v3.app",
-    "directories": {
-      "buildResources": "public-dist"
-    },
+    "files": [
+      "./index.js",
+      "./src/**/*",
+      "./config/**/*",
+      "./public-dist/**/*"
+    ],
     "win": {
       "target": "NSIS"
     }

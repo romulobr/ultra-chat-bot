@@ -1,5 +1,4 @@
 const {app, BrowserWindow} = require('electron');
-const {default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS} = require('electron-devtools-installer');
 const serverUrl = require('./urls').server;
 
 let splashScreenUrl = serverUrl+'/splash.html';
@@ -52,18 +51,6 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
-
-app.on('ready', () => {
-    installExtension(REACT_DEVELOPER_TOOLS)
-        .then((name) => console.log(`Added Extension: ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
-});
-
-app.on('ready', () => {
-    installExtension(REDUX_DEVTOOLS)
-        .then((name) => console.log(`Added Extension: ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
-});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

@@ -1,5 +1,3 @@
-const path = require('path');
-const favicon = require('serve-favicon');
 const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -9,12 +7,8 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketIoMessenger = require('./socket-io/socket-io-messenger');
 const streamElements = require('./stream-elements/stream-elements');
-//const bodyParser = require('body-parser');
-
 const {app} = require('electron');
-
-const request = require('request');
-
+const path = require('path');
 const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
@@ -50,16 +44,11 @@ mainApp.use(express.urlencoded({extended: false}));
 mainApp.use(compress());
 
 mainApp.use('/media', express.static(mediaFolder));
-mainApp.use(express.static('public-dist'));
+mainApp.use(express.static(path.join(__dirname, '../../public-dist')));
 
 const server = mainApp.listen(3000);
 socketIoMessenger.initialize(server, mainApp);
 streamElements.initialize(mainApp);
-
-// mainApp.use('*', function (req, res) {
-//   const newUrl = 'http://localhost:3001' + req.baseUrl;
-//   request(newUrl).pipe(res);
-// });
 
 
 mainApp.use(express.notFound());
