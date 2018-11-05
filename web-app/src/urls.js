@@ -1,10 +1,10 @@
-const server = 'http://localhost:3000';
-const api = 'http://localhost:3000/api';
-const mediaApi = 'http://localhost:3000/api/media';
-const userApi = 'http://localhost:3000/api/users';
-const messageApi = 'http://localhost:3000/message';
-const streamElementsTokenApi = 'http://localhost:3000/api/stream-elements-token';
-const mediaUrl = 'http://localhost:3000/media';
+const server = 'http://localhost:62619';
+const api = 'http://localhost:62619/api';
+const mediaApi = 'http://localhost:62619/api/media';
+const userApi = 'http://localhost:62619/api/users';
+const messageApi = 'http://localhost:62619/message';
+const streamElementsTokenApi = 'http://localhost:62619/api/stream-elements-token';
+const mediaUrl = 'http://localhost:62619/media';
 const streamElementsApiCheck = 'https://api.streamelements.com/kappa/v2/users/current';
 
 export {server};

@@ -1,5 +1,5 @@
 {
-  "host": "localhost:3000",
+  "host": "localhost::62619",
   "port": "PORT",
   "paginate": {
     "default": 10,
@@ -16,7 +16,7 @@
       "header": {
         "typ": "access"
       },
-      "audience": "https://localhost:3000",
+      "audience": "https://localhost::62619",
       "subject": "anonymous",
       "issuer": "feathers",
       "algorithm": "HS256",
@@ -27,7 +27,7 @@
       "clientID": "get it from twitch",
       "clientSecret": "get it from twitch",
       "successRedirect": "/index.html",
-      "callbackURL": "http://localhost:3000/api/auth/twitch/callback",
+      "callbackURL": "http://localhost:62619/api/auth/twitch/callback",
       "scope": [
         "chat_login user:read:email user_read"
       ]

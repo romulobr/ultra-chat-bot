@@ -75,7 +75,7 @@ class AuthenticationPanel extends Component {
                 </div>
                 <div>
                     <button onClick={() => {
-                        const authWindow = window.open('/api/auth/youtube', '_blank', 'nodeIntegration=no', "width=200, height=100");
+                        const authWindow = window.open('/api/auth/youtube', '_blank', 'nodeIntegration=no');
                         debugger;
                         console.log(authWindow);
                     }}>Connect with youtube

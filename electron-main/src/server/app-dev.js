@@ -51,7 +51,7 @@ mainApp.use(compress());
 
 mainApp.use('/media', express.static(mediaFolder));
 
-const server = mainApp.listen(3000);
+const server = mainApp.listen(62619);
 socketIoMessenger.initialize(server, mainApp);
 streamElements.initialize(mainApp);
 

@@ -21,7 +21,7 @@ function createWindow() {
         show: false
     });
     mainWindowState.manage(mainWindow);
-    mainWindow.loadURL('http://localhost:3000');
+    mainWindow.loadURL('http://localhost:62619');
 
     mainWindow.once('ready-to-show', () => {
             mainWindow.show();
