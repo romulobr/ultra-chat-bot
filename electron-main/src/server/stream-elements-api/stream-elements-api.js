@@ -7,7 +7,6 @@ let localUserResult;
 let streamElementsTokenResult;
 let streamElementsUserResult;
 
-
 async function getPointsForUser(localToken, userName) {
   streamElementsTokenResult = streamElementsTokenResult || await axios.get(streamElementsTokenApi, {headers: {Authorization: 'Bearer ' + localToken}});
   const streamElementsToken = streamElementsTokenResult.data[0].token;

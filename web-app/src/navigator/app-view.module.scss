@@ -1,9 +1,7 @@
 .appView{
-  display:flex;
-  width: 100vw;
   visibility: visible;
 }
 
 .appViewHidden{
-  position: absolute; visibility: hidden;display: none;
+  visibility: hidden;
 }

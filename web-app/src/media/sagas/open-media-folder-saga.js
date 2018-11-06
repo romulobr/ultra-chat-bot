@@ -1,8 +1,9 @@
 import {put, takeEvery} from 'redux-saga/effects';
-import {ipcRenderer} from 'electron';
 import getSavedToken from '../../authentication/jwt';
+const ipcRenderer = require('electron').ipcRenderer;
 
 function* openMediaFolder() {
+    debugger;
     console.log('opening media folder');
     try {
         const jwt = getSavedToken();

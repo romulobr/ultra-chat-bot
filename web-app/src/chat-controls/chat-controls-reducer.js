@@ -1,43 +1,18 @@
-const defaultState = {    
-    connected:false,
-    loading:false
-  };
-  
-  function mediaReducer(state, action) {
-    switch (action.type) {
-      case 'CONNECT_TO_CHAT' :{
-        return {
-            connected:false,
-            loading:true
-        }
-      }
-      case 'DISCONNECT_FROM_CHAT' :{
-        return {
-            connected:false,
-            loading:true
-        }
-      }
-      case 'CONNECTED_TO_CHAT' :{
-        return {
-            connected:true,
-            loading:false
-        }
-      }
-      case 'DISCONNECTED_FROM_CHAT' :{
-        return {
-            connected:false,
-            loading:false
-        }
-      }
-      case 'CONNECT_TO_CHAT_FAILED' :{
-        return {
-            connected:false,
-            loading:false
-        }
-      }
-      default:
-        return state || defaultState;
-    }
-  }
-  
-  export default mediaReducer;
+import actions from './chat-control-actions';
+import {createReducer} from 'redux-act';
+
+const initialState = {
+    connected: false,
+    loading: false
+};
+
+const chatControlsReducer = createReducer({
+        [actions.connectToChat]: (state, payload) => ({connected: false, loading: true}),
+        [actions.disconnectFromChat]: (state, payload) => ({connected: true, loading: true}),
+        [actions.connectedToChat]: (state, payload) => ({connected: true, loading: false}),
+        [actions.disconnectedFromChat]: (state, payload) => ({connected: false, loading: false}),
+        [actions.connectToChatFailed]: (state, payload) => ({connected: false, loading: false}),
+    }, initialState
+);
+
+export default chatControlsReducer;

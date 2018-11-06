@@ -1,12 +1,6 @@
 const querystring = require('querystring');
 const twitchCredentials = require('./twitch-credentials');
 const axios = require('axios');
-// curl -X POST https://id.twitch.tv/oauth2/token
-//     --data-urlencode
-//         ?grant_type=refresh_token
-//         &refresh_token=<your refresh token>
-//             &client_id=<your client ID>
-//             &client_secret=<your client secret>
 
 function validateTwitchUserAndRefreshIfNeeded(user) {
     return new Promise((success, fail) => {

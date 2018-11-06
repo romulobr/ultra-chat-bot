@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import styles from './media.module.scss';
-import spinnerStyles from './spinner.module.scss'
 import {connect} from 'react-redux';
 import registerRendererEvents from './media-message-handlers';
 import actions from './media-actions';
 import AppView from '../navigator/app-view'
+import LoadingSpinner from '../loading-spinner/loading-spinner'
 
 class MediaPanel extends Component {
     constructor(props) {
@@ -128,13 +128,9 @@ class MediaPanel extends Component {
         //console.log('props: ', this.props);
         return (
             <div className={styles.mediaPanel}>
-                <AppView className={spinnerStyles.loader} hidden={!this.props.loading}>
-                    <svg className={spinnerStyles.circular}>
-                        <circle className={spinnerStyles.path} cx="50" cy="50" r="20" fill="none" strokeWidth="2"
-                                strokeMiterlimit="10"/>
-                    </svg>
+                <AppView>
+                    <LoadingSpinner/>
                 </AppView>
-
                 <div className={styles.mediaList}>
                     <table>
                         <thead>

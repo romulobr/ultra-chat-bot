@@ -6,6 +6,7 @@ const messageApi = 'http://localhost:62619/message';
 const streamElementsTokenApi = 'http://localhost:62619/api/stream-elements-token';
 const mediaUrl = 'http://localhost:62619/media';
 const streamElementsApiCheck = 'https://api.streamelements.com/kappa/v2/users/current';
+const youtubeBroadcastsApi = 'http://localhost:62619/youtube-broadcasts';
 
 export {server};
 export {api};
@@ -15,7 +16,16 @@ export {userApi};
 export {messageApi};
 export {streamElementsTokenApi};
 export {streamElementsApiCheck};
+export {youtubeBroadcastsApi};
 
 export default {
-    server, api, mediaApi, userApi, messageApi, mediaUrl, streamElementsTokenApi, streamElementsApiCheck
+    server,
+    api,
+    mediaApi,
+    userApi,
+    messageApi,
+    mediaUrl,
+    streamElementsTokenApi,
+    streamElementsApiCheck,
+    youtubeBroadcastsApi
 };

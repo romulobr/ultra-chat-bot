@@ -1,5 +1,4 @@
 .chatControls {
-  padding: 16px;
-  background: linear-gradient(to bottom, #FFD200, #F7971E);
-  width: 100%;
+  display:flex;
+  flex-direction: column;
 }

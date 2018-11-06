@@ -1,0 +1,26 @@
+.youtubeChatControls {
+  justify-content: center;
+}
+
+.broadcasts {
+  display: flex;
+  width: 100vw;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.broadcast {
+  box-shadow: rgba(0,0,0,0.5) 3px 3px 3px;
+  background-color: white;
+  border: solid 1px black;
+  flex-direction: column;
+  padding: 8px;
+  margin:10px;
+  max-width: 200px;
+  border-radius: 16px;
+  text-align: center;
+  img {
+  width: 100%;
+    border-radius: 16px;
+  }
+}
