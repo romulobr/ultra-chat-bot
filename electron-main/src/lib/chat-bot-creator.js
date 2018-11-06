@@ -30,8 +30,8 @@ function createBotFor(user, options) {
         });
       })
     } else if (user.origin === 'youtube') {
-      createChatBotApps(user, options.liveChatId).then(apps => {
-        success(youtubeChatClient.create(user, apps));
+      createChatBotApps(user).then(apps => {
+        success(youtubeChatClient.create(user, apps, options.liveChatId));
       })
     }
   });

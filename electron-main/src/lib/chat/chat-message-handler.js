@@ -3,8 +3,8 @@ const fetchUser = require('../../lib/fetch-user');
 const chatBotCreator = require('../../lib/chat-bot-creator');
 let user;
 
-ipcMain.on('connectToChat', (event, jwt) => {
-  console.log('connecting to chat\n', e);
+ipcMain.on('connectToChat', (event, jwt, options) => {
+  console.log('connecting to chat\n');
   fetchUser(jwt).then(response => {
     user = response.data;
     user.jwt = jwt;
@@ -12,7 +12,7 @@ ipcMain.on('connectToChat', (event, jwt) => {
     console.log('error connecting to chat\n', e);
   }).finally(() => {
     if (user) {
-      chatBotCreator.createBotFor(user);
+      chatBotCreator.createBotFor(user, options);
     }
   });
 });

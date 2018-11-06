@@ -1,8 +1,9 @@
 import {put, takeEvery} from 'redux-saga/effects';
 import getSavedToken from '../authentication/jwt'
+
 const ipcRenderer = require('electron').ipcRenderer;
 
-function* connectToChat() {
+function* connectToChat(action) {
     console.log('trying to connect to chat');
     try {
         debugger;
@@ -11,7 +12,7 @@ function* connectToChat() {
             yield put({type: 'NOT_AUTHENTICATED'});
             return;
         }
-        ipcRenderer.send('connectToChat', jwt);
+        ipcRenderer.send('connectToChat', jwt, {liveChatId:action.payload});
     } catch (e) {
         yield put({type: 'CONNECT_TO_CHAT_ERROR', error: e});
         console.log('got an error:', e);
