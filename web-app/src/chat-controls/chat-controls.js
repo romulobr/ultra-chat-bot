@@ -3,6 +3,7 @@ import styles from './chat-controls.module.scss';
 import {connect} from 'react-redux';
 import YoutubeChatControls from './youtube/youtube-chat-controls';
 import actions from './chat-control-actions';
+import registerRendererEvents from './chat-controls-message-handlers';
 
 class ChatControls extends Component {
     render() {
@@ -10,18 +11,31 @@ class ChatControls extends Component {
             <div className={styles.chatControls}>
                 {this.props.user && this.props.user.origin === 'youtube' && (<YoutubeChatControls/>)}
                 {this.props.user && this.props.user.origin === 'twitch' && (
-                    <button onClick={this.props.connectToChat} className={styles.button}>
-                        Connect to Chat
-                    </button>
+
+                    <div
+                        className={styles.twitchChat + (this.props.connected ? ' ' + styles.connected : '') + (this.props.loading ? ' ' + styles.loading : '')}>
+                        <img src="/img/twitch-logo.png" alt="twitch logo"/>
+                        <div>Twitch</div>
+                        <button
+                            onClick={this.props.connected ? this.props.disconnectFromChat : this.props.connectToChat}
+                            disabled={this.props.loading}>
+                            {this.props.connected ? 'Disconnect' : 'Connect to Chat'}
+                        </button>
+                    </div>
                 )}
             </div>
         );
     }
+
+    componentDidMount() {
+        this.props.registerRendererEvents();
+    }
 }
+
 
 function mapStateToProps(state) {
     return {
-        ...state.chat,
+        ...state.chatControls,
         user: state.authentication.user
     };
 }
@@ -33,6 +47,9 @@ const mapDispatchToProps = dispatch => {
         },
         disconnectFromChat: () => {
             dispatch(actions.disconnectFromChat());
+        },
+        registerRendererEvents: () => {
+            registerRendererEvents(dispatch)
         }
     };
 };

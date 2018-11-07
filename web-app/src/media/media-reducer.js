@@ -9,10 +9,10 @@ const initialState = {
 const mediaReducer = createReducer({
         [actions.saveMedia]: (state, payload) => ({...state, loading: true}),
         [actions.mediaValidationFailed]: (state, payload) => ({...state, loading: false}),
-        [actions.mediaSaved]: (state, payload) => ({items: payload.items, loading: false}),
+        [actions.mediaSaved]: (state, payload) => ({...payload, loading: false}),
         [actions.mediaSaveFailed]: (state, payload) => ({...state, loading: false,error:payload}),
         [actions.fetchMedia]: (state, payload) => ({...state, loading: true}),
-        [actions.mediaFetched]: (state, payload) => ({items: payload.items, loading: false}),
+        [actions.mediaFetched]: (state, payload) => ({...state,...payload, loading: false}),
         [actions.mediaImported]: (state, payload) => {
             debugger;
             return {items: state.items.concat(payload.items), loading: false};

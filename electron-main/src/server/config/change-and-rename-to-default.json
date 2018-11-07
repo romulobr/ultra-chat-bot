@@ -23,6 +23,8 @@
       "expiresIn": "7d"
     },
     "twitch": {
+      "chatBotUsername": "your chat bot username",
+      "chatBotOauthToken":"oAuth:your chat bot oauth token",
       "username": "your twitch username",
       "clientID": "get it from twitch",
       "clientSecret": "get it from twitch",

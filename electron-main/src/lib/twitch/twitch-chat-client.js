@@ -1,4 +1,5 @@
 const normalizeTwitchChatMessage = require('../twitch/twitch-chat-message-normalizer');
+const twitchCredentials = require('./twitch-credentials');
 const twitchJs = require("twitch-js");
 
 function create(user, apps) {
@@ -6,8 +7,8 @@ function create(user, apps) {
     const options = {
         channels: [`#${channel}`],
         identity: {
-            username: user.name,
-            password: `oauth:${user.accessToken}`
+            username: twitchCredentials.chatBotUsername,
+            password: twitchCredentials.chatBotOauthToken
         },
         connection: {
             reconnect: true,

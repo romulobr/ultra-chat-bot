@@ -15,9 +15,9 @@ function* fetchMedia() {
         const getResponse = yield axios.get(mediaApi, {
             headers: {Authorization: 'Bearer ' + jwt}
         });
-
         if (getResponse.data && getResponse.data[0]) {
-            yield put(actions.mediaFetched({items: (getResponse.data && getResponse.data[0].items) || []}));
+            debugger;
+            yield put(actions.mediaFetched({...getResponse.data[0]}));
         } else {
             yield axios.post(mediaApi, {items: []}, {headers: {Authorization: 'Bearer ' + jwt}}
             );

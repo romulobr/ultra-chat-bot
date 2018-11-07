@@ -20,6 +20,7 @@ import watchOpenMediaFolder from './media/sagas/open-media-folder-saga';
 import watchFetchMedia from './media/sagas/fetch-media-saga';
 import watchImportMedia from './media/sagas/import-media-saga';
 import watchStartChat from './chat-controls/start-chat-saga';
+import watchStopChat from './chat-controls/stop-chat-saga';
 import watchPlayMedia from './media-remote/play-media-saga';
 import watchFetchStreamElementsToken from './authentication/stream-elements/fetch-stream-elements-token-saga';
 import watchSaveStreamElementsToken from './authentication/stream-elements/save-stream-elements-token-saga';
@@ -53,6 +54,7 @@ sagaMiddleware.run(watchPlayMedia);
 sagaMiddleware.run(watchFetchStreamElementsToken);
 sagaMiddleware.run(watchSaveStreamElementsToken);
 sagaMiddleware.run(watchFetchYoutubeBroadcasts);
+sagaMiddleware.run(watchStopChat);
 
 ReactDOM.render(
     <Provider store={store}>

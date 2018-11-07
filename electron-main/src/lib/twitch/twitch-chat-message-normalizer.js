@@ -13,6 +13,7 @@ function normalizeTwitchChatMessage(twitchMessage) {
       source: 'twitch',
       id: 'tw-' + twitchMessage.userState['user-id'],
       name: twitchMessage.userState['display-name'],
+      userName: twitchMessage.userState['username'],
       isChatOwner: isChatOwner,
       isChatSponsor: isChatSponsor,
       isChatModerator: twitchMessage.userState.mod,

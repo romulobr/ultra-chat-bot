@@ -5,8 +5,12 @@ import getSavedToken from '../../authentication/jwt';
 import actions from '../media-actions';
 import {notAuthenticated} from '../../authentication/authentication-actions'
 
-function validateItems(items) {
+function validateForm(form) {
+    const {items,costPerChatPlay} = form;
     const validation = {hasErrors: false, items: []};
+    if (isNaN(costPerChatPlay)) {
+        validation.costPerChatPlay = {hasValidationError: true, validationError: 'number'}
+    }
     items.forEach(item => {
         if (!item.url || !item.command) {
             validation.items.push({
@@ -25,7 +29,7 @@ function validateItems(items) {
 function* saveMedia(action) {
     console.log('trying to save media \n\n', action);
     try {
-        const validation = validateItems(action.payload);
+        const validation = validateForm(action.payload);
         if (validation.hasErrors) {
             yield put(actions.mediaValidationFailed(validation));
         } else {
@@ -35,13 +39,14 @@ function* saveMedia(action) {
                 return;
             }
             console.log('saving media: ', action);
-            const response = yield axios.put(mediaApi, {items: action.payload}, {
+            debugger;
+            const response = yield axios.put(mediaApi, action.payload, {
                 headers: {Authorization: 'Bearer ' + jwt}
             });
-            yield put(actions.mediaSaved({items: response.data.items}));
+            yield put(actions.mediaSaved({...response.data}));
         }
     } catch (e) {
-        console.log('error saving media',e);
+        console.log('error saving media', e);
         yield put(actions.mediaSaveFailed({error: e}));
     }
 }

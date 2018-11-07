@@ -7,15 +7,15 @@ let localUserResult;
 let streamElementsTokenResult;
 let streamElementsUserResult;
 
-async function getPointsForUser(localToken, userName) {
-  streamElementsTokenResult = streamElementsTokenResult || await axios.get(streamElementsTokenApi, {headers: {Authorization: 'Bearer ' + localToken}});
+async function fetchUserPoints(localToken, userName) {
+  streamElementsTokenResult = await axios.get(streamElementsTokenApi, {headers: {Authorization: 'Bearer ' + localToken}});
   const streamElementsToken = streamElementsTokenResult.data[0].token;
-  streamElementsUserResult = streamElementsUserResult || await axios.get(streamElementsUserApiUrl, {headers: {Authorization: 'Bearer ' + streamElementsToken}});
+  streamElementsUserResult = await axios.get(streamElementsUserApiUrl, {headers: {Authorization: 'Bearer ' + streamElementsToken}});
   let streamElementsChannel;
   if (streamElementsUserResult.data.channels.length === 1) {
     streamElementsChannel = streamElementsUserResult.data.channels[0]._id;
   } else {
-    localUserResult = localUserResult || await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
+    localUserResult = await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
     const userOrigin = localUserResult.data.origin;
     streamElementsChannel = streamElementsUserResult.data.channels.filter(channel => channel.provider === userOrigin)[0]._id;
   }
@@ -24,26 +24,26 @@ async function getPointsForUser(localToken, userName) {
 }
 
 async function changeUserPoints(localToken, userName, amount) {
-  streamElementsTokenResult = streamElementsTokenResult || await axios.get(streamElementsTokenApi, {headers: {Authorization: 'Bearer ' + localToken}});
+  streamElementsTokenResult = await axios.get(streamElementsTokenApi, {headers: {Authorization: 'Bearer ' + localToken}});
   const streamElementsToken = streamElementsTokenResult.data[0].token;
-  streamElementsUserResult = streamElementsUserResult || await axios.get(streamElementsUserApiUrl, {headers: {Authorization: 'Bearer ' + streamElementsToken}});
+  streamElementsUserResult = await axios.get(streamElementsUserApiUrl, {headers: {Authorization: 'Bearer ' + streamElementsToken}});
   let streamElementsChannel;
   if (streamElementsUserResult.data.channels.length === 1) {
     streamElementsChannel = streamElementsUserResult.data.channels[0]._id;
   } else {
-    localUserResult = localUserResult || await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
+    localUserResult =  await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
     const userOrigin = localUserResult.data.origin;
     streamElementsChannel = streamElementsUserResult.data.channels.filter(channel => channel.provider === userOrigin)[0]._id;
   }
   const pointsUrl = `${streamElementsPointsApiUrl}/${streamElementsChannel}/${userName}/${amount}`;
-  return await axios.put(pointsUrl, {},{headers: {Authorization: 'Bearer ' + streamElementsToken}});
+  return await axios.put(pointsUrl, {}, {headers: {Authorization: 'Bearer ' + streamElementsToken}});
 }
 
 function initialize(app) {
   app.get('/stream-elements/points/:user', function (req, res) {
     try {
       const localToken = req.headers.authorization.split('Bearer ')[1];
-      getPointsForUser(localToken, req.params.user).then(result => {
+      fetchUserPoints(localToken, req.params.user).then(result => {
         res.send(result.data);
       }).catch(e => {
         res.error(e);
@@ -67,4 +67,4 @@ function initialize(app) {
 
 }
 
-module.exports = {initialize};
+module.exports = {initialize, changeUserPoints, fetchUserPoints};

@@ -1,3 +1,44 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 12px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  font-size: 0.7em;
+
+  label {
+    line-height: 2em;
+    font-size: 1.1em;
+    margin: 8px;
+
+    span {
+      margin: 8px;
+    }
+    input[type='text'] {
+      font-size: 1.2em;
+    }
+    input[type='checkbox'] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 2px solid #666666;
+      margin: -4px;
+      transition: all 0.2s ease-in;
+    }
+    input[type='checkbox']:checked {
+      background: #5614B0;
+      transition: all 0.2s ease-in;
+    }
+  }
+}
+
+.buttonBar {
+  display: flex;
+  justify-content: space-around;
+}
+
 .mediaPanel {
   padding: 0;
   width: 100%;
@@ -21,14 +62,14 @@
 
 .mediaList {
   width: 98%;
-  margin:auto;
+  margin: auto;
   text-align: center;
   table {
     margin-top: 8px;
     width: 100%;
-    background-color: rgba(255,255,255,0.95);
+    background-color: rgba(255, 255, 255, 0.95);
     border: 1px solid #dddddd;
-    box-shadow: rgba(0,0,0,0.2) 2px 2px 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 5px;
     border-collapse: collapse;
     border-radius: 8px;
 
@@ -63,12 +104,12 @@
       }
 
       input[type='checkbox'] {
-        appearance:none;
-        width:20px;
-        height:20px;
-        background:white;
-        border:2px solid #666666;
-        margin:-4px;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: 2px solid #666666;
+        margin: -4px;
         transition: all 0.2s ease-in;
       }
       input[type='checkbox']:checked {

@@ -1,4 +1,33 @@
 .chatControls {
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
+
+.twitchChat {
+  box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
+  background-color: white;
+  border: solid 1px black;
+  flex-direction: column;
+  padding: 8px;
+  margin: 10px;
+  max-width: 200px;
+  border-radius: 16px;
+  text-align: center;
+  img {
+    width: 100%;
+    border-radius: 16px;
+  }
+}
+
+.connected {
+  transition: all 0.2s ease-in;
+  background-color: #aaffaa;
+  border-color: #00dd00;
+}
+
+.loading {
+  transition: all 0.2s ease-in;
+  background-color: #ffffaa;
+  border-color: #FFD200;
+}
+
