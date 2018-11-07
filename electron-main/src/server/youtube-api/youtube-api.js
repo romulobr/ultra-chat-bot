@@ -1,6 +1,6 @@
 const axios = require('axios');
 const userApi = require('../../urls').userApi;
-const youtubeClient = require('../../lib/youtube/youtube-client');
+const youtubeClient = require('../../libs/youtube/youtube-client');
 
 async function getUserBroadcasts(localToken) {
   const localUserResult = await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
