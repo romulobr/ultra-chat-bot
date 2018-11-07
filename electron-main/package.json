@@ -1,9 +1,9 @@
 {
-  "name": "v3",
+  "name": "ultrav3",
   "version": "0.3.3",
   "private": true,
   "author": "romulino",
-  "description": "super vaca v3",
+  "description": "super vaca v3 - ultra",
   "dependencies": {
     "@feathersjs/authentication": "^2.1.11",
     "@feathersjs/authentication-jwt": "^2.0.5",
