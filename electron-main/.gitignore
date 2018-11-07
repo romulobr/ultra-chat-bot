@@ -1,6 +1,7 @@
 node_modules/
 src/server/config/default.json
 public/
+public-dist/
 # Logs
 logs
 *.log
