@@ -53,22 +53,22 @@ class MediaOptionsForm extends Component {
                                    onChange={this.onChange}/>
                         </span>
                     </label>
-                    {/*<label>Global cooldown (seconds)*/}
-                        {/*<span>*/}
-                            {/*<input name="globalCooldown"*/}
-                                   {/*type="text"*/}
-                                   {/*value={this.state.globalCooldown}*/}
-                                   {/*onChange={this.onChange}/>*/}
-                        {/*</span>*/}
-                    {/*</label>*/}
-                    {/*<label>Per user cooldown (seconds)*/}
-                        {/*<span>*/}
-                            {/*<input name="perUserCooldown"*/}
-                                   {/*type="text"*/}
-                                   {/*value={this.state.perUserCooldown}*/}
-                                   {/*onChange={this.onChange}/>*/}
-                        {/*</span>*/}
-                    {/*</label>*/}
+                    <label>Global cooldown (seconds)
+                        <span>
+                            <input name="globalCooldown"
+                                   type="text"
+                                   value={this.state.globalCooldown}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
+                    <label>Per user cooldown (seconds)
+                        <span>
+                            <input name="perUserCooldown"
+                                   type="text"
+                                   value={this.state.perUserCooldown}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
                 </div>
             </div>
         );

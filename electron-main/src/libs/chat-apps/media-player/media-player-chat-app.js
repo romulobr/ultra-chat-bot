@@ -8,6 +8,7 @@ class MediaPlayerChatApp {
   constructor(settings) {
     this.settings = settings;
     this.commands = settings.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase());
+    this.blockedByCooldown = {global: false};
   }
 
   static checkModeration(author) {
@@ -15,14 +16,14 @@ class MediaPlayerChatApp {
   }
 
   async checkStreamElementsPoints(author) {
-    if (this.streamElementsIntegrationFailed || this.costPerChatPlay === 0) {
+    if (this.streamElementsIntegrationFailed || this.settings.costPerChatPlay === 0) {
       return true;
     }
     try {
-      const amount = this.costPerChatPlay * -1;
+      const amount = this.settings.costPerChatPlay * -1;
       const fetch = await fetchUserPoints(this.user.jwt, author.userName);
-      if (fetch.data.points >= this.costPerChatPlay) {
-        changeUserPoints(this.user.jwt, author.userName, amount);
+      if (fetch.data.points >= this.settings.costPerChatPlay) {
+        changeUserPoints(this.settings.user.jwt, author.userName, amount);
         return true;
       }
     }
@@ -32,26 +33,43 @@ class MediaPlayerChatApp {
     }
   }
 
-  async handleMessage(message) {
-    if (this.settings.enabledForChat) {
-      if (!this.settings.allowCommandsWithoutExclamation && message.text[0] !== '!') return;
+  isAuthorBlockedByCoolDown(author) {
+    return this.blockedByCooldown[author.userName];
+  }
 
-      let command = commandInText(message.text, this.commands);
-      if (!command) return;
+  removeCoolDownFrom(author) {
+    delete this.blockedByCooldown[author.userName];
+  }
 
-      if (!MediaPlayerChatApp.checkModeration(message.author)) return;
-
-      if (this.settings.enableStreamElementsIntegration){
-        const pointsOk = await this.checkStreamElementsPoints(message.author);
-        if (!pointsOk) return;
-      }
-
-      const mediaUrl = urls.media + '/' + this.settings.items[command.index].url;
-      const screenMessage = {media: mediaUrl, author: message.author};
-      sendScreenMessage(screenMessage);
+  addCoolDownto(author) {
+    if (this.settings.perUserCooldown && !isNaN(this.settings.perUserCooldown) && this.settings.perUserCooldown > 0) {
+      this.blockedByCooldown[author.userName] = true;
+      setTimeout(() => this.removeCoolDownFrom(author), this.settings.perUserCooldown * 1000)
     }
+  }
+
+  async handleMessage(message) {
+    if (!this.settings.enabledForChat) return;
+    if (this.blockedByCooldown.global) return;
+    if (this.isAuthorBlockedByCoolDown(message.author)) return;
+
+    if (!this.settings.allowCommandsWithoutExclamation && message.text[0] !== '!') return;
+
+    let command = commandInText(message.text, this.commands);
+    if (!command) return;
+
+    if (!MediaPlayerChatApp.checkModeration(message.author)) return;
+
+    if (this.settings.enableStreamElementsIntegration) {
+      const pointsOk = await this.checkStreamElementsPoints(message.author);
+      if (!pointsOk) return;
+    }
+
+    const mediaUrl = urls.media + '/' + this.settings.items[command.index].url;
+    const screenMessage = {media: mediaUrl, author: message.author};
+    sendScreenMessage(screenMessage);
+    this.addCoolDownto(message.author);
   }
 }
 
-module
-  .exports = MediaPlayerChatApp;
+module.exports = MediaPlayerChatApp;
