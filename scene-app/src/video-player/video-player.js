@@ -4,8 +4,8 @@ import styles from './video-player.module.scss';
 import posed from 'react-pose';
 
 const Box = posed.div({
-    hidden: {opacity: 0, width:0},
-    visible: {opacity: 1,width:'100%'}
+    hidden: {opacity: 0, width: 0},
+    visible: {opacity: 1, width: '100%'}
 });
 
 class VideoPlayer extends Component {
@@ -24,21 +24,19 @@ class VideoPlayer extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.video) {
+    componentDidUpdate(prevProps) {
+        if (prevProps.video !== this.props.video) {
             const videoNode = this.videoRef.current;
-            if (videoNode.src === nextProps.video) {
+            if (videoNode.src === this.props.video) {
                 videoNode.currentTime = 0;
                 videoNode.play();
                 this.setState({playing: true})
             } else {
-                videoNode.src = nextProps.video;
+                videoNode.src = this.props.video;
                 videoNode.play();
                 this.setState({playing: true})
             }
-
         }
-        console.log(nextProps);
     }
 
     render() {

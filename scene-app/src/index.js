@@ -8,12 +8,12 @@ import {createReducer, createAction} from 'redux-act';
 import * as serviceWorker from './serviceWorker';
 
 const playVideo = createAction('PLAY_VIDEO');
+const playAudio = createAction('PLAY_AUDIO');
 
 const store = createStore(
     combineReducers({
-        videoPlayer: createReducer({
-            [playVideo]: (state, payload) => ({...payload, id: state.id+1})
-        }, {id: 0})
+        videoPlayer: createReducer({[playVideo]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
+        audioPlayer: createReducer({[playAudio]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0})
     }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -21,9 +21,12 @@ const io = require('socket.io-client');
 const socket = io('http://localhost:62619');
 
 socket.on('message', function (message) {
+    console.log('message received >',message);
     if (message.media) {
-        if (/(.*)+(.mp4|.webm|.mov|.mpeg)$/.test(message.media)) {
-            store.dispatch({type: 'PLAY_VIDEO', payload: {video: message.media}});
+        if (/\.(mp4|webm)$/i.test(message.media)) {
+            store.dispatch(playVideo({video: message.media}));
+        } else if (/\.(mp3|aac|ogg|flac|wav)$/i.test(message.media)) {
+            store.dispatch(playAudio({audio: message.media}));
         }
     }
 });
