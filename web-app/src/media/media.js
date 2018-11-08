@@ -4,18 +4,7 @@ import {connect} from 'react-redux';
 import registerRendererEvents from './media-message-handlers';
 import actions from './media-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner'
-
-
-function fromState(state) {
-    debugger;
-    return {
-        items: state.items,
-        enabledForChat: state.enabledForChat,
-        moderatorsOnly: state.moderatorsOnly,
-        costPerChatPlay: state.costPerChatPlay,
-        enableStreamElementsIntegration: state.enableStreamElementsIntegration
-    }
-}
+import MediaOptionsForm from './media-options-form';
 
 class MediaPanel extends Component {
     constructor(props) {
@@ -28,13 +17,11 @@ class MediaPanel extends Component {
         this.toggleAllCheckedForDeletion = this.toggleAllCheckedForDeletion.bind(this);
         this.handleCommandChange = this.handleCommandChange.bind(this);
         this.handleMediaInputChange = this.handleMediaInputChange.bind(this);
-        this.onChange = this.onChange.bind(this);
-        this.onToggle = this.onToggle.bind(this);
+        this.fromState = this.fromState.bind(this);
+
+        this.optionsRef = React.createRef();
         this.state = {
             items: this.props.items,
-            enabledForChat: this.props.enabledForChat || false,
-            moderatorsOnly: this.props.moderatorsOnly || false,
-            costPerChatPlay: this.props.costPerChatPlay || 0,
             enableStreamElementsIntegration: this.props.enableStreamElementsIntegration || false,
             checkedForDeletion: []
         };
@@ -45,63 +32,8 @@ class MediaPanel extends Component {
         return (
             <div className={styles.mediaPanel}>
                 {this.props.isLoading && (<LoadingSpinner/>)}
-                <div className={styles.settings}>
-                    <label>
-                        <input type="checkbox"
-                               name="enabledForChat"
-                               checked={this.state.enabledForChat}
-                               onChange={this.onToggle}/>
-                        <span>Enable on Chat</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="moderatorsOnly"
-                               checked={this.state.moderatorsOnly}
-                               onChange={this.onToggle}/>
-                        <span>Moderators Only</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="enableStreamElementsIntegration"
-                               checked={this.state.enableStreamElementsIntegration}
-                               onChange={this.onToggle}/>
-                        <span>Enable StreamElements Integration (You need a valid token)</span>
-                    </label>
-                    <label>Cost per chat play:
-                        <span>
-                            <input name="costPerChatPlay"
-                                   type="text"
-                                   value={this.state.costPerChatPlay}
-                                   onChange={this.onChange}/>
-                        </span>
-                    </label>
-                </div>
-                <div className={styles.buttonBar}>
-                    <button className={styles.button} disabled={this.props.loading} type="button"
-                            onClick={this.deleteMediaItems}>
-                        Delete
-                    </button>
-                    <button className={styles.button} disabled={this.props.loading} type="button"
-                            onClick={this.createMediaItem}>
-                        New
-                    </button>
-
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={() => {
-                                this.props.saveMedia(fromState(this.state))
-                            }}>
-                        Save
-                    </button>
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={this.props.importMedia}>
-                        Import from media folder
-                    </button>
-
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={this.props.openMediaFolder}>
-                        Open media folder
-                    </button>
-                </div>
+                <MediaOptionsForm ref={this.optionsRef} {...this.props}/>
+                {this.renderButtonBar()}
                 <div className={styles.mediaList}>
                     <table>
                         <thead>
@@ -116,34 +48,40 @@ class MediaPanel extends Component {
                         </tbody>
                     </table>
                 </div>
-                <div className={styles.buttonBar}>
-                    <button className={styles.button} disabled={this.props.loading} type="button"
-                            onClick={this.deleteMediaItems}>
-                        Delete
-                    </button>
-                    <button className={styles.button} disabled={this.props.loading} type="button"
-                            onClick={this.createMediaItem}>
-                        New
-                    </button>
-
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={() => {
-                                this.props.saveMedia(fromState(this.state));
-                            }}>
-                        Save
-                    </button>
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={this.props.importMedia}>
-                        Import from media folder
-                    </button>
-
-                    <button className={styles.button} type="button" disabled={this.props.loading}
-                            onClick={this.props.openMediaFolder}>
-                        Open media folder
-                    </button>
-                </div>
+                {this.renderButtonBar()}
             </div>
         );
+    }
+
+    renderButtonBar() {
+        return (
+            <div className={styles.buttonBar}>
+                <button className={styles.button} disabled={this.props.loading} type="button"
+                        onClick={this.deleteMediaItems}>
+                    Delete
+                </button>
+                <button className={styles.button} disabled={this.props.loading} type="button"
+                        onClick={this.createMediaItem}>
+                    New
+                </button>
+
+                <button className={styles.button} type="button" disabled={this.props.loading}
+                        onClick={() => {
+                            this.props.saveMedia(this.fromState(this.state))
+                        }}>
+                    Save
+                </button>
+                <button className={styles.button} type="button" disabled={this.props.loading}
+                        onClick={this.props.importMedia}>
+                    Import from media folder
+                </button>
+
+                <button className={styles.button} type="button" disabled={this.props.loading}
+                        onClick={this.props.openMediaFolder}>
+                    Open media folder
+                </button>
+            </div>
+        )
     }
 
     componentDidMount() {
@@ -158,8 +96,11 @@ class MediaPanel extends Component {
         });
     }
 
-    onChange = event => this.setState({...this.state, [event.target.name]: event.target.value});
-    onToggle = event => this.setState({...this.state, [event.target.name]: !this.state[event.target.name]});
+    fromState() {
+        const formData = {...this.optionsRef.current.state, items: this.state.items};
+        delete formData.props;
+        return formData;
+    }
 
     toggleCheckedForDeletion(checkBoxIndex) {
         const newCheckedForDeletion = [...this.state.checkedForDeletion];

@@ -6,13 +6,7 @@ const urls = require('../../../urls');
 class MediaPlayerChatApp {
 
   constructor(settings) {
-    this.user = settings.user;
-    this.media = settings.items;
-    this.enabledForChat = settings.enabledForChat;
-    this.moderatorsOnly = settings.moderatorsOnly;
-    this.costPerChatPlay = settings.costPerChatPlay;
-    this.enableStreamElementsIntegration = settings.enableStreamElementsIntegration;
-    this.streamElementsIntegrationFailed = false;
+    this.settings = settings;
     this.commands = settings.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase());
   }
 
@@ -21,13 +15,13 @@ class MediaPlayerChatApp {
   }
 
   async checkStreamElementsPoints(author) {
-    if (this.streamElementsIntegrationFailed) {
+    if (this.streamElementsIntegrationFailed || this.costPerChatPlay === 0) {
       return true;
     }
     try {
       const amount = this.costPerChatPlay * -1;
       const fetch = await fetchUserPoints(this.user.jwt, author.userName);
-      if (fetch.data.points > this.costPerChatPlay) {
+      if (fetch.data.points >= this.costPerChatPlay) {
         changeUserPoints(this.user.jwt, author.userName, amount);
         return true;
       }
@@ -39,20 +33,22 @@ class MediaPlayerChatApp {
   }
 
   async handleMessage(message) {
-    if (this.enabledForChat) {
+    if (this.settings.enabledForChat) {
+      if (!this.settings.allowCommandsWithoutExclamation && message.text[0] !== '!') return;
+
       let command = commandInText(message.text, this.commands);
-      if (command) {
-        if (MediaPlayerChatApp.checkModeration(message.author)) {
-          if (this.enableStreamElementsIntegration) {
-            const pointsOk = await this.checkStreamElementsPoints(message.author);
-            if (pointsOk) {
-              const mediaUrl = urls.media + '/' + this.media[command.index].url;
-              const screenMessage = {media: mediaUrl, author: message.author};
-              sendScreenMessage(screenMessage);
-            }
-          }
-        }
+      if (!command) return;
+
+      if (!MediaPlayerChatApp.checkModeration(message.author)) return;
+
+      if (this.settings.enableStreamElementsIntegration){
+        const pointsOk = await this.checkStreamElementsPoints(message.author);
+        if (!pointsOk) return;
       }
+
+      const mediaUrl = urls.media + '/' + this.settings.items[command.index].url;
+      const screenMessage = {media: mediaUrl, author: message.author};
+      sendScreenMessage(screenMessage);
     }
   }
 }

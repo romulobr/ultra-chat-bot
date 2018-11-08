@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const mediaReducer = createReducer({
-        [actions.saveMedia]: (state, payload) => ({...state, loading: true}),
+        [actions.saveMedia]: (state, payload) => ({...state,...payload, loading: true}),
         [actions.mediaValidationFailed]: (state, payload) => ({...state, loading: false}),
         [actions.mediaSaved]: (state, payload) => ({...payload, loading: false}),
         [actions.mediaSaveFailed]: (state, payload) => ({...state, loading: false,error:payload}),

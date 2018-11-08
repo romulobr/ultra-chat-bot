@@ -16,7 +16,6 @@ function* fetchMedia() {
             headers: {Authorization: 'Bearer ' + jwt}
         });
         if (getResponse.data && getResponse.data[0]) {
-            debugger;
             yield put(actions.mediaFetched({...getResponse.data[0]}));
         } else {
             yield axios.post(mediaApi, {items: []}, {headers: {Authorization: 'Bearer ' + jwt}}

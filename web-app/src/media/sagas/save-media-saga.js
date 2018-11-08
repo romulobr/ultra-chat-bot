@@ -4,6 +4,7 @@ import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
 import actions from '../media-actions';
 import {notAuthenticated} from '../../authentication/authentication-actions'
+const delay = (ms) => new Promise(res => setTimeout(res, ms))
 
 function validateForm(form) {
     const {items,costPerChatPlay} = form;
@@ -39,10 +40,10 @@ function* saveMedia(action) {
                 return;
             }
             console.log('saving media: ', action);
-            debugger;
             const response = yield axios.put(mediaApi, action.payload, {
                 headers: {Authorization: 'Bearer ' + jwt}
             });
+            yield delay(1000);
             yield put(actions.mediaSaved({...response.data}));
         }
     } catch (e) {
