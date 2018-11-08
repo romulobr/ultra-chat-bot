@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import styles from './media.module.scss';
-import optionsFormStyles from '../options-form/options-form.module.scss';
+import styles from './chicken-remote.module.scss';
 import LoadingSpinner from '../loading-spinner/loading-spinner'
+import optionsFormStyles from '../options-form/options-form.module.scss';
 
-class MediaOptionsForm extends Component {
+class ChickenOptionsForm extends Component {
     constructor(props) {
         super(props);
         this.onChange = this.onChange.bind(this);
@@ -15,9 +15,23 @@ class MediaOptionsForm extends Component {
 
     render() {
         return (
-            <div className={styles.mediaPanel}>
+            <div className={styles.chickenPanel}>
                 {this.props.isLoading && (<LoadingSpinner/>)}
                 <div className={optionsFormStyles.settings}>
+                    <label>
+                        <input type="checkbox"
+                               name="enabled"
+                               checked={this.state.enabled}
+                               onChange={this.onToggle}/>
+                        <span>Enable</span>
+                    </label>
+                    <label>
+                        <input type="checkbox"
+                               name="enabled"
+                               checked={this.state.soundEnabled}
+                               onChange={this.onToggle}/>
+                        <span>Enable Sound</span>
+                    </label>
                     <label>
                         <input type="checkbox"
                                name="enabledForChat"
@@ -32,41 +46,20 @@ class MediaOptionsForm extends Component {
                                onChange={this.onToggle}/>
                         <span>Enable commands without "!"</span>
                     </label>
-                    <label>
-                        <input type="checkbox"
-                               name="moderatorsOnly"
-                               checked={this.state.moderatorsOnly}
-                               onChange={this.onToggle}/>
-                        <span>Moderators Only</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="enableStreamElementsIntegration"
-                               checked={this.state.enableStreamElementsIntegration}
-                               onChange={this.onToggle}/>
-                        <span>Enable StreamElements Integration (You need a valid token)</span>
-                    </label>
-                    <label>Cost per chat play:
+
+                    <label>Move command
                         <span>
-                            <input name="costPerChatPlay"
+                            <input name="moveCommand"
                                    type="text"
-                                   value={this.state.costPerChatPlay}
+                                   value={this.state.moveCommand}
                                    onChange={this.onChange}/>
                         </span>
                     </label>
-                    <label>Global cooldown (seconds)
+                    <label>Say command
                         <span>
-                            <input name="globalCooldown"
+                            <input name="moveCommand"
                                    type="text"
-                                   value={this.state.globalCooldown}
-                                   onChange={this.onChange}/>
-                        </span>
-                    </label>
-                    <label>Per user cooldown (seconds)
-                        <span>
-                            <input name="perUserCooldown"
-                                   type="text"
-                                   value={this.state.perUserCooldown}
+                                   value={this.state.moveCommand}
                                    onChange={this.onChange}/>
                         </span>
                     </label>
@@ -79,4 +72,4 @@ class MediaOptionsForm extends Component {
     onToggle = event => this.setState({...this.state, [event.target.name]: !this.state[event.target.name]});
 }
 
-export default MediaOptionsForm;
+export default ChickenOptionsForm;

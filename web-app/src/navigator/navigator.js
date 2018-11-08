@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import AuthenticationPanel from '../authentication/authentication'
 import MediaPanel from '../media/media';
 import MediaRemote from '../media-remote/media-remote';
+import ChickenRemote from '../chicken-remote/chicken-remote'
 import ChatControls from '../chat-controls/chat-controls';
 import actions from './navigation-actions';
 
@@ -42,6 +43,10 @@ class Navigator extends Component {
                     }}>📱 Remote
                     </div>
                     <div className={styles.navigationItem} onClick={() => {
+                        this.props.navigateTo('chicken-remote')
+                    }}>🐔 Chicken
+                    </div>
+                    <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('chat-controls')
                     }}>💬 Chat-Bot
                     </div>
@@ -60,6 +65,9 @@ class Navigator extends Component {
                     </Panel>)}
                     {this.props.view === 'media' && (<Panel key="media">
                         <MediaPanel/>
+                    </Panel>)}
+                    {this.props.view === 'chicken-remote' && (<Panel key="chicken-remote">
+                        <ChickenRemote/>
                     </Panel>)}
                 </PoseGroup>
             </div>

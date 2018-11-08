@@ -55,17 +55,17 @@ class MediaPanel extends Component {
 
     renderButtonBar() {
         return (
-            <div className={styles.buttonBar}>
-                <button className={styles.button} disabled={this.props.loading} type="button"
+            <div className={MediaOptionsForm.buttonBar}>
+                <button disabled={this.props.loading} type="button"
                         onClick={this.deleteMediaItems}>
                     Delete
                 </button>
-                <button className={styles.button} disabled={this.props.loading} type="button"
+                <button disabled={this.props.loading} type="button"
                         onClick={this.createMediaItem}>
                     New
                 </button>
 
-                <button className={styles.button} type="button" disabled={this.props.loading}
+                <button type="button" disabled={this.props.loading}
                         onClick={() => {
                             this.props.saveMedia(this.fromState(this.state))
                         }}>
