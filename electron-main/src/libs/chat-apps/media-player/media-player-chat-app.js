@@ -11,7 +11,7 @@ class MediaPlayerChatApp {
     this.blockedByCooldown = {global: false};
   }
 
-  static checkModeration(author) {
+  static hasPermission(author) {
     return author.isChatModerator || author.isChatOwner;
   }
 
@@ -58,7 +58,7 @@ class MediaPlayerChatApp {
     let command = commandInText(message.text, this.commands);
     if (!command) return;
 
-    if (!MediaPlayerChatApp.checkModeration(message.author)) return;
+    if (this.settings.moderatorsOnly && !MediaPlayerChatApp.hasPermission(message.author)) return;
 
     if (this.settings.enableStreamElementsIntegration) {
       const pointsOk = await this.checkStreamElementsPoints(message.author);

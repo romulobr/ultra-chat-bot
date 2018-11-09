@@ -42,10 +42,10 @@ class Navigator extends Component {
                         this.props.navigateTo('media-remote')
                     }}>📱 Remote
                     </div>
-                    <div className={styles.navigationItem} onClick={() => {
-                        this.props.navigateTo('chicken-remote')
-                    }}>🐔 Chicken
-                    </div>
+                    {/*<div className={styles.navigationItem} onClick={() => {*/}
+                        {/*this.props.navigateTo('chicken-remote')*/}
+                    {/*}}>🐔 Chicken*/}
+                    {/*</div>*/}
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('chat-controls')
                     }}>💬 Chat-Bot
