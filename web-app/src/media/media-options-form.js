@@ -8,8 +8,6 @@ class MediaOptionsForm extends Component {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onToggle = this.onToggle.bind(this);
-
-        console.log('props on constructor', props);
         this.state = {...props}
     }
 

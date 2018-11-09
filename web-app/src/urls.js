@@ -1,6 +1,7 @@
 const server = 'http://localhost:62619';
 const api = 'http://localhost:62619/api';
 const mediaApi = 'http://localhost:62619/api/media';
+const chickenApi = 'http://localhost:62619/api/chicken';
 const userApi = 'http://localhost:62619/api/users';
 const messageApi = 'http://localhost:62619/message';
 const streamElementsTokenApi = 'http://localhost:62619/api/stream-elements-token';
@@ -17,6 +18,7 @@ export {messageApi};
 export {streamElementsTokenApi};
 export {streamElementsApiCheck};
 export {youtubeBroadcastsApi};
+export {chickenApi};
 
 export default {
     server,
@@ -27,5 +29,6 @@ export default {
     mediaUrl,
     streamElementsTokenApi,
     streamElementsApiCheck,
-    youtubeBroadcastsApi
+    youtubeBroadcastsApi,
+    chickenApi
 };

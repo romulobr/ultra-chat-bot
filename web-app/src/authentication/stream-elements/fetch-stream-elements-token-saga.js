@@ -1,4 +1,4 @@
-import {streamElementsTokenApi, streamElementsApiCheck, mediaApi} from '../../urls';
+import {streamElementsTokenApi, streamElementsApiCheck} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
@@ -18,7 +18,7 @@ function* fetchToken() {
         if (getResponse.data && getResponse.data[0] && getResponse.data[0].token) {
             yield put(actions.fetchTokenSuccess({token: getResponse.data[0].token}));
             try {
-                if(getResponse.data[0].token!==''){
+                if (getResponse.data[0].token !== '') {
                     const streamElementsUser = yield axios.get(streamElementsApiCheck, {
                         headers: {Authorization: 'Bearer ' + getResponse.data[0].token}
                     });

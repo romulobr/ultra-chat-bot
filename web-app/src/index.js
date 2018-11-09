@@ -11,6 +11,7 @@ import environmentReducer from './environment/environment-reducer';
 import chatControlsReducer from './chat-controls/chat-controls-reducer';
 import streamElementsReducer from './authentication/stream-elements/stream-elements-reducer';
 import youtubeChatControlsReducer from './chat-controls/youtube/youtube-chat-controls-reducer';
+import chickenControlsReducer from './chicken-remote/chicken-reducer'
 
 import createSagaMiddleware from 'redux-saga';
 
@@ -25,6 +26,8 @@ import watchPlayMedia from './media-remote/play-media-saga';
 import watchFetchStreamElementsToken from './authentication/stream-elements/fetch-stream-elements-token-saga';
 import watchSaveStreamElementsToken from './authentication/stream-elements/save-stream-elements-token-saga';
 import watchFetchYoutubeBroadcasts from './chat-controls/youtube/fetch-youtube-broadcasts-saga';
+import watchSaveChicken from './chicken-remote/sagas/save-chicken-saga';
+import watchFetchChicken from './chicken-remote/sagas/fetch-chicken-saga';
 
 import navigatorReducer from './navigator/navigator-reducer';
 
@@ -39,7 +42,8 @@ const store = createStore(
         chatControls: chatControlsReducer,
         youtubeChatControls: youtubeChatControlsReducer,
         navigator: navigatorReducer,
-        streamElements: streamElementsReducer
+        streamElements: streamElementsReducer,
+        chickenControls: chickenControlsReducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -55,6 +59,8 @@ sagaMiddleware.run(watchFetchStreamElementsToken);
 sagaMiddleware.run(watchSaveStreamElementsToken);
 sagaMiddleware.run(watchFetchYoutubeBroadcasts);
 sagaMiddleware.run(watchStopChat);
+sagaMiddleware.run(watchSaveChicken);
+sagaMiddleware.run(watchFetchChicken);
 
 ReactDOM.render(
     <Provider store={store}>

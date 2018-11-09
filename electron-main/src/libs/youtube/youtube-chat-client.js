@@ -30,7 +30,7 @@ function create(user, apps, liveChatId) {
       .sendChatMessage(
         youtubeOauthClient,
         liveChatId,
-        '🐮v3 on!',
+        '🐮Hi!',
       )
       .then(
         r => console.log(JSON.stringify(r)),

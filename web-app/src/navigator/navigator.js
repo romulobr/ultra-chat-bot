@@ -32,23 +32,23 @@ class Navigator extends Component {
                 <div className={styles.viewPicker}>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('authentication')
-                    }}>⚙ Settings
+                    }}><span role="img">⚙</span> Settings
                     </div>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('media')
-                    }}>📺 Media
+                    }}><span role="img" aria-label={"tv"}>📺</span> Media
                     </div>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('media-remote')
-                    }}>📱 Remote
+                    }}><span role="img" aria-label={"remote"}>📱</span> Remote
                     </div>
-                    {/*<div className={styles.navigationItem} onClick={() => {*/}
-                        {/*this.props.navigateTo('chicken-remote')*/}
-                    {/*}}>🐔 Chicken*/}
-                    {/*</div>*/}
+                    <div className={styles.navigationItem} onClick={() => {
+                        this.props.navigateTo('chicken-remote')
+                    }}><span role="img" aria-label={"chicken"}>🐔</span> Chicken
+                    </div>
                     <div className={styles.navigationItem} onClick={() => {
                         this.props.navigateTo('chat-controls')
-                    }}>💬 Chat-Bot
+                    }}><span role="img" aria-label={"chat"}>💬</span> Chat-Bot
                     </div>
                 </div>
                 <PoseGroup>

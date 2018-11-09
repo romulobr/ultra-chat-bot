@@ -6,9 +6,6 @@ import actions from './youtube-chat-controls-actions';
 import chatControlActions from '../chat-control-actions';
 
 class YoutubeChatControl extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.fetchYoutubeBroadcasts();
@@ -46,7 +43,9 @@ const mapDispatchToProps = dispatch => {
             dispatch(actions.fetchYoutubeBroadcasts());
         },
         connectToChat: (liveChatId) => {
-            return ()=>{dispatch(chatControlActions.connectToChat(liveChatId))};
+            return () => {
+                dispatch(chatControlActions.connectToChat(liveChatId))
+            };
         },
         disconnectFromChat: () => {
             dispatch(chatControlActions.disconnectFromChat());

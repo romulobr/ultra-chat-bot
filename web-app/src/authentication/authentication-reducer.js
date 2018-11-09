@@ -1,10 +1,6 @@
 import {createReducer} from 'redux-act';
 import actions from './authentication-actions';
 
-const streamElements = {
-    token: '',
-    isEditing: true
-};
 const authenticationReducer = createReducer({
     [actions.authenticationSuccess]: (state, payload) => ({
         ...state,
