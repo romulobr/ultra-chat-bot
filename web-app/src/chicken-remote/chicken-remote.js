@@ -4,7 +4,7 @@ import optionsFormStyles from '../options-form/options-form.module.scss';
 
 import {connect} from 'react-redux';
 import actions from './chicken-remote-actions.js';
-import OptionsForm from './ckicken-options-form';
+import OptionsForm from './chicken-options-form';
 import ChickenControls from './ckicken-controls-form';
 
 class ChickenRemote extends Component {
@@ -21,19 +21,7 @@ class ChickenRemote extends Component {
 
                 </div>
                 <div className={optionsFormStyles.form}>
-                    <ChickenControls/>
-                    <div className={optionsFormStyles.buttonBar}>
-                        <button className={styles.chickenItem} onClick={() => {
-                            this.props.moveChicken()
-                        }}>
-                            Move Chicken
-                        </button>
-                        <button className={styles.chickenItem} onClick={() => {
-                            this.props.chickenSay()
-                        }}>
-                            Say Message
-                        </button>
-                    </div>
+                    <ChickenControls {...this.props}/>
                 </div>
             </div>)
     }
@@ -58,11 +46,8 @@ const mapDispatchToProps = dispatch => {
         fetchChickenOptions: () => {
             dispatch(actions.fetchChicken())
         },
-        moveChicken: (x, y) => {
-            dispatch(actions.chickenMove({x, y}));
-        },
-        chickenSay: (message) => {
-            dispatch(actions.chickenSpeak({message}));
+        sendChickenCommand: (command) => {
+            dispatch(actions.sendChickenCommand(command));
         }
     };
 };

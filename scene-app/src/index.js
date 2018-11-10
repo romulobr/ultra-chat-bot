@@ -9,18 +9,23 @@ import * as serviceWorker from './serviceWorker';
 
 const playVideo = createAction('PLAY_VIDEO');
 const playAudio = createAction('PLAY_AUDIO');
-const moveChicken = createAction('MOVE_CHICKEN');
+const chickenCommand = createAction('MOVE_CHICKEN');
 
 const store = createStore(
     combineReducers({
         videoPlayer: createReducer({[playVideo]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
         audioPlayer: createReducer({[playAudio]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
-        chicken: createReducer({[moveChicken]: (state, payload) => ({...payload, id: state.id + 1})}, {
-            moving: false,
-            x: 0,
-            y: 0,
-            facing: 'right'
-        })
+        chicken: createReducer({
+            [chickenCommand]: (state, payload) => {
+                const sayId = payload.say ? state.sayId + 1 : state.sayId;
+                const moveId = payload.move ? state.moveId + 1 : state.moveId;
+                return {
+                    ...payload,
+                    moveId,
+                    sayId
+                }
+            }
+        }, {moveId: 0, sayId: 0})
     }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -35,6 +40,8 @@ socket.on('message', function (message) {
         } else if (/\.(mp3|aac|ogg|flac|wav)$/i.test(message.media)) {
             store.dispatch(playAudio({audio: message.media}));
         }
+    } else if (message.chicken) {
+        store.dispatch(chickenCommand(message.chicken));
     }
 });
 

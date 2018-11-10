@@ -1,7 +1,6 @@
 import {createAction} from 'redux-act';
 
-const chickenMove = createAction('CHICKEN_MOVE');
-const chickenSpeak = createAction('CHICKEN_SPEAK');
+const sendChickenCommand = createAction('CHICKEN_COMMAND');
 
 const saveChicken = createAction('SAVE_CHICKEN');
 const chickenSaveFailed = createAction('CHICKEN_SAVE_FAILED');
@@ -16,11 +15,10 @@ export {chickenFetchFailed};
 export {chickenSaveFailed};
 export {chickenSaved};
 export {fetchChicken};
-export {chickenMove, chickenSpeak};
+export {sendChickenCommand};
 
 export default {
-    chickenMove,
-    chickenSpeak,
+    sendChickenCommand,
     fetchChicken,
     chickenFetched,
     chickenFetchFailed,

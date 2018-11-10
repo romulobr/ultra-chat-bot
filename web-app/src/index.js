@@ -28,7 +28,7 @@ import watchSaveStreamElementsToken from './authentication/stream-elements/save-
 import watchFetchYoutubeBroadcasts from './chat-controls/youtube/fetch-youtube-broadcasts-saga';
 import watchSaveChicken from './chicken-remote/sagas/save-chicken-saga';
 import watchFetchChicken from './chicken-remote/sagas/fetch-chicken-saga';
-
+import watchChickenCommand from './chicken-remote/sagas/chicken-command-saga'
 import navigatorReducer from './navigator/navigator-reducer';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -61,6 +61,7 @@ sagaMiddleware.run(watchFetchYoutubeBroadcasts);
 sagaMiddleware.run(watchStopChat);
 sagaMiddleware.run(watchSaveChicken);
 sagaMiddleware.run(watchFetchChicken);
+sagaMiddleware.run(watchChickenCommand);
 
 ReactDOM.render(
     <Provider store={store}>
