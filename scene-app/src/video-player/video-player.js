@@ -1,11 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import styles from './video-player.module.scss';
+import styles from './video-player.scss';
 import posed from 'react-pose';
 
 const Box = posed.div({
-    hidden: {opacity: 0, width: 0},
-    visible: {opacity: 1, width: '100%'}
+    hidden: {
+        opacity: 0, width: '100%',transform: 'translateY(150%) rotate(-20deg)'
+
+    },
+    visible: {
+        opacity: 1, width: '100%', transform: 'translateY(0%) rotate(0deg)'
+    }
+
 });
 
 class VideoPlayer extends Component {
@@ -19,7 +25,6 @@ class VideoPlayer extends Component {
         const videoNode = this.videoRef.current;
         const that = this;
         videoNode.onended = function () {
-            videoNode.src = '';
             that.setState({playing: false})
         };
     }
@@ -41,9 +46,11 @@ class VideoPlayer extends Component {
 
     render() {
         return (
-            <Box className={styles.videoPlayer + " box"} pose={this.state.playing ? 'visible' : 'hidden'}>
+            <div className={'videoContainer'}>
+            <Box className={'videoPlayer box'} pose={this.state.playing ? 'visible' : 'hidden'}>
                 <video width="100%" ref={this.videoRef}/>
-            </Box>)
+            </Box>
+            </div>)
     }
 
 }

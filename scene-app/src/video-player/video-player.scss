@@ -1,0 +1,19 @@
+.videoContainer {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.videoPlayer {
+  display: block;
+  text-align: center;
+  width: 98vw;
+  background-color: transparent;
+
+  video {
+    width: 95vw;
+    border-radius: 8px;
+    background-size: contain;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+  }
+}

@@ -25,7 +25,7 @@ class Chicken extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.move && prevProps.moveId !== this.props.moveId) {
             handleMovement(this.chicken.current, {x: this.props.move.x, y: this.props.move.y, autoFlip: true});
-            handleMovement(this.speechBubble.current, {x: this.props.move.x, y: this.props.move.y, shiftY: -64});
+            handleMovement(this.speechBubble.current, {x: this.props.move.x, y: this.props.move.y, shiftY: -64,shiftX:128});
         }
         if (this.props.say && prevProps.sayId !== this.props.sayId) {
             const bubble = this.speechBubble.current;
