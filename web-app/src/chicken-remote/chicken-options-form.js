@@ -94,7 +94,7 @@ class ChickenOptionsForm extends Component {
                     </label>
                     <label>Volunteer command
                         <span>
-                            <input name="sayCommand"
+                            <input name="volunteerCommand"
                                    type="text"
                                    value={this.state.volunteerCommand}
                                    onChange={this.onChange}

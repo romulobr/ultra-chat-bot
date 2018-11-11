@@ -4,18 +4,23 @@ const youtubeChatClient = require('./youtube/youtube-chat-client');
 const validateTwitchUserTokenAndRefreshIfNeeded = require('./twitch/validate-twitch-user-tokens-and-refresh-if-needed');
 
 const createMediaPlayerChatApp = require('./chat-apps/media-player/media-player-chat-app-creator');
+const createChickenChatApp = require('./chat-apps/chiken/chicken-app-chat-app-creator');
 
-function createChatBotApps(user) {
+async function createChatBotApps(user) {
   const apps = [];
-  return new Promise(success => {
-    createMediaPlayerChatApp(user).then(chatApp => {
-      apps.push(chatApp);
-    }).catch(e => {
-      console.log('could not create chat apps', e)
-    }).finally(() => {
-      success(apps);
-    });
-  });
+  try {
+    const mediaChatApp = await createMediaPlayerChatApp(user);
+    apps.push(mediaChatApp);
+  } catch (e) {
+    console.log('failed to create media chat app')
+  }
+  try {
+    const chickenChatApp = await createChickenChatApp(user);
+    apps.push(chickenChatApp);
+  } catch (e) {
+    console.log('failed to create chicken chat app')
+  }
+  return (apps);
 }
 
 function createBotFor(user, options) {

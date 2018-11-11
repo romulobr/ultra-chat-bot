@@ -1,4 +1,4 @@
-const commandInText = require('../util/command-in-text');
+const commands = require('../util/command-in-text');
 const sendScreenMessage = require('../util/send-screen-message');
 const {changeUserPoints, fetchUserPoints} = require('../../../server/stream-elements-api/stream-elements-api');
 const urls = require('../../../urls');
@@ -55,7 +55,7 @@ class MediaPlayerChatApp {
 
     if (!this.settings.allowCommandsWithoutExclamation && message.text[0] !== '!') return;
 
-    let command = commandInText(message.text, this.commands);
+    let command = commands.commandInText(message.text, this.commands);
     if (!command) return;
 
     if (this.settings.moderatorsOnly && !MediaPlayerChatApp.hasPermission(message.author)) return;
