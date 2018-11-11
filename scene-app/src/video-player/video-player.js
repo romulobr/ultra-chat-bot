@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import styles from './video-player.scss';
+import './video-player.scss';
 import posed from 'react-pose';
 
 const Box = posed.div({
     hidden: {
-        opacity: 0, width: '100%',transform: 'translateY(150%) rotate(-20deg)'
-
+        opacity: 0, width: '100%', transform: 'translateY(150%) rotate(-20deg)'
     },
     visible: {
-        opacity: 1, width: '100%', transform: 'translateY(0%) rotate(0deg)'
+        opacity: 1, width: '80%', transform: 'translateY(0%) rotate(0deg)'
     }
 
 });
@@ -30,14 +29,14 @@ class VideoPlayer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.video !== this.props.video) {
+        if (prevProps.media !== this.props.media) {
             const videoNode = this.videoRef.current;
-            if (videoNode.src === this.props.video) {
+            if (videoNode.src === this.props.media) {
                 videoNode.currentTime = 0;
                 videoNode.play();
                 this.setState({playing: true})
             } else {
-                videoNode.src = this.props.video;
+                videoNode.src = this.props.media;
                 videoNode.play();
                 this.setState({playing: true})
             }
@@ -47,9 +46,12 @@ class VideoPlayer extends Component {
     render() {
         return (
             <div className={'videoContainer'}>
-            <Box className={'videoPlayer box'} pose={this.state.playing ? 'visible' : 'hidden'}>
-                <video width="100%" ref={this.videoRef}/>
-            </Box>
+                <Box className={'videoPlayer'} pose={this.state.playing ? 'visible' : 'hidden'}>
+                    <video width="100%" ref={this.videoRef}/>
+                    <div className="videoPlayer__author" pose={this.state.playing ? 'visible' : 'hidden'}>
+                        {this.props.author && this.props.author.name || 'Ultra v3'}
+                    </div>
+                </Box>
             </div>)
     }
 

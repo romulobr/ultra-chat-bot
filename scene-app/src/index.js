@@ -36,9 +36,9 @@ socket.on('message', function (message) {
     console.log('message received >', message);
     if (message.media) {
         if (/\.(mp4|webm)$/i.test(message.media)) {
-            store.dispatch(playVideo({video: message.media}));
+            store.dispatch(playVideo({...message}));
         } else if (/\.(mp3|aac|ogg|flac|wav)$/i.test(message.media)) {
-            store.dispatch(playAudio({audio: message.media}));
+            store.dispatch(playAudio({...message.media}));
         }
     } else if (message.chicken) {
         store.dispatch(chickenCommand(message.chicken));

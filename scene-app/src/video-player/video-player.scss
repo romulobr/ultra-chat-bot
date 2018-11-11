@@ -2,18 +2,35 @@
   display: flex;
   justify-content: center;
   width: 100vw;
+  height: 100vh;
 }
 
 .videoPlayer {
-  display: block;
+  margin-top:5px;
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
   text-align: center;
-  width: 98vw;
+  height: 100%;
   background-color: transparent;
 
   video {
-    width: 95vw;
-    border-radius: 8px;
+    height: 100%;
     background-size: contain;
-    border: 5px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+  }
+
+  &__author{
+    display: inline;
+    width: auto;
+    position: relative;
+    top:-1.2em;
+    border-radius: 8px;
+    font-size: 4em;
+    line-height: 1.2;
+    color: #ffffff;
+    transform: rotate(-5deg);
+    text-shadow: black 5px 5px 5px;
   }
 }
+
