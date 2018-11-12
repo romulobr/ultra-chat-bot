@@ -4,7 +4,7 @@ import getSavedToken from '../authentication/jwt'
 const ipcRenderer = require('electron').ipcRenderer;
 
 function* connectToChat(action) {
-    console.log('trying to connect to chat');
+    console.log('trying to connectStreamlabs to chat');
     try {
         const jwt = getSavedToken();
         if (!jwt) {

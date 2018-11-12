@@ -31,7 +31,7 @@ async function changeUserPoints(localToken, userName, amount) {
   if (streamElementsUserResult.data.channels.length === 1) {
     streamElementsChannel = streamElementsUserResult.data.channels[0]._id;
   } else {
-    localUserResult =  await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
+    localUserResult = await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
     const userOrigin = localUserResult.data.origin;
     streamElementsChannel = streamElementsUserResult.data.channels.filter(channel => channel.provider === userOrigin)[0]._id;
   }
@@ -67,4 +67,4 @@ function initialize(app) {
 
 }
 
-module.exports = {initialize, changeUserPoints, fetchUserPoints};
+module.exports = {initialize, streamElements: {changeUserPoints, fetchUserPoints}};

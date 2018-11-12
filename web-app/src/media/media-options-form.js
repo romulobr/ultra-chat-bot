@@ -42,7 +42,14 @@ class MediaOptionsForm extends Component {
                                name="enableStreamElementsIntegration"
                                checked={this.state.enableStreamElementsIntegration}
                                onChange={this.onToggle}/>
-                        <span>Enable StreamElements Integration (You need a valid token)</span>
+                        <span>Enable StreamElements Integration (need a valid token)</span>
+                    </label>
+                    <label>
+                        <input type="checkbox"
+                               name="enableStreamlabsIntegration"
+                               checked={this.state.enableStreamlabsIntegration}
+                               onChange={this.onToggle}/>
+                        <span>Enable Streamlabs Integration (need to be connected)</span>
                     </label>
                     <label>Cost per chat play:
                         <span>

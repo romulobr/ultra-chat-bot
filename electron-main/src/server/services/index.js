@@ -2,7 +2,7 @@ const users = require('./users/users.service.js');
 const media = require('./media/media.service.js');
 const chicken = require('./chicken/chicken.service.js');
 const streamElementsToken = require('./stream-elements-token/stream-elements-token.service');
-const streamLabsToken = require('./stream-labs-token/stream-labs-token.service');
+const streamLabsToken = require('./stream-labs/stream-labs.service');
 
 module.exports = function (app) {
   app.configure(users);

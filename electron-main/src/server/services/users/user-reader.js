@@ -1,4 +1,4 @@
-getUserIn = data => {
+const getUserIn = data => {
   if (data.twitch) {
     return getTwitchUserIn(data);
   } else if (data.youtube) {
@@ -7,7 +7,7 @@ getUserIn = data => {
   return null;
 };
 
-getSimplifiedUserIn = data => {
+const getSimplifiedUserIn = data => {
   if (data.twitch) {
     return getSimplifiedTwitchUserIn(data);
   } else if (data.youtube) {
@@ -16,17 +16,17 @@ getSimplifiedUserIn = data => {
   return null;
 };
 
-getSimplifiedYoutubeUserIn = data => {
+const getSimplifiedYoutubeUserIn = data => {
   return {
     origin: "youtube",
     name: data.youtube.profile.displayName,
     displayName: data.youtube.profile.displayName,
     profilePictureUrl:
-      data.youtube.profile._json.items[0].snippet.thumbnails.medium.url
+    data.youtube.profile._json.items[0].snippet.thumbnails.medium.url
   };
 };
 
-getYoutubeUserIn = data => {
+const getYoutubeUserIn = data => {
   const simplifiedUser = getSimplifiedYoutubeUserIn(data);
   return {
     ...simplifiedUser,
@@ -36,7 +36,7 @@ getYoutubeUserIn = data => {
   };
 };
 
-getSimplifiedTwitchUserIn = data => {
+const getSimplifiedTwitchUserIn = data => {
   return {
     origin: "twitch",
     name: data.twitch.profile.login,
@@ -45,7 +45,7 @@ getSimplifiedTwitchUserIn = data => {
   };
 };
 
-getTwitchUserIn = data => {
+const getTwitchUserIn = data => {
   const simplifiedUser = getSimplifiedTwitchUserIn(data);
   return {
     ...simplifiedUser,

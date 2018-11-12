@@ -4,6 +4,7 @@ import posed, {PoseGroup} from 'react-pose';
 import deauthenticate from './deauthentication';
 import actions from './authentication-actions';
 import StreamElements from './stream-elements/stream-elements';
+import Streamlabs from './stream-labs/stream-labs';
 import {connect} from 'react-redux';
 
 const Panel = posed.div({
@@ -26,22 +27,16 @@ const Panel = posed.div({
 class AuthenticationPanel extends Component {
     constructor() {
         super();
-        this.poolToken = this.poolToken.bind(this);
+        window.addEventListener("message", (event) => {
+            if (event.data === 'authenticated') {
+                event.source.close();
+                this.props.authenticate();
+            }
+        }, false);
     }
 
     componentDidMount() {
         this.props.authenticate();
-    }
-
-    poolToken(callBack) {
-        setTimeout(() => {
-            this.props.authenticate();
-            if (!this.props.connected) {
-                this.poolToken(callBack)
-            } else {
-                callBack();
-            }
-        }, 1000)
     }
 
     render() {
@@ -59,25 +54,22 @@ class AuthenticationPanel extends Component {
                             <button onClick={this.props.deauthenticate}>Disconnect</button>
                         </div>
                     </div>
-                    <StreamElements isEditing={this.props.isEditing} token={this.props.token} editToken={this.props.editToken}/>
+                    <StreamElements isEditing={this.props.isEditing} token={this.props.token}
+                                    editToken={this.props.editToken}/>
+                    <Streamlabs ref={this.streamlabs}/>
                 </div>
             </Panel>) :
             (<Panel className={styles.information + ' ' + styles.offline} key="disconnected-panel">
                 <div>Welcome - You are not connected yet</div>
                 <div>
                     <button onClick={() => {
-                        const authWindow = window.open('/api/auth/twitch', '_blank', 'nodeIntegration=no');
-                        this.poolToken(() => {
-                            authWindow.close();
-                        })
+                        window.open('/api/auth/twitch', '_blank', 'nodeIntegration=no');
                     }}>Connect with twitch
                     </button>
                 </div>
                 <div>
                     <button onClick={() => {
-                        const authWindow = window.open('/api/auth/youtube', '_blank', 'nodeIntegration=no');
-                        debugger;
-                        console.log(authWindow);
+                        window.open('/api/auth/youtube', '_blank', 'nodeIntegration=no');
                     }}>Connect with youtube
                     </button>
                 </div>

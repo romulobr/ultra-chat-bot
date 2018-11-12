@@ -48,8 +48,10 @@ class VideoPlayer extends Component {
             <div className={'videoContainer'}>
                 <Box className={'videoPlayer'} pose={this.state.playing ? 'visible' : 'hidden'}>
                     <video width="100%" ref={this.videoRef}/>
-                    <div className="videoPlayer__author" pose={this.state.playing ? 'visible' : 'hidden'}>
-                        {this.props.author && this.props.author.name || 'Ultra v3'}
+                    <div
+                        className={(this.props.author && this.props.author.isChatSponsor )? 'videoPlayer__author videoPlayer__author-sponsor' : 'videoPlayer__author'}
+                        pose={this.state.playing ? 'visible' : 'hidden'}>
+                        {(this.props.author && this.props.author.name) || 'Ultra v3'}
                     </div>
                 </Box>
             </div>)

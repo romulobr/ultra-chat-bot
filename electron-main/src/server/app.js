@@ -7,6 +7,7 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketIoMessenger = require('./socket-io/socket-io-messenger');
 const streamElementsApi = require('./stream-elements-api/stream-elements-api');
+const streamlabsApi = require('./stream-labs-api/stream-labs-api');
 const youtubeApi = require('./youtube-api/youtube-api');
 
 const {app} = require('electron');
@@ -51,6 +52,7 @@ mainApp.use(express.static(path.join(__dirname, '../../public-dist')));
 const server = mainApp.listen(62619);
 socketIoMessenger.initialize(server, mainApp);
 streamElementsApi.initialize(mainApp);
+streamlabsApi.initialize(mainApp);
 youtubeApi.initialize(mainApp);
 
 mainApp.use(express.notFound());

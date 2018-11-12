@@ -9,6 +9,7 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketIoMessenger = require('./socket-io/socket-io-messenger');
 const streamElements = require('./stream-elements-api/stream-elements-api');
+const streamlabsApi = require('./stream-labs-api/stream-labs-api');
 const youtubeApi = require('./youtube-api/youtube-api');
 //const bodyParser = require('body-parser');
 
@@ -55,6 +56,7 @@ mainApp.use('/media', express.static(mediaFolder));
 const server = mainApp.listen(62619);
 socketIoMessenger.initialize(server, mainApp);
 streamElements.initialize(mainApp);
+streamlabsApi.initialize(mainApp);
 youtubeApi.initialize(mainApp);
 
 mainApp.use('*', function (req, res) {
