@@ -18,6 +18,10 @@ import chicken11 from './audio/chicken11.mp3';
 import chicken12 from './audio/chicken12.mp3';
 import chicken13 from './audio/chicken13.mp3';
 
+const gsap = require("gsap");
+const textPlugin = require("gsap/TextPlugin");
+console.log(gsap, textPlugin);
+
 const chickenAudio = [chicken1, chicken2, chicken3, chicken4, chicken5, chicken6, chicken7, chicken8, chicken9, chicken10, chicken11, chicken12, chicken13];
 const tl = new TimelineLite();
 
@@ -25,7 +29,12 @@ class Chicken extends Component {
     componentDidUpdate(prevProps) {
         if (this.props.move && prevProps.moveId !== this.props.moveId) {
             handleMovement(this.chicken.current, {x: this.props.move.x, y: this.props.move.y, autoFlip: true});
-            handleMovement(this.speechBubble.current, {x: this.props.move.x, y: this.props.move.y, shiftY: -64,shiftX:128});
+            handleMovement(this.speechBubble.current, {
+                x: this.props.move.x,
+                y: this.props.move.y,
+                shiftY: -64,
+                shiftX: 128
+            });
         }
         if (this.props.say && prevProps.sayId !== this.props.sayId) {
             const bubble = this.speechBubble.current;
