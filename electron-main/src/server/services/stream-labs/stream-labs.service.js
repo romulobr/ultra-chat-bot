@@ -1,10 +1,10 @@
 const hooks = require('./stream-labs.hooks');
 const NeDB = require('nedb');
 const service = require('feathers-nedb');
-
+const dataFolder = require('../../../folders').dataFolder;
 
 const Model = new NeDB({
-  filename: './data/stream-labs.db',
+  filename: dataFolder + '/stream-labs.db',
   autoload: true
 });
 

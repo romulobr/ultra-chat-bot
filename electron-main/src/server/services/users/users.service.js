@@ -1,10 +1,10 @@
 const hooks = require('./users.hooks');
 const NeDB = require('nedb');
 const service = require('feathers-nedb');
-
+const dataFolder = require('../../../folders').dataFolder;
 
 const Model = new NeDB({
-  filename: './data/users.db',
+  filename: dataFolder + '/users.db',
   autoload: true
 });
 

@@ -1,9 +1,10 @@
 const hooks = require('./chicken.hooks');
 const NeDB = require('nedb');
 const service = require('feathers-nedb');
+const dataFolder = require('../../../folders').dataFolder;
 
 const Model = new NeDB({
-  filename: './data/chicken.db',
+  filename: dataFolder + '/chicken.db',
   autoload: true
 });
 

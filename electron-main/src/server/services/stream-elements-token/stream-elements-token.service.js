@@ -1,10 +1,10 @@
 const hooks = require('./stream-elements-token.hooks');
 const NeDB = require('nedb');
 const service = require('feathers-nedb');
-
+const dataFolder = require('../../../folders').dataFolder;
 
 const Model = new NeDB({
-  filename: './data/stream-elements-token.db',
+  filename: dataFolder + '/stream-elements-token.db',
   autoload: true
 });
 
