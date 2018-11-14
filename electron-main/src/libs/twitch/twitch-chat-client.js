@@ -4,6 +4,7 @@ const twitchJs = require("twitch-js");
 
 function create(user, apps) {
   const channel = user.name;
+  console.log('channel', channel);
   const options = {
     channels: [`#${channel}`],
     identity: {
@@ -12,7 +13,7 @@ function create(user, apps) {
     },
     connection: {
       reconnect: true,
-      secure: false
+      secure: true
     }
   };
 
@@ -33,7 +34,7 @@ function create(user, apps) {
   });
   client.on('join', function (channel) {
     if (!showedConnectionStatus) {
-      client.say(channel, '🐮 Hi!');
+      client.say(channel, 'Muuuuu!');
       showedConnectionStatus = true;
     }
   });
