@@ -18,14 +18,14 @@ class AudioPlayer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.audio !== this.props.media) {
+        if (prevProps.url !== this.props.url) {
             const audioNode = this.audioRef.current;
-            if (audioNode.src === this.props.media) {
+            if (audioNode.src === this.props.url) {
                 audioNode.currentTime = 0;
                 audioNode.play();
                 this.setState({playing: true})
             } else {
-                audioNode.src = this.props.media;
+                audioNode.src = this.props.url;
                 audioNode.play();
                 this.setState({playing: true})
             }

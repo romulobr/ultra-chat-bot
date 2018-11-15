@@ -34,11 +34,11 @@ const socket = io('http://localhost:62619');
 
 socket.on('message', function (message) {
     console.log('message received >', message);
-    if (message.media) {
-        if (/\.(mp4|webm)$/i.test(message.media)) {
+    if (message.isMedia) {
+        if (/\.(mp4|webm)$/i.test(message.url)) {
             store.dispatch(playVideo({...message}));
-        } else if (/\.(mp3|aac|ogg|flac|wav)$/i.test(message.media)) {
-            store.dispatch(playAudio({...message.media}));
+        } else if (/\.(mp3|aac|ogg|flac|wav)$/i.test(message.url)) {
+            store.dispatch(playAudio({...message}));
         }
     } else if (message.chicken) {
         store.dispatch(chickenCommand(message.chicken));

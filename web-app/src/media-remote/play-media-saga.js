@@ -6,7 +6,8 @@ import actions from './media-remote-actions';
 
 function* playMedia(action) {
     try {
-        yield axios.post(messageApi, {media: `${mediaUrl}/${action.payload.url}`});
+        action.payload.url = `${mediaUrl}/${action.payload.url}`;
+        yield axios.post(messageApi, action.payload);
     } catch (e) {
         yield put(actions.mediaFetchFailed({error: e}));
         console.log('got an error:', e);

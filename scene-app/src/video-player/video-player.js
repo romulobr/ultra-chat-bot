@@ -5,19 +5,44 @@ import posed from 'react-pose';
 
 const Box = posed.div({
     hidden: {
-        opacity: 0, width: '100%', transform: 'translateY(150%) rotate(-20deg)'
+        opacity: 0, transform: 'translateY(150%) rotate(-20deg)',
+        transition: { duration: 1000 }
     },
     visible: {
-        opacity: 1, width: '80%', transform: 'translateY(0%) rotate(0deg)'
+        opacity: 1, transform: 'translateY(0%) rotate(0deg)',
+        transition: { duration: 1000 }
     }
 
 });
 
 class VideoPlayer extends Component {
+
+    render() {
+        return (
+            <Box className={'videoContainer'} pose={this.state.playing ? 'visible' : 'hidden'}>
+                <div style={this.state.playerStyle} className={'videoPlayer'}>
+                    <video width="100%" ref={this.videoRef}/>
+                    <div
+                        className={(this.props.author && this.props.author.isChatSponsor ) ? 'videoPlayer__author videoPlayer__author-sponsor' : 'videoPlayer__author'}
+                        pose={this.state.playing ? 'visible' : 'hidden'}>
+                        {(this.props.author && this.props.author.name) || 'Ultra v3'}
+                    </div>
+                </div>
+            </Box>)
+    }
+
     constructor(props) {
         super(props);
         this.videoRef = React.createRef();
-        this.state = {playing: false};
+        this.state = {playing: false, playerStyle: VideoPlayer.styleFromProps(props)};
+    }
+
+    static styleFromProps(props) {
+        return {
+            transform: `scale(${props.videoWidth / 100})` || '',
+            top: `${props.videoTop}px` || '20px',
+            left: `${props.videoLeft}px` || '200px'
+        };
     }
 
     componentDidMount() {
@@ -29,34 +54,19 @@ class VideoPlayer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.media !== this.props.media) {
+        if (prevProps.url !== this.props.url) {
             const videoNode = this.videoRef.current;
-            if (videoNode.src === this.props.media) {
+            if (videoNode.src === this.props.url) {
                 videoNode.currentTime = 0;
                 videoNode.play();
-                this.setState({playing: true})
+                this.setState({playing: true, playerStyle: VideoPlayer.styleFromProps(this.props)})
             } else {
-                videoNode.src = this.props.media;
+                videoNode.src = this.props.url;
                 videoNode.play();
-                this.setState({playing: true})
+                this.setState({playing: true, playerStyle: VideoPlayer.styleFromProps(this.props)})
             }
         }
     }
-
-    render() {
-        return (
-            <div className={'videoContainer'}>
-                <Box className={'videoPlayer'} pose={this.state.playing ? 'visible' : 'hidden'}>
-                    <video width="100%" ref={this.videoRef}/>
-                    <div
-                        className={(this.props.author && this.props.author.isChatSponsor )? 'videoPlayer__author videoPlayer__author-sponsor' : 'videoPlayer__author'}
-                        pose={this.state.playing ? 'visible' : 'hidden'}>
-                        {(this.props.author && this.props.author.name) || 'Ultra v3'}
-                    </div>
-                </Box>
-            </div>)
-    }
-
 }
 
 function mapStateToProps(state) {

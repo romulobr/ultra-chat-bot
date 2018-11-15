@@ -8,7 +8,20 @@ class MediaOptionsForm extends Component {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onToggle = this.onToggle.bind(this);
-        this.state = {...props}
+        this.state = {};
+        this.state.enabled = props.enabled || true;
+        this.state.enabledForChat = props.enabledForChat || false;
+        this.state.allowCommandsWithoutExclamation = props.allowCommandsWithoutExclamation || false;
+        this.state.moderatorsOnly = props.moderatorsOnly || false;
+        this.state.enableStreamElementsIntegration = props.enableStreamElementsIntegration || false;
+        this.state.enableStreamlabsIntegration = props.enableStreamlabsIntegration || false;
+        this.state.videoPosition = props.videoPosition || 'video-position-bottom';
+        this.state.costPerChatPlay = props.costPerChatPlay || 0;
+        this.state.globalCooldown = props.globalCooldown || 60;
+        this.state.perUserCooldown = props.perUserCooldown || 5;
+        this.state.videoTop = props.videoTop || 20;
+        this.state.videoLeft = props.videoLeft || 20;
+        this.state.videoWidth = props.videoWidth || 33;
     }
 
     render() {
@@ -54,7 +67,7 @@ class MediaOptionsForm extends Component {
                     <label>Cost per chat play:
                         <span>
                             <input name="costPerChatPlay"
-                                   type="text"
+                                   type="number"
                                    value={this.state.costPerChatPlay}
                                    onChange={this.onChange}/>
                         </span>
@@ -62,7 +75,7 @@ class MediaOptionsForm extends Component {
                     <label>Global cooldown (seconds)
                         <span>
                             <input name="globalCooldown"
-                                   type="text"
+                                   type="number"
                                    value={this.state.globalCooldown}
                                    onChange={this.onChange}/>
                         </span>
@@ -70,8 +83,32 @@ class MediaOptionsForm extends Component {
                     <label>Per user cooldown (seconds)
                         <span>
                             <input name="perUserCooldown"
-                                   type="text"
+                                   type="number"
                                    value={this.state.perUserCooldown}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
+                    <label>Video Position Top (px)
+                        <span>
+                            <input name="videoTop"
+                                   type="number"
+                                   value={this.state.videoTop}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
+                    <label>Video Position Left (px)
+                        <span>
+                            <input name="videoLeft"
+                                   type="number"
+                                   value={this.state.videoLeft}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
+                    <label>Video Width (%)
+                        <span>
+                            <input name="videoWidth"
+                                   type="number"
+                                   value={this.state.videoWidth}
                                    onChange={this.onChange}/>
                         </span>
                     </label>
