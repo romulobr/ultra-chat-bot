@@ -1,0 +1,12 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.romulino.v3.app
+files:
+  - ./index.js
+  - ./src/**/*
+  - ./config/**/*
+  - ./public-dist/**/*
+win:
+  target: NSIS
+electronVersion: 3.0.7

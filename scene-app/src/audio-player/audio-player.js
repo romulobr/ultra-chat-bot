@@ -34,7 +34,7 @@ class AudioPlayer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="application">
                 <audio ref={this.audioRef}/>
             </div>)
     }

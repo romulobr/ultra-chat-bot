@@ -1,0 +1,11 @@
+.emotions {
+  &_emotion {
+    position: absolute;
+    width: 5vw;
+    height: 5vw;
+    opacity:0.2;
+    bottom:-5vw;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}

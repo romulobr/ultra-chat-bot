@@ -67,7 +67,7 @@ class Chicken extends Component {
 
     render() {
         return (
-            <div>
+            <div className="application">
                 <div ref={this.speechBubble} className={styles.chatBubble}>
                 </div>
                 <div ref={this.chicken} className={styles.chicken}>
