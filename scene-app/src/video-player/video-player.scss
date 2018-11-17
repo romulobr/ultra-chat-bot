@@ -1,9 +1,9 @@
 .video {
-overflow: hidden;
+  overflow: hidden;
 }
 
 .videoContainer {
-  position:absolute;
+  position: absolute;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -19,7 +19,7 @@ overflow: hidden;
   background-color: transparent;
 
   video {
-    top:0;
+    top: 0;
     width: 100%;
     background-size: contain;
     box-sizing: border-box;

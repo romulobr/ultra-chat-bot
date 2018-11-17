@@ -13,4 +13,4 @@ function commandInFirstWord(text, commands) {
   return commandIndex !== -1 ? {index: commandIndex, command: commands[commandIndex]} : null;
 }
 
-module.exports = {commandInText, commandInFirstWord};
+module.exports = {commandInText, commandInFirstWord, cleanText};

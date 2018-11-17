@@ -9,12 +9,14 @@ import * as serviceWorker from './serviceWorker';
 
 const playVideo = createAction('PLAY_VIDEO');
 const playAudio = createAction('PLAY_AUDIO');
-const chickenCommand = createAction('MOVE_CHICKEN');
+const chickenCommand = createAction('CHICKEN_COMMAND');
+const showEmotion = createAction('SHOW_EMOTION');
 
 const store = createStore(
     combineReducers({
         videoPlayer: createReducer({[playVideo]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
         audioPlayer: createReducer({[playAudio]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
+        emotions: createReducer({[showEmotion]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
         chicken: createReducer({
             [chickenCommand]: (state, payload) => {
                 const sayId = payload.say ? state.sayId + 1 : state.sayId;
@@ -42,6 +44,8 @@ socket.on('message', function (message) {
         }
     } else if (message.chicken) {
         store.dispatch(chickenCommand(message.chicken));
+    } else if (message.isEmotions) {
+        store.dispatch(showEmotion(message))
     }
 });
 

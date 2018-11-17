@@ -26,8 +26,6 @@ class Emotion extends Component {
                 this.props.onComplete();
             }
         });
-
-
     }
 
     componentDidMount() {
