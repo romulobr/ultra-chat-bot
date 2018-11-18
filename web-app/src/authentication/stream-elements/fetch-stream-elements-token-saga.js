@@ -28,7 +28,7 @@ function* fetchToken() {
                 yield put(actions.tokenVerificationFailed({error: e}));
             }
         } else {
-            yield axios.post(streamElementsTokenApi, {token: ''}, {headers: {Authorization: 'Bearer ' + jwt}});
+            yield axios.post(streamElementsTokenApi, {token: 'monkey'}, {headers: {Authorization: 'Bearer ' + jwt}});
             yield put(actions.fetchToken());
         }
     } catch (e) {

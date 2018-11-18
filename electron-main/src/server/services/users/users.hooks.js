@@ -16,7 +16,11 @@ module.exports = {
     ],
     get: [],
     create: [],
-    update: [],
+    update: [
+      (context) => {
+        context.id = context.params.user._id;
+      }
+    ],
     patch: [],
     remove: []
   },
@@ -26,7 +30,7 @@ module.exports = {
     find: [
       context => {
         if (context.result && context.result[0]) {
-          context.result = userReader.getUserIn(context.result[0]);
+          context.result = context.result[0].origin ? context.result[0] : userReader.getUserIn(context.result[0]);
         }
       }
     ],

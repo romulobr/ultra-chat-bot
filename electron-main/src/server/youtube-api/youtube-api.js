@@ -4,8 +4,11 @@ const youtubeClient = require('../../libs/youtube/youtube-client');
 
 async function getUserBroadcasts(localToken) {
   const localUserResult = await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
-  const client = youtubeClient.oAuthClientWith(localUserResult.data.accessToken, localUserResult.data.refreshToken);
-  return await youtubeClient.getBroadcasts(client);
+  if (localUserResult.data && localUserResult.data.youtube) {
+    const client = youtubeClient.oAuthClientWith(localUserResult.data.youtube.accessToken, localUserResult.data.youtube.refreshToken);
+    return await youtubeClient.getBroadcasts(client);
+  }
+  return [];
 }
 
 function initialize(app) {
@@ -15,11 +18,11 @@ function initialize(app) {
       getUserBroadcasts(localToken).then(result => {
         res.send(result);
       }).catch(e => {
-        console.log('e2',e);
+        console.log('e2', e);
         res.error(e);
       });
     } catch (e) {
-      console.log('e1',e);
+      console.log('e1', e);
       res.error(e);
     }
   });

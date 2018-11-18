@@ -6,7 +6,6 @@ import AuthenticationPanel from '../authentication/authentication'
 import MediaPanel from '../media/media';
 import MediaRemote from '../media-remote/media-remote';
 import ChickenRemote from '../chicken-remote/chicken-remote'
-import ChatControls from '../chat-controls/chat-controls';
 import actions from './navigation-actions';
 
 import styles from './navigator.module.scss';
@@ -22,7 +21,6 @@ const RoutesContainer = posed.div({
 });
 
 const authentication = () => <AuthenticationPanel/>;
-const chatControls = () => <ChatControls/>;
 const media = () => <MediaPanel/>;
 const mediaRemote = () => <MediaRemote/>;
 const chickenControls = () => <ChickenRemote/>;
@@ -36,7 +34,7 @@ class Navigator extends Component {
                         <div className={styles.navigator}>
                             <div className={styles.viewPicker}>
                                 <Link to="/">
-                                    <div className={styles.navigationItem}><span role="img">⚙</span> Settings
+                                    <div className={styles.navigationItem}><span role="img">⚙</span> Connections
                                     </div>
                                 </Link>
                                 <Link to="/media">
@@ -56,20 +54,13 @@ class Navigator extends Component {
                                         Chicken
                                     </div>
                                 </Link>
-                                <Link to="/chat">
-                                    <div className={styles.navigationItem}><span role="img"
-                                                                                 aria-label={"chat"}>💬</span>
-                                        Chat-Bot
-                                    </div>
-                                </Link>
                             </div>
                             <PoseGroup>
                                 <RoutesContainer key={location.pathname}>
                                     <Switch location={location}>
-                                        <Route key={'auth'} exact path="/" component={authentication}/>
+                                        <Route key={'connections'} exact path="/" component={authentication}/>
                                         <Route key={'media'} path="/media/" component={media}/>
                                         <Route key={'remote'} path="/remote/" component={mediaRemote}/>
-                                        <Route key={'chat'} path="/chat/" component={chatControls}/>
                                         <Route key={'chicken'} path="/chicken/" component={chickenControls}/>
                                     </Switch>
                                 </RoutesContainer>

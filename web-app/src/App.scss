@@ -1,11 +1,12 @@
 body {
-  background: linear-gradient(to bottom, #FFD200, #F7971E);
+
 }
 
 .App {
   margin: 0;
   padding: 0;
   width: 100vw;
+  background-color: black;
 }
 
 button {
@@ -19,11 +20,20 @@ button {
   border: none;
   box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
   transition: all 0.2s ease-in;
+
   &:disabled, &[disabled] {
     border: 1px solid #999999;
     background-color: #cccccc;
     color: #666666;
     transition: all 0.2s ease-in;
   }
+}
 
+.button-danger {
+  background-color: #ff14B0;
+}
+
+.button-important{
+  background-color: #aaffaa;
+  color:black;
 }

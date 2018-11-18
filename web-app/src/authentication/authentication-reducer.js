@@ -21,6 +21,7 @@ const authenticationReducer = createReducer({
             ...state,
             connected: false,
             loading: false,
+            user: null
         })
 }, {
     connected: false,

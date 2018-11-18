@@ -5,7 +5,10 @@ import deauthenticate from './deauthentication';
 import actions from './authentication-actions';
 import StreamElements from './stream-elements/stream-elements';
 import Streamlabs from './stream-labs/stream-labs';
+import Twitch from './twitch/twitch';
+import Youtube from './youtube/youtube';
 import {connect} from 'react-redux';
+import ChatControls from '../chat-controls/chat-controls'
 
 const Panel = posed.div({
     enter: {
@@ -30,50 +33,32 @@ class AuthenticationPanel extends Component {
         window.addEventListener("message", (event) => {
             if (event.data === 'authenticated') {
                 event.source.close();
-                this.props.authenticate();
+                this.props.authenticate(this.props.user);
             }
         }, false);
     }
 
     componentDidMount() {
-        this.props.authenticate();
+        this.props.authenticate(this.props.user);
     }
 
     render() {
-        const myPanel = this.props.connected ?
-            (<Panel initialPose={'hidden'} key="connected-panel">
+        const myPanel =
+            <Panel initialPose={'hidden'} key="connected-panel">
+                <h2>Services</h2>
                 <div className={styles.information}>
-                    <div>
-                        <div className={styles.accountInformation}
-                             style={this.props.user && {backgroundImage: `url(${this.props.user.profilePictureUrl})`}}>
-                            <div className={styles.userName}>
-                                {this.props.hasUser && this.props.user.displayName}
-                            </div>
-                        </div>
-                        <div>
-                            <button onClick={this.props.deauthenticate}>Disconnect</button>
-                        </div>
-                    </div>
-                    <StreamElements isEditing={this.props.isEditing} token={this.props.token}
+                    <Twitch user={this.props.user && this.props.user.twitch}
+                            onDeathenticate={this.props.deauthenticate}/>
+                    <Youtube user={this.props.user && this.props.user.youtube}
+                             onDeathenticate={this.props.deauthenticate}/>
+                    <StreamElements isEditing={this.props.isEditing}
+                                    token={this.props.token}
                                     editToken={this.props.editToken}/>
                     <Streamlabs ref={this.streamlabs}/>
                 </div>
-            </Panel>) :
-            (<Panel className={styles.information + ' ' + styles.offline} key="disconnected-panel">
-                <div>Welcome - You are not connected yet</div>
-                <div>
-                    <button onClick={() => {
-                        window.open('/api/auth/twitch', '_blank', 'nodeIntegration=no');
-                    }}>Connect with twitch
-                    </button>
-                </div>
-                <div>
-                    <button onClick={() => {
-                        window.open('/api/auth/youtube', '_blank', 'nodeIntegration=no');
-                    }}>Connect with youtube
-                    </button>
-                </div>
-            </Panel>);
+                <h2>Chat</h2>
+                <ChatControls/>
+            </Panel>;
 
         return (
             <div className={styles.welcomePanel}>
@@ -97,8 +82,8 @@ const mapDispatchToProps = dispatch => {
         deauthenticate: () => {
             deauthenticate(dispatch);
         },
-        authenticate: () => {
-            dispatch(actions.authentication());
+        authenticate: (currentUser) => {
+            dispatch(actions.authentication(currentUser));
         }
     };
 };

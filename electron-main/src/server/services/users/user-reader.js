@@ -1,10 +1,13 @@
 const getUserIn = data => {
+  if (data.origin) {
+    return data;
+  }
   if (data.twitch) {
     return getTwitchUserIn(data);
   } else if (data.youtube) {
     return getYoutubeUserIn(data);
   }
-  return null;
+  return data;
 };
 
 const getSimplifiedUserIn = data => {
@@ -38,6 +41,7 @@ const getYoutubeUserIn = data => {
 
 const getSimplifiedTwitchUserIn = data => {
   return {
+    _id: data._id,
     origin: "twitch",
     name: data.twitch.profile.login,
     displayName: data.twitch.profile.display_name,

@@ -11,7 +11,6 @@ class ChatControls extends Component {
             <div className={styles.chatControls}>
                 {this.props.user && this.props.user.origin === 'youtube' && (<YoutubeChatControls/>)}
                 {this.props.user && this.props.user.origin === 'twitch' && (
-
                     <div
                         className={styles.twitchChat + (this.props.connected ? ' ' + styles.connected : '') + (this.props.loading ? ' ' + styles.loading : '')}>
                         <img src="/img/twitch-logo.png" alt="twitch logo"/>
@@ -36,7 +35,7 @@ class ChatControls extends Component {
 function mapStateToProps(state) {
     return {
         ...state.chatControls,
-        user: state.authentication.user
+        user: state.authentication.user && state.authentication.user.youtube
     };
 }
 

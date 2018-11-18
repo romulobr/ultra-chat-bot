@@ -33,7 +33,7 @@ class YoutubeChatControl extends Component {
 function mapStateToProps(state) {
     return {
         ...state.youtubeChatControls,
-        user: state.user,
+        user: state.user && state.user.youtube,
     };
 }
 

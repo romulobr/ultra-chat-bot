@@ -8,7 +8,32 @@ import {fetchToken} from './stream-elements/stream-elements-actions';
 import {fetchChicken} from '../chicken-remote/chicken-remote-actions';
 import {fetchStreamlabs} from './stream-labs/stream-labs-actions';
 
-function* authenticate() {
+
+function userFrom(data, originalUser) {
+    const newUser = {origin: 'multi'};
+    if (originalUser) {
+        if (originalUser.origin === 'multi') {
+            newUser.youtube = originalUser.youtube;
+            newUser.twitch = originalUser.twitch;
+        } else {
+            newUser[originalUser.origin] = originalUser;
+        }
+        newUser._id = originalUser._id;
+        newUser[data.origin] = data;
+        return newUser;
+    } else {
+        if (data.origin !== 'multi') {
+            newUser[data.origin] = data;
+            newUser._id = data._id;
+            return newUser;
+        } else {
+            return data;
+        }
+    }
+
+}
+
+function* authenticate(action) {
     try {
         const token = getSavedToken();
         if (!token) {
@@ -18,7 +43,15 @@ function* authenticate() {
         const response = yield axios.get(userApi, {
             headers: {Authorization: 'Bearer ' + token}
         });
-        yield put(actions.authenticationSuccess({user: response.data}));
+        const currentUser = action.payload;
+        const upToDateUser = userFrom(response.data, currentUser);
+
+        if (JSON.stringify(upToDateUser) !== JSON.stringify(currentUser)) {
+            yield axios.put(userApi, upToDateUser, {
+                headers: {Authorization: 'Bearer ' + token}
+            });
+        }
+        yield put(actions.authenticationSuccess({user: upToDateUser}));
         yield put(fetchMedia());
         yield put(fetchChicken());
         yield put(fetchToken());
