@@ -9,19 +9,19 @@ class ChatControls extends Component {
     render() {
         return (
             <div className={styles.chatControls}>
-                {this.props.user && this.props.user.origin === 'youtube' && (<YoutubeChatControls/>)}
-                {this.props.user && this.props.user.origin === 'twitch' && (
+                {this.props.user && this.props.user.twitch && (
                     <div
                         className={styles.twitchChat + (this.props.connected ? ' ' + styles.connected : '') + (this.props.loading ? ' ' + styles.loading : '')}>
-                        <img src="/img/twitch-logo.png" alt="twitch logo"/>
-                        <div>Twitch</div>
+                        <img src={this.props.user.twitch.profilePictureUrl} alt="twitch channel art"/>
+                        <div>Twitch Chat</div>
                         <button
                             onClick={this.props.connected ? this.props.disconnectFromChat : this.props.connectToChat}
                             disabled={this.props.loading}>
-                            {this.props.connected ? 'Disconnect' : 'Connect to Chat'}
+                            {this.props.connected ? 'Disconnect' : 'Connect'}
                         </button>
                     </div>
                 )}
+                {this.props.user && this.props.user.youtube && (<YoutubeChatControls/>)}
             </div>
         );
     }
@@ -35,7 +35,7 @@ class ChatControls extends Component {
 function mapStateToProps(state) {
     return {
         ...state.chatControls,
-        user: state.authentication.user && state.authentication.user.youtube
+        user: state.authentication.user
     };
 }
 

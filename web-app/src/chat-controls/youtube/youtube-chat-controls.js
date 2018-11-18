@@ -14,13 +14,12 @@ class YoutubeChatControl extends Component {
     render() {
         return (
             <div className={styles.youtubeChatControls}>
-                {this.props.loading && (<LoadingSpinner/>)}
                 <div className={styles.broadcasts}>
                     {this.props.broadcasts.map(broadcast => (
                         <div key={broadcast.id} className={styles.broadcast}>
                             <img src={broadcast.snippet.thumbnails.medium.url} alt="thumbnail"/>
                             {broadcast.snippet.title}
-                            <button onClick={this.props.connectToChat(broadcast.snippet.liveChatId)}>Connect to Chat
+                            <button onClick={this.props.connectToChat(broadcast.snippet.liveChatId)}>Connect
                             </button>
                         </div>
                     ))}

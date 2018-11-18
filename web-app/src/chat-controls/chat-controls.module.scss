@@ -1,22 +1,27 @@
 .chatControls {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
+  color: black;
 }
 
 .twitchChat {
   box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
-  background-color: white;
+  color: white;
+  font-weight: bolder;
+  text-shadow: black 1px 1px 1px;
+  background: linear-gradient(180deg, rgba(0,0,0,1) 20%, rgba(106, 0, 187, 1) 100%);
   border: solid 1px black;
   flex-direction: column;
-  padding: 8px;
-  margin: 10px;
+  padding: 2px;
+  margin: 10px 5px;
   max-width: 200px;
   border-radius: 16px;
   text-align: center;
   img {
     width: 100%;
     border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.8) 1px 4px 1px;
   }
 }
 

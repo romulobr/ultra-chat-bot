@@ -15,7 +15,7 @@ function* fetchToken() {
         const getResponse = yield axios.get(streamElementsTokenApi, {
             headers: {Authorization: 'Bearer ' + jwt}
         });
-        if (getResponse.data && getResponse.data[0] && getResponse.data[0].token) {
+        if (getResponse.data && getResponse.data[0] && getResponse.data[0].token !== undefined) {
             yield put(actions.fetchTokenSuccess({token: getResponse.data[0].token}));
             try {
                 if (getResponse.data[0].token !== '') {
@@ -28,7 +28,7 @@ function* fetchToken() {
                 yield put(actions.tokenVerificationFailed({error: e}));
             }
         } else {
-            yield axios.post(streamElementsTokenApi, {token: 'monkey'}, {headers: {Authorization: 'Bearer ' + jwt}});
+            yield axios.post(streamElementsTokenApi, {token: ''}, {headers: {Authorization: 'Bearer ' + jwt}});
             yield put(actions.fetchToken());
         }
     } catch (e) {

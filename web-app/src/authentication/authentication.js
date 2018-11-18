@@ -45,7 +45,6 @@ class AuthenticationPanel extends Component {
     render() {
         const myPanel =
             <Panel initialPose={'hidden'} key="connected-panel">
-                <h2>Services</h2>
                 <div className={styles.information}>
                     <Twitch user={this.props.user && this.props.user.twitch}
                             onDeathenticate={this.props.deauthenticate}/>
@@ -56,7 +55,6 @@ class AuthenticationPanel extends Component {
                                     editToken={this.props.editToken}/>
                     <Streamlabs ref={this.streamlabs}/>
                 </div>
-                <h2>Chat</h2>
                 <ChatControls/>
             </Panel>;
 

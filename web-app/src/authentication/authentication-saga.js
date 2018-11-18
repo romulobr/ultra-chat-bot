@@ -25,6 +25,7 @@ function userFrom(data, originalUser) {
         if (data.origin !== 'multi') {
             newUser[data.origin] = data;
             newUser._id = data._id;
+            newUser.origin = 'multi';
             return newUser;
         } else {
             return data;

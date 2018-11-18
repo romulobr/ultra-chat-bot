@@ -11,12 +11,17 @@
 }
 
 .viewPicker {
+  justify-content: space-around;
   line-height: 3em;
   display: flex;
   flex-direction: row;
   text-align: center;
   font-weight: bold;
-  background-color: #5614B0;
+  background-color: black;
+
+  a{
+    text-decoration: none;
+  }
 }
 
 .navigationItem {

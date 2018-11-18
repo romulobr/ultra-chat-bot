@@ -1,7 +1,7 @@
 .mediaPanel {
   padding: 0;
   width: 100%;
-  color: black;
+  color: white;
 
   h2 {
     text-align: left;
@@ -26,35 +26,40 @@
   table {
     margin-top: 8px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    border: 1px solid #dddddd;
+    background-color: #222222;
+    color:white;
+    border: 1px solid #6441a4;
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 5px;
     border-collapse: collapse;
     border-radius: 8px;
 
     th {
       font-size: 0.7em;
-      color: #222222;
+      color: #dddddd;
+      background-color: #6441a4;
       text-align: center;
       font-weight: bold;
     }
 
     th:first-child {
       width: 50px;
-      border-right: solid 1px #dddddd
+      border: 1px solid #6441a4;
     }
 
     tr {
-      border-bottom: solid 1px #dddddd;
+      border: 1px solid #6441a4;
       line-height: 2.5em;
     }
     tr:first-child {
-      border-right: solid 1px #dddddd
+      border-right: 1px solid #6441a4;
     }
 
     td {
       vertical-align: middle;
       input[type=text] {
+        background-color: black;
+        border: 1px solid #6441a4;
+        color:white;
         text-align: center;
         display: inline-block;
         width: 98%;
@@ -66,18 +71,20 @@
         appearance: none;
         width: 20px;
         height: 20px;
-        background: white;
+        background: black;
         border: 2px solid #666666;
+        border-radius: 50px;
         margin: -4px;
         transition: all 0.2s ease-in;
       }
       input[type='checkbox']:checked {
         background: #5614B0;
+        border: 2px solid white;
         transition: all 0.2s ease-in;
       }
     }
     td:first-child {
-      border-right: solid 1px #dddddd;
+      border-right: solid 1px #5614B0;
       text-align: center;
       vertical-align: middle;
     }
