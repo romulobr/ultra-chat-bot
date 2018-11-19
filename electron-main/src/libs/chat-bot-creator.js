@@ -44,7 +44,10 @@ function createBotFor(user, options) {
     } else if (user.origin === 'youtube') {
       createChatBotApps(user).then(apps => {
         success(youtubeChatClient.create(user, apps, options.liveChatId));
-      })
+      }).catch(e => {
+        console.log(e);
+        fail(e);
+      });
     }
   });
 }

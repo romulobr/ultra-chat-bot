@@ -1,18 +1,28 @@
 import actions from './chat-control-actions';
 import {createReducer} from 'redux-act';
 
-const initialState = {
-    connected: false,
-    loading: false
-};
-
 const chatControlsReducer = createReducer({
-        [actions.connectToChat]: (state, payload) => ({connected: false, loading: true}),
-        [actions.disconnectFromChat]: (state, payload) => ({connected: true, loading: true}),
-        [actions.connectedToChat]: (state, payload) => ({connected: true, loading: false}),
-        [actions.disconnectedFromChat]: (state, payload) => ({connected: false, loading: false}),
-        [actions.connectToChatFailed]: (state, payload) => ({connected: false, loading: false}),
-    }, initialState
+        [actions.connectToChat]: (state, payload) => {
+            debugger;
+            if (payload.youtube) {
+                const newState = {...state};
+                newState.youtube = {...state.youtube, [payload.youtube.liveChatId]: {connected: false, loading: true}};
+                return newState
+            }
+            return {...state, ...payload};
+        },
+        [actions.disconnectFromChat]: (state, payload) => ({...state, ...payload}),
+        [actions.connectedToChat]: (state, payload) => {
+            if (payload.youtube) {
+                const newState = {...state};
+                newState.youtube = {...state.youtube, ...payload.youtube};
+                return newState
+            }
+            return {...state, ...payload}
+        },
+        [actions.disconnectedFromChat]: (state, payload) => ({...state, ...payload}),
+        [actions.connectToChatFailed]: (state, payload) => ({...state, ...payload}),
+    }, {twitch: {}, youtube: {}}
 );
 
 export default chatControlsReducer;

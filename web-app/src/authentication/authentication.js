@@ -47,9 +47,9 @@ class AuthenticationPanel extends Component {
             <Panel initialPose={'hidden'} key="connected-panel">
                 <div className={styles.information}>
                     <Twitch user={this.props.user && this.props.user.twitch}
-                            onDeathenticate={this.props.deauthenticate}/>
+                            onDeathenticate={this.props.deauthenticate('twitch')}/>
                     <Youtube user={this.props.user && this.props.user.youtube}
-                             onDeathenticate={this.props.deauthenticate}/>
+                             onDeathenticate={this.props.deauthenticate('youtube')}/>
                     <StreamElements isEditing={this.props.isEditing}
                                     token={this.props.token}
                                     editToken={this.props.editToken}/>
@@ -78,7 +78,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => {
     return {
         deauthenticate: () => {
-            deauthenticate(dispatch);
+            return (origin) => deauthenticate(dispatch, origin);
         },
         authenticate: (currentUser) => {
             dispatch(actions.authentication(currentUser));

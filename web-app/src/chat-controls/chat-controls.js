@@ -11,13 +11,13 @@ class ChatControls extends Component {
             <div className={styles.chatControls}>
                 {this.props.user && this.props.user.twitch && (
                     <div
-                        className={styles.twitchChat + (this.props.connected ? ' ' + styles.connected : '') + (this.props.loading ? ' ' + styles.loading : '')}>
+                        className={styles.twitchChat + (this.props.twitch.connected ? ' ' + styles.connected : '') + (this.props.twitch.loading ? ' ' + styles.loading : '')}>
                         <img src={this.props.user.twitch.profilePictureUrl} alt="twitch channel art"/>
                         <div>Twitch Chat</div>
                         <button
-                            onClick={this.props.connected ? this.props.disconnectFromChat : this.props.connectToChat}
-                            disabled={this.props.loading}>
-                            {this.props.connected ? 'Disconnect' : 'Connect'}
+                            onClick={this.props.twitch.connected ? this.props.disconnectFromChat : this.props.connectToChat}
+                            disabled={this.props.twitch.loading}>
+                            {this.props.twitch.connected ? 'Disconnect' : 'Connect'}
                         </button>
                     </div>
                 )}
@@ -42,10 +42,10 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => {
     return {
         connectToChat: () => {
-            dispatch(actions.connectToChat());
+            dispatch(actions.connectToChat({'twitch': {loading: true}}));
         },
         disconnectFromChat: () => {
-            dispatch(actions.disconnectFromChat());
+            dispatch(actions.disconnectFromChat({'twitch': {loading: true}}));
         },
         registerRendererEvents: () => {
             registerRendererEvents(dispatch)

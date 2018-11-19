@@ -6,9 +6,17 @@ import actions from './youtube-chat-controls-actions';
 import chatControlActions from '../chat-control-actions';
 
 class YoutubeChatControl extends Component {
+    constructor() {
+        super();
+        this.isConnected = this.isConnected.bind(this);
+    }
 
     componentDidMount() {
         this.props.fetchYoutubeBroadcasts();
+    }
+
+    isConnected(liveChatId) {
+        return this.props.youtube && this.props.youtube[liveChatId] && this.props.youtube[liveChatId].connected;
     }
 
     render() {
@@ -19,7 +27,15 @@ class YoutubeChatControl extends Component {
                         <div key={broadcast.id} className={styles.broadcast}>
                             <img src={broadcast.snippet.thumbnails.medium.url} alt="thumbnail"/>
                             {broadcast.snippet.title}
-                            <button onClick={this.props.connectToChat(broadcast.snippet.liveChatId)}>Connect
+                            <button
+                                disabled={this.props.youtube.loading}
+                                onClick={
+                                    this.isConnected(broadcast.snippet.liveChatId) ?
+                                        this.props.disconnectFromChat(broadcast.snippet.liveChatId) :
+                                        this.props.connectToChat(broadcast.snippet.liveChatId)
+                                }
+                            >{this.isConnected(broadcast.snippet.liveChatId) ?
+                                'Disconnect': 'Connect'}
                             </button>
                         </div>
                     ))}
@@ -31,6 +47,7 @@ class YoutubeChatControl extends Component {
 
 function mapStateToProps(state) {
     return {
+        ...state.chatControls,
         ...state.youtubeChatControls,
         user: state.user && state.user.youtube,
     };
@@ -42,12 +59,11 @@ const mapDispatchToProps = dispatch => {
             dispatch(actions.fetchYoutubeBroadcasts());
         },
         connectToChat: (liveChatId) => {
-            return () => {
-                dispatch(chatControlActions.connectToChat(liveChatId))
-            };
+            return () => dispatch(chatControlActions.connectToChat({'youtube': {liveChatId, loading: true}}));
+
         },
-        disconnectFromChat: () => {
-            dispatch(chatControlActions.disconnectFromChat());
+        disconnectFromChat: (liveChatId) => {
+            return () => dispatch(chatControlActions.disconnectFromChat({'youtube': {liveChatId, loading: true}}))
         }
     };
 };

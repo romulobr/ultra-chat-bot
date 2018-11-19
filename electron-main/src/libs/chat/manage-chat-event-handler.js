@@ -3,26 +3,42 @@ const fetchUser = require('..//fetch-user');
 const chatBotCreator = require('..//chat-bot-creator');
 let user;
 
-let stopChatBot;
+let stopTwitchChatBot;
+let stopYoutubeChatBot;
+let youtubeChatId;
 
 ipcMain.on('connectToChat', (event, jwt, options) => {
   console.log('connecting to chat\n');
   fetchUser(jwt).then(response => {
     user = response.data;
-    user.jwt = jwt;
-    chatBotCreator.createBotFor(user, options).then(bot=>{
-      stopChatBot = bot;
-    });
-    event.sender.send('connectedToChat')
+    user.youtube && (user.youtube.jwt = jwt);
+    user.twitch && (user.twitch.jwt = jwt);
+    if (options.youtube) {
+      chatBotCreator.createBotFor(user.youtube, {liveChatId: options.youtube.liveChatId}).then(bot => {
+        stopYoutubeChatBot = bot;
+        youtubeChatId = options.youtube.liveChatId;
+      });
+      event.sender.send('connectedToChat', {origin: 'youtube', liveChatId: options.youtube.liveChatId});
+    } else {
+      chatBotCreator.createBotFor(user.twitch).then(bot => {
+        stopTwitchChatBot = bot;
+      });
+      event.sender.send('connectedToChat', {origin: 'twitch'});
+    }
+
   }).catch(e => {
     console.log('error connecting to chat\n', e);
-    event.sender.send('connectToChatFailed')
+    event.sender.send('connectToChatFailed', options)
   });
 });
 
-ipcMain.on('disconnectFromChat', (event) => {
-  if (stopChatBot) {
-    stopChatBot();
-    event.sender.send('disconnectedFromChat')
+ipcMain.on('disconnectFromChat', (event, options) => {
+  if (options.twitch) {
+    stopTwitchChatBot && stopTwitchChatBot();
+    event.sender.send('disconnectedFromChat', {origin: 'twitch'});
+  }
+  else if (options.youtube) {
+    stopYoutubeChatBot && stopYoutubeChatBot();
+    event.sender.send('disconnectedFromChat', {origin: 'youtube', liveChatId: youtubeChatId});
   }
 });

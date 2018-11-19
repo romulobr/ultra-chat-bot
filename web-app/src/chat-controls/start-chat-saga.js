@@ -1,17 +1,18 @@
 import {put, takeEvery} from 'redux-saga/effects';
 import getSavedToken from '../authentication/jwt'
+import {connectToChat} from './chat-control-actions';
 
 const ipcRenderer = require('electron').ipcRenderer;
 
-function* connectToChat(action) {
-    console.log('trying to connectStreamlabs to chat');
+function* onConnectToChat(action) {
+    console.log('trying to connect to chat');
     try {
         const jwt = getSavedToken();
         if (!jwt) {
             yield put({type: 'NOT_AUTHENTICATED'});
             return;
         }
-        ipcRenderer.send('connectToChat', jwt, {liveChatId:action.payload});
+        ipcRenderer.send('connectToChat', jwt, action.payload);
     } catch (e) {
         yield put({type: 'CONNECT_TO_CHAT_ERROR', error: e});
         console.log('got an error:', e);
@@ -19,7 +20,7 @@ function* connectToChat(action) {
 }
 
 function* watchStartChat() {
-    yield takeEvery('CONNECT_TO_CHAT', connectToChat);
+    yield takeEvery(connectToChat, onConnectToChat);
 }
 
 export default watchStartChat;
