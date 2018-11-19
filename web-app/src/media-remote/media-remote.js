@@ -14,6 +14,19 @@ class MediaRemote extends Component {
     render() {
         return (
             <div className={styles.mediaRemote}>
+                {this.props.items.length === 0 && (
+                    <div>
+                        <p>Looks like you have not imported any Media.</p>
+                        <h1>How to use media player</h1>
+                        <h2>1. Go to media (TV)</h2>
+                        <h2>2. Click Open Media Folder</h2>
+                        <h2>3. Copy your media files to Media Folder (no subfolders)</h2>
+                        <h2>4. Click Import Media</h2>
+                        <h2>5. Click Save</h2>
+                        <h2>6. Come Back here</h2>
+                    </div>
+
+                )}
                 {this.renderMediaItems(this.props.items)}
             </div>)
     }

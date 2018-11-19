@@ -4,8 +4,7 @@ const chatBotCreator = require('..//chat-bot-creator');
 let user;
 
 let stopTwitchChatBot;
-let stopYoutubeChatBot;
-let youtubeChatId;
+let stopYoutubeChatBot = {};
 
 ipcMain.on('connectToChat', (event, jwt, options) => {
   console.log('connecting to chat\n');
@@ -15,8 +14,7 @@ ipcMain.on('connectToChat', (event, jwt, options) => {
     user.twitch && (user.twitch.jwt = jwt);
     if (options.youtube) {
       chatBotCreator.createBotFor(user.youtube, {liveChatId: options.youtube.liveChatId}).then(bot => {
-        stopYoutubeChatBot = bot;
-        youtubeChatId = options.youtube.liveChatId;
+        stopYoutubeChatBot[options.youtube.liveChatId] = bot;
       });
       event.sender.send('connectedToChat', {origin: 'youtube', liveChatId: options.youtube.liveChatId});
     } else {
@@ -38,7 +36,7 @@ ipcMain.on('disconnectFromChat', (event, options) => {
     event.sender.send('disconnectedFromChat', {origin: 'twitch'});
   }
   else if (options.youtube) {
-    stopYoutubeChatBot && stopYoutubeChatBot();
-    event.sender.send('disconnectedFromChat', {origin: 'youtube', liveChatId: youtubeChatId});
+    stopYoutubeChatBot[options.youtube.liveChatId] && stopYoutubeChatBot[options.youtube.liveChatId]();
+    event.sender.send('disconnectedFromChat', {origin: 'youtube', liveChatId: options.youtube.liveChatId});
   }
 });

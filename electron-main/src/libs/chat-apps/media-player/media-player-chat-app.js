@@ -96,7 +96,15 @@ class MediaPlayerChatApp {
 
 
     const mediaUrl = urls.media + '/' + this.settings.items[command.index].url;
-    const screenMessage = {media: mediaUrl, author: message.author};
+    const screenMessage = {
+      isMedia: true,
+      command,
+      url: mediaUrl,
+      author: message.author,
+      videoLeft: this.settings.videoLeft,
+      videoTop: this.settings.videoTop,
+      videoWidth: this.settings.videoWidth
+    };
     sendScreenMessage(screenMessage);
     this.addCoolDownto(message.author);
   }

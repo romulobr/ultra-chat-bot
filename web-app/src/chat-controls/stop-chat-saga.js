@@ -4,7 +4,6 @@ import {disconnectFromChat} from './chat-control-actions'
 const ipcRenderer = require('electron').ipcRenderer;
 
 function* onDisconnect(action) {
-    debugger;
     yield ipcRenderer.send('disconnectFromChat', action.payload);
 }
 

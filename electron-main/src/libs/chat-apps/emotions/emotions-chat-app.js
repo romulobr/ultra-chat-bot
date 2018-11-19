@@ -33,15 +33,13 @@ class MediaPlayerChatApp {
     const emotionTypes = Object.keys(wordList);
     for (let i = 0; i < emotionTypes.length; i++) {
       const emotionWords = wordList[emotionTypes[i]];
-      for (let j = 0; j < emotionTypes.length; j++) {
-        const emotionWord = emotionWords[j];
-        if (text.includes(emotionWord)) {
-          emotions.push(emotionTypes[i]);
-          console.log('word>',emotionWord);
-          break;
-        }
+      const filtered = emotionWords.filter(word => text.includes(word));
+      if (filtered.length > 0) {
+        emotions.push(emotionTypes[i]);
+        console.log('word>', filtered);
       }
     }
+
     return emotions;
   }
 

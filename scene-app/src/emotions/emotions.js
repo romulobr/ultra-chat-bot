@@ -27,7 +27,9 @@ class Emotions extends Component {
     deleteEmotion(emotion) {
         const newEmotions = [].concat(this.state.emotions);
         const index = newEmotions.indexOf(emotion);
-        newEmotions.splice(index, 1);
+        if(index!==-1){
+            newEmotions.splice(index, 0);
+        }
         this.setState({...this.state, emotions: newEmotions});
     }
 
@@ -41,7 +43,7 @@ class Emotions extends Component {
             this.props.emotions.forEach(emotion => {
                 const newEmotion = {
                     icon: emotionIcons[emotion],
-                    key: 'emotion-' + this.props.id,
+                    key: 'emotion-' +emotion+ '-'+this.props.id,
                     bottom: (Math.random() * (window.innerHeight - 200)) + 200,
                     left: Math.random() * window.innerWidth,
                 };

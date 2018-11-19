@@ -17,7 +17,6 @@ class ChickenOptionsForm extends Component {
         this.state.allowCommandsWithoutExclamation = props.allowCommandsWithoutExclamation || false;
         this.state.moveCommand = props.moveCommand || 'go';
         this.state.sayCommand = props.moveCommand || 'say';
-        this.state.volunteerCommand = props.volunteerCommand || 'pickme';
     }
 
     render() {
@@ -72,31 +71,11 @@ class ChickenOptionsForm extends Component {
                             />
                         </span>
                     </label>
-                    <label>Kill Command
-                        <span>
-                            <input name="killCommand"
-                                   type="text"
-                                   value={this.state.killCommand}
-                                   onChange={this.onChange}
-                                   disabled={this.props.loading}
-                            />
-                        </span>
-                    </label>
                     <label>Say command
                         <span>
                             <input name="sayCommand"
                                    type="text"
                                    value={this.state.sayCommand}
-                                   onChange={this.onChange}
-                                   disabled={this.props.loading}
-                            />
-                        </span>
-                    </label>
-                    <label>Volunteer command
-                        <span>
-                            <input name="volunteerCommand"
-                                   type="text"
-                                   value={this.state.volunteerCommand}
                                    onChange={this.onChange}
                                    disabled={this.props.loading}
                             />

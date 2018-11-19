@@ -12,14 +12,14 @@ class Emotion extends Component {
 
     initialAnimation(emotion) {
         this.tl.to(emotion, 1, {rotation: Math.random() * -30, scale: 0.9}, 0);
-        TweenLite.to(emotion, 30, {
+        TweenLite.to(emotion, 10, {
             opacity: 0.90,
             y: -1 * this.props.bottom,
             ease: Elastic.easeOut.config(1, 0.3),
         });
         TweenLite.to(emotion, 1.5, {
             opacity: 1,
-            delay: 30,
+            delay: 10,
             y: 0,
             ease: Bounce.easeOut,
             onComplete: () => {

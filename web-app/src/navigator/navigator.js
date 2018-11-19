@@ -33,25 +33,32 @@ class Navigator extends Component {
                     render={({location}) => (
                         <div className={styles.navigator}>
                             <div className={styles.viewPicker}>
-                                <Link to="/">
-                                    <div className={styles.navigationItem}><span role="img">⚙</span> Connections
+                                <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/') ? styles.selected : '')}
+                                    to="/">
+                                    <div>
+                                        <span role="img">⚙</span>
                                     </div>
                                 </Link>
-                                <Link to="/media">
-                                    <div className={styles.navigationItem}><span role="img" aria-label={"tv"}>📺</span>
-                                        Media
+                                <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/media') ? styles.selected : '')}
+                                    to="/media">
+                                    <div>
+                                        <span role="img" aria-label={"tv"}>📺</span>
                                     </div>
                                 </Link>
-                                <Link to="/remote">
-                                    <div className={styles.navigationItem}><span role="img"
-                                                                                 aria-label={"remote"}>📱</span>
-                                        Remote
+                                <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/remote') ? styles.selected : '')}
+                                    to="/remote">
+                                    <div>
+                                        <span role="img" aria-label={"remote"}>📱</span>
                                     </div>
                                 </Link>
-                                <Link to="/chicken">
-                                    <div className={styles.navigationItem}><span role="img"
-                                                                                 aria-label={"chicken"}>🐔</span>
-                                        Chicken
+                                <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/chicken') ? styles.selected : '')}
+                                    to="/chicken">
+                                    <div>
+                                        <span role="img" aria-label={"chicken"}>🐔</span>
                                     </div>
                                 </Link>
                             </div>
@@ -68,6 +75,11 @@ class Navigator extends Component {
                         </div>)}/>
             </Router>
         )
+    }
+
+    static isSelected(location, url) {
+        console.log(location);
+        return location.pathname === url;
     }
 }
 

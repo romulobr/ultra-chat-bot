@@ -6,7 +6,6 @@ function create(user, apps) {
   const channel = user.name;
   console.log('channel', channel);
   const options = {
-    // channels: ['#carletofrommars'],
     channels: [`#${channel}`],
     identity: {
       username: twitchCredentials.chatBotUsername,
@@ -31,11 +30,11 @@ function create(user, apps) {
     apps.forEach(app => {
       app.handleMessage(normalizedMessage)
     });
-    console.log(`Got message| ${normalizedMessage.author.name}: ${normalizedMessage.text}`);
+    // console.log(`Got message| ${normalizedMessage.author.name}: ${normalizedMessage.text}`);
   });
   client.on('join', function (channel) {
     if (!showedConnectionStatus) {
-      client.say(channel, 'Muuuuu!');
+      // client.say(channel, 'Muuuuu!');
       showedConnectionStatus = true;
     }
   });

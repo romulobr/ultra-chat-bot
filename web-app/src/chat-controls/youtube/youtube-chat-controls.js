@@ -9,6 +9,7 @@ class YoutubeChatControl extends Component {
     constructor() {
         super();
         this.isConnected = this.isConnected.bind(this);
+        this.isLoading = this.isLoading.bind(this);
     }
 
     componentDidMount() {
@@ -19,23 +20,28 @@ class YoutubeChatControl extends Component {
         return this.props.youtube && this.props.youtube[liveChatId] && this.props.youtube[liveChatId].connected;
     }
 
+    isLoading(liveChatId) {
+        return this.props.youtube && this.props.youtube[liveChatId] && this.props.youtube[liveChatId].loading;
+    }
+
     render() {
         return (
             <div className={styles.youtubeChatControls}>
                 <div className={styles.broadcasts}>
                     {this.props.broadcasts.map(broadcast => (
-                        <div key={broadcast.id} className={styles.broadcast}>
+                        <div key={broadcast.id}
+                             className={styles.broadcast + (this.isConnected(broadcast.snippet.liveChatId) ? ' ' + styles.connected : '') + (this.isLoading(broadcast.snippet.liveChatId) ? ' ' + styles.loading : '')}>
                             <img src={broadcast.snippet.thumbnails.medium.url} alt="thumbnail"/>
                             {broadcast.snippet.title}
                             <button
-                                disabled={this.props.youtube.loading}
+                                disabled={this.isLoading(broadcast.snippet.liveChatId) ? ' ' + styles.loading : ''}
                                 onClick={
                                     this.isConnected(broadcast.snippet.liveChatId) ?
                                         this.props.disconnectFromChat(broadcast.snippet.liveChatId) :
                                         this.props.connectToChat(broadcast.snippet.liveChatId)
                                 }
                             >{this.isConnected(broadcast.snippet.liveChatId) ?
-                                'Disconnect': 'Connect'}
+                                'Disconnect' : 'Connect'}
                             </button>
                         </div>
                     ))}

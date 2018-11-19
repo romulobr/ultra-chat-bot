@@ -38,7 +38,9 @@ class MediaPanel extends Component {
                     <table>
                         <thead>
                         <tr>
-                            <th onClick={this.toggleAllCheckedForDeletion}>Media</th>
+                            <th>
+                                <button onClick={this.toggleAllCheckedForDeletion}>All</button>
+                            </th>
                             <th>Command</th>
                             <th>File</th>
                         </tr>
@@ -48,38 +50,40 @@ class MediaPanel extends Component {
                         </tbody>
                     </table>
                 </div>
-                {this.renderButtonBar()}
             </div>
         );
     }
 
     renderButtonBar() {
         return (
-            <div className={MediaOptionsForm.buttonBar}>
-                <button disabled={this.props.loading} type="button"
-                        onClick={this.deleteMediaItems}>
-                    Delete
-                </button>
-                <button disabled={this.props.loading} type="button"
-                        onClick={this.createMediaItem}>
-                    New
-                </button>
+            <div>
+                <div className={MediaOptionsForm.buttonBar}>
+                    <button type="button" disabled={this.props.loading}
+                            onClick={this.props.openMediaFolder}>
+                        Change files in media folder
+                    </button>
+                    <button type="button" disabled={this.props.loading}
+                            onClick={this.props.importMedia}>
+                        Import files in media folder
+                    </button>
+                </div>
+                <div className={MediaOptionsForm.buttonBar}>
+                    <button disabled={this.props.loading} type="button"
+                            onClick={this.deleteMediaItems}>
+                        Delete
+                    </button>
+                    <button disabled={this.props.loading} type="button"
+                            onClick={this.createMediaItem}>
+                        New
+                    </button>
 
-                <button type="button" disabled={this.props.loading}
-                        onClick={() => {
-                            this.props.saveMedia(this.fromState(this.state))
-                        }}>
-                    Save
-                </button>
-                <button className={styles.button} type="button" disabled={this.props.loading}
-                        onClick={this.props.importMedia}>
-                    Import from media folder
-                </button>
-
-                <button className={styles.button} type="button" disabled={this.props.loading}
-                        onClick={this.props.openMediaFolder}>
-                    Open media folder
-                </button>
+                    <button type="button" disabled={this.props.loading}
+                            onClick={() => {
+                                this.props.saveMedia(this.fromState(this.state))
+                            }}>
+                        Save
+                    </button>
+                </div>
             </div>
         )
     }
