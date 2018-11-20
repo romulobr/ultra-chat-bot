@@ -57,7 +57,7 @@ const getBroadcasts = (oauth2Client) => {
   });
   return new Promise((fulfill, reject) => {
     Promise.all([persistentBroadcasts, eventBroadcasts]).then(values => {
-      fulfill(values[0].concat(values[1]).filter(broadcast=>broadcast.status.lifeCycleStatus==='ready'));
+      fulfill(values[0].concat(values[1]).filter(broadcast=>broadcast.status.lifeCycleStatus!=='complete'));
     }, error => {
       logger.error('error fetching live broadcasts' + JSON.stringify(error));
       reject(error);
