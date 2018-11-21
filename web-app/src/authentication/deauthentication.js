@@ -5,8 +5,8 @@ const ipcRenderer = require('electron').ipcRenderer;
 
 function deauthenticate(dispatch, origin) {
     cookies.erase('feathers-jwt');
-    //ipcRenderer.send('deauthenticate');
-    // dispatch(notAuthenticated());
+    ipcRenderer.send('deauthenticate');
+    dispatch(notAuthenticated());
 }
 
 export default deauthenticate;

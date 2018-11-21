@@ -28,7 +28,7 @@ class Streamlabs extends Component {
                     filter: this.props.access_token ? '' : 'grayscale(100%)'
                 }}>
                     <div className={styles.token}>
-                        {!this.props.user ? 'Not available' :
+                        {!this.props.hasUser? 'Not available' :
                             this.props.isLoading ? 'Loading...' : (this.props.user) || (this.props.access_token ? 'Ready' : 'Not connected')}
                     </div>
                 </div>
@@ -48,7 +48,8 @@ class Streamlabs extends Component {
 
 function mapStateToProps(state) {
     return {
-        ...state.streamLabs
+        ...state.streamLabs,
+        hasUser: !!state.authentication.user
     };
 }
 

@@ -46,10 +46,12 @@ class AuthenticationPanel extends Component {
         const myPanel =
             <Panel initialPose={'hidden'} key="connected-panel">
                 <div className={styles.information}>
-                    <Twitch user={this.props.user && this.props.user.twitch}
-                            onDeathenticate={this.props.deauthenticate('twitch')}/>
-                    <Youtube user={this.props.user && this.props.user.youtube}
-                             onDeathenticate={this.props.deauthenticate('youtube')}/>
+                    <div className={styles.information}>
+                        <Twitch user={this.props.user && this.props.user.twitch}
+                                onDeathenticate={this.props.deauthenticate('twitch')}/>
+                        <Youtube user={this.props.user && this.props.user.youtube}
+                                 onDeathenticate={this.props.deauthenticate('youtube')}/>
+                    </div>
                     <StreamElements isEditing={this.props.isEditing}
                                     token={this.props.token}
                                     editToken={this.props.editToken}/>
