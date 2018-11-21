@@ -1,4 +1,4 @@
-import actions from './chicken-remote-actions';
+import actions from './chicken-controls-actions';
 import {createReducer} from 'redux-act';
 
 const initialState = {

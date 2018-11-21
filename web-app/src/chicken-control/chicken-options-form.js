@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styles from './chicken-remote.module.scss';
+import styles from './chicken-controls.module.scss';
 import LoadingSpinner from '../loading-spinner/loading-spinner'
 import optionsFormStyles from '../options-form/options-form.module.scss';
 
@@ -59,7 +59,7 @@ class ChickenOptionsForm extends Component {
                                    onChange={this.onToggle}
                                    disabled={this.props.loading}
                             />
-                            <span>Enable commands without "!"</span>
+                            <span>Allow simple commands(No Exclamation)</span>
                         </label>
 
                         <label>Move command

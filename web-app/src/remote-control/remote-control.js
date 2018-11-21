@@ -3,7 +3,7 @@ import styles from './remote-control.module.scss';
 import {connect} from 'react-redux';
 import actions from './remote-control-actions';
 import {Link} from "react-router-dom";
-import ChickenControls from '../chicken-control/chicken-controls-form';
+import ChickenControls from '../chicken-control/chicken-remote';
 
 class MediaRemote extends Component {
 

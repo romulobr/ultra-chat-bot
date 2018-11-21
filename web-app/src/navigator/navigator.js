@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import AuthenticationPanel from '../authentication/authentication'
 import MediaPanel from '../media/media';
 import MediaRemote from '../remote-control/remote-control';
-import ChickenRemote from '../chicken-control/chicken-remote'
+import ChickenRemote from '../chicken-control/chicken-controls'
 import actions from './navigation-actions';
 
 import styles from './navigator.module.scss';

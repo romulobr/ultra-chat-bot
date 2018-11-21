@@ -2,7 +2,7 @@ import {messageApi} from '../urls';
 import {mediaUrl} from '../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
-import actions from './chicken-remote-actions';
+import actions from './chicken-controls-actions';
 
 function* playMedia(action) {
     try {

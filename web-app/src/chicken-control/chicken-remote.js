@@ -1,55 +1,77 @@
 import React, {Component} from 'react';
-import styles from './chicken-remote.module.scss';
+import optionsFormStyles from '../options-form/options-form.module.scss';
+import styles from './chicken-controls.module.scss';
 
-import {connect} from 'react-redux';
-import actions from './chicken-remote-actions.js';
-import OptionsForm from './chicken-options-form';
-import {Link} from "react-router-dom";
+class ChickenControlsForm extends Component {
+    constructor(props) {
+        super(props);
+        this.onChange = this.onChange.bind(this);
+        this.onToggle = this.onToggle.bind(this);
 
-class ChickenRemote extends Component {
-    constructor() {
-        super();
-        this.options = React.createRef();
+        this.state = {};
+        this.state.moveX = 5;
+        this.state.moveY = 5;
+        this.state.whatToSay = 'Blah Blah Blah!'
     }
 
     render() {
         return (
-            <div className={styles.chickenRemote}>
-                <OptionsForm ref={this.options} {...this.props}/>
-                {!this.props.user && (
-                    <h2 className="warning">
-                        You need to <Link to="/">connect a streaming account</Link> to be able to save your settings.
-                    </h2>)}
-            </div>)
+            <div className={optionsFormStyles.settings}>
+                <fieldset>
+                    <p>Chicken</p>
+                    <label>X
+                        <span>
+                            <input name="moveX"
+                                   type="number"
+                                   min="0"
+                                   max="10"
+                                   value={this.state.moveX}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
+                    <label>Y
+                        <span>
+                            <input name="moveY"
+                                   type="number"
+                                   min="0"
+                                   max="10"
+                                   value={this.state.moveY}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
+                    <label>What to Say?
+                        <span>
+                            <input name="whatToSay"
+                                   type="text"
+                                   value={this.state.whatToSay}
+                                   onChange={this.onChange}/>
+                        </span>
+                    </label>
+                    <div className={optionsFormStyles.buttonBar}>
+                        <button className={styles.chickenItem} onClick={() => {
+                            this.props.sendChickenCommand({move: {x: this.state.moveX, y: this.state.moveY}})
+                        }}>
+                            Move
+                        </button>
+                        <button className={styles.chickenItem} onClick={() => {
+                            this.props.sendChickenCommand({move: {x: Math.random() * 10, y: Math.random() * 10}})
+                        }}>
+                            Random Move
+                        </button>
+                        <button className={styles.chickenItem} onClick={() => {
+                            this.props.sendChickenCommand({say: this.state.whatToSay, sound: this.props.soundEnabled})
+                        }}>
+                            Say Message
+                        </button>
+                    </div>
+                </fieldset>
+            </div>
+
+        );
     }
 
-    componentDidMount() {
-        this.props.fetchChickenOptions();
-    }
+    onChange = event => this.setState({...this.state, [event.target.name]: event.target.value});
+    onToggle = event => this.setState({...this.state, [event.target.name]: !this.state[event.target.name]});
 }
 
-function mapStateToProps(state) {
-    return {
-        ...state.chickenControls,
-        user: state.users,
-    };
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        saveChickenOptions: (options) => {
-            dispatch(actions.saveChicken(options))
-        },
-        fetchChickenOptions: () => {
-            dispatch(actions.fetchChicken())
-        },
-        sendChickenCommand: (command) => {
-            dispatch(actions.sendChickenCommand(command));
-        }
-    };
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ChickenRemote);
+export default ChickenControlsForm;

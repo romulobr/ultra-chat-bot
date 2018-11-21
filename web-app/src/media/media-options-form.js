@@ -42,7 +42,7 @@ class MediaOptionsForm extends Component {
                                    name="allowCommandsWithoutExclamation"
                                    checked={this.state.allowCommandsWithoutExclamation}
                                    onChange={this.onToggle}/>
-                            <span>Allow simple form (No Exclamation) </span>
+                            <span>Allow simple commands (No Exclamation) </span>
                         </label>
                         {/*<label>*/}
                             {/*<input type="checkbox"*/}

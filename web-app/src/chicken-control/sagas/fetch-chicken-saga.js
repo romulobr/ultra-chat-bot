@@ -2,7 +2,7 @@ import {chickenApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
-import actions from '../chicken-remote-actions';
+import actions from '../chicken-controls-actions';
 import {notAuthenticated} from '../../authentication/authentication-actions'
 
 function* fetchChicken() {

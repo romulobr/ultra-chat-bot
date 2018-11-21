@@ -5,9 +5,8 @@ import getSavedToken from './jwt';
 import actions from './authentication-actions';
 import {fetchMedia} from '../media/media-actions'
 import {fetchToken} from './stream-elements/stream-elements-actions';
-import {fetchChicken} from '../chicken-control/chicken-remote-actions';
+import {fetchChicken} from '../chicken-control/chicken-controls-actions';
 import {fetchStreamlabs} from './stream-labs/stream-labs-actions';
-
 
 function userFrom(data, originalUser) {
     const newUser = {origin: 'multi'};
