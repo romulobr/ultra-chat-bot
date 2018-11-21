@@ -13,6 +13,16 @@ function create(user, apps, liveChatId) {
   const channelName = user.displayName;
 
   function stop() {
+    youtubeClient
+      .sendChatMessage(
+        youtubeOauthClient,
+        liveChatId,
+        '🐮🛑💬',
+      )
+      .then(
+        r => console.log(JSON.stringify(r)),
+        e => console.log(JSON.stringify(e))
+      );
     isRunning = false;
   }
 
@@ -30,7 +40,7 @@ function create(user, apps, liveChatId) {
       .sendChatMessage(
         youtubeOauthClient,
         liveChatId,
-        '🐮Hi!',
+        '🐮🔌💬',
       )
       .then(
         r => console.log(JSON.stringify(r)),

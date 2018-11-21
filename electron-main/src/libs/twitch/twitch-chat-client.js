@@ -21,6 +21,7 @@ function create(user, apps) {
   const client = new twitchJs.client(options);
 
   function stop() {
+    client.say(channel, '🐮🛑💬');
     client.disconnect();
   }
 
@@ -34,7 +35,7 @@ function create(user, apps) {
   });
   client.on('join', function (channel) {
     if (!showedConnectionStatus) {
-      // client.say(channel, 'Muuuuu!');
+      client.say(channel, '🐮🔌💬');
       showedConnectionStatus = true;
     }
   });
