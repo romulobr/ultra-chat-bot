@@ -44,13 +44,13 @@ class MediaOptionsForm extends Component {
                                    onChange={this.onToggle}/>
                             <span>Allow simple form (No Exclamation) </span>
                         </label>
-                        <label>
-                            <input type="checkbox"
-                                   name="allowCommandsWithoutExclamation"
-                                   checked={this.state.allowCommandsWithoutExclamation}
-                                   onChange={this.onToggle}/>
-                            <span>Allow permissive form: "message with COMMAND on it"</span>
-                        </label>
+                        {/*<label>*/}
+                            {/*<input type="checkbox"*/}
+                                   {/*name="allowCommandsWithoutExclamation"*/}
+                                   {/*checked={this.state.allowCommandsWithoutExclamation}*/}
+                                   {/*onChange={this.onToggle}/>*/}
+                            {/*<span>Allow permissive form: "message with COMMAND on it"</span>*/}
+                        {/*</label>*/}
                         <label>
                             <input type="checkbox"
                                    name="moderatorsOnly"

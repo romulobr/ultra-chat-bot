@@ -46,19 +46,19 @@ class AuthenticationPanel extends Component {
         const myPanel =
             <Panel initialPose={'hidden'} key="connected-panel">
                 <div className={styles.information}>
-                    <div className={styles.information}>
-                        <Twitch user={this.props.user && this.props.user.twitch}
-                                onDeathenticate={this.props.deauthenticate('twitch')}/>
-                        <Youtube user={this.props.user && this.props.user.youtube}
-                                 onDeathenticate={this.props.deauthenticate('youtube')}/>
-                    </div>
+
+                    <Twitch user={this.props.user && this.props.user.twitch}
+                            onDeathenticate={this.props.deauthenticate('twitch')}/>
+                    <Youtube user={this.props.user && this.props.user.youtube}
+                             onDeathenticate={this.props.deauthenticate('youtube')}/>
+
                     <StreamElements isEditing={this.props.isEditing}
                                     token={this.props.token}
                                     editToken={this.props.editToken}/>
                     <Streamlabs ref={this.streamlabs}/>
                 </div>
                 <div className={styles.overlayInstructions}>Remember to add browserSource
-                    <span> http://localhost:62619/v3.html</span> (1280x720)
+                    <span> http://localhost:62619/scene</span> (1280x720)
                 </div>
                 <ChatControls/>
             </Panel>;

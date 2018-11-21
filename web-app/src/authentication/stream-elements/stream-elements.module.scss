@@ -32,8 +32,9 @@
     font-weight: bolder;
     border-radius: 8px;
     min-height: 29px;
-    min-width: 144px;
-    transform: rotate(-5deg) translate(10px, 128px);
+    width: 143px;
+    -webkit-transform: rotate(-5deg) translate(10px, 128px);
+    transform: rotate(-5deg) translate(-11px, 100px);
     border: 2px solid rgba(0, 0, 0, 1);
   }
 
@@ -41,8 +42,10 @@
     position: absolute;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
-    transform: translate(0, 190px);
+    flex-direction: column;
+    margin:0;
+    -webkit-transform: translate(0, 190px);
+    transform: translate(16px, 118px);
     z-index: 0;
 
     .hidden {
