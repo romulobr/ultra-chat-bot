@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
 import AuthenticationPanel from '../authentication/authentication'
 import MediaPanel from '../media/media';
-import MediaRemote from '../media-remote/media-remote';
-import ChickenRemote from '../chicken-remote/chicken-remote'
+import MediaRemote from '../remote-control/remote-control';
+import ChickenRemote from '../chicken-control/chicken-remote'
 import actions from './navigation-actions';
 
 import styles from './navigator.module.scss';
@@ -37,14 +37,21 @@ class Navigator extends Component {
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/') ? styles.selected : '')}
                                     to="/">
                                     <div>
-                                        <span role="img">⚙</span>
+                                        <span role="img">⚙🌍</span>
                                     </div>
                                 </Link>
                                 <Link
-                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/media') ? styles.selected : '')}
-                                    to="/media">
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/media-controls') ? styles.selected : '')}
+                                    to="/media-controls">
                                     <div>
-                                        <span role="img" aria-label={"tv"}>📺</span>
+                                        <span role="img" aria-label={"tv"}>⚙📺</span>
+                                    </div>
+                                </Link>
+                                <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/chicken') ? styles.selected : '')}
+                                    to="/chicken">
+                                    <div>
+                                        <span role="img" aria-label={"chicken"}>⚙🐔</span>
                                     </div>
                                 </Link>
                                 <Link
@@ -54,19 +61,12 @@ class Navigator extends Component {
                                         <span role="img" aria-label={"remote"}>📱</span>
                                     </div>
                                 </Link>
-                                <Link
-                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/chicken') ? styles.selected : '')}
-                                    to="/chicken">
-                                    <div>
-                                        <span role="img" aria-label={"chicken"}>🐔</span>
-                                    </div>
-                                </Link>
                             </div>
                             <PoseGroup>
                                 <RoutesContainer key={location.pathname}>
                                     <Switch location={location}>
                                         <Route key={'connections'} exact path="/" component={authentication}/>
-                                        <Route key={'media'} path="/media/" component={media}/>
+                                        <Route key={'media-controls'} path="/media-controls/" component={media}/>
                                         <Route key={'remote'} path="/remote/" component={mediaRemote}/>
                                         <Route key={'chicken'} path="/chicken/" component={chickenControls}/>
                                     </Switch>

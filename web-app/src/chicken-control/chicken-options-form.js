@@ -24,45 +24,46 @@ class ChickenOptionsForm extends Component {
             <div className={styles.chickenPanel}>
                 {this.props.isLoading && (<LoadingSpinner/>)}
                 <div className={optionsFormStyles.settings}>
-                    <label>
-                        <input type="checkbox"
-                               name="enabled"
-                               checked={this.state.enabled}
-                               onChange={this.onToggle}
-                               disabled={this.props.loading}
-                        />
-                        <span>Enable</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="soundEnabled"
-                               checked={this.state.soundEnabled}
-                               onChange={this.onToggle}
-                               disabled={this.props.loading}
-                        />
-                        <span>Enable Sound</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="enabledForChat"
-                               checked={this.state.enabledForChat}
-                               onChange={this.onToggle}
-                               disabled={this.props.loading}
-                        />
-                        <span>Enable on Chat</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="allowCommandsWithoutExclamation"
-                               checked={this.state.allowCommandsWithoutExclamation}
-                               onChange={this.onToggle}
-                               disabled={this.props.loading}
-                        />
-                        <span>Enable commands without "!"</span>
-                    </label>
+                    <fieldset>
+                        <label>
+                            <input type="checkbox"
+                                   name="enabled"
+                                   checked={this.state.enabled}
+                                   onChange={this.onToggle}
+                                   disabled={this.props.loading}
+                            />
+                            <span>Enable</span>
+                        </label>
+                        <label>
+                            <input type="checkbox"
+                                   name="soundEnabled"
+                                   checked={this.state.soundEnabled}
+                                   onChange={this.onToggle}
+                                   disabled={this.props.loading}
+                            />
+                            <span>Enable Sound</span>
+                        </label>
+                        <label>
+                            <input type="checkbox"
+                                   name="enabledForChat"
+                                   checked={this.state.enabledForChat}
+                                   onChange={this.onToggle}
+                                   disabled={this.props.loading}
+                            />
+                            <span>Enable on Chat</span>
+                        </label>
+                        <label>
+                            <input type="checkbox"
+                                   name="allowCommandsWithoutExclamation"
+                                   checked={this.state.allowCommandsWithoutExclamation}
+                                   onChange={this.onToggle}
+                                   disabled={this.props.loading}
+                            />
+                            <span>Enable commands without "!"</span>
+                        </label>
 
-                    <label>Move command
-                        <span>
+                        <label>Move command
+                            <span>
                             <input name="moveCommand"
                                    type="text"
                                    value={this.state.moveCommand}
@@ -70,9 +71,9 @@ class ChickenOptionsForm extends Component {
                                    disabled={this.props.loading}
                             />
                         </span>
-                    </label>
-                    <label>Say command
-                        <span>
+                        </label>
+                        <label>Say command
+                            <span>
                             <input name="sayCommand"
                                    type="text"
                                    value={this.state.sayCommand}
@@ -80,12 +81,15 @@ class ChickenOptionsForm extends Component {
                                    disabled={this.props.loading}
                             />
                         </span>
-                    </label>
+                        </label>
+                    </fieldset>
                 </div>
-                <div className={optionsFormStyles.buttonBar}>
-                    <button onClick={() => {
-                        this.props.saveChickenOptions(this.getOptions())
-                    }}>
+
+                <div className="button-bar">
+                    <button disabled={!this.props.user}
+                            onClick={() => {
+                                this.props.saveChickenOptions(this.getOptions())
+                            }}>
                         Save
                     </button>
                 </div>

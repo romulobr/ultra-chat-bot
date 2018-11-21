@@ -1,5 +1,5 @@
 .welcomePanel {
-  padding-top:30px;
+  padding-top:50px;
   flex-direction: column;
   text-align: center;
 
@@ -62,4 +62,16 @@
   width: 100%;
   display: inline-block;
   height: 200px;
+}
+
+.overlayInstructions {
+  width: auto;
+  color: white;
+  text-align: center;
+  background-color: #000000;
+  margin: 3px 0;
+  line-height: 1.5em;
+  span {
+    color: #FFD200;
+  }
 }

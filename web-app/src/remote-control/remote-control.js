@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import styles from './media-remote.module.scss';
+import styles from './remote-control.module.scss';
 import {connect} from 'react-redux';
-import actions from './media-remote-actions.js';
+import actions from './remote-control-actions';
+import {Link} from "react-router-dom";
+import ChickenControls from '../chicken-control/chicken-controls-form';
 
 class MediaRemote extends Component {
 
@@ -15,19 +17,27 @@ class MediaRemote extends Component {
         return (
             <div className={styles.mediaRemote}>
                 {this.props.items.length === 0 && (
-                    <div>
-                        <p>Looks like you have not imported any Media.</p>
-                        <h1>How to use media player</h1>
-                        <h2>1. Go to media (TV)</h2>
-                        <h2>2. Click Open Media Folder</h2>
-                        <h2>3. Copy your media files to Media Folder (no subfolders)</h2>
-                        <h2>4. Click Import Media</h2>
-                        <h2>5. Click Save</h2>
-                        <h2>6. Come Back here</h2>
+                    <div className={styles.instructions}>
+                        <h2>How to use</h2>
+                        <h3>1. Go to <Link to="media-controls"> media section </Link>(TV)</h3>
+                        <h3>2. Click "Copy Files"</h3>
+                        <h3>3. Copy your files to the Media Folder (don't use sub-folders)</h3>
+                        <h3>4. Click "Import Files"</h3>
+                        <h3>5. Click Save</h3>
+                        <h3>6. Come Back here</h3>
                     </div>
-
                 )}
-                {this.renderMediaItems(this.props.items)}
+                <div>
+                    <ChickenControls {...this.props}/>
+                </div>
+                <div>
+                    {this.props.items.length !== 0 && (
+                        <fieldset>
+                            <p>Media</p>
+                            {this.renderMediaItems(this.props.items)}
+                        </fieldset>)
+                    }
+                </div>
             </div>)
     }
 

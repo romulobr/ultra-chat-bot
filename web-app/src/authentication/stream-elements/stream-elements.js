@@ -59,7 +59,8 @@ class SteamElements extends Component {
                     filter: this.props.token ? '' : 'grayscale(100%)'
                 }}>
                     <div className={styles.token}>
-                        {this.props.isLoading ? 'Loading...' : (this.props.tokenUser) || (this.props.token ? 'Ready' : 'No Token')}
+                        {!this.props.user ? 'Not available' :
+                            (this.props.isLoading ? 'Loading...' : (this.props.tokenUser) || (this.props.token ? 'Ready' : 'No Token'))}
                     </div>
                 </div>
                 <div>
@@ -77,7 +78,8 @@ class SteamElements extends Component {
 
 function mapStateToProps(state) {
     return {
-        ...state.streamElements
+        ...state.streamElements,
+        user: state.authentication.user
     };
 }
 

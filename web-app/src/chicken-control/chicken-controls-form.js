@@ -17,8 +17,10 @@ class ChickenControlsForm extends Component {
     render() {
         return (
             <div className={optionsFormStyles.settings}>
-                <label>X
-                    <span>
+                <fieldset>
+                    <p>Chicken</p>
+                    <label>X
+                        <span>
                             <input name="moveX"
                                    type="number"
                                    min="0"
@@ -26,9 +28,9 @@ class ChickenControlsForm extends Component {
                                    value={this.state.moveX}
                                    onChange={this.onChange}/>
                         </span>
-                </label>
-                <label>Y
-                    <span>
+                    </label>
+                    <label>Y
+                        <span>
                             <input name="moveY"
                                    type="number"
                                    min="0"
@@ -36,33 +38,35 @@ class ChickenControlsForm extends Component {
                                    value={this.state.moveY}
                                    onChange={this.onChange}/>
                         </span>
-                </label>
-                <label>What to Say?
-                    <span>
+                    </label>
+                    <label>What to Say?
+                        <span>
                             <input name="whatToSay"
                                    type="text"
                                    value={this.state.whatToSay}
                                    onChange={this.onChange}/>
                         </span>
-                </label>
-                <div className={optionsFormStyles.buttonBar}>
-                    <button className={styles.chickenItem} onClick={() => {
-                         this.props.sendChickenCommand({move: {x: this.state.moveX, y: this.state.moveY}})
-                    }}>
-                        Move
-                    </button>
-                    <button className={styles.chickenItem} onClick={() => {
-                        this.props.sendChickenCommand({move: {x: Math.random()*10, y: Math.random()*10}})
-                    }}>
-                        Random Move
-                    </button>
-                    <button className={styles.chickenItem} onClick={() => {
-                        this.props.sendChickenCommand({say: this.state.whatToSay,sound:this.props.soundEnabled})
-                    }}>
-                        Say Message
-                    </button>
-                </div>
+                    </label>
+                    <div className={optionsFormStyles.buttonBar}>
+                        <button className={styles.chickenItem} onClick={() => {
+                            this.props.sendChickenCommand({move: {x: this.state.moveX, y: this.state.moveY}})
+                        }}>
+                            Move
+                        </button>
+                        <button className={styles.chickenItem} onClick={() => {
+                            this.props.sendChickenCommand({move: {x: Math.random() * 10, y: Math.random() * 10}})
+                        }}>
+                            Random Move
+                        </button>
+                        <button className={styles.chickenItem} onClick={() => {
+                            this.props.sendChickenCommand({say: this.state.whatToSay, sound: this.props.soundEnabled})
+                        }}>
+                            Say Message
+                        </button>
+                    </div>
+                </fieldset>
             </div>
+
         );
     }
 

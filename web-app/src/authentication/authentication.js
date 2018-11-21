@@ -55,6 +55,9 @@ class AuthenticationPanel extends Component {
                                     editToken={this.props.editToken}/>
                     <Streamlabs ref={this.streamlabs}/>
                 </div>
+                <div className={styles.overlayInstructions}>Remember to add browserSource
+                    <span> http://localhost:62619/v3.html</span> (1280x720)
+                </div>
                 <ChatControls/>
             </Panel>;
 

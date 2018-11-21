@@ -1,6 +1,7 @@
 .chickenRemote {
-  padding-top: 30px;
-  width: 100%;
+  padding-top: 50px;
+  width: auto;
+  margin:0 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,7 +12,6 @@
   text-overflow: clip;
   overflow: hidden;
   padding:5px;
-  color: white;
   background-color: #ffdd99;
   color:black;
   text-transform: uppercase;
@@ -28,7 +28,7 @@
   transition: all 0.2s ease-in;
 
   &:hover{
-    background-color: #6441a4;
+    background-color: #FFD200;
     transition: all 0.2s ease-in;
   }
 }

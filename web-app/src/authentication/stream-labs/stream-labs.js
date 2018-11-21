@@ -28,7 +28,8 @@ class Streamlabs extends Component {
                     filter: this.props.access_token ? '' : 'grayscale(100%)'
                 }}>
                     <div className={styles.token}>
-                        {this.props.isLoading ? 'Loading...' : (this.props.user) || (this.props.access_token ? 'Ready' : 'Not connected')}
+                        {!this.props.user ? 'Not available' :
+                            this.props.isLoading ? 'Loading...' : (this.props.user) || (this.props.access_token ? 'Ready' : 'Not connected')}
                     </div>
                 </div>
                 <div>

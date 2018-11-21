@@ -26,92 +26,107 @@ class MediaOptionsForm extends Component {
 
     render() {
         return (
-            <div className={styles.mediaPanel}>
+            <div>
                 {this.props.isLoading && (<LoadingSpinner/>)}
                 <div className={optionsFormStyles.settings}>
-                    <label>
-                        <input type="checkbox"
-                               name="enabledForChat"
-                               checked={this.state.enabledForChat}
-                               onChange={this.onToggle}/>
-                        <span>Enable on Chat</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="allowCommandsWithoutExclamation"
-                               checked={this.state.allowCommandsWithoutExclamation}
-                               onChange={this.onToggle}/>
-                        <span>Enable commands without "!"</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="moderatorsOnly"
-                               checked={this.state.moderatorsOnly}
-                               onChange={this.onToggle}/>
-                        <span>Moderators Only</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="enableStreamElementsIntegration"
-                               checked={this.state.enableStreamElementsIntegration}
-                               onChange={this.onToggle}/>
-                        <span>Enable StreamElements Integration (need a valid token)</span>
-                    </label>
-                    <label>
-                        <input type="checkbox"
-                               name="enableStreamlabsIntegration"
-                               checked={this.state.enableStreamlabsIntegration}
-                               onChange={this.onToggle}/>
-                        <span>Enable Streamlabs Integration (need to be connected)</span>
-                    </label>
-                    <label>Cost per chat play:
-                        <span>
+                    <fieldset>
+                        <label>
+                            <input type="checkbox"
+                                   name="enabledForChat"
+                                   checked={this.state.enabledForChat}
+                                   onChange={this.onToggle}/>
+                            <span>Enable on Chat</span>
+                        </label>
+                        <label>
+                            <input type="checkbox"
+                                   name="allowCommandsWithoutExclamation"
+                                   checked={this.state.allowCommandsWithoutExclamation}
+                                   onChange={this.onToggle}/>
+                            <span>Allow simple form (No Exclamation) </span>
+                        </label>
+                        <label>
+                            <input type="checkbox"
+                                   name="allowCommandsWithoutExclamation"
+                                   checked={this.state.allowCommandsWithoutExclamation}
+                                   onChange={this.onToggle}/>
+                            <span>Allow permissive form: "message with COMMAND on it"</span>
+                        </label>
+                        <label>
+                            <input type="checkbox"
+                                   name="moderatorsOnly"
+                                   checked={this.state.moderatorsOnly}
+                                   onChange={this.onToggle}/>
+                            <span>Moderators Only</span>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label>
+                            <input type="checkbox"
+                                   name="enableStreamElementsIntegration"
+                                   checked={this.state.enableStreamElementsIntegration}
+                                   onChange={this.onToggle}/>
+                            <span>Enable StreamElements Integration (need a valid token)</span>
+                        </label>
+                        <label>
+                            <input type="checkbox"
+                                   name="enableStreamlabsIntegration"
+                                   checked={this.state.enableStreamlabsIntegration}
+                                   onChange={this.onToggle}/>
+                            <span>Enable Streamlabs Integration (need to be connected)</span>
+                        </label>
+                        <label>Cost per chat play:
+                            <span>
                             <input name="costPerChatPlay"
                                    type="number"
                                    value={this.state.costPerChatPlay}
                                    onChange={this.onChange}/>
                         </span>
-                    </label>
-                    <label>Global cooldown (seconds)
-                        <span>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label>Global cooldown (seconds)
+                            <span>
                             <input name="globalCooldown"
                                    type="number"
                                    value={this.state.globalCooldown}
                                    onChange={this.onChange}/>
                         </span>
-                    </label>
-                    <label>Per user cooldown (seconds)
-                        <span>
+                        </label>
+                        <label>Per user cooldown (seconds)
+                            <span>
                             <input name="perUserCooldown"
                                    type="number"
                                    value={this.state.perUserCooldown}
                                    onChange={this.onChange}/>
                         </span>
-                    </label>
-                    <label>Video Position Top (px)
-                        <span>
+                        </label>
+                    </fieldset>
+                    <fieldset>
+                        <label>Video Position Top (px)
+                            <span>
                             <input name="videoTop"
                                    type="number"
                                    value={this.state.videoTop}
                                    onChange={this.onChange}/>
                         </span>
-                    </label>
-                    <label>Video Position Left (px)
-                        <span>
+                        </label>
+                        <label>Video Position Left (px)
+                            <span>
                             <input name="videoLeft"
                                    type="number"
                                    value={this.state.videoLeft}
                                    onChange={this.onChange}/>
                         </span>
-                    </label>
-                    <label>Video Width (%)
-                        <span>
+                        </label>
+                        <label>Video Width (%)
+                            <span>
                             <input name="videoWidth"
                                    type="number"
                                    value={this.state.videoWidth}
                                    onChange={this.onChange}/>
                         </span>
-                    </label>
+                        </label>
+                    </fieldset>
                 </div>
             </div>
         );

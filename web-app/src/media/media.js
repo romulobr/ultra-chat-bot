@@ -5,6 +5,7 @@ import registerRendererEvents from './media-message-handlers';
 import actions from './media-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner'
 import MediaOptionsForm from './media-options-form';
+import {Link} from 'react-router-dom';
 
 class MediaPanel extends Component {
     constructor(props) {
@@ -32,8 +33,27 @@ class MediaPanel extends Component {
         return (
             <div className={styles.mediaPanel}>
                 {this.props.isLoading && (<LoadingSpinner/>)}
+                <div className='button-bar'>
+                    <button type="button"
+                            onClick={this.props.openMediaFolder}>
+                        <span>1</span> Copy files
+                    </button>
+                    <button type="button" onClick={this.props.importMedia}>
+                        <span>2</span> Import files
+                    </button>
+                    <button type="button"
+                            disabled={this.props.loading || !this.props.user}
+                            onClick={() => {
+                                this.props.saveMedia(this.fromState(this.state))
+                            }}>
+                        <span>3</span>Save Settings
+                    </button>
+                </div>
+                {!this.props.user && (
+                    <h2 className="warning">
+                        You need to <Link to="/">connect a streaming account</Link> to be able to save your settings.
+                    </h2>)}
                 <MediaOptionsForm ref={this.optionsRef} {...this.props}/>
-                {this.renderButtonBar()}
                 <div className={styles.mediaList}>
                     <table>
                         <thead>
@@ -42,7 +62,7 @@ class MediaPanel extends Component {
                                 <button onClick={this.toggleAllCheckedForDeletion}>All</button>
                             </th>
                             <th>Command</th>
-                            <th>File</th>
+                            <th>File/URL</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,6 +70,7 @@ class MediaPanel extends Component {
                         </tbody>
                     </table>
                 </div>
+                {this.renderButtonBar()}
             </div>
         );
     }
@@ -57,22 +78,12 @@ class MediaPanel extends Component {
     renderButtonBar() {
         return (
             <div>
-                <div className={MediaOptionsForm.buttonBar}>
-                    <button type="button" disabled={this.props.loading}
-                            onClick={this.props.openMediaFolder}>
-                        Change files in media folder
-                    </button>
-                    <button type="button" disabled={this.props.loading}
-                            onClick={this.props.importMedia}>
-                        Import files in media folder
-                    </button>
-                </div>
-                <div className={MediaOptionsForm.buttonBar}>
-                    <button disabled={this.props.loading} type="button"
+                <div className='button-bar'>
+                    <button type="button"
                             onClick={this.deleteMediaItems}>
                         Delete
                     </button>
-                    <button disabled={this.props.loading} type="button"
+                    <button type="button"
                             onClick={this.createMediaItem}>
                         New
                     </button>
@@ -200,7 +211,7 @@ class MediaPanel extends Component {
 function mapStateToProps(state) {
     return {
         ...state.media,
-        user: state.users,
+        user: state.authentication.user,
     };
 }
 

@@ -28,7 +28,7 @@ const mediaFolder = app.getPath('documents') + '/v3-media';
 
 const corsOptions = {
   credentials: true, // This is important.
-  origin: 'http://localhost:3002'
+  origin: 'http://127.0.0.1:3002'
 };
 
 const api = express(feathers())
@@ -60,7 +60,13 @@ streamlabsApi.initialize(mainApp);
 youtubeApi.initialize(mainApp);
 
 mainApp.use('*', function (req, res) {
-  const newUrl = 'http://localhost:3001' + req.baseUrl;
+  let baseUrl = 'http://127.0.0.1:3001';
+  const newUrl = baseUrl + req.baseUrl;
+  if(newUrl===baseUrl +'/media-controls'||
+    newUrl===baseUrl +'/remote'||
+    newUrl===baseUrl +'/chicken'){
+    request(baseUrl).pipe(res);
+  }
   request(newUrl).pipe(res);
 });
 

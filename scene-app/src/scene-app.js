@@ -32,7 +32,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const io = require('socket.io-client');
-const socket = io('http://localhost:62619');
+const socket = io('http://127.0.0.1:62619');
 
 socket.on('message', function (message) {
     console.log('message received >', message);

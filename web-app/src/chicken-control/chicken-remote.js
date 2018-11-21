@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import styles from './chicken-remote.module.scss';
-import optionsFormStyles from '../options-form/options-form.module.scss';
 
 import {connect} from 'react-redux';
 import actions from './chicken-remote-actions.js';
 import OptionsForm from './chicken-options-form';
-import ChickenControls from './ckicken-controls-form';
+import {Link} from "react-router-dom";
 
 class ChickenRemote extends Component {
     constructor() {
@@ -16,13 +15,11 @@ class ChickenRemote extends Component {
     render() {
         return (
             <div className={styles.chickenRemote}>
-                <div className={optionsFormStyles.form}>
-                    <OptionsForm ref={this.options} {...this.props}/>
-
-                </div>
-                <div className={optionsFormStyles.form}>
-                    <ChickenControls {...this.props}/>
-                </div>
+                <OptionsForm ref={this.options} {...this.props}/>
+                {!this.props.user && (
+                    <h2 className="warning">
+                        You need to <Link to="/">connect a streaming account</Link> to be able to save your settings.
+                    </h2>)}
             </div>)
     }
 
