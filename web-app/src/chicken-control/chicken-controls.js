@@ -42,9 +42,6 @@ const mapDispatchToProps = dispatch => {
         },
         fetchChickenOptions: () => {
             dispatch(actions.fetchChicken())
-        },
-        sendChickenCommand: (command) => {
-            dispatch(actions.sendChickenCommand(command));
         }
     };
 };

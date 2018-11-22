@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import optionsFormStyles from '../options-form/options-form.module.scss';
 import styles from './chicken-controls.module.scss';
+import {connect} from 'react-redux';
+import actions from './chicken-controls-actions.js';
 
 class ChickenControlsForm extends Component {
     constructor(props) {
@@ -74,4 +76,19 @@ class ChickenControlsForm extends Component {
     onToggle = event => this.setState({...this.state, [event.target.name]: !this.state[event.target.name]});
 }
 
-export default ChickenControlsForm;
+function mapStateToProps() {
+    return {};
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        sendChickenCommand: (command) => {
+            dispatch(actions.sendChickenCommand(command));
+        }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ChickenControlsForm);
