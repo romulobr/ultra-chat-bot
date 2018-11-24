@@ -21,9 +21,17 @@ class MediaPlayerChatApp {
   }
 
   addCoolDownTo(author) {
-    if (this.settings.perUserCooldown && !isNaN(this.settings.perUserCooldown) && this.settings.perUserCooldown > 0) {
+    if (this.settings.options.coolDown.user &&
+      !isNaN(this.settings.options.coolDown.user) &&
+      this.settings.options.coolDown.user > 0) {
       this.blockedByCooldown[author.userName] = true;
-      setTimeout(() => this.removeCoolDownFrom(author), this.settings.perUserCooldown * 1000)
+      setTimeout(() => this.removeCoolDownFrom(author), this.settings.coolDown.user * 1000)
+    }
+    if (this.settings.options.coolDown.global &&
+      !isNaN(this.settings.options.coolDown.global) &&
+      this.settings.options.coolDown.global> 0) {
+      this.blockedByCooldown[global] = true;
+      setTimeout(() => {this.blockedByCooldown[global] = false}, this.settings.coolDown.global  * 1000)
     }
   }
 

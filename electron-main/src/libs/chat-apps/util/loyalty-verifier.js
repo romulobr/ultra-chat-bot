@@ -4,55 +4,58 @@ const {streamlabs} = require('../../../server/stream-labs-api/stream-labs-api');
 // streamElements: true
 // streamLabs: true
 // defaultCost: "1"
+let streamElementsIntegrationFailed = false;
+let streamlabsIntegrationFailed = false;
+
 async function verifyLoyalty(loyalty, message) {
-  if (loyalty.streamElements) {
-    const pointsOk = await checkStreamElementsPoints(message.author);
+  if (loyalty.streamElements && loyalty.defaultCost && loyalty.defaultCost != 0) {
+    const pointsOk = await checkStreamElementsPoints(message.author, loyalty.defaultCost);
     if (!pointsOk) return false;
   }
 
-  if (this.settings.enableStreamlabsIntegration) {
+  if (this.settings.enableStreamlabsIntegration && loyalty.defaultCost && loyalty.defaultCost != 0) {
     const pointsOk = await checkStreamlabsPoints(message.author);
     if (!pointsOk) return false;
   }
   return true;
 }
 
-async function checkStreamElementsPoints(author) {
-  if (this.streamElementsIntegrationFailed || this.settings.costPerChatPlay === 0) {
+async function checkStreamElementsPoints(author, defaultCost = 10) {
+  if (streamElementsIntegrationFailed || defaultCost === 0) {
     return true;
   }
   try {
-    const amount = this.settings.costPerChatPlay * -1;
+    const amount = defaultCost * -1;
     const fetch = await streamElements.fetchUserPoints(this.user.jwt, author.userName);
-    if (fetch.data.points >= this.settings.costPerChatPlay) {
+    if (fetch.data.points >= defaultCost) {
       streamElements.changeUserPoints(this.settings.user.jwt, author.userName, amount);
       return true;
     }
   }
   catch (e) {
-    this.streamElementsIntegrationFailed = true;
+    streamElementsIntegrationFailed = true;
     return true;
   }
 }
 
-async function checkStreamlabsPoints(author) {
-  if (this.streamlabsIntegrationFailed || this.settings.costPerChatPlay === 0) {
+async function checkStreamlabsPoints(author, defaultCost = 10) {
+  if (streamlabsIntegrationFailed || defaultCost === 0) {
     return true;
   }
   try {
     const pointsResponse = await streamlabs.fetchPoints(this.settings.user.jwt, author.userName);
     const points = pointsResponse.data.points;
-    if (points < this.settings.costPerChatPlay) {
+    if (points < defaultCost) {
       return false;
     }
-    await streamlabs.subtractPoints(this.settings.user.jwt, author.userName, this.settings.costPerChatPlay);
+    await streamlabs.subtractPoints(this.settings.user.jwt, author.userName, defaultCost);
     return true;
   }
   catch (e) {
     if (e.message === 'User does not have enough points') {
       return false;
     }
-    this.streamElementsIntegrationFailed = true;
+    streamElementsIntegrationFailed = true;
     return true;
   }
 }
