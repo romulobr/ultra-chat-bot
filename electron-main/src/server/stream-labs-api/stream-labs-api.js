@@ -4,7 +4,6 @@ const userApi = require('../../urls').userApi;
 const config = require('../config/default.json').authentication.streamlabs;
 const streamLabsPointsApiUrl = 'https://streamlabs.com/api/v1.0/points/subtract';
 
-
 async function fetchPoints(localToken, userName) {
   const streamLabsTokenResult = await axios.get(streamLabsDataApi, {headers: {Authorization: 'Bearer ' + localToken}});
   const streamLabsToken = streamLabsTokenResult.data[0].access_token;
@@ -49,6 +48,7 @@ function initialize(app) {
 
   app.get('/streamlabs/callback', (req, res) => {
     try {
+
       getToken(req.query.code, req.headers.cookie.replace('feathers-jwt=', '')).then(() => {
         res.redirect('/auth-success');
       });

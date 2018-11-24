@@ -22,7 +22,7 @@ function createWindow() {
   });
 
   mainWindowState.manage(mainWindow);
-  mainWindow.loadURL('http://127.0.0.1:62619');
+  mainWindow.loadURL('http://localhost:62619');
 
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();

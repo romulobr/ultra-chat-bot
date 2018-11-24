@@ -6,6 +6,7 @@ import actions from './media-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner'
 import MediaOptionsForm from './media-options-form';
 import {Link} from 'react-router-dom';
+import PermissionsForm from "../forms/permissions-form";
 
 class MediaPanel extends Component {
     constructor(props) {
@@ -18,18 +19,15 @@ class MediaPanel extends Component {
         this.toggleAllCheckedForDeletion = this.toggleAllCheckedForDeletion.bind(this);
         this.handleCommandChange = this.handleCommandChange.bind(this);
         this.handleMediaInputChange = this.handleMediaInputChange.bind(this);
-        this.fromState = this.fromState.bind(this);
-
-        this.optionsRef = React.createRef();
+        this.saveMedia = this.saveMedia.bind(this);
         this.state = {
-            items: this.props.items,
-            enableStreamElementsIntegration: this.props.enableStreamElementsIntegration || false,
-            checkedForDeletion: []
+            items: (this.props.data && this.props.data.items) || [],
+            checkedForDeletion: [],
+            options: {}
         };
     }
 
     render() {
-        //console.log('props: ', this.props);
         return (
             <div className={styles.mediaPanel}>
                 {this.props.isLoading && (<LoadingSpinner/>)}
@@ -43,17 +41,18 @@ class MediaPanel extends Component {
                     </button>
                     <button type="button"
                             disabled={this.props.loading || !this.props.user}
-                            onClick={() => {
-                                this.props.saveMedia(this.fromState(this.state))
-                            }}>
+                            onClick={() => this.saveMedia()}>
                         <span>3</span>Save Settings
                     </button>
                 </div>
+
+                <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}/>
+                <MediaOptionsForm getApi={(formApi) => this.optionsForm = formApi}/>
+
                 {!this.props.user && (
                     <h2 className="warning">
                         You need to <Link to="/">connect a streaming account</Link> to be able to save your settings.
                     </h2>)}
-                <MediaOptionsForm ref={this.optionsRef} {...this.props}/>
                 <div className={styles.mediaList}>
                     <table>
                         <thead>
@@ -88,33 +87,40 @@ class MediaPanel extends Component {
                         New
                     </button>
 
-                    <button type="button" disabled={this.props.loading}
-                            onClick={() => {
-                                this.props.saveMedia(this.fromState(this.state))
-                            }}>
-                        Save
+                    <button type="button"
+                            disabled={this.props.loading || !this.props.user}
+                            onClick={() => this.saveMedia()}>
+                        <span>3</span>Save Settings
                     </button>
                 </div>
             </div>
         )
     }
 
+    saveMedia() {
+        const permissions = this.permissionsForm.getState().values;
+        const options = this.optionsForm.getState().values;
+        this.props.saveMedia({permissions, options, items: this.state.items})
+    }
+
     componentDidMount() {
         this.props.registerRendererEvents();
+        this.props.fetchMedia();
+        this.props.data && this.props.data.permissions && this.permissionsForm.setValues(this.props.data.permissions);
+        this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            ...this.state,
-            ...nextProps,
+    static getDerivedStateFromProps(props, state) {
+        return {
+            ...state,
+            ...props,
             checkedForDeletion: []
-        });
+        }
     }
 
-    fromState() {
-        const formData = {...this.optionsRef.current.state, items: this.state.items};
-        delete formData.props;
-        return formData;
+    componentDidUpdate() {
+        this.props.data && this.props.data.permissions && this.permissionsForm.setValues(this.props.data.permissions);
+        this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
     }
 
     toggleCheckedForDeletion(checkBoxIndex) {

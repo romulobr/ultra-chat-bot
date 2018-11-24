@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import optionsFormStyles from '../options-form/options-form.module.scss';
+import optionsFormStyles from '../forms/options-form.module.scss';
 import styles from './chicken-controls.module.scss';
 import {connect} from 'react-redux';
 import actions from './chicken-controls-actions.js';

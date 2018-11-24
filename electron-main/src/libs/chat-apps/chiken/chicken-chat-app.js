@@ -1,5 +1,6 @@
 const commands = require('../util/command-in-text');
 const sendScreenMessage = require('../util/send-screen-message');
+const permissionVerifier = require('../util/permission-verifier');
 
 class ChickenChatApp {
 
@@ -9,8 +10,7 @@ class ChickenChatApp {
   }
 
   async handleMessage(message) {
-    if (!this.settings.enabledForChat) return;
-    if (!this.settings.allowCommandsWithoutExclamation && message.text[0] !== '!') return;
+    if (!permissionVerifier.verifyPermissions(this.settings.permissions, message)) return;
 
     let command = commands.commandInFirstWord(message.text, [this.settings.moveCommand, this.settings.sayCommand, this.settings.volunteerCommand]);
     if (!command) return;
@@ -23,7 +23,7 @@ class ChickenChatApp {
       }
     }
     else if (command.command === this.settings.sayCommand) {
-      const theMessage = message.text.replace('!' + this.settings.sayCommand,'').replace(this.settings.sayCommand,'').substr(0,75);
+      const theMessage = message.text.replace('!' + this.settings.sayCommand, '').replace(this.settings.sayCommand, '').substr(0, 75);
       const screenMessage = {chicken: {say: theMessage, sound: this.settings.soundEnabled}};
       sendScreenMessage(screenMessage);
     }

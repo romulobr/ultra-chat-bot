@@ -12,13 +12,12 @@ function createMediaFolder() {
 }
 
 ipcMain.on('openMediaFolder', () => {
-  console.log('\n\n\nopening media folder\n\n\n');
   createMediaFolder();
   shell.openItem(mediaFolder);
 });
 
 ipcMain.on('importMedia', (event) => {
-  console.log('\n\n\nimporting media\n\n\n');
+  console.log('importing media data');
   createMediaFolder();
   mediaImporter(event.sender.getOwnerBrowserWindow());
 });

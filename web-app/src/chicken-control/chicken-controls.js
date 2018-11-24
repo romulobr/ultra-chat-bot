@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import actions from './chicken-controls-actions.js';
 import OptionsForm from './chicken-options-form';
 import {Link} from "react-router-dom";
+import PermissionsForm from "../forms/permissions-form";
 
 class ChickenRemote extends Component {
     constructor() {
@@ -15,7 +16,19 @@ class ChickenRemote extends Component {
     render() {
         return (
             <div className={styles.chickenRemote}>
-                <OptionsForm ref={this.options} {...this.props}/>
+                <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}/>
+                <OptionsForm getApi={(formApi) => this.optionsForm = formApi}/>
+                <div className="button-bar">
+                    <button disabled={!this.props.user}
+                            onClick={() => {
+                                this.props.saveChickenOptions({
+                                    permissions: this.permissionsForm.getState().values,
+                                    options: this.optionsForm.getState().values
+                                })
+                            }}>
+                        Save Settings
+                    </button>
+                </div>
                 {!this.props.user && (
                     <h2 className="warning">
                         You need to <Link to="/">connect a streaming account</Link> to be able to save your settings.
@@ -25,6 +38,13 @@ class ChickenRemote extends Component {
 
     componentDidMount() {
         this.props.fetchChickenOptions();
+        this.props.data && this.props.data.permissions && this.permissionsForm.setValues(this.props.data.permissions);
+        this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
+    }
+
+    componentDidUpdate() {
+        this.props.data && this.props.data.permissions && this.permissionsForm.setValues(this.props.data.permissions);
+        this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
     }
 }
 

@@ -16,7 +16,7 @@ class MediaRemote extends Component {
     render() {
         return (
             <div className={styles.mediaRemote}>
-                {this.props.items.length === 0 && (
+                {this.props.data.items.length === 0 && (
                     <div className={styles.instructions}>
                         <h2>How to use</h2>
                         <h3>1. Go to <Link to="media-controls"> media section </Link>(TV)</h3>
@@ -31,10 +31,10 @@ class MediaRemote extends Component {
                     <ChickenControls {...this.props}/>
                 </div>
                 <div>
-                    {this.props.items.length !== 0 && (
+                    {this.props.data.items.length !== 0 && (
                         <fieldset>
                             <p>Media</p>
-                            {this.renderMediaItems(this.props.items)}
+                            {this.renderMediaItems(this.props.data.items)}
                         </fieldset>)
                     }
                 </div>

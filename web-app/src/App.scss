@@ -57,7 +57,7 @@ input {
 }
 
 .button-bar {
-  width: auto;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   background-color: #111111;
@@ -100,3 +100,40 @@ fieldset {
   }
 }
 
+form {
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  font-size: 0.7em;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  div{
+    flex-grow: 1;
+  }
+
+  label {
+    line-height: 2em;
+    font-size: 1.1em;
+    margin: 8px 0;
+
+    span {
+      margin: 8px;
+    }
+
+    input[type='checkbox'] {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 2px solid #666666;
+      margin: -4px;
+      transition: all 0.2s ease-in;
+    }
+    input[type='checkbox']:checked {
+      background: #5614B0;
+      transition: all 0.2s ease-in;
+    }
+  }
+}

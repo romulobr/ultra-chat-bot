@@ -7,11 +7,11 @@ const initialState = {
 };
 
 const chickenReducer = createReducer({
-        [actions.saveChicken]: (state, payload) => ({...state,...payload, loading: true}),
-        [actions.chickenSaved]: (state, payload) => ({...payload, loading: false}),
-        [actions.chickenSaveFailed]: (state, payload) => ({...state, loading: false,error:payload}),
+        [actions.saveChicken]: (state, payload) => ({...state, data: payload, loading: true}),
+        [actions.chickenSaved]: (state, payload) => ({data: payload, loading: false}),
+        [actions.chickenSaveFailed]: (state, payload) => ({...state, loading: false, error: payload}),
         [actions.fetchChicken]: (state, payload) => ({...state, loading: true}),
-        [actions.chickenFetched]: (state, payload) => ({...state,...payload, loading: false})
+        [actions.chickenFetched]: (state, payload) => ({...state, data: payload, loading: false})
     }, initialState
 );
 
