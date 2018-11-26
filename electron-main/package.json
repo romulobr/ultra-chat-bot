@@ -1,6 +1,6 @@
 {
   "name": "ultrav3",
-  "version": "0.2.3",
+  "version": "0.2.7",
   "private": true,
   "author": "romulino",
   "description": "super vaca v3 - ultra",
@@ -47,6 +47,9 @@
   },
   "build": {
     "appId": "com.romulino.v3.app",
+    "directories":{
+      "buildResources": "./assets/icons"
+    },
     "files": [
       "./index.js",
       "./src/**/*",

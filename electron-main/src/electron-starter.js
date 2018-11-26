@@ -1,6 +1,6 @@
 const {app, BrowserWindow} = require('electron');
 const serverUrl = require('./urls').server;
-
+const path = require('path');
 let splashScreenUrl = serverUrl+'/splash.html';
 
 let mainWindow;
@@ -13,6 +13,7 @@ function createWindow() {
         defaultHeight: 768
     });
     mainWindow = new BrowserWindow({
+        icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
         x: mainWindowState.x,
         y: mainWindowState.y,
         width: mainWindowState.width,

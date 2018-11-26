@@ -3,13 +3,9 @@ import {Form, Scope, Text, TextArea} from 'informed';
 import CooldownFieldset from '../forms/cooldown-fieldset';
 import styles from './icons.module.scss';
 
-const fakeData = [{image: 'love', words: ['love', 'amor']},
-    {image: 'hate', words: ['hate', 'raiva']}];
-
 class IconsOptionsForm extends Component {
     constructor() {
         super();
-        // this.state = {icons: fakeData};
         this.state = {icons: []};
         this.addIcon = this.addIcon.bind(this);
         this.deleteIcon = this.deleteIcon.bind(this);
@@ -66,13 +62,13 @@ class IconsOptionsForm extends Component {
 
     componentDidMount() {
         if (JSON.stringify(this.state.icons) !== JSON.stringify(this.props.icons)) {
-            this.setState({icons: this.props.icons});
+            this.setState({icons: this.props.icons || []});
         }
     }
 
     componentDidUpdate(prevProps) {
         if (JSON.stringify(prevProps.icons) !== JSON.stringify(this.props.icons)) {
-            this.setState({icons: this.props.icons});
+            this.setState({icons: this.props.icons || []});
         }
     }
 }
