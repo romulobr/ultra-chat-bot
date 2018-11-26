@@ -1,3 +1,4 @@
+const {CoolDownManager} = require('../util/cool-down-manager');
 const commands = require('../util/command-in-text');
 const sendScreenMessage = require('../util/send-screen-message');
 const permissionVerifier = require('../util/permission-verifier');
@@ -5,12 +6,14 @@ const permissionVerifier = require('../util/permission-verifier');
 class ChickenChatApp {
 
   constructor(settings) {
-    console.log('chicken app started');
     this.settings = settings;
+    this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
   }
 
   async handleMessage(message) {
     if (!permissionVerifier.verifyPermissions(this.settings.permissions, message)) return;
+    if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
+    if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
     let command = commands.commandInFirstWord(message.text, [this.settings.moveCommand, this.settings.sayCommand, this.settings.volunteerCommand]);
     if (!command) return;

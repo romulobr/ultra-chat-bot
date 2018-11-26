@@ -5,7 +5,8 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import AuthenticationPanel from '../authentication/authentication'
 import MediaPanel from '../media/media';
 import MediaRemote from '../remote-control/remote-control';
-import ChickenRemote from '../chicken-control/chicken-controls'
+import ChickenRemote from '../chicken-control/chicken-controls';
+import Icons from '../icons/icons';
 import actions from './navigation-actions';
 
 import styles from './navigator.module.scss';
@@ -24,6 +25,7 @@ const authentication = () => <AuthenticationPanel/>;
 const media = () => <MediaPanel/>;
 const mediaRemote = () => <MediaRemote/>;
 const chickenControls = () => <ChickenRemote/>;
+const icons = () => <Icons/>;
 
 class Navigator extends Component {
     render() {
@@ -55,6 +57,13 @@ class Navigator extends Component {
                                     </div>
                                 </Link>
                                 <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/icons') ? styles.selected : '')}
+                                    to="/icons">
+                                    <div>
+                                        <span role="img" aria-label={"chicken"}>⚙💖</span>
+                                    </div>
+                                </Link>
+                                <Link
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/remote') ? styles.selected : '')}
                                     to="/remote">
                                     <div>
@@ -69,6 +78,7 @@ class Navigator extends Component {
                                         <Route key={'media-controls'} path="/media-controls/" component={media}/>
                                         <Route key={'remote'} path="/remote/" component={mediaRemote}/>
                                         <Route key={'chicken'} path="/chicken/" component={chickenControls}/>
+                                        <Route key={'icons'} path="/icons/" component={icons}/>
                                     </Switch>
                                 </RoutesContainer>
                             </PoseGroup>
@@ -78,7 +88,6 @@ class Navigator extends Component {
     }
 
     static isSelected(location, url) {
-        console.log(location);
         return location.pathname === url;
     }
 }

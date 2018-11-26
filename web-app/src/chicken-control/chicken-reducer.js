@@ -2,7 +2,6 @@ import actions from './chicken-controls-actions';
 import {createReducer} from 'redux-act';
 
 const initialState = {
-    items: [],
     loading: true
 };
 

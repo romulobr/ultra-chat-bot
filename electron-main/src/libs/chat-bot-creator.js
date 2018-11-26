@@ -5,7 +5,7 @@ const validateTwitchUserTokenAndRefreshIfNeeded = require('./twitch/validate-twi
 
 const createMediaPlayerChatApp = require('./chat-apps/media-player/media-player-chat-app-creator');
 const createChickenChatApp = require('./chat-apps/chiken/chicken-app-chat-app-creator');
-const createEmotionsChatApp = require('./chat-apps/emotions/emotions-chat-app-creator');
+const createIconsChatApp = require('./chat-apps/icons/icons-chat-app-creator');
 
 async function createChatBotApps(user) {
   const apps = [];
@@ -22,10 +22,10 @@ async function createChatBotApps(user) {
     console.log('failed to create chicken chat app')
   }
   try {
-    const emotionsApp = await createEmotionsChatApp(user);
+    const emotionsApp = await createIconsChatApp(user);
     apps.push(emotionsApp);
   } catch (e) {
-    console.log('failed to create emotions chat app')
+    console.log('failed to create icons chat app')
   }
   return (apps);
 }

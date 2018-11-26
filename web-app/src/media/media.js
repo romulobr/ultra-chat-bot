@@ -105,10 +105,11 @@ class MediaPanel extends Component {
 
     componentDidMount() {
         this.props.registerRendererEvents();
-        this.props.fetchMedia();
         this.props.data && this.props.data.permissions && this.permissionsForm.setValues(this.props.data.permissions);
         this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
     }
+
+    compo
 
     static getDerivedStateFromProps(props, state) {
         return {
@@ -192,7 +193,6 @@ class MediaPanel extends Component {
             items: newItems,
             checkedForDeletion: []
         });
-
     }
 
     handleCommandChange(e) {

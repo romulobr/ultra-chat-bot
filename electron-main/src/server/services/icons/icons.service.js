@@ -4,11 +4,11 @@ const service = require('feathers-nedb');
 const dataFolder = require('../../../folders').dataFolder;
 
 const Model = new NeDB({
-  filename: dataFolder + '/emotions.db',
+  filename: dataFolder + '/icons.db',
   autoload: true
 });
 
 module.exports = function (app) {
-  app.use('/emotions', service({Model}));
-  app.service('/emotions').hooks(hooks);
+  app.use('/icons', service({Model}));
+  app.service('/icons').hooks(hooks);
 };

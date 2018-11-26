@@ -4,7 +4,6 @@ const ChickenChatApp = require('./chicken-chat-app');
 
 function create(user) {
     return new Promise((success, fail) => {
-
         axios.get(urls.chickenApi, {
             headers: {Authorization: 'Bearer ' + user.jwt}
         }).then(response => {

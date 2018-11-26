@@ -13,6 +13,7 @@ import streamElementsReducer from './authentication/stream-elements/stream-eleme
 import streamLabsReducer from './authentication/stream-labs/stream-labs-reducer';
 import youtubeChatControlsReducer from './chat-controls/youtube/youtube-chat-controls-reducer';
 import chickenControlsReducer from './chicken-control/chicken-reducer'
+import iconsReducer from './icons/icons-reducer';
 
 import createSagaMiddleware from 'redux-saga';
 
@@ -29,9 +30,12 @@ import watchSaveStreamElementsToken from './authentication/stream-elements/save-
 import watchDisconnectStreamLabs from './authentication/stream-labs/disconnect-streamlabs-saga';
 import watchFetchStreamLabsData from './authentication/stream-labs/fetch-stream-labs-data-saga';
 import watchFetchYoutubeBroadcasts from './chat-controls/youtube/fetch-youtube-broadcasts-saga';
-import watchSaveChicken from './chicken-control/sagas/save-chicken-saga';
 import watchFetchChicken from './chicken-control/sagas/fetch-chicken-saga';
-import watchChickenCommand from './chicken-control/sagas/chicken-command-saga'
+import watchSaveChicken from './chicken-control/sagas/save-chicken-saga';
+import watchChickenCommand from './chicken-control/sagas/chicken-command-saga';
+import watchFetchIcons from './icons/sagas/fetch-icons-saga';
+import watchSaveIcons from './icons/sagas/save-icons-saga';
+
 import navigatorReducer from './navigator/navigator-reducer';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -47,7 +51,8 @@ const store = createStore(
         navigator: navigatorReducer,
         streamElements: streamElementsReducer,
         streamLabs: streamLabsReducer,
-        chickenControls: chickenControlsReducer
+        chicken: chickenControlsReducer,
+        icons: iconsReducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -68,6 +73,8 @@ sagaMiddleware.run(watchFetchChicken);
 sagaMiddleware.run(watchChickenCommand);
 sagaMiddleware.run(watchFetchStreamLabsData);
 sagaMiddleware.run(watchDisconnectStreamLabs);
+sagaMiddleware.run(watchFetchIcons);
+sagaMiddleware.run(watchSaveIcons);
 
 ReactDOM.render(
     <Provider store={store}>

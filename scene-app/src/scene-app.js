@@ -16,7 +16,7 @@ const store = createStore(
     combineReducers({
         videoPlayer: createReducer({[playVideo]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
         audioPlayer: createReducer({[playAudio]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
-        emotions: createReducer({[showEmotion]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
+        icons: createReducer({[showEmotion]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
         chicken: createReducer({
             [chickenCommand]: (state, payload) => {
                 const sayId = payload.say ? state.sayId + 1 : state.sayId;
@@ -44,7 +44,7 @@ socket.on('message', function (message) {
         }
     } else if (message.chicken) {
         store.dispatch(chickenCommand(message.chicken));
-    } else if (message.isEmotions) {
+    } else if (message.isIcons) {
         store.dispatch(showEmotion(message))
     }
 });

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import './emotions.scss';
+import './icons.scss';
 import {TimelineMax, TweenLite, Elastic, Bounce} from "gsap/all";
 
-class Emotion extends Component {
+class Icon extends Component {
     constructor() {
         super();
         this.initialAnimation = this.initialAnimation.bind(this);
@@ -35,7 +35,7 @@ class Emotion extends Component {
 
     render() {
         return (
-            <div ref={this.emotionRef} className="emotions_emotion"
+            <div ref={this.emotionRef} className="icons_icon"
                  style={
                      {
                          backgroundImage: `url(${this.props.icon})`,
@@ -48,4 +48,4 @@ class Emotion extends Component {
     }
 }
 
-export default (Emotion);
+export default Icon;

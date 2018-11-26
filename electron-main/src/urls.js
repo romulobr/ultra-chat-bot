@@ -1,7 +1,7 @@
 const server = 'http://localhost:62619';
 const api = 'http://localhost:62619/api';
 const mediaApi = 'http://localhost:62619/api/media';
-const emotionsApi = 'http://localhost:62619/api/emotions';
+const iconsApi = 'http://localhost:62619/api/icons';
 const chickenApi = 'http://localhost:62619/api/chicken';
 const userApi = 'http://localhost:62619/api/users';
 const media = 'http://localhost:62619/media';
@@ -14,7 +14,7 @@ module.exports = {
   server,
   api,
   mediaApi,
-  emotionsApi,
+  iconsApi,
   userApi,
   media,
   messageApi,

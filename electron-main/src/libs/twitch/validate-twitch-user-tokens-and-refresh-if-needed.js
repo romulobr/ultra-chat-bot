@@ -21,7 +21,7 @@ function validateTwitchUserAndRefreshIfNeeded(user) {
                 }), {
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).then(result => {
-                    console.log('refreshed user\n', result);
+                    console.log('refreshed user\n');
                     const newUser = {...user,acessToken:result.data.access_token, refreshToken:result.data.refresh_token}
                     success(newUser);
                 });

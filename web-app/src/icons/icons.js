@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import styles from './chicken-controls.module.scss';
-
+import styles from './icons.module.scss';
 import {connect} from 'react-redux';
-import actions from './chicken-controls-actions.js';
-import OptionsForm from './chicken-options-form';
+import actions from './icons-actions';
+import OptionsForm from './icons-options-form';
 import {Link} from "react-router-dom";
 import PermissionsForm from "../forms/permissions-form";
 
-class ChickenRemote extends Component {
+class icons extends Component {
     constructor() {
         super();
         this.options = React.createRef();
@@ -15,13 +14,13 @@ class ChickenRemote extends Component {
 
     render() {
         return (
-            <div className={styles.chickenRemote}>
+            <div className={styles.icons}>
                 <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}/>
-                <OptionsForm getApi={(formApi) => this.optionsForm = formApi}/>
+                <OptionsForm getApi={(formApi) => this.optionsForm = formApi} icons={this.props.data && this.props.data.options && this.props.data.options.icons}/>
                 <div className="button-bar">
                     <button disabled={!this.props.user}
                             onClick={() => {
-                                this.props.saveChickenOptions({
+                                this.props.saveIconsOptions({
                                     permissions: this.permissionsForm.getState().values,
                                     options: this.optionsForm.getState().values
                                 })
@@ -49,18 +48,18 @@ class ChickenRemote extends Component {
 
 function mapStateToProps(state) {
     return {
-        ...state.chicken,
+        ...state.icons,
         user: state.authentication.user,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        saveChickenOptions: (options) => {
-            dispatch(actions.saveChicken(options))
+        saveIconsOptions: (options) => {
+            dispatch(actions.saveIcons(options))
         },
-        fetchChickenOptions: () => {
-            dispatch(actions.fetchChicken())
+        fetchIconsOptions: () => {
+            dispatch(actions.fetchIcons())
         }
     };
 };
@@ -68,4 +67,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ChickenRemote);
+)(icons);

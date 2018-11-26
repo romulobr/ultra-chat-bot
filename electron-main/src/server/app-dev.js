@@ -62,9 +62,10 @@ youtubeApi.initialize(mainApp);
 mainApp.use('*', function (req, res) {
   let baseUrl = 'http://127.0.0.1:3001';
   const newUrl = baseUrl + req.baseUrl;
-  if(newUrl===baseUrl +'/media-controls'||
-    newUrl===baseUrl +'/remote'||
-    newUrl===baseUrl +'/chicken'){
+  if (newUrl === baseUrl + '/media-controls' ||
+    newUrl === baseUrl + '/remote' ||
+    newUrl === baseUrl + '/icons' ||
+    newUrl === baseUrl + '/chicken') {
     request(baseUrl).pipe(res);
   }
   request(newUrl).pipe(res);
