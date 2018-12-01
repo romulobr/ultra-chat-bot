@@ -15,7 +15,7 @@ class ChickenChatApp {
     if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
     if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
-    let command = commands.commandInFirstWord(message.text, [this.settings.options.moveCommand, this.settings.sayCommand, this.settings.volunteerCommand]);
+    let command = commands.commandInFirstWord(message.text, [this.settings.options.moveCommand, this.settings.options.sayCommand, this.settings.volunteerCommand]);
     if (!command) return;
 
     if (command.command === this.settings.options.moveCommand) {

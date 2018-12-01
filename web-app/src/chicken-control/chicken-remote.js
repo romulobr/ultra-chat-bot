@@ -61,7 +61,7 @@ class ChickenControlsForm extends Component {
                             Random Move
                         </button>
                         <button className={styles.chickenItem} onClick={() => {
-                            this.props.sendChickenCommand({say: this.state.whatToSay, sound: this.props.soundEnabled})
+                            this.props.sendChickenCommand({say: this.state.whatToSay, sound: this.props.enableSound})
                         }}>
                             Say Message
                         </button>
@@ -76,8 +76,8 @@ class ChickenControlsForm extends Component {
     onToggle = event => this.setState({...this.state, [event.target.name]: !this.state[event.target.name]});
 }
 
-function mapStateToProps() {
-    return {};
+function mapStateToProps(state) {
+    return {enableSound: state.chicken.data && state.chicken.data.options && state.chicken.data.options.enableSound};
 }
 
 const mapDispatchToProps = dispatch => {

@@ -39,28 +39,28 @@ class Navigator extends Component {
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/') ? styles.selected : '')}
                                     to="/">
                                     <div>
-                                        <span role="img">⚙🌍</span>
+                                        <span role="img">🌍</span>
                                     </div>
                                 </Link>
                                 <Link
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/media-controls') ? styles.selected : '')}
                                     to="/media-controls">
                                     <div>
-                                        <span role="img" aria-label={"tv"}>⚙📺</span>
+                                        <span role="img" aria-label={"tv"}>📺</span>
                                     </div>
                                 </Link>
                                 <Link
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/chicken') ? styles.selected : '')}
                                     to="/chicken">
                                     <div>
-                                        <span role="img" aria-label={"chicken"}>⚙🐔</span>
+                                        <span role="img" aria-label={"chicken"}>🐔</span>
                                     </div>
                                 </Link>
                                 <Link
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/icons') ? styles.selected : '')}
                                     to="/icons">
                                     <div>
-                                        <span role="img" aria-label={"chicken"}>⚙💖</span>
+                                        <span role="img" aria-label={"chicken"}>💖</span>
                                     </div>
                                 </Link>
                                 <Link
