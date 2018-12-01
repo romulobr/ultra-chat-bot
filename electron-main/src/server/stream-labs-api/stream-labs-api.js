@@ -4,21 +4,35 @@ const userApi = require('../../urls').userApi;
 const config = require('../config/default.json').authentication.streamlabs;
 const streamLabsPointsApiUrl = 'https://streamlabs.com/api/v1.0/points/subtract';
 
-async function fetchPoints(localToken, userName) {
+function getChannel(user, origin) {
+  if(user.data.origin==='twitch'){
+    return user.data.twitch.name;
+  }
+  if(user.data.origin==='youtube'){
+    return user.data.youtube.name;
+  }
+  if(user.data.origin==='multi'){
+    return user.data[origin].name;
+  }
+}
+
+async function fetchPoints(localToken, userName, origin = 'twitch') {
   const streamLabsTokenResult = await axios.get(streamLabsDataApi, {headers: {Authorization: 'Bearer ' + localToken}});
   const streamLabsToken = streamLabsTokenResult.data[0].access_token;
   const localUserResult = await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
-  const url = `https://streamlabs.com/api/v1.0/points?access_token=${streamLabsToken}&username=${userName}&channel=${localUserResult.data.name}`;
+  const channel = getChannel(localUserResult, origin);
+  const url = `https://streamlabs.com/api/v1.0/points?access_token=${streamLabsToken}&username=${userName}&channel=${channel}`;
   return await axios.get(url);
 }
 
-async function subtractPoints(localToken, userName, amount) {
+async function subtractPoints(localToken, userName, amount, origin = 'twitch') {
   const streamLabsTokenResult = await axios.get(streamLabsDataApi, {headers: {Authorization: 'Bearer ' + localToken}});
   const streamLabsToken = streamLabsTokenResult.data[0].access_token;
   const localUserResult = await axios.get(userApi, {headers: {Authorization: 'Bearer ' + localToken}});
+  const channel = getChannel(localUserResult, origin);
   return await axios.post(streamLabsPointsApiUrl, {
     username: userName,
-    channel: localUserResult.data.name,
+    channel: channel,
     points: amount,
     access_token: streamLabsToken
   });

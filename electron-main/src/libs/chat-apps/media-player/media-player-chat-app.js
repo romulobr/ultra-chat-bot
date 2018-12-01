@@ -16,7 +16,6 @@ class MediaPlayerChatApp {
     if (!verifyPermissions(this.settings.permissions, message)) return;
     if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
     if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
-    if (await !verifyLoyalty(this.settings.options.loyalty, message)) return;
 
     let command = commands.commandInText(message.text, this.commands);
     if (!command) return;
@@ -31,6 +30,7 @@ class MediaPlayerChatApp {
       videoLeft: this.settings.options.video.left,
       videoWidth: this.settings.options.video.size
     };
+    if (await !verifyLoyalty(this.settings.options.loyalty, message, this.settings.user)) return;
     sendScreenMessage(screenMessage);
     this.cooldownManager.addCoolDownTo(message.author);
   }

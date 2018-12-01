@@ -34,15 +34,15 @@ class MediaPanel extends Component {
                 <div className='button-bar'>
                     <button type="button"
                             onClick={this.props.openMediaFolder}>
-                        <span>1</span> Copy files
+                        Copy files
                     </button>
                     <button type="button" onClick={this.props.importMedia}>
-                        <span>2</span> Import files
+                        Import files
                     </button>
                     <button type="button"
                             disabled={this.props.loading || !this.props.user}
                             onClick={() => this.saveMedia()}>
-                        <span>3</span>Save Settings
+                        Save Settings
                     </button>
                 </div>
 
@@ -90,7 +90,7 @@ class MediaPanel extends Component {
                     <button type="button"
                             disabled={this.props.loading || !this.props.user}
                             onClick={() => this.saveMedia()}>
-                        <span>3</span>Save Settings
+                        Save Settings
                     </button>
                 </div>
             </div>

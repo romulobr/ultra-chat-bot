@@ -11,7 +11,7 @@ function MediaOptionsForm(props) {
             <fieldset>
                 <Scope scope="loyalty">
                     <CheckBoxOption id="streamElements" label="Charge points from Stream Elements"/>
-                    <CheckBoxOption id="streamLabs" label="Charge points from Streamlabs"/>
+                    <CheckBoxOption id="streamlabs" label="Charge points from Streamlabs"/>
                     <NumberOption id="defaultCost" label="Cost"/>
                 </Scope>
             </fieldset>
