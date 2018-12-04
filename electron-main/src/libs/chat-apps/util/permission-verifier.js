@@ -9,7 +9,7 @@ function verifyPermissions(permissions, message) {
   if (!permissions.enabled) {
     return false;
   }
-  if (!permissions.simpleCommands && message.text[0] === '!') {
+  if (!permissions.simpleCommands && message.text[0] !== '!') {
     return false;
   }
   if (!permissions.allowNormalUsers && !(message.author.isChatOwner || message.author.isChatModerator || message.author.isChatSponsor)) {

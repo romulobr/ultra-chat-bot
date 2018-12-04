@@ -16,7 +16,7 @@ class MediaRemote extends Component {
     render() {
         return (
             <div className={styles.mediaRemote}>
-                {this.props.data.items.length === 0 && (
+                {(((!this.props.data || !this.props.data.items)) || (this.props.data.items.length === 0)) && (
                     <div className={styles.instructions}>
                         <h2>How to use</h2>
                         <h3>1. Go to <Link to="media-controls"> media section </Link>(TV)</h3>
@@ -31,7 +31,7 @@ class MediaRemote extends Component {
                     <ChickenControls {...this.props}/>
                 </div>
                 <div>
-                    {this.props.data.items.length !== 0 && (
+                    {this.props.data && this.props.data.items && this.props.data.items.length !== 0 && (
                         <fieldset>
                             <p>Media</p>
                             {this.renderMediaItems(this.props.data.items)}
@@ -56,18 +56,24 @@ class MediaRemote extends Component {
     mediaMessage(item) {
         return {
             ...item, isMedia: true,
-            videoLeft: this.props.videoLeft,
-            videoWidth: this.props.videoWidth,
-            videoTop: this.props.videoTop,
+            left: item.left || this.props.data.options.video.left,
+            top: item.top || this.props.data.options.video.top,
+            size: item.size || this.props.data.options.video.size,
+            cost: item.cost || this.props.data.options.loyalty.defaultCost,
             author: {name: this.props.userDisplayName}
         };
     }
 }
 
+function getName(state) {
+    return (state.authentication.user && state.authentication.user.youtube && state.authentication.user.youtube.displayName)
+        || (state.authentication.user && state.authentication.user.twitch && state.authentication.user.twitch.displayName)
+}
+
 function mapStateToProps(state) {
     return {
         ...state.media,
-        userDisplayName: state.authentication.user && state.authentication.user.displayName,
+        userDisplayName: getName(state),
     };
 }
 

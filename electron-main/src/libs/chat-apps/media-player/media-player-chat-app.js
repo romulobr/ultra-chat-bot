@@ -20,17 +20,19 @@ class MediaPlayerChatApp {
     let command = commands.commandInText(message.text, this.commands);
     if (!command) return;
 
-    const mediaUrl = urls.media + '/' + this.settings.items[command.index].url;
+    const item = this.settings.items[command.index];
+    const mediaUrl = urls.media + '/' + item.url;
     const screenMessage = {
       isMedia: true,
       command,
       url: mediaUrl,
       author: message.author,
-      videoTop: this.settings.options.video.top,
-      videoLeft: this.settings.options.video.left,
-      videoWidth: this.settings.options.video.size
+      top: item.top || this.settings.options.video.top,
+      left: item.left || this.settings.options.video.left,
+      size: item.size || this.settings.options.video.size
     };
-    if (await !verifyLoyalty(this.settings.options.loyalty, message, this.settings.user)) return;
+    const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost);
+    if (!loyaltyVerified) return;
     sendScreenMessage(screenMessage);
     this.cooldownManager.addCoolDownTo(message.author);
   }

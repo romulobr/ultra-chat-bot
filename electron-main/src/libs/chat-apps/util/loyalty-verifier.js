@@ -1,28 +1,26 @@
 const {streamElements} = require('../../../server/stream-elements-api/stream-elements-api');
 const {streamlabs} = require('../../../server/stream-labs-api/stream-labs-api');
 
-// streamElements: true
-// streamLabs: true
-// defaultCost: "1"
+async function verifyLoyalty(loyalty, message, user, itemCost) {
+  const cost = itemCost || loyalty.defaultCost;
 
-async function verifyLoyalty(loyalty, message, user) {
-  if (loyalty.streamElements && loyalty.defaultCost && loyalty.defaultCost != 0) {
-    const pointsOk = await checkStreamElementsPoints(message.author, user, loyalty.defaultCost);
+  if (loyalty.streamElements && cost && cost !== 0) {
+    const pointsOk = await checkStreamElementsPoints(message.author, user, cost);
     if (!pointsOk) return false;
   }
 
-  if (loyalty.streamlabs && loyalty.defaultCost && loyalty.defaultCost != 0) {
-    const pointsOk = await checkStreamlabsPoints(message.author, user, loyalty.defaultCost);
+  if (loyalty.streamlabs && cost && cost !== 0) {
+    const pointsOk = await checkStreamlabsPoints(message.author, user, cost);
     if (!pointsOk) return false;
   }
   return true;
 }
 
-async function checkStreamElementsPoints(author, user, defaultCost = 10) {
+async function checkStreamElementsPoints(author, user, cost = 10) {
   try {
-    const amount = defaultCost * -1;
+    const amount = cost * -1;
     const fetch = await streamElements.fetchUserPoints(user.jwt, author.userName);
-    if (fetch.data.points >= defaultCost) {
+    if (fetch.data.points >= cost) {
       streamElements.changeUserPoints(user.jwt, author.userName, amount);
       return true;
     }
@@ -32,14 +30,14 @@ async function checkStreamElementsPoints(author, user, defaultCost = 10) {
   }
 }
 
-async function checkStreamlabsPoints(author, user, defaultCost = 10) {
+async function checkStreamlabsPoints(author, user, cost = 10) {
   try {
     const pointsResponse = await streamlabs.fetchPoints(user.jwt, author.userName);
     const points = pointsResponse.data.points;
-    if (points < defaultCost) {
+    if (points < cost) {
       return false;
     }
-    await streamlabs.subtractPoints(user.jwt, author.userName, defaultCost);
+    streamlabs.subtractPoints(user.jwt, author.userName, cost);
     return true;
   }
   catch (e) {

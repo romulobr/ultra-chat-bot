@@ -43,9 +43,9 @@ class VideoPlayer extends Component {
 
     static styleFromProps(props) {
         return {
-            transform: `scale(${props.videoWidth / 100})` || '',
-            top: `${props.videoTop}px` || '20px',
-            left: `${props.videoLeft}px` || '200px'
+            transform: `scale(${props.size / 100})` || '',
+            top: `${props.top}px` || '20px',
+            left: `${props.left}px` || '200px'
         };
     }
 

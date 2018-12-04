@@ -9,6 +9,7 @@ function PermissionsForm(props) {
             <fieldset>
                 <CheckBoxOption id="enabled" label="Enabled"/>
                 <CheckBoxOption id="simpleCommands" label="SimpleCommands (No !)"/>
+                <br/>
                 <CheckBoxOption id="allowNormalUsers" label="Allow Normal Users"/>
                 <CheckBoxOption id="allowVips" label="Allow Vips"/>
                 <CheckBoxOption id="allowModerators" label="Allow Moderators"/>

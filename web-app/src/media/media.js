@@ -7,6 +7,7 @@ import LoadingSpinner from '../loading-spinner/loading-spinner'
 import MediaOptionsForm from './media-options-form';
 import {Link} from 'react-router-dom';
 import PermissionsForm from "../forms/permissions-form";
+import {Form, Scope, Text, Checkbox} from 'informed';
 
 class MediaPanel extends Component {
     constructor(props) {
@@ -15,14 +16,10 @@ class MediaPanel extends Component {
         this.deleteMediaItems = this.deleteMediaItems.bind(this);
         this.renderItems = this.renderItems.bind(this);
         this.toMediaItemJSX = this.toMediaItemJSX.bind(this);
-        this.toggleCheckedForDeletion = this.toggleCheckedForDeletion.bind(this);
-        this.toggleAllCheckedForDeletion = this.toggleAllCheckedForDeletion.bind(this);
-        this.handleCommandChange = this.handleCommandChange.bind(this);
-        this.handleMediaInputChange = this.handleMediaInputChange.bind(this);
         this.saveMedia = this.saveMedia.bind(this);
+        this.toggleAllCheckedForDeletion = this.toggleAllCheckedForDeletion.bind(this);
         this.state = {
             items: (this.props.data && this.props.data.items) || [],
-            checkedForDeletion: [],
             options: {}
         };
     }
@@ -54,20 +51,26 @@ class MediaPanel extends Component {
                         You need to <Link to="/">connect a streaming account</Link> to be able to save your settings.
                     </h2>)}
                 <div className={styles.mediaList}>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>
-                                <button onClick={this.toggleAllCheckedForDeletion}>All</button>
-                            </th>
-                            <th>Command</th>
-                            <th>File/URL</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.renderItems(this.state.items)}
-                        </tbody>
-                    </table>
+                    <Form getApi={(formApi) => this.itemsForm = formApi}>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>
+                                    <button type="button" onClick={this.toggleAllCheckedForDeletion}>All</button>
+                                </th>
+                                <th>Command</th>
+                                <th>File/URL</th>
+                                <th>Cost</th>
+                                <th>Size(%)</th>
+                                <th>Vertical Adj</th>
+                                <th>Horizontal Adj</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {this.renderItems(this.state.items)}
+                            </tbody>
+                        </table>
+                    </Form>
                 </div>
                 {this.renderButtonBar()}
             </div>
@@ -100,7 +103,8 @@ class MediaPanel extends Component {
     saveMedia() {
         const permissions = this.permissionsForm.getState().values;
         const options = this.optionsForm.getState().values;
-        this.props.saveMedia({permissions, options, items: this.state.items})
+        const items = this.itemsForm.getState().values.items;
+        this.props.saveMedia({permissions, options, items})
     }
 
     componentDidMount() {
@@ -109,13 +113,10 @@ class MediaPanel extends Component {
         this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
     }
 
-    compo
-
     static getDerivedStateFromProps(props, state) {
         return {
             ...state,
-            ...props,
-            checkedForDeletion: []
+            ...props
         }
     }
 
@@ -124,90 +125,65 @@ class MediaPanel extends Component {
         this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
     }
 
-    toggleCheckedForDeletion(checkBoxIndex) {
-        const newCheckedForDeletion = [...this.state.checkedForDeletion];
-        let arrayIndexOrMinusOne = this.state.checkedForDeletion.indexOf(checkBoxIndex);
-        if (arrayIndexOrMinusOne !== -1) {
-            newCheckedForDeletion.splice(arrayIndexOrMinusOne, 1);
-        } else {
-            newCheckedForDeletion.push(checkBoxIndex);
-        }
-        this.setState({
-            items: this.state.items,
-            checkedForDeletion: newCheckedForDeletion
-        });
-    }
-
-    toggleAllCheckedForDeletion() {
-        let newCheckedForDeletion;
-        if (this.state.checkedForDeletion.length === this.state.items.length) {
-            newCheckedForDeletion = [];
-        } else {
-            newCheckedForDeletion = [...this.state.items.keys()];
-        }
-        this.setState({
-            items: this.state.items,
-            checkedForDeletion: newCheckedForDeletion
-        });
-    }
-
     toMediaItemJSX(item, index) {
         return (
-            <tr key={'media-item-' + index}>
-                <td>
-                    <input type="checkbox" checked={this.state.checkedForDeletion.includes(index)} onChange={() => {
-                        this.toggleCheckedForDeletion(index)
-                    }}/>
-                </td>
-                <td>
-                    <input type="text"
-                           name={'media-item-command-' + index}
-                           value={item.command}
-                           onChange={this.handleCommandChange}
-                    />
-                </td>
-                <td>
-                    <input type="text"
-                           name={'media-item-url-' + index}
-                           value={item.url}
-                           onChange={this.handleMediaInputChange}
-                    />
-                </td>
+            <tr key={`media-item-${JSON.stringify(item)}`}>
+                <Scope scope={`items[${index}]`}>
+                    <td>
+                        <Checkbox field="delete" id={`item-${index}-delete`}/>
+                    </td>
+                    <td>
+                        <Text field="command" id={`item-${index}-command`} initialValue={item.command}/>
+                    </td>
+                    <td>
+                        <Text field="url" id={`item-${index}-url`} initialValue={item.url}/>
+                    </td>
+                    <td>
+                        <Text field="cost" id={`item-${index}-cost`} initialValue={item.cost}/>
+                    </td>
+                    <td>
+                        <Text field="size" id={`item-${index}-size`} initialValue={item.size}/>
+                    </td>
+                    <td>
+                        <Text field={"left"} id={`item-${index}-left`} initialValue={item.left}/>
+                    </td>
+                    <td>
+                        <Text field={"top"} id={`item-${index}-top`} initialValue={item.top}/>
+                    </td>
+                </Scope>
             </tr>
         );
     }
 
     createMediaItem() {
         const items = this.state.items;
-        items.push({command: '', url: ''});
+        items.push({});
         this.setState({...this.state, items});
     }
 
     deleteMediaItems() {
-        const newItems = [...this.state.items];
-        const sortedArray = this.state.checkedForDeletion.sort((a, b) => b - a);
-        sortedArray.forEach(indexForDeletion => {
-            newItems.splice(indexForDeletion, 1);
-        });
+        const newItems = this.itemsForm.getState().values.items.filter(item => !item.delete);
         this.setState({
-            items: newItems,
-            checkedForDeletion: []
+            items: newItems
         });
     }
 
-    handleCommandChange(e) {
-        let newItems = [...this.state.items];
-        const index = e.target.name.split('media-item-command-')[1];
-        newItems[index].command = e.target.value;
-        this.setState({...this.state, items: newItems})
-    }
-
-    handleMediaInputChange(e) {
-        let newItems = [...this.state.items];
-        const index = e.target.name.split('media-item-url-')[1];
-        newItems[index].url = e.target.value;
-        this.setState({...this.state, items: newItems})
-    }
+    toggleAllCheckedForDeletion() {
+        const originalItems = this.itemsForm.getState().values.items;
+        let items = originalItems;
+        if (originalItems.every(item => item.delete)) {
+            items = originalItems.map(item => {
+                item.delete = false;
+                return item;
+            })
+        } else {
+            items = originalItems.map(item => {
+                item.delete = true;
+                return item;
+            });
+        }
+        this.itemsForm.setValues({items});
+    };
 
     renderItems(items) {
         return items ? items.map(this.toMediaItemJSX) : null;

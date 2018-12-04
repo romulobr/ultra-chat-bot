@@ -12,15 +12,15 @@ function MediaOptionsForm(props) {
                 <Scope scope="loyalty">
                     <CheckBoxOption id="streamElements" label="Charge points from Stream Elements"/>
                     <CheckBoxOption id="streamlabs" label="Charge points from Streamlabs"/>
-                    <NumberOption id="defaultCost" label="Cost"/>
+                    <NumberOption id="defaultCost" label="Default Cost"/>
                 </Scope>
             </fieldset>
             <CooldownFieldset/>
                 <fieldset>
                     <Scope scope="video">
-                        <NumberOption id="top" label="Video Vertical adjust (px)"/>
-                        <NumberOption id="left" label="Video Horizontal adjust (px)"/>
-                        <NumberOption id="size" label="Video Size (%)"/>
+                        <NumberOption id="top" label="Default Vertical Adjust (px)"/>
+                        <NumberOption id="left" label="Default Horizontal Adjust (px)"/>
+                        <NumberOption id="size" label="Default Size (%)"/>
                     </Scope>
                 </fieldset>
         </Form>
