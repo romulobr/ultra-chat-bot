@@ -8,6 +8,7 @@ import {fetchToken} from './stream-elements/stream-elements-actions';
 import {fetchChicken} from '../chicken-control/chicken-controls-actions';
 import {fetchStreamlabs} from './stream-labs/stream-labs-actions';
 import {fetchIcons} from "../icons/icons-actions";
+import {fetchWelcome} from "../welcome/welcome-actions";
 
 function userFrom(data, originalUser) {
     const newUser = {origin: 'multi'};
@@ -31,7 +32,6 @@ function userFrom(data, originalUser) {
             return data;
         }
     }
-
 }
 
 function* authenticate(action) {
@@ -58,6 +58,7 @@ function* authenticate(action) {
         yield put(fetchToken());
         yield put(fetchStreamlabs());
         yield put(fetchIcons());
+        yield put(fetchWelcome());
     } catch (e) {
         yield put(actions.authenticationFailed({error: e}));
         console.log('got an error:', e);

@@ -3,7 +3,7 @@ const commands = require('../util/command-in-text');
 const sendScreenMessage = require('../util/send-screen-message');
 const permissionVerifier = require('../util/permission-verifier');
 
-class ChickenChatApp {
+class WelcomeChatApp {
 
   constructor(settings) {
     this.settings = settings;
@@ -33,4 +33,4 @@ class ChickenChatApp {
   }
 }
 
-module.exports = ChickenChatApp;
+module.exports = WelcomeChatApp;

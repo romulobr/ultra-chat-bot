@@ -67,6 +67,7 @@ mainApp.use('*', function (req, res) {
   if (newUrl === baseUrl + '/media-controls' ||
     newUrl === baseUrl + '/remote' ||
     newUrl === baseUrl + '/icons' ||
+    newUrl === baseUrl + '/welcome' ||
     newUrl === baseUrl + '/chicken') {
     request(baseUrl).pipe(res);
   }

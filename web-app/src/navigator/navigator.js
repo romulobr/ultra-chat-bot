@@ -7,6 +7,7 @@ import MediaPanel from '../media/media';
 import MediaRemote from '../remote-control/remote-control';
 import ChickenRemote from '../chicken-control/chicken-controls';
 import Icons from '../icons/icons';
+import Welcome from '../welcome/welcome';
 import actions from './navigation-actions';
 
 import styles from './navigator.module.scss';
@@ -26,6 +27,7 @@ const media = () => <MediaPanel/>;
 const mediaRemote = () => <MediaRemote/>;
 const chickenControls = () => <ChickenRemote/>;
 const icons = () => <Icons/>;
+const welcome = () => <Welcome/>;
 
 class Navigator extends Component {
     render() {
@@ -64,6 +66,13 @@ class Navigator extends Component {
                                     </div>
                                 </Link>
                                 <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/welcome') ? styles.selected : '')}
+                                    to="/welcome">
+                                    <div>
+                                        <span role="img" aria-label={"welcome"}>🙋‍</span>
+                                    </div>
+                                </Link>
+                                <Link
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/remote') ? styles.selected : '')}
                                     to="/remote">
                                     <div>
@@ -78,6 +87,7 @@ class Navigator extends Component {
                                         <Route key={'media-controls'} path="/media-controls/" component={media}/>
                                         <Route key={'remote'} path="/remote/" component={mediaRemote}/>
                                         <Route key={'chicken'} path="/chicken/" component={chickenControls}/>
+                                        <Route key={'welcome'} path="/welcome/" component={welcome}/>
                                         <Route key={'icons'} path="/icons/" component={icons}/>
                                     </Switch>
                                 </RoutesContainer>

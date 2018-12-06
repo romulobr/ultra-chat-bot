@@ -14,6 +14,7 @@ import streamLabsReducer from './authentication/stream-labs/stream-labs-reducer'
 import youtubeChatControlsReducer from './chat-controls/youtube/youtube-chat-controls-reducer';
 import chickenControlsReducer from './chicken-control/chicken-reducer'
 import iconsReducer from './icons/icons-reducer';
+import welcomeReducer from './welcome/welcome-reducer';
 
 import createSagaMiddleware from 'redux-saga';
 
@@ -35,6 +36,8 @@ import watchSaveChicken from './chicken-control/sagas/save-chicken-saga';
 import watchChickenCommand from './chicken-control/sagas/chicken-command-saga';
 import watchFetchIcons from './icons/sagas/fetch-icons-saga';
 import watchSaveIcons from './icons/sagas/save-icons-saga';
+import watchFetchWelcome from './welcome/sagas/fetch-welcome-saga';
+import watchSaveWelcome from './welcome/sagas/save-welcome-saga';
 
 import navigatorReducer from './navigator/navigator-reducer';
 
@@ -52,7 +55,8 @@ const store = createStore(
         streamElements: streamElementsReducer,
         streamLabs: streamLabsReducer,
         chicken: chickenControlsReducer,
-        icons: iconsReducer
+        icons: iconsReducer,
+        welcome: welcomeReducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -75,6 +79,8 @@ sagaMiddleware.run(watchFetchStreamLabsData);
 sagaMiddleware.run(watchDisconnectStreamLabs);
 sagaMiddleware.run(watchFetchIcons);
 sagaMiddleware.run(watchSaveIcons);
+sagaMiddleware.run(watchFetchWelcome);
+sagaMiddleware.run(watchSaveWelcome);
 
 ReactDOM.render(
     <Provider store={store}>
