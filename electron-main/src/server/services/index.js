@@ -2,9 +2,10 @@ const users = require('./users/users.service');
 const media = require('./media/media.service');
 const chicken = require('./chicken/chicken.service');
 const welcome = require('./welcome/welcome.service');
+const welcomeMessages = require('./welcome/welcome-messages.service');
 const streamElementsToken = require('./stream-elements-token/stream-elements-token.service');
 const streamLabsToken = require('./stream-labs/stream-labs.service');
-const emotions = require('./icons/icons.service');
+const icons = require('./icons/icons.service');
 
 module.exports = function (app) {
   app.configure(users);
@@ -12,6 +13,7 @@ module.exports = function (app) {
   app.configure(chicken);
   app.configure(streamElementsToken);
   app.configure(streamLabsToken);
-  app.configure(emotions);
+  app.configure(icons);
   app.configure(welcome);
+  app.configure(welcomeMessages);
 };

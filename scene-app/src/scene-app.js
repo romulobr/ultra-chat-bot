@@ -7,16 +7,23 @@ import {Provider} from 'react-redux';
 import {createReducer, createAction} from 'redux-act';
 import * as serviceWorker from './serviceWorker';
 
+const showWelcomeMessage = createAction('SHOW_WELCOME_MESSAGE');
 const playVideo = createAction('PLAY_VIDEO');
 const playAudio = createAction('PLAY_AUDIO');
 const chickenCommand = createAction('CHICKEN_COMMAND');
-const showEmotion = createAction('SHOW_EMOTION');
+const showIcon = createAction('SHOW_EMOTION');
 
 const store = createStore(
     combineReducers({
         videoPlayer: createReducer({[playVideo]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
+        welcomeMessage: createReducer({
+            [showWelcomeMessage]: (state, payload) => ({
+                ...payload,
+                id: state.id + 1
+            })
+        }, {id: 0}),
         audioPlayer: createReducer({[playAudio]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
-        icons: createReducer({[showEmotion]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
+        icons: createReducer({[showIcon]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
         chicken: createReducer({
             [chickenCommand]: (state, payload) => {
                 const sayId = payload.say ? state.sayId + 1 : state.sayId;
@@ -32,7 +39,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const io = require('socket.io-client');
-const socket = io();
+const socket = io('http://127.0.0.1:62619');
 
 socket.on('message', function (message) {
     console.log('message received >', message);
@@ -45,7 +52,9 @@ socket.on('message', function (message) {
     } else if (message.chicken) {
         store.dispatch(chickenCommand(message.chicken));
     } else if (message.isIcons) {
-        store.dispatch(showEmotion(message))
+        store.dispatch(showIcon(message))
+    } else if (message.isWelcomeMessage) {
+        store.dispatch(showWelcomeMessage(message))
     }
 });
 

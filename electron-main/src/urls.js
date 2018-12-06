@@ -4,6 +4,7 @@ const mediaApi = 'http://localhost:62619/api/media';
 const iconsApi = 'http://localhost:62619/api/icons';
 const chickenApi = 'http://localhost:62619/api/chicken';
 const welcomeApi = 'http://localhost:62619/api/welcome';
+const welcomeMessagesApi = 'http://localhost:62619/api/welcome-messages';
 const userApi = 'http://localhost:62619/api/users';
 const media = 'http://localhost:62619/media';
 const messageApi = 'http://localhost:62619/message';
@@ -23,5 +24,6 @@ module.exports = {
   streamElementsTokenApi,
   chickenApi,
   welcomeApi,
-  streamlabsDataApi
+  streamlabsDataApi,
+  welcomeMessagesApi
 };

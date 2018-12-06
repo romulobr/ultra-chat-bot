@@ -6,7 +6,7 @@ import posed from 'react-pose';
 const Box = posed.div({
     hidden: {
         position:'absolute',
-        opacity: 1, transform: 'translateY(150%) rotate(-20deg)',
+        opacity: 0, transform: 'translateY(150%) rotate(-20deg)',
         transition: {duration: 1000}
     },
     visible: {

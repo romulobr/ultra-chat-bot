@@ -4,11 +4,11 @@ const service = require('feathers-nedb');
 const dataFolder = require('../../../folders').dataFolder;
 
 const Model = new NeDB({
-  filename: dataFolder + '/welcome.db',
+  filename: dataFolder + '/welcome-messages.db',
   autoload: true
 });
 
 module.exports = function (app) {
-  app.use('/welcome', service({Model}));
-  app.service('/welcome').hooks(hooks);
+  app.use('/welcome-messages', service({Model}));
+  app.service('/welcome-messages').hooks(hooks);
 };

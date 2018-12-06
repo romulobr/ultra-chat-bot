@@ -1,0 +1,16 @@
+.welcome {
+  overflow: hidden;
+  text-align: center;
+  padding:100px;
+  margin:50px;
+  width:100%;
+  text-shadow: black 3px 3px 3px;
+  h1{
+    font-size: 8em;
+    color:rgba(255,255,255,0.9);
+  }
+  h2{
+    font-size: 2em;
+    color:rgba(200,200,255,0.9);
+  }
+}
