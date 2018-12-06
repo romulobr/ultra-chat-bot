@@ -9,7 +9,7 @@ const socketIoMessenger = require('./socket-io/socket-io-messenger');
 const streamElementsApi = require('./stream-elements-api/stream-elements-api');
 const streamlabsApi = require('./stream-labs-api/stream-labs-api');
 const youtubeApi = require('./youtube-api/youtube-api');
-const settingsFileApi = require('./settings-files-api');
+const settingsFileApi = require('./settings-files-api/settings-files-api');
 
 const {app} = require('electron');
 const path = require('path');
