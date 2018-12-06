@@ -9,6 +9,7 @@ const socketIoMessenger = require('./socket-io/socket-io-messenger');
 const streamElementsApi = require('./stream-elements-api/stream-elements-api');
 const streamlabsApi = require('./stream-labs-api/stream-labs-api');
 const youtubeApi = require('./youtube-api/youtube-api');
+const settingsFileApi = require('./settings-files-api');
 
 const {app} = require('electron');
 const path = require('path');
@@ -54,6 +55,7 @@ socketIoMessenger.initialize(server, mainApp);
 streamElementsApi.initialize(mainApp);
 streamlabsApi.initialize(mainApp);
 youtubeApi.initialize(mainApp);
+settingsFileApi.initialize(mainApp);
 
 mainApp.use(express.notFound());
 mainApp.use(express.errorHandler({logger}));

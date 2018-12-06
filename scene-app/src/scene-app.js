@@ -32,7 +32,7 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const io = require('socket.io-client');
-const socket = io('http://127.0.0.1:62619');
+const socket = io();
 
 socket.on('message', function (message) {
     console.log('message received >', message);
@@ -56,7 +56,4 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();

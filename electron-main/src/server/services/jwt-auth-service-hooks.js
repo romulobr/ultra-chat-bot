@@ -1,5 +1,6 @@
-// const userReader = require('../users/user-reader');
-const { authenticate } = require('@feathersjs/authentication').hooks;
+const fs = require('fs');
+const dataFolder = require('../../folders').dataFolder;
+const {authenticate} = require('@feathersjs/authentication').hooks;
 
 function addUserToQuery(context) {
   if (context.params.user) {
@@ -8,7 +9,7 @@ function addUserToQuery(context) {
       _id: context.params.user._id,
       $limit: 1
     };
-    context.params.mongodb = {upsert:true};
+    context.params.mongodb = {upsert: true};
   }
 }
 
@@ -17,20 +18,25 @@ function adduserIdToData(context) {
   context.data._id = context.params.user._id;
 }
 
+function saveToFile(context) {
+  const filePath = `${dataFolder}/${context.path}.json`;
+  fs.writeFileSync(filePath, JSON.stringify(context.data));
+}
+
 module.exports = {
   before: {
     all: [authenticate('jwt')],
     find: [addUserToQuery],
     get: [addUserToQuery],
     create: [adduserIdToData],
-    update: [(context)=>{
+    update: [(context) => {
       // const user = userReader.getUserIn(context.params.user);
-      context.id=context.params.user._id;
+      context.id = context.params.user._id;
     }],
     patch: [],
     remove: [
-      (context)=>{
-        context.id=context.params.user._id;
+      (context) => {
+        context.id = context.params.user._id;
       }
     ]
   },
@@ -39,8 +45,8 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
-    update: [],
+    create: [saveToFile],
+    update: [saveToFile],
     patch: [],
     remove: []
   },

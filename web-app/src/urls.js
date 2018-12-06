@@ -1,6 +1,7 @@
 const server = 'http://localhost:62619';
 const api = 'http://localhost:62619/api';
 const mediaApi = 'http://localhost:62619/api/media';
+const settingsFileApi = 'settings-file';
 const iconsApi = 'http://localhost:62619/api/icons';
 const chickenApi = 'http://localhost:62619/api/chicken';
 const userApi = 'http://localhost:62619/api/users';
@@ -23,6 +24,7 @@ export {youtubeBroadcastsApi};
 export {chickenApi};
 export {streamLabsDataApi};
 export {iconsApi};
+export {settingsFileApi}
 
 export default {
     server,
@@ -35,5 +37,6 @@ export default {
     streamElementsApiCheck,
     youtubeBroadcastsApi,
     chickenApi,
-    streamLabsDataApi
+    streamLabsDataApi,
+    settingsFileApi
 };

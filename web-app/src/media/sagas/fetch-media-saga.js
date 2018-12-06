@@ -1,4 +1,4 @@
-import {mediaApi} from '../../urls';
+import {mediaApi, settingsFileApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
@@ -18,11 +18,14 @@ function* fetchMedia() {
         if (getResponse.data && getResponse.data[0]) {
             yield put(actions.mediaFetched({...getResponse.data[0]}));
         } else {
-            yield axios.post(mediaApi, {items: []}, {headers: {Authorization: 'Bearer ' + jwt}}
+            const savedData = yield axios.get(settingsFileApi + '/media');
+            delete savedData.data._id;
+            yield axios.post(mediaApi, savedData.data, {headers: {Authorization: 'Bearer ' + jwt}}
             );
             yield put(actions.fetchMedia());
         }
     } catch (e) {
+        debugger
         yield put(actions.mediaFetchFailed({error: e}));
         console.log('got an error:', e);
     }

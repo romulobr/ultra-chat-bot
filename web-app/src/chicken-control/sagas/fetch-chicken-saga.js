@@ -1,4 +1,4 @@
-import {chickenApi} from '../../urls';
+import {chickenApi, settingsFileApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
@@ -18,8 +18,9 @@ function* fetchChicken() {
         if (getResponse.data && getResponse.data[0]) {
             yield put(actions.chickenFetched({...getResponse.data[0]}));
         } else {
-            yield axios.post(chickenApi, {}, {headers: {Authorization: 'Bearer ' + jwt}}
-            );
+            const savedData = yield axios.get(settingsFileApi + '/chicken');
+            delete savedData.data._id;
+            yield axios.post(chickenApi, savedData.data, {headers: {Authorization: 'Bearer ' + jwt}});
             yield put(actions.fetchChicken());
         }
     } catch (e) {

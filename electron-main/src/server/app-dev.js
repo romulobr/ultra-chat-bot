@@ -11,6 +11,7 @@ const socketIoMessenger = require('./socket-io/socket-io-messenger');
 const streamElements = require('./stream-elements-api/stream-elements-api');
 const streamlabsApi = require('./stream-labs-api/stream-labs-api');
 const youtubeApi = require('./youtube-api/youtube-api');
+const settingsFileApi = require('./settings-files-api/settings-files-api');
 //const bodyParser = require('body-parser');
 
 const {app} = require('electron');
@@ -58,6 +59,7 @@ socketIoMessenger.initialize(server, mainApp);
 streamElements.initialize(mainApp);
 streamlabsApi.initialize(mainApp);
 youtubeApi.initialize(mainApp);
+settingsFileApi.initialize(mainApp);
 
 mainApp.use('*', function (req, res) {
   let baseUrl = 'http://127.0.0.1:3001';

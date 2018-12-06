@@ -1,4 +1,4 @@
-import {streamElementsTokenApi, streamElementsApiCheck} from '../../urls';
+import {streamElementsTokenApi, streamElementsApiCheck, settingsFileApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
@@ -28,7 +28,9 @@ function* fetchToken() {
                 yield put(actions.tokenVerificationFailed({error: e}));
             }
         } else {
-            yield axios.post(streamElementsTokenApi, {token: ''}, {headers: {Authorization: 'Bearer ' + jwt}});
+            const savedData = yield axios.get(settingsFileApi + '/stream-elements-token');
+            delete savedData.data._id;
+            yield axios.post(streamElementsTokenApi, savedData.data || {token: ''}, {headers: {Authorization: 'Bearer ' + jwt}});
             yield put(actions.fetchToken());
         }
     } catch (e) {

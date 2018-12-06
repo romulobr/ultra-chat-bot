@@ -1,4 +1,4 @@
-import {streamLabsDataApi} from '../../urls';
+import {settingsFileApi, streamLabsDataApi} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
@@ -18,8 +18,9 @@ function* fetchData() {
         if (getResponse.data && getResponse.data[0]) {
             yield put(actions.fetchSuccess({...getResponse.data[0]}));
         } else {
-            yield axios.post(streamLabsDataApi, {}, {headers: {Authorization: 'Bearer ' + jwt}}
-            );
+            const savedData = yield axios.get(settingsFileApi + '/streamlabs');
+            delete savedData.data._id;
+            yield axios.post(streamLabsDataApi, savedData.data, {headers: {Authorization: 'Bearer ' + jwt}});
             yield put(actions.fetchSuccess());
         }
     } catch (e) {

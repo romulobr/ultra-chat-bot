@@ -27,9 +27,9 @@ class MediaPlayerChatApp {
       command,
       url: mediaUrl,
       author: message.author,
-      top: item.top || this.settings.options.video.top,
-      left: item.left || this.settings.options.video.left,
-      size: item.size || this.settings.options.video.size
+      top: item.top || this.settings.options.video.top || 0,
+      left: item.left || this.settings.options.video.left || 0,
+      size: item.size || this.settings.options.video.size || 100
     };
     const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost);
     if (!loyaltyVerified) return;
