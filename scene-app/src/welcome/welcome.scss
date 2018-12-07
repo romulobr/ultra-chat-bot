@@ -1,16 +1,31 @@
-.welcome {
-  overflow: hidden;
-  text-align: center;
-  padding:100px;
-  margin:50px;
-  width:100%;
-  text-shadow: black 3px 3px 3px;
-  h1{
-    font-size: 8em;
-    color:rgba(255,255,255,0.9);
+.welcomeMessages {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Roboto Condensed', sans-serif;
+  &_welcomeMessage {
+    text-align: center;
+    opacity: 0;
+    text-shadow: rgba(0, 0, 0, 0.9) 3px 3px 3px;
+    h1 {
+      margin:50px;
+      font-size: 4em;
+      color: rgba(255, 255, 255, 0.9);
+    }
+    h2 {
+      padding:10px;
+      font-size: 2em;
+      color: rgba(180, 180, 255, 0.9);
+    }
   }
-  h2{
-    font-size: 2em;
-    color:rgba(200,200,255,0.9);
+
+  .welcome {
+    overflow: hidden;
+    text-align: center;
+    padding: 100px;
+    margin: 50px;
+    width: 100%;
+    text-shadow: black 3px 3px 3px;
   }
 }

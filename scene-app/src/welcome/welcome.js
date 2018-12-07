@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import './welcomeMessages.scss';
-import WelcomeMessage from './welcomeMessage';
+import './welcome.scss';
+import WelcomeMessage from './welcome-message';
 
 class WelcomeMessages extends Component {
 
@@ -29,10 +29,11 @@ class WelcomeMessages extends Component {
             const newWelcomeMessages = [].concat(this.state.welcomeMessages);
 
             const newWelcomeMessage = {
-                welcomeMessage: this.props.welcomeMessage,
-                key: 'welcomeMessage-' + this.props.welcomeMessage + '-' + this.props.id,
+                text: this.props.message,
+                author: this.props.author,
+                key: 'welcomeMessage-' + this.props.id,
                 bottom: (Math.random() * (window.innerHeight - 200)) + 200,
-                left: Math.random() * window.innerWidth,
+                left: Math.random() * (window.innerWidth - 600),
             };
             newWelcomeMessage.onComplete = () => {
                 console.log('deleting welcomeMessage ', this.props.id);
@@ -46,11 +47,10 @@ class WelcomeMessages extends Component {
 
     renderWelcomeMessages() {
         return this.state.welcomeMessages.map((welcomeMessage) =>
-            (<WelcomeMessage welcomeMessage={welcomeMessage.welcomeMessage}
-                   key={welcomeMessage.key}
-                   bottom={welcomeMessage.bottom}
-                   left={welcomeMessage.left}
-                   onComplete={welcomeMessage.onComplete}
+            (<WelcomeMessage text={welcomeMessage.text}
+                             author={welcomeMessage.author}
+                             key={welcomeMessage.key}
+                             onComplete={welcomeMessage.onComplete}
                 />
             )
         )

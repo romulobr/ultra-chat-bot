@@ -16,7 +16,7 @@ const showIcon = createAction('SHOW_EMOTION');
 const store = createStore(
     combineReducers({
         videoPlayer: createReducer({[playVideo]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
-        welcomeMessage: createReducer({
+        welcomeMessages: createReducer({
             [showWelcomeMessage]: (state, payload) => ({
                 ...payload,
                 id: state.id + 1
