@@ -21,6 +21,7 @@
     "feathers-localstorage": "^3.0.0",
     "feathers-mongodb": "^3.3.0",
     "feathers-nedb": "^3.1.0",
+    "feedparser": "^2.2.9",
     "googleapis": "^34.0.0",
     "helmet": "^3.14.0",
     "mongodb": "^3.1.8",
@@ -47,7 +48,7 @@
   },
   "build": {
     "appId": "com.romulino.v3.app",
-    "directories":{
+    "directories": {
       "buildResources": "./assets/icons"
     },
     "files": [
@@ -119,7 +120,7 @@
     "eslint": "^5.7.0",
     "expect.js": "^0.3.1",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.4",
+    "nodemon": "1.18.8",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
   }
