@@ -5,6 +5,7 @@ import AudioPlayer from './audio-player/audio-player';
 import Chicken from './chicken/chicken';
 import Icons from './icons/icons';
 import Welcome from './welcome/welcome';
+import News from './news/news';
 
 class App extends Component {
     render() {
@@ -15,6 +16,7 @@ class App extends Component {
                 <VideoPlayer/>
                 <AudioPlayer/>
                 <Welcome/>
+                <News/>
             </div>
         );
     }

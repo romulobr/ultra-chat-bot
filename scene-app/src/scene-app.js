@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import {createReducer, createAction} from 'redux-act';
 import * as serviceWorker from './serviceWorker';
 
+const showNewsItem = createAction('SHOW_NEWS_ITEM');
 const showWelcomeMessage = createAction('SHOW_WELCOME_MESSAGE');
 const playVideo = createAction('PLAY_VIDEO');
 const playAudio = createAction('PLAY_AUDIO');
@@ -18,6 +19,12 @@ const store = createStore(
         videoPlayer: createReducer({[playVideo]: (state, payload) => ({...payload, id: state.id + 1})}, {id: 0}),
         welcomeMessages: createReducer({
             [showWelcomeMessage]: (state, payload) => ({
+                ...payload,
+                id: state.id + 1
+            })
+        }, {id: 0}),
+        news: createReducer({
+            [showNewsItem]: (state, payload) => ({
                 ...payload,
                 id: state.id + 1
             })
@@ -55,6 +62,8 @@ socket.on('message', function (message) {
         store.dispatch(showIcon(message))
     } else if (message.isWelcomeMessage) {
         store.dispatch(showWelcomeMessage(message))
+    } else if (message.isNewsItem) {
+        store.dispatch(showNewsItem(message))
     }
 });
 
