@@ -39,12 +39,7 @@ function getNews(url, charset = 'utf-8') {
   });
 }
 
-
-
-getNews(url, 'ISO-8859-1').then(data => {
-  console.log(data)
-});
-// getNews('https://www.eurogamer.net/?format=rss&type=news').then(data => {
+// getNews(url, 'ISO-8859-1').then(data => {
 //   console.log(data)
 // });
 

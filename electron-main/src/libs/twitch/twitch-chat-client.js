@@ -21,6 +21,9 @@ function create(user, apps) {
   const client = new twitchJs.client(options);
 
   function stop() {
+    apps.forEach(app => {
+      app.close && app.close();
+    });
     client.say(channel, '🐮🛑💬');
     client.disconnect();
   }

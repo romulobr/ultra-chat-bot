@@ -20,6 +20,8 @@ class NewsOptionsForm extends Component {
                 <fieldset>
                     <NumberOption id="fetchInterval" label="Refresh news every X (minutes)"/>
                     <NumberOption id="showInterval" label="Show news every X (minutes)"/>
+                    <NumberOption id="maximumDescriptionSize" label="Maximum description size (characters)"/>
+                    <NumberOption id="screenTime" label="Time on screen (seconds)"/>
                     <CheckBoxOption id="cycle" label="Cycle news"/>
                 </fieldset>
                 <fieldset>
@@ -41,9 +43,13 @@ class NewsOptionsForm extends Component {
                 <div className={styles.newsItem} key={`newsItem-${index}-${JSON.stringify(newsItem)}`}>
                     <div>
                         <Scope scope={`news[${index}]`}>
-                            Url: (file in media folder or internet url)
+                            RSS Url
                             <Text field="url" id={`newsItem-${index}-${JSON.stringify(newsItem)}-url`}
                                   initialValue={newsItem.url}
+                            />
+                            Character-Encoding (optional)
+                            <Text field="encoding" id={`newsItem-${index}-${JSON.stringify(newsItem)}-url`}
+                                  initialValue={newsItem.enconding}
                             />
                         </Scope>
                     </div>

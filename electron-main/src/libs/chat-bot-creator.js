@@ -7,6 +7,7 @@ const createMediaPlayerChatApp = require('./chat-apps/media-player/media-player-
 const createChickenChatApp = require('./chat-apps/chiken/chicken-app-chat-app-creator');
 const createIconsChatApp = require('./chat-apps/icons/icons-chat-app-creator');
 const createWelcomeChatApp = require('./chat-apps/welcome/welcome-app-chat-app-creator');
+const createNewsApp = require('./chat-apps/news/news-chat-app-creator');
 
 async function createChatBotApps(user) {
   const apps = [];
@@ -33,6 +34,12 @@ async function createChatBotApps(user) {
     apps.push(welcome);
   } catch (e) {
     console.log('failed to create welcome chat app')
+  }
+  try {
+    const news = await createNewsApp(user);
+    apps.push(news);
+  } catch (e) {
+    console.log('failed to create news app')
   }
   return (apps);
 }
