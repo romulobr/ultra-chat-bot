@@ -14,6 +14,7 @@ import streamLabsReducer from './authentication/stream-labs/stream-labs-reducer'
 import youtubeChatControlsReducer from './chat-controls/youtube/youtube-chat-controls-reducer';
 import chickenControlsReducer from './chicken-control/chicken-reducer'
 import iconsReducer from './icons/icons-reducer';
+import newsReducer from './news/news-reducer';
 import welcomeReducer from './welcome/welcome-reducer';
 
 import createSagaMiddleware from 'redux-saga';
@@ -34,6 +35,8 @@ import watchFetchYoutubeBroadcasts from './chat-controls/youtube/fetch-youtube-b
 import watchFetchChicken from './chicken-control/sagas/fetch-chicken-saga';
 import watchSaveChicken from './chicken-control/sagas/save-chicken-saga';
 import watchChickenCommand from './chicken-control/sagas/chicken-command-saga';
+import watchFetchNews from './news/sagas/fetch-news-saga';
+import watchSaveNews from './news/sagas/save-news-saga';
 import watchFetchIcons from './icons/sagas/fetch-icons-saga';
 import watchSaveIcons from './icons/sagas/save-icons-saga';
 import watchFetchWelcome from './welcome/sagas/fetch-welcome-saga';
@@ -56,6 +59,7 @@ const store = createStore(
         streamLabs: streamLabsReducer,
         chicken: chickenControlsReducer,
         icons: iconsReducer,
+        news: newsReducer,
         welcome: welcomeReducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
@@ -79,6 +83,8 @@ sagaMiddleware.run(watchFetchStreamLabsData);
 sagaMiddleware.run(watchDisconnectStreamLabs);
 sagaMiddleware.run(watchFetchIcons);
 sagaMiddleware.run(watchSaveIcons);
+sagaMiddleware.run(watchFetchNews);
+sagaMiddleware.run(watchSaveNews);
 sagaMiddleware.run(watchFetchWelcome);
 sagaMiddleware.run(watchSaveWelcome);
 

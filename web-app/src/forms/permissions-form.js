@@ -8,12 +8,13 @@ function PermissionsForm(props) {
         <Form id="permissionsForm" {...props}>
             <fieldset>
                 <CheckBoxOption id="enabled" label="Enabled"/>
-                <CheckBoxOption id="simpleCommands" label="SimpleCommands (No !)"/>
+                {!props.nocommands && <CheckBoxOption id="simpleCommands" label="SimpleCommands (No !)"/>}
                 <br/>
-                <CheckBoxOption id="allowNormalUsers" label="Allow Normal Users"/>
-                <CheckBoxOption id="allowVips" label="Allow Vips"/>
-                <CheckBoxOption id="allowModerators" label="Allow Moderators"/>
-                <CheckBoxOption id="allowSubscribersMembers" label="Allow Subscribers/Members"/>
+                {!props.nopermissions && <CheckBoxOption id="allowNormalUsers" label="Allow Normal Users"/>}
+                {!props.nopermissions && <CheckBoxOption id="allowVips" label="Allow Vips"/>}
+                {!props.nopermissions && <CheckBoxOption id="allowModerators" label="Allow Moderators"/>}
+                {!props.nopermissions &&
+                <CheckBoxOption id="allowSubscribersMembers" label="Allow Subscribers/Members"/>}
             </fieldset>
         </Form>
     );

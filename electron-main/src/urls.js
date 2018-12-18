@@ -11,6 +11,7 @@ const messageApi = 'http://localhost:62619/message';
 const streamlabsDataApi = 'http://localhost:62619/api/streamlabs';
 const streamElementsTokenApi = 'http://localhost:62619/api/stream-elements-token';
 const streamElementsApiCheck = 'https://api.streamelements.com/kappa/v2/users/current';
+const newsApi = 'http://localhost:62619/api/news';
 
 module.exports = {
   server,
@@ -25,5 +26,6 @@ module.exports = {
   chickenApi,
   welcomeApi,
   streamlabsDataApi,
-  welcomeMessagesApi
+  welcomeMessagesApi,
+  newsApi
 };

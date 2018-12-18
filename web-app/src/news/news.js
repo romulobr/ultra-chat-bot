@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import styles from './icons.module.scss';
+import styles from './news.module.scss';
 import {connect} from 'react-redux';
-import actions from './icons-actions';
-import OptionsForm from './icons-options-form';
+import actions from './news-actions';
+import OptionsForm from './news-options-form';
 import {Link} from "react-router-dom";
 import PermissionsForm from "../forms/permissions-form";
 
-class icons extends Component {
+class news extends Component {
     constructor() {
         super();
         this.options = React.createRef();
@@ -14,19 +14,23 @@ class icons extends Component {
 
     render() {
         return (
-            <div className={styles.icons}>
-                <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}/>
+            <div className={styles.news}>
+                <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}
+                                 nocommands
+                                 nopermissions
+                />
                 <OptionsForm getApi={(formApi) => this.optionsForm = formApi}
-                             icons={this.props.data && this.props.data.options && this.props.data.options.icons}/>
+                             news={this.props.data && this.props.data.options && this.props.data.options.news}
+                />
                 <div className="button-bar">
                     <button disabled={!this.props.user}
                             onClick={() => {
-                                const iconOptions = this.optionsForm.getState().values;
-                                iconOptions.icons = iconOptions.icons && iconOptions.icons.filter(icon => !!icon);
-                                console.log(iconOptions);
-                                this.props.saveIconsOptions({
+                                const newsItem = this.optionsForm.getState().values;
+                                newsItem.news = newsItem.news && newsItem.news.filter(newsItem => !!newsItem);
+                                console.log(newsItem);
+                                this.props.saveNewsOptions({
                                     permissions: this.permissionsForm.getState().values,
-                                    options: iconOptions
+                                    options: newsItem
                                 })
                             }}>
                         Save Settings
@@ -52,18 +56,18 @@ class icons extends Component {
 
 function mapStateToProps(state) {
     return {
-        ...state.icons,
+        ...state.news,
         user: state.authentication.user,
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        saveIconsOptions: (options) => {
-            dispatch(actions.saveIcons(options))
+        saveNewsOptions: (options) => {
+            dispatch(actions.saveNews(options))
         },
-        fetchIconsOptions: () => {
-            dispatch(actions.fetchIcons())
+        fetchNewsOptions: () => {
+            dispatch(actions.fetchNews())
         }
     };
 };
@@ -71,4 +75,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(icons);
+)(news);

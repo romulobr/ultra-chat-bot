@@ -5,6 +5,7 @@ const iconsApi = 'http://localhost:62619/api/icons';
 const chickenApi = 'http://localhost:62619/api/chicken';
 const welcomeApi = 'http://localhost:62619/api/welcome';
 const userApi = 'http://localhost:62619/api/users';
+const newsApi = 'http://localhost:62619/api/news';
 const messageApi = 'http://localhost:62619/message';
 const streamElementsTokenApi = 'http://localhost:62619/api/stream-elements-token';
 const streamLabsDataApi = 'http://localhost:62619/api/streamlabs';
@@ -27,6 +28,7 @@ export {streamLabsDataApi};
 export {iconsApi};
 export {settingsFileApi};
 export {welcomeApi};
+export {newsApi};
 
 export default {
     server,
@@ -41,5 +43,6 @@ export default {
     chickenApi,
     streamLabsDataApi,
     settingsFileApi,
-    welcomeApi
+    welcomeApi,
+    newsApi
 };

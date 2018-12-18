@@ -28,19 +28,25 @@ class IconsOptionsForm extends Component {
         );
     }
 
-    renderIcons() {
+    renderIcons(formState) {
+        console.log('state icons', this.state.icons);
         return this.state.icons && this.state.icons.map((icon, index) => {
             return (
-                <div className={styles.icon} key={`icon-${icon.image}-${icon.words}`}>
+                <div className={styles.icon} key={`icon-${index}-${JSON.stringify(icon)}`}>
                     <div>
                         <Scope scope={`icons[${index}]`}>
-                            Image: (file in media folder or internet url)<Text field="image" id={`icon-${index}-image`}/>
-                            Words:<TextArea field="words" id={`icon-${index}-words`}/>
+                            Image: (file in media folder or internet url)
+                            <Text field="image" id={`icon-${index}-${JSON.stringify(icon)}-image`}
+                                  initialValue={icon.image}
+                            />
+                            Words:<TextArea field="words" id={`icon-${index}-${JSON.stringify(icon)}-words`}
+                                            initialValue={icon.words}
+                        />
                         </Scope>
                     </div>
                     <div className={styles.buttons}>
                         <button onClick={() => {
-                            this.deleteIcon(index)
+                            this.deleteIcon(index, formState)
                         }}>Delete
                         </button>
                     </div>
@@ -61,15 +67,7 @@ class IconsOptionsForm extends Component {
     }
 
     componentDidMount() {
-        if (JSON.stringify(this.state.icons) !== JSON.stringify(this.props.icons)) {
-            this.setState({icons: this.props.icons || []});
-        }
-    }
-
-    componentDidUpdate(prevProps) {
-        if (JSON.stringify(prevProps.icons) !== JSON.stringify(this.props.icons)) {
-            this.setState({icons: this.props.icons || []});
-        }
+        this.setState({icons: this.props.icons || []});
     }
 }
 

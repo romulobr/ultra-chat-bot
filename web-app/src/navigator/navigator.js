@@ -7,6 +7,7 @@ import MediaPanel from '../media/media';
 import MediaRemote from '../remote-control/remote-control';
 import ChickenRemote from '../chicken-control/chicken-controls';
 import Icons from '../icons/icons';
+import News from '../news/news';
 import Welcome from '../welcome/welcome';
 import actions from './navigation-actions';
 
@@ -28,6 +29,7 @@ const mediaRemote = () => <MediaRemote/>;
 const chickenControls = () => <ChickenRemote/>;
 const icons = () => <Icons/>;
 const welcome = () => <Welcome/>;
+const news = () => <News/>;
 
 class Navigator extends Component {
     render() {
@@ -73,6 +75,13 @@ class Navigator extends Component {
                                     </div>
                                 </Link>
                                 <Link
+                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/news') ? styles.selected : '')}
+                                    to="/news">
+                                    <div>
+                                        <span role="img">📰</span>
+                                    </div>
+                                </Link>
+                                <Link
                                     className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/remote') ? styles.selected : '')}
                                     to="/remote">
                                     <div>
@@ -89,6 +98,7 @@ class Navigator extends Component {
                                         <Route key={'chicken'} path="/chicken/" component={chickenControls}/>
                                         <Route key={'welcome'} path="/welcome/" component={welcome}/>
                                         <Route key={'icons'} path="/icons/" component={icons}/>
+                                        <Route key={'news'} path="/news/" component={news}/>
                                     </Switch>
                                 </RoutesContainer>
                             </PoseGroup>

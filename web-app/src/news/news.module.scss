@@ -1,0 +1,36 @@
+.news {
+  padding-top: 50px;
+  width: auto;
+  margin: 0 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.newsItem {
+  display: flex;
+  flex-direction: row;
+  padding: 8px;
+  border-radius: 8px;
+  border: solid 1px #555555;
+  margin: 8px 0;
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buttons {
+    max-width: 100px;
+    background-color: #111111;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 8px;
+    margin: 0 4px;
+    button {
+      min-height: 20px;
+      background-color: darkred;
+    }
+  }
+}
