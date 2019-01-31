@@ -1,11 +1,11 @@
 import React from 'react'
-import NumberOption from './number-option';
 import {Scope} from 'informed';
+import TextOption from "./text-option";
 
 function CustomSourceFieldSet() {
     return ( <fieldset>
         <Scope scope="source">
-            <NumberOption id="customSource" label="Custom Source"/>
+            <TextOption id="customSource" label="Custom Source"/>
         </Scope>
     </fieldset>);
 }

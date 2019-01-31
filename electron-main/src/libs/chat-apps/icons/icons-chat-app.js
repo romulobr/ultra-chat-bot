@@ -37,7 +37,7 @@ class IconsChatApp {
       icons.forEach(icon => {
         console.log(`icon ${icon} found in message: ${message.text}`);
         const screenMessage = {isIcons: true, icon};
-        sendScreenMessage(screenMessage, this.settings.options.source.customSource);
+        sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
       });
       this.cooldownManager.addCoolDownTo(message.author);
     }

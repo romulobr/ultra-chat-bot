@@ -22,13 +22,13 @@ class ChickenChatApp {
       const split = message.text.split(' ');
       if (!isNaN(split[1]) && !isNaN(split[2])) {
         const screenMessage = {chicken: {move: {x: split[1], y: split[2]}}};
-        sendScreenMessage(screenMessage, this.settings.options.source.customSource);
+        sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
       }
     }
     else if (command.command === this.settings.options.sayCommand) {
       const theMessage = message.text.replace('!' + this.settings.options.sayCommand, '').replace(this.settings.options.sayCommand, '').substr(0, 75);
       const screenMessage = {chicken: {say: theMessage, sound: this.settings.options.enableSound}};
-      sendScreenMessage(screenMessage, this.settings.options.source.customSource);
+      sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
     }
   }
 }

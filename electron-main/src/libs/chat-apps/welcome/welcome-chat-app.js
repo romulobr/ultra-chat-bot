@@ -56,7 +56,7 @@ class WelcomeChatApp {
           ...authorWelcomeMessage.data[0],
           author:message.author
         };
-        sendScreenMessage(screenMessage, this.settings.options.source.customSource);
+        sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
       }
     }
   }

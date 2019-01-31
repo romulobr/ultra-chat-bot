@@ -57,8 +57,13 @@ class AuthenticationPanel extends Component {
                                     editToken={this.props.editToken}/>
                     <Streamlabs ref={this.streamlabs}/>
                 </div>
-                <div className={styles.overlayInstructions}>Remember to add browserSource
+                <div className={styles.overlayInstructions}>Add browserSource
                     <span> http://localhost:62619/scene</span> (1280x720)
+                    <br/>
+                    Or with source parameter for custom sources
+                    <br/> Example: <span> http://localhost:62619/scene?source=video</span>
+                </div>
+                <div className={styles.overlayInstructions}>
                 </div>
                 <ChatControls/>
             </Panel>;

@@ -30,13 +30,14 @@ class NewsChatApp {
       return;
     }
     const news = this.news[this.newsIndex || 0];
-    sendScreenMessage({
+    const screenMessage = {
       "isNewsItem": "true",
       "title": news.title,
       "text": news.description.substr(0, this.maximumDescriptionSize),
       "image": news.image,
       "duration": this.screenTime
-    },this.settings.options.source.customSource);
+    };
+    sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
     this.newsIndex++;
   }
 
