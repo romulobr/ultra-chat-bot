@@ -3,10 +3,12 @@ import {Form} from 'informed';
 import CooldownFieldset from '../forms/cooldown-fieldset';
 import TextOption from "../forms/text-option";
 import CheckboxOption from "../forms/checkbox-option"
+import CustomSourceFieldSet from "../forms/custom-source-fieldset";
 
 function welcomeOptionsForm(props) {
     return (
         <Form id="welcomeForm" {...props}>
+            <CustomSourceFieldSet/>
             <CooldownFieldset/>
             <fieldset>
                 <TextOption id={'saveCommand'} label={"Save Command"}/>

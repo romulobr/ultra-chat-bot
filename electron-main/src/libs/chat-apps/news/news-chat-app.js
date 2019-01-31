@@ -36,7 +36,7 @@ class NewsChatApp {
       "text": news.description.substr(0, this.maximumDescriptionSize),
       "image": news.image,
       "duration": this.screenTime
-    });
+    },this.settings.options.source.customSource);
     this.newsIndex++;
   }
 

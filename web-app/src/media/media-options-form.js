@@ -3,7 +3,7 @@ import {Form, Scope} from 'informed';
 import CheckBoxOption from "../forms/checkbox-option";
 import NumberOption from "../forms/number-option";
 import CooldownFieldset from '../forms/cooldown-fieldset';
-
+import CustomSourceFieldSet from "../forms/custom-source-fieldset";
 
 function MediaOptionsForm(props) {
     return (
@@ -16,15 +16,9 @@ function MediaOptionsForm(props) {
                 </Scope>
             </fieldset>
             <CooldownFieldset/>
-                <fieldset>
-                    <Scope scope="video">
-                        <NumberOption id="top" label="Default Vertical Adjust (px)"/>
-                        <NumberOption id="left" label="Default Horizontal Adjust (px)"/>
-                        <NumberOption id="size" label="Default Size (%)"/>
-                    </Scope>
-                </fieldset>
+           <CustomSourceFieldSet/>
         </Form>
-);
+    );
 }
 
 export default MediaOptionsForm;

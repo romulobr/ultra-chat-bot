@@ -60,6 +60,7 @@ class MediaRemote extends Component {
             top: item.top || this.props.data.options.video.top,
             size: item.size || this.props.data.options.video.size,
             cost: item.cost || this.props.data.options.loyalty.defaultCost,
+            source: item.sourceOverride || this.props.data.options.source.customSource || 'nope',
             author: {name: this.props.userDisplayName}
         };
     }

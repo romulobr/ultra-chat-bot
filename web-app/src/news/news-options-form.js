@@ -4,6 +4,7 @@ import CooldownFieldset from '../forms/cooldown-fieldset';
 import styles from './news.module.scss';
 import NumberOption from "../forms/number-option";
 import CheckBoxOption from "../forms/checkbox-option";
+import CustomSourceFieldSet from "../forms/custom-source-fieldset";
 
 class NewsOptionsForm extends Component {
     constructor() {
@@ -17,6 +18,7 @@ class NewsOptionsForm extends Component {
     render() {
         return (
             <Form id="options" {...this.props}>
+                <CustomSourceFieldSet/>
                 <fieldset>
                     <NumberOption id="fetchInterval" label="Refresh news every X (minutes)"/>
                     <NumberOption id="showInterval" label="Show news every X (minutes)"/>
@@ -27,6 +29,7 @@ class NewsOptionsForm extends Component {
                 <fieldset>
                     {this.renderNews()}
                 </fieldset>
+
                 <div className="button-bar">
                     <button onClick={this.addNewsItem}>
                         Add

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Form, Scope, Text, TextArea} from 'informed';
 import CooldownFieldset from '../forms/cooldown-fieldset';
 import styles from './icons.module.scss';
+import CustomSourceFieldSet from "../forms/custom-source-fieldset";
 
 class IconsOptionsForm extends Component {
     constructor() {
@@ -15,6 +16,7 @@ class IconsOptionsForm extends Component {
     render() {
         return (
             <Form id="options" {...this.props}>
+                <CustomSourceFieldSet/>
                 <CooldownFieldset/>
                 <fieldset>
                     {this.renderIcons()}
