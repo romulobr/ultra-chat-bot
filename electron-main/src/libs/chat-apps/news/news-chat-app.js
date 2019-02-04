@@ -4,6 +4,7 @@ const flatten = require('array-flatten');
 const commands = require('../util/command-in-text');
 const {verifyPermissions} = require('../util/permission-verifier');
 const {CoolDownManager} = require('../util/cool-down-manager');
+const urls = require('../../../urls');
 
 let shuffle = function (array) {
 
@@ -35,6 +36,8 @@ class NewsChatApp {
     this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 1000;
     this.screenTime = settings.options.screenTime || 60;
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
+    this.playAudio = settings.options.playAudio;
+    this.audioUrl = settings.options.audioUrl;
 
     if (settings.permissions.enabled) {
       this.refresh();
@@ -63,7 +66,15 @@ class NewsChatApp {
       "image": news.image,
       "duration": this.screenTime
     };
+
     sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+    if (this.playAudio) {
+      const audioScreenMessage = {
+        isMedia: true,
+        url: urls.media + '/' +this.audioUrl
+      };
+      sendScreenMessage(audioScreenMessage, this.settings.options.source && this.settings.options.source.customSource);
+    }
     this.newsLink = news.link;
     this.newsIndex++;
   }
@@ -72,7 +83,7 @@ class NewsChatApp {
     this.news = [];
     this.feeds.forEach(feed => {
       getNews(feed.url, feed.encoding || 'utf-8').then(result => {
-        this.news = this.news.concat(result.slice(1,25));
+        this.news = this.news.concat(result.slice(1, 25));
         shuffle(this.news);
         console.log('got ', result.length, ' news from ', feed.url);
       }).catch(error => console.log('error fetching news', error));

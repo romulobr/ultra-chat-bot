@@ -23,6 +23,10 @@ class NewsOptionsForm extends Component {
                 <CooldownFieldset/>
                 <CustomSourceFieldSet/>
                 <fieldset>
+                    <fieldset>
+                    <CheckBoxOption id="playAudio" label="Play Audio"/>
+                    <TextOption id="audioUrl" label="Audio (file in media folder or internet url)"/>
+                    </fieldset>
                     <TextOption id="getLinkCommand" label="Get Link command"/>
                     <NumberOption id="fetchInterval" label="Refresh news every X (minutes)"/>
                     <NumberOption id="showInterval" label="Show news every X (minutes)"/>

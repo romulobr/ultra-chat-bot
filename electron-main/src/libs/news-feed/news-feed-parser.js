@@ -23,7 +23,7 @@ function getNews(url, charset = 'utf-8') {
         while (item = stream.read()) {
           newsItems.push({
             title: item.title,
-            description: item.description.replace('Read more...',''),
+            description: item.description.replace('Read more...','').replace('Read more...',''),
             link:item.link
           });
         }

@@ -18,7 +18,7 @@ class AudioPlayer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.url !== this.props.url) {
+        if (prevProps.id !== this.props.id) {
             const audioNode = this.audioRef.current;
             if (audioNode.src === this.props.url) {
                 audioNode.currentTime = 0;

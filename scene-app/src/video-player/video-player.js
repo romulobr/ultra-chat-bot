@@ -58,7 +58,7 @@ class VideoPlayer extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.url !== this.props.url) {
+        if (prevProps.id !== this.props.id) {
             const videoNode = this.videoRef.current;
             if (videoNode.src === this.props.url) {
                 videoNode.currentTime = 0;
