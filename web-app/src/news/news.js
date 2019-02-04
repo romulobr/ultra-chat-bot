@@ -5,6 +5,8 @@ import actions from './news-actions';
 import OptionsForm from './news-options-form';
 import {Link} from "react-router-dom";
 import PermissionsForm from "../forms/permissions-form";
+import CustomSourceFieldSet from "../forms/custom-source-fieldset";
+import CooldownFieldSet from "../forms/cooldown-fieldset";
 
 class news extends Component {
     constructor() {
@@ -15,10 +17,7 @@ class news extends Component {
     render() {
         return (
             <div className={styles.news}>
-                <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}
-                                 nocommands
-                                 nopermissions
-                />
+                <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}/>
                 <OptionsForm getApi={(formApi) => this.optionsForm = formApi}
                              news={this.props.data && this.props.data.options && this.props.data.options.news}
                 />

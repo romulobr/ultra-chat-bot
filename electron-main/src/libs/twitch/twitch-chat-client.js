@@ -20,6 +20,10 @@ function create(user, apps) {
   console.log('creating twitch chat bot\n', options);
   const client = new twitchJs.client(options);
 
+  function say(message) {
+    client.say(channel, message);
+  }
+
   function stop() {
     apps.forEach(app => {
       app.close && app.close();
@@ -41,9 +45,14 @@ function create(user, apps) {
       client.say(channel, '🐮🔌💬');
       showedConnectionStatus = true;
     }
+    apps.forEach(app => {
+      app.say = say;
+    });
   });
   client.connect();
+
   return stop;
+
 }
 
 module.exports = {

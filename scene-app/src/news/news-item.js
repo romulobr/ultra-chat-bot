@@ -14,12 +14,12 @@ class newsItem extends Component {
 
         TweenLite.to(messageElement, 3, {
             opacity: 1,
-            bottom:0,
+            bottom: 0,
             ease: Power2.easeIn,
         });
         TweenLite.to(messageElement, 1, {
             opacity: 0,
-            bottom:-201,
+            bottom: -201,
             delay: this.props.duration || 60,
             ease: Power2.easeOut,
             onComplete: () => {
@@ -37,13 +37,8 @@ class newsItem extends Component {
     render() {
         return (
             <div ref={this.messageElementRef} className="newsItems_newsItem">
-                <div>
-                    <img src={this.props.image}/>
-                </div>
-                <div>
-                    <h1>{this.props.title}</h1>
-                    <p>{this.props.text}</p>
-                </div>
+                <h1>{this.props.title}</h1>
+                <div className="newsItems_newsItem_description" dangerouslySetInnerHTML={{__html: this.props.description}}/>
             </div>
         )
     }

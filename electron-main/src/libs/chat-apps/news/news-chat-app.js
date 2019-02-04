@@ -1,6 +1,30 @@
 const sendScreenMessage = require('../util/send-screen-message');
 const getNews = require('../../news-feed/news-feed-parser');
 const flatten = require('array-flatten');
+const commands = require('../util/command-in-text');
+const {verifyPermissions} = require('../util/permission-verifier');
+const {CoolDownManager} = require('../util/cool-down-manager');
+
+let shuffle = function (array) {
+
+  let currentIndex = array.length;
+  let temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+
+};
 
 class NewsChatApp {
   constructor(settings) {
@@ -8,8 +32,9 @@ class NewsChatApp {
     this.feeds = settings.options.news;
     this.refreshInterval = settings.options.refreshInterval || 60;
     this.showInterval = settings.options.showInterval || 5;
-    this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 600;
+    this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 1000;
     this.screenTime = settings.options.screenTime || 60;
+    this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
 
     if (settings.permissions.enabled) {
       this.refresh();
@@ -30,25 +55,27 @@ class NewsChatApp {
       return;
     }
     const news = this.news[this.newsIndex || 0];
+    console.log(news);
     const screenMessage = {
       "isNewsItem": "true",
       "title": news.title,
-      "text": news.description.substr(0, this.maximumDescriptionSize),
+      "description": news.description && news.description.substr(0, this.maximumDescriptionSize),
       "image": news.image,
       "duration": this.screenTime
     };
     sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+    this.newsLink = news.link;
     this.newsIndex++;
   }
 
   refresh() {
-    const newsPromises = [];
+    this.news = [];
     this.feeds.forEach(feed => {
-      newsPromises.push(getNews(feed.url, feed.encoding));
-    });
-    Promise.all(newsPromises).then(results => {
-      this.news = flatten(results);
-      console.log('got news', this.news);
+      getNews(feed.url, feed.encoding || 'utf-8').then(result => {
+        this.news = this.news.concat(result);
+        shuffle(this.news);
+        console.log('got ', result.length, ' news from ', feed.url);
+      }).catch(error => console.log('error fetching news', error));
     });
     this.newsIndex = 0;
   }
@@ -58,8 +85,18 @@ class NewsChatApp {
     clearInterval(this.showIntervalId);
   }
 
-  async handleMessage() {
-    return Promise.resolve();
+  async handleMessage(message) {
+    if (!verifyPermissions(this.settings.permissions, message)) return;
+    if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
+    if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
+
+    let command = commands.commandInFirstWord(message.text, [this.settings.options.getLinkCommand]);
+    if (!command) return;
+
+    if (command.command === this.settings.options.getLinkCommand || 'news') {
+      console.log('showing link', this.newsLink);
+      this.newsLink && this.say('read more at ' + this.newsLink);
+    }
   }
 }
 

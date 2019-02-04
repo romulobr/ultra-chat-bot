@@ -29,9 +29,8 @@ class NewsItems extends Component {
             const newNewsItems = [].concat(this.state.newsItems);
 
             const newNewsItem = {
-                text: this.props.text,
+                description: this.props.description,
                 title: this.props.title,
-                image: this.props.image,
                 duration: (this.props.duration || 60),
                 key: 'newsItem-' + this.props.id,
             };
@@ -47,9 +46,8 @@ class NewsItems extends Component {
 
     renderNewsItems() {
         return this.state.newsItems.map((newsItem) =>
-            (<NewsItem text={newsItem.text}
+            (<NewsItem description={newsItem.description}
                        title={newsItem.title}
-                       image={newsItem.image}
                        duration={newsItem.duration}
                        key={newsItem.key}
                        onComplete={newsItem.onComplete}

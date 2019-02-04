@@ -5,6 +5,8 @@ import styles from './news.module.scss';
 import NumberOption from "../forms/number-option";
 import CheckBoxOption from "../forms/checkbox-option";
 import CustomSourceFieldSet from "../forms/custom-source-fieldset";
+import TextOption from "../forms/text-option";
+import PermissionsForm from "../forms/permissions-form";
 
 class NewsOptionsForm extends Component {
     constructor() {
@@ -18,8 +20,10 @@ class NewsOptionsForm extends Component {
     render() {
         return (
             <Form id="options" {...this.props}>
+                <CooldownFieldset/>
                 <CustomSourceFieldSet/>
                 <fieldset>
+                    <TextOption id="getLinkCommand" label="Get Link command"/>
                     <NumberOption id="fetchInterval" label="Refresh news every X (minutes)"/>
                     <NumberOption id="showInterval" label="Show news every X (minutes)"/>
                     <NumberOption id="maximumDescriptionSize" label="Maximum description size (characters)"/>

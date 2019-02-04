@@ -13,13 +13,13 @@ ipcMain.on('connectToChat', (event, jwt, options) => {
     user.youtube && (user.youtube.jwt = jwt);
     user.twitch && (user.twitch.jwt = jwt);
     if (options.youtube) {
-      chatBotCreator.createBotFor(user.youtube, {liveChatId: options.youtube.liveChatId}).then(bot => {
-        stopYoutubeChatBot[options.youtube.liveChatId] = bot;
+      chatBotCreator.createBotFor(user.youtube, {liveChatId: options.youtube.liveChatId}).then(stopBot => {
+        stopYoutubeChatBot[options.youtube.liveChatId] = stopBot;
       });
       event.sender.send('connectedToChat', {origin: 'youtube', liveChatId: options.youtube.liveChatId});
     } else {
-      chatBotCreator.createBotFor(user.twitch).then(bot => {
-        stopTwitchChatBot = bot;
+      chatBotCreator.createBotFor(user.twitch).then(stopBot => {
+        stopTwitchChatBot = stopBot;
       });
       event.sender.send('connectedToChat', {origin: 'twitch'});
     }

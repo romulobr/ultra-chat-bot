@@ -12,6 +12,19 @@ function create(user, apps, liveChatId) {
   let youtubeOauthClient = youtubeClient.oAuthClientWith(user.accessToken, user.refreshToken);
   const channelName = user.displayName;
 
+  function say(message) {
+    youtubeClient
+      .sendChatMessage(
+        youtubeOauthClient,
+        liveChatId,
+        message,
+      )
+  }
+
+  apps.forEach(app => {
+    app.say = say;
+  });
+  
   function stop() {
     apps.forEach(app => {
       app.close && app.close();

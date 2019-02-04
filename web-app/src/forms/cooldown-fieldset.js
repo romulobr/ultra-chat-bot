@@ -2,7 +2,7 @@ import React from 'react'
 import NumberOption from './number-option';
 import {Scope} from 'informed';
 
-function cooldownFieldset() {
+function cooldownFieldSet() {
     return (<fieldset>
         <Scope scope="cooldown">
             <NumberOption id="global" label="Global cooldown (seconds)"/>
@@ -11,4 +11,4 @@ function cooldownFieldset() {
     </fieldset>);
 }
 
-export default cooldownFieldset;
+export default cooldownFieldSet;

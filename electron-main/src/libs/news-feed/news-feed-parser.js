@@ -21,15 +21,10 @@ function getNews(url, charset = 'utf-8') {
         let item;
 
         while (item = stream.read()) {
-          const imageTagPattern = /<img.*>/g;
-          const imageSourcePattern = /src=\'(.*)\'/g;
-          const imageTag = imageTagPattern.exec(item.description);
-          const imageSourceUrl = imageTag && imageSourcePattern.exec(imageTag[0]);
-
           newsItems.push({
             title: item.title,
-            image: imageSourceUrl && imageSourceUrl[1],
-            description: item.description.replace(imageTag, ''),
+            description: item.description.replace('Read more...',''),
+            link:item.link
           });
         }
         success(newsItems);
