@@ -26,7 +26,7 @@ function create(user, apps) {
 
   function stop() {
     apps.forEach(app => {
-      app.close && app.close();
+      app.stop && app.stop();
     });
     client.say(channel, '🐮🛑💬');
     client.disconnect();

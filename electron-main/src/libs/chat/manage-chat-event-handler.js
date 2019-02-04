@@ -32,7 +32,7 @@ ipcMain.on('connectToChat', (event, jwt, options) => {
 
 ipcMain.on('disconnectFromChat', (event, options) => {
   if (options.twitch) {
-    stopTwitchChatBot && stopTwitchChatBot();
+     stopTwitchChatBot && stopTwitchChatBot();
     event.sender.send('disconnectedFromChat', {origin: 'twitch'});
   }
   else if (options.youtube) {
