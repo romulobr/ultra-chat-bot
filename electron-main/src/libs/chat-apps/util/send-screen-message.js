@@ -1,7 +1,7 @@
 const urls = require('../../../urls');
 const axios = require('axios');
 
-function sendScreenMessage(message, source = 0) {
+function sendScreenMessage(message, source) {
   return axios.post(urls.messageApi, {...message, source});
 }
 

@@ -72,7 +72,7 @@ class NewsChatApp {
     this.news = [];
     this.feeds.forEach(feed => {
       getNews(feed.url, feed.encoding || 'utf-8').then(result => {
-        this.news = this.news.concat(result);
+        this.news = this.news.concat(result.slice(1,25));
         shuffle(this.news);
         console.log('got ', result.length, ' news from ', feed.url);
       }).catch(error => console.log('error fetching news', error));

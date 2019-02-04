@@ -47,16 +47,21 @@ const store = createStore(
 
 const io = require('socket.io-client');
 const socket = io('http://127.0.0.1:62619');
-const url_string = window.location.href
-const url = new URL(url_string);
+const url = new URL(window.location.href);
 const source = url.searchParams.get("source");
 
 socket.on('message', function (message) {
     console.log('source:', source, ' - message received >', message);
-    if (message.source && message.source !== source) {
+
+    if (source && source !== message.source) {
         console.log('ignoring message, wrong source');
         return;
     }
+    if (!source && message.source) {
+        console.log('ignoring message, wrong source');
+        return;
+    }
+
     if (message.isMedia) {
         if (/\.(mp4|webm)$/i.test(message.url)) {
             store.dispatch(playVideo({...message}));
@@ -72,6 +77,7 @@ socket.on('message', function (message) {
     } else if (message.isNewsItem) {
         store.dispatch(showNewsItem(message))
     }
+
 });
 
 ReactDOM.render(
