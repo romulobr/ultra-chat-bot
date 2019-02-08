@@ -57,7 +57,17 @@ class NewsChatApp {
       console.log('no news to show, skipping...');
       return;
     }
-    const news = this.news[this.newsIndex || 0];
+    let news = this.news[this.newsIndex || 0];
+    this.newsIndex++;
+
+    if (!news) {
+      this.newsIndex = 0;
+      news = this.news[0];
+    }
+    if (!news) {
+      return;
+    }
+    this.newsLink = news.link;
     console.log(news);
     const screenMessage = {
       "isNewsItem": "true",
@@ -71,12 +81,10 @@ class NewsChatApp {
     if (this.playAudio) {
       const audioScreenMessage = {
         isMedia: true,
-        url: urls.media + '/' +this.audioUrl
+        url: urls.media + '/' + this.audioUrl
       };
       sendScreenMessage(audioScreenMessage, this.settings.options.source && this.settings.options.source.customSource);
     }
-    this.newsLink = news.link;
-    this.newsIndex++;
   }
 
   refresh() {

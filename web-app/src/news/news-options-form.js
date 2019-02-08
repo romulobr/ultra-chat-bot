@@ -24,15 +24,14 @@ class NewsOptionsForm extends Component {
                 <CustomSourceFieldSet/>
                 <fieldset>
                     <fieldset>
-                    <CheckBoxOption id="playAudio" label="Play Audio"/>
-                    <TextOption id="audioUrl" label="Audio (file in media folder or internet url)"/>
+                        <CheckBoxOption id="playAudio" label="Play Audio"/>
+                        <TextOption id="audioUrl" label="Audio (file in media folder or internet url)"/>
                     </fieldset>
                     <TextOption id="getLinkCommand" label="Get Link command"/>
                     <NumberOption id="fetchInterval" label="Refresh news every X (minutes)"/>
                     <NumberOption id="showInterval" label="Show news every X (minutes)"/>
                     <NumberOption id="maximumDescriptionSize" label="Maximum description size (characters)"/>
                     <NumberOption id="screenTime" label="Time on screen (seconds)"/>
-                    <CheckBoxOption id="cycle" label="Cycle news"/>
                 </fieldset>
                 <fieldset>
                     {this.renderNews()}
