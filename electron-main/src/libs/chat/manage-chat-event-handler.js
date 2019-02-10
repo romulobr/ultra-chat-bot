@@ -1,6 +1,6 @@
 const {ipcMain} = require('electron');
-const fetchUser = require('..//fetch-user');
-const chatBotCreator = require('..//chat-bot-creator');
+const fetchUser = require('../fetch-user');
+const chatBotCreator = require('./chat-bot-creator');
 let user;
 
 let stopTwitchChatBot;
@@ -32,7 +32,7 @@ ipcMain.on('connectToChat', (event, jwt, options) => {
 
 ipcMain.on('disconnectFromChat', (event, options) => {
   if (options.twitch) {
-     stopTwitchChatBot && stopTwitchChatBot();
+    stopTwitchChatBot && stopTwitchChatBot();
     event.sender.send('disconnectedFromChat', {origin: 'twitch'});
   }
   else if (options.youtube) {

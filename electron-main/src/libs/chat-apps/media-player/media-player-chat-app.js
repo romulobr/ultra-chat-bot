@@ -7,8 +7,10 @@ const urls = require('../../../urls');
 
 class MediaPlayerChatApp {
   constructor(settings) {
+    settings.options = settings.options || {};
     this.settings = settings;
-    this.commands = settings.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase());
+    this.settings.options = this.settings.options || {};
+    this.commands = (settings.items && settings.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) || [];
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
   }
 

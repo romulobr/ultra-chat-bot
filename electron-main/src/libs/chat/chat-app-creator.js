@@ -1,16 +1,14 @@
-const urls = require('../../../urls');
 const axios = require('axios');
-const EmotionsChatApp = require('./icons-chat-app');
 
-function create(user) {
+function create(user, app, settingsUrl, loyaltySystem) {
   return new Promise((success, fail) => {
-
-    axios.get(urls.iconsApi, {
+    axios.get(settingsUrl, {
       headers: {Authorization: 'Bearer ' + user.jwt}
     }).then(response => {
-      const settings = response.data[0] || {};
+      const settings = response.data[0];
       settings.user = user;
-      success(new EmotionsChatApp(settings));
+      settings.loyaltySystem = loyaltySystem;
+      success(new app(settings));
     }).catch(e => {
       fail(e);
     });

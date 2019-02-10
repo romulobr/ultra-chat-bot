@@ -29,13 +29,15 @@ let shuffle = function (array) {
 
 class NewsChatApp {
   constructor(settings) {
+    settings.options = settings.options || {};
+    settings.permissions = settings.permissions || {};
     this.settings = settings;
-    this.feeds = settings.options.news;
+    this.feeds = settings.options.news || [];
     this.refreshInterval = settings.options.refreshInterval || 60;
     this.showInterval = settings.options.showInterval || 5;
     this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 1000;
     this.screenTime = settings.options.screenTime || 60;
-    this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
+    this.cooldownManager = new CoolDownManager(this.settings.options.cooldown || 60);
     this.playAudio = settings.options.playAudio;
     this.audioUrl = settings.options.audioUrl;
 

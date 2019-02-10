@@ -1,14 +1,15 @@
-const PointTracker = require('./point-tracker');
-
 module.exports = class ActivityCounter {
-  constructor(settings, pointTracker = new PointTracker()) {
+  constructor(settings) {
     this.roundDuration = settings.roundDuration || 5 * 60000;
-    this.pointTracker = pointTracker;
+    this.endRoundCallBack = settings.endRoundCallBack;
     this.startsRounds();
   }
 
   startsRounds() {
-    this.roundsIntervalId = setInterval(this.startsRound,)
+    if (this.roundsIntervalId) {
+      clearInterval(this.roundsIntervalId);
+    }
+    this.roundsIntervalId = setInterval(this.startsRound, this.roundDuration)
   }
 
   startsRound() {
@@ -19,11 +20,18 @@ module.exports = class ActivityCounter {
   }
 
   endsRound() {
-    this.pointTracker.addPointsTo(this.activePeople);
+    console.log('ending round, active people:\n', this.activePeople);
+    if (this.activePeople && this.activePeople.length > 0) {
+      this.endRoundCallBack(this.activePeople);
+    }
+  }
+
+  addActivity(user) {
+    console.log('adding activity to user: ', user.id);
+    this.activePeople[user.id] = user;
   }
 
   stop() {
     clearInterval(this.roundsIntervalId);
   }
-
 };

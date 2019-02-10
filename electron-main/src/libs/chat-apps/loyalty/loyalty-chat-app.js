@@ -2,32 +2,43 @@ const {CoolDownManager} = require('../util/cool-down-manager');
 const commands = require('../util/command-in-text');
 const sendScreenMessage = require('../util/send-screen-message');
 const permissionVerifier = require('../util/permission-verifier');
-const axios = require('axios');
-const welcomeMessagesApi = require('../../../urls').welcomeMessagesApi;
+const ActivityCounter = require('./activity-counter');
 
 module.exports = class LoyaltyChatApp {
   constructor(settings) {
+    this.loyaltyProfiles = settings.loyaltySystem.getLoyaltyProfiles();
+    this.pointsPerRound = settings.pointsPerRound || 5;
 
+    function endRoundCallBack(activeUsers) {
+      activeUsers.forEach(user => {
+        this.loyaltyProfiles.addPoints(user, {type: 'power', amount: this.pointsPerRound})
+      });
+    }
+
+    this.activityCounter = new ActivityCounter({roundDuration: settings.roundDuration, endRoundCallBack});
+    this.activityCounter.startsRounds();
   }
 
   async handleMessage(message) {
+    console.log(message.author);
+    this.activityCounter.addActivity(message.author);
     if (!permissionVerifier.verifyPermissions(this.settings.permissions, message)) return;
     if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
     if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
-    let command = commands.commandInFirstWord(message.text, [this.settings.options.saveCommand, this.settings.options.showCommand]);
+    let command = commands.commandInFirstWord(message.text, [this.saveCommand, this.showCommand]);
     if (!command) return;
 
-    if (command.command === this.settings.options.saveCommand) {
+    if (command.command === this.saveCommand) {
       console.log('saving a welcome message');
-      let welcomeMessage = message.text.replace(this.settings.options.saveCommand, '');
+      let welcomeMessage = message.text.replace(this.saveCommand, '');
       if (welcomeMessage[0] === '!') {
         welcomeMessage = welcomeMessage.substr(1, welcomeMessage.length - 1);
       }
       console.log('got the message:' + welcomeMessage + '\n\n\n');
       this.saveMessage(welcomeMessage, message.author.id);
     }
-    else if (command.command === this.settings.options.showCommand) {
+    else if (command.command === this.showCommand) {
       console.log('showing a welcome message');
       const authorWelcomeMessage = await this.getMessage(message.author.id);
       if (authorWelcomeMessage.data && authorWelcomeMessage.data.length > 0) {
@@ -35,12 +46,14 @@ module.exports = class LoyaltyChatApp {
         const screenMessage = {
           isWelcomeMessage: true,
           ...authorWelcomeMessage.data[0],
-          author:message.author
+          author: message.author
         };
         sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
       }
     }
   }
 
-
+  stop() {
+    this.activityCounter.stop();
+  }
 };

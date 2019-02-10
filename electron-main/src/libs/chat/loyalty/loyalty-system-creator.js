@@ -1,6 +1,6 @@
 const urls = require('../../../urls');
 const axios = require('axios');
-const LoyaltyChatApp = require('./news-chat-app');
+const LoyaltySystem = require('./loyalty-system');
 
 function create(user) {
   return new Promise((success, fail) => {
@@ -9,7 +9,7 @@ function create(user) {
     }).then(response => {
       const settings = response.data[0] || {};
       settings.user = user;
-      success(new LoyaltyChatApp(settings));
+      success(new LoyaltySystem(settings));
     }).catch(e => {
       fail(e);
     });

@@ -9,6 +9,9 @@ class WelcomeChatApp {
 
   constructor(settings) {
     this.settings = settings;
+    this.jwt = settings.user.jwt;
+    this.saveCommand = settings.options.saveCommand;
+    this.showCommand = settings.options.showCommand;
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
   }
 
@@ -16,17 +19,17 @@ class WelcomeChatApp {
     const welcomeMessage = await this.getMessage(id);
     if (welcomeMessage.data && welcomeMessage.data.length > 0) {
       welcomeMessage.data[0].message = newMessage;
-      return axios.patch(welcomeMessagesApi, welcomeMessage.data[0], {headers: {Authorization: 'Bearer ' + this.settings.user.jwt}});
+      return axios.patch(welcomeMessagesApi, welcomeMessage.data[0], {headers: {Authorization: 'Bearer ' + this.jwt}});
     } else {
       return axios.post(welcomeMessagesApi, {
         message: newMessage,
         author: id
-      }, {headers: {Authorization: 'Bearer ' + this.settings.user.jwt}});
+      }, {headers: {Authorization: 'Bearer ' + this.jwt}});
     }
   }
 
   getMessage(id) {
-    return axios.get(`${welcomeMessagesApi}?author=${id}`, {headers: {Authorization: 'Bearer ' + this.settings.user.jwt}});
+    return axios.get(`${welcomeMessagesApi}?author=${id}`, {headers: {Authorization: 'Bearer ' + this.jwt}});
   }
 
   async handleMessage(message) {
@@ -34,19 +37,19 @@ class WelcomeChatApp {
     if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
     if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
-    let command = commands.commandInFirstWord(message.text, [this.settings.options.saveCommand, this.settings.options.showCommand]);
+    let command = commands.commandInFirstWord(message.text, [this.saveCommand, this.showCommand]);
     if (!command) return;
 
-    if (command.command === this.settings.options.saveCommand) {
+    if (command.command === this.saveCommand) {
       console.log('saving a welcome message');
-      let welcomeMessage = message.text.replace(this.settings.options.saveCommand, '');
+      let welcomeMessage = message.text.replace(this.saveCommand, '');
       if (welcomeMessage[0] === '!') {
         welcomeMessage = welcomeMessage.substr(1, welcomeMessage.length - 1);
       }
       console.log('got the message:' + welcomeMessage + '\n\n\n');
       this.saveMessage(welcomeMessage, message.author.id);
     }
-    else if (command.command === this.settings.options.showCommand) {
+    else if (command.command === this.showCommand) {
       console.log('showing a welcome message');
       const authorWelcomeMessage = await this.getMessage(message.author.id);
       if (authorWelcomeMessage.data && authorWelcomeMessage.data.length > 0) {
@@ -54,7 +57,7 @@ class WelcomeChatApp {
         const screenMessage = {
           isWelcomeMessage: true,
           ...authorWelcomeMessage.data[0],
-          author:message.author
+          author: message.author
         };
         sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
       }
