@@ -19,9 +19,9 @@ async function createChatBotApps(user) {
   const apps = [];
 
   try {
-    loyaltySystem = await createLoyaltySystem();
+    loyaltySystem = await createLoyaltySystem(user);
   } catch (e) {
-    console.log('failed to create loyalty system');
+    console.log('failed to create loyalty system', e);
   }
 
   async function createApp(app, url, name) {
@@ -29,11 +29,11 @@ async function createChatBotApps(user) {
       const newApp = await chatAppCreator(user, app, url, loyaltySystem);
       apps.push(newApp);
     } catch (e) {
-      console.log(`failed to create ${name} app`,e);
+      console.log(`failed to create app: ${name},`, e);
     }
   }
 
-  //await createApp(LoyaltyApp, urls.loyaltyApi, 'loyalty');
+  await createApp(LoyaltyApp, urls.loyaltyApi, 'loyalty');
   await createApp(MediaPlayerApp, urls.mediaApi, 'media player');
   await createApp(ChickenApp, urls.chickenApi, 'chicken');
   await createApp(IconsApp, urls.iconsApi, 'icons');
@@ -48,7 +48,7 @@ function createBotFor(user, options) {
     if (user.origin === 'twitch') {
       createChatBotApps(user).then(apps => {
         validateTwitchUserTokenAndRefreshIfNeeded(user).then(user => {
-          success(twitchChatClient.create(user, apps));
+          success(twitchChatClient.create(user, apps, loyaltySystem));
         }).catch(e => {
           console.log(e);
           fail(e);
@@ -56,7 +56,7 @@ function createBotFor(user, options) {
       })
     } else if (user.origin === 'youtube') {
       createChatBotApps(user).then(apps => {
-        success(youtubeChatClient.create(user, apps, options.liveChatId));
+        success(youtubeChatClient.create(user, apps, options.liveChatId, loyaltySystem));
       }).catch(e => {
         console.log(e);
         fail(e);

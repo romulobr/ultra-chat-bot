@@ -2,7 +2,7 @@ const normalizeTwitchChatMessage = require('../twitch/twitch-chat-message-normal
 const twitchCredentials = require('./twitch-credentials');
 const twitchJs = require("twitch-js");
 
-function create(user, apps) {
+function create(user, apps, loyaltySystem) {
   const channel = user.name;
   console.log('channel', channel);
   const options = {
@@ -25,6 +25,7 @@ function create(user, apps) {
   }
 
   function stop() {
+    loyaltySystem.stop();
     apps.forEach(app => {
       app.stop && app.stop();
     });

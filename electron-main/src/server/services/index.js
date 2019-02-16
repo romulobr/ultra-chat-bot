@@ -8,6 +8,7 @@ const streamLabsToken = require('./stream-labs/stream-labs.service');
 const icons = require('./icons/icons.service');
 const news = require('./news/news.service');
 const loyalty = require('./loyalty/loyalty.service');
+const loyaltyProfile = require('./loyalty/loyalty-profile.service');
 
 module.exports = function (app) {
   app.configure(users);
@@ -20,4 +21,5 @@ module.exports = function (app) {
   app.configure(welcome);
   app.configure(welcomeMessages);
   app.configure(loyalty);
+  app.configure(loyaltyProfile);
 };

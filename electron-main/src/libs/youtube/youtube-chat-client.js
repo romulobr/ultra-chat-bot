@@ -4,7 +4,7 @@ function requestChatMessages(oauth2Client, liveChatId, pageToken) {
   return youtubeClient.getLiveChatMessages(oauth2Client, liveChatId, pageToken);
 }
 
-function create(user, apps, liveChatId) {
+function create(user, apps, liveChatId, loyaltySystem) {
   let firstFetch = false;
   let isRunning = true;
   let pageToken = null;
@@ -24,8 +24,9 @@ function create(user, apps, liveChatId) {
   apps.forEach(app => {
     app.say = say;
   });
-  
+
   function stop() {
+    loyaltySystem.stop();
     apps.forEach(app => {
       app.close && app.close();
     });

@@ -6,49 +6,48 @@ const ActivityCounter = require('./activity-counter');
 
 module.exports = class LoyaltyChatApp {
   constructor(settings) {
+    console.log('creating loyalty chat app');
     this.loyaltyProfiles = settings.loyaltySystem.getLoyaltyProfiles();
-    this.pointsPerRound = settings.pointsPerRound || 5;
+    this.pointsPerRound = settings.pointsPerRound || 1;
+    const loyaltyProfiles = this.loyaltyProfiles;
+    const pointsPerRound = this.pointsPerRound;
 
     function endRoundCallBack(activeUsers) {
       activeUsers.forEach(user => {
-        this.loyaltyProfiles.addPoints(user, {type: 'power', amount: this.pointsPerRound})
+        loyaltyProfiles.addPoints(user, {type: 'power', amount: pointsPerRound});
       });
     }
 
     this.activityCounter = new ActivityCounter({roundDuration: settings.roundDuration, endRoundCallBack});
-    this.activityCounter.startsRounds();
   }
 
   async handleMessage(message) {
-    console.log(message.author);
     this.activityCounter.addActivity(message.author);
-    if (!permissionVerifier.verifyPermissions(this.settings.permissions, message)) return;
-    if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
-    if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
-    let command = commands.commandInFirstWord(message.text, [this.saveCommand, this.showCommand]);
+    // if (!permissionVerifier.verifyPermissions(this.settings.permissions, message)) return;
+    // if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
+    // if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
+
+    const command = commands.commandInFirstWord(message.text, ['power', 'love', 'me']);
+    const splitMessage = message.text.split(' ');
+    const targetName = splitMessage[1] && splitMessage[1].replace('@', '');
+    const amount = Number.parseInt(splitMessage[2]);
+
     if (!command) return;
 
-    if (command.command === this.saveCommand) {
-      console.log('saving a welcome message');
-      let welcomeMessage = message.text.replace(this.saveCommand, '');
-      if (welcomeMessage[0] === '!') {
-        welcomeMessage = welcomeMessage.substr(1, welcomeMessage.length - 1);
-      }
-      console.log('got the message:' + welcomeMessage + '\n\n\n');
-      this.saveMessage(welcomeMessage, message.author.id);
-    }
-    else if (command.command === this.showCommand) {
-      console.log('showing a welcome message');
-      const authorWelcomeMessage = await this.getMessage(message.author.id);
-      if (authorWelcomeMessage.data && authorWelcomeMessage.data.length > 0) {
-        console.log('got a message to show:\n\n', authorWelcomeMessage.data[0], '\n\n');
-        const screenMessage = {
-          isWelcomeMessage: true,
-          ...authorWelcomeMessage.data[0],
-          author: message.author
-        };
-        sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+    if (command.command && !targetName) {
+      const profile = this.loyaltyProfiles.getUserProfile(message.author.id);
+      this.say(`@${message.author.name}: ${(profile && profile.power) || 0}⚡ ${(profile && profile.love) || 0}💖`);
+
+    } else if (command.command === 'love' && targetName && amount && amount > 0) {
+      const sourceProfile = this.loyaltyProfiles.getUserProfile(message.author.id);
+      const targetProfile = this.loyaltyProfiles.getUserProfileByName(targetName);
+      if (sourceProfile && targetProfile && (sourceProfile !== targetProfile)) {
+        if (sourceProfile.power >= amount) {
+          sourceProfile.power = (targetProfile.power || 0) - amount;
+          targetProfile.love = (targetProfile.love || 0) + amount;
+        }
+        this.say(`@${sourceProfile.name} ${amount}💕 @${targetProfile.name || 0}`);
       }
     }
   }
