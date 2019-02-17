@@ -3,14 +3,34 @@ const commands = require('../util/command-in-text');
 const sendScreenMessage = require('../util/send-screen-message');
 const permissionVerifier = require('../util/permission-verifier');
 const ActivityCounter = require('./activity-counter');
+const urls = require('../../../urls');
+const mediaUrl = require('../../../urls').media;
+
+function simpleUrlOrMediaUrl(setting) {
+  return (setting.includes('http://') || setting.includes('https://')) ?
+    setting : `${mediaUrl}/${setting}`
+}
 
 module.exports = class LoyaltyChatApp {
   constructor(settings) {
     console.log('creating loyalty chat app');
     this.loyaltyProfiles = settings.loyaltySystem.getLoyaltyProfiles();
-    this.pointsPerRound = settings.pointsPerRound || 1;
+    this.pointsPerRound = (Number.parseInt(settings.options.pointsPerRound)) || 1;
+
+    this.source = settings.options.source;
+    this.customSource = settings.options.customSource;
+
+    this.permissions = settings.permissions;
+
+    this.enableSound = settings.options.enableSound;
+    this.sound = simpleUrlOrMediaUrl(settings.options.sound);
+    this.icon = simpleUrlOrMediaUrl(settings.options.icon);
+    this.showIcon = settings.options.showIcon;
+
     const loyaltyProfiles = this.loyaltyProfiles;
     const pointsPerRound = this.pointsPerRound;
+
+    this.cooldownManager = new CoolDownManager(settings.options.cooldown);
 
     function endRoundCallBack(activeUsers) {
       activeUsers.forEach(user => {
@@ -19,14 +39,31 @@ module.exports = class LoyaltyChatApp {
     }
 
     this.activityCounter = new ActivityCounter({roundDuration: settings.roundDuration, endRoundCallBack});
+
+  }
+
+  sendAudioMessage() {
+    const screenAudioMessage = {
+      isMedia: true,
+      url: urls.media + '/' + this.sound
+    };
+    sendScreenMessage(screenAudioMessage, this.source && this.customSource);
+  }
+
+  sendIconMessages(amount) {
+    const iconMessage = {isIcons: true, icon: this.icon};
+    let i;
+    for (i = 0; i < amount; i++) {
+      sendScreenMessage(iconMessage, this.source && this.customSource);
+    }
   }
 
   async handleMessage(message) {
     this.activityCounter.addActivity(message.author);
 
-    // if (!permissionVerifier.verifyPermissions(this.settings.permissions, message)) return;
-    // if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
-    // if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
+    if (!permissionVerifier.verifyPermissions(this.permissions, message)) return;
+    if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
+    if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
     const command = commands.commandInFirstWord(message.text, ['power', 'love', 'me']);
     const splitMessage = message.text.split(' ');
@@ -48,6 +85,12 @@ module.exports = class LoyaltyChatApp {
           targetProfile.love = (targetProfile.love || 0) + amount;
         }
         this.say(`@${sourceProfile.name} ${amount}💕 @${targetProfile.name || 0}`);
+        if (this.enableSound && this.sound) {
+          this.sendAudioMessage();
+        }
+        if (this.showIcon && this.icon) {
+          this.sendIconMessages(amount);
+        }
       }
     }
   }

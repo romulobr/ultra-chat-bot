@@ -2,7 +2,7 @@ const {streamElements} = require('../../../server/stream-elements-api/stream-ele
 const {streamlabs} = require('../../../server/stream-labs-api/stream-labs-api');
 
 async function verifyLoyalty(loyalty, message, user, itemCost, loyaltyProfiles) {
-  const cost = itemCost || loyalty.defaultCost;
+  const cost = Number.parseInt(itemCost) || Number.parseInt(loyalty.defaultCost);
 
   if (loyalty.streamElements && cost && cost !== 0) {
     const pointsOk = await checkStreamElementsPoints(message.author, user, cost);
@@ -15,19 +15,20 @@ async function verifyLoyalty(loyalty, message, user, itemCost, loyaltyProfiles) 
   }
 
   if (loyaltyProfiles && loyalty.nativePower && cost && cost !== 0) {
-    return checkNativePoints({author: message.author, user, cost, loyaltyProfiles, type: 'power'});
+    return Promise.resolve(checkNativePoints({author: message.author, user, cost, loyaltyProfiles, type: 'power'}));
   }
 
   if (loyaltyProfiles && loyalty.nativeLove && cost && cost !== 0) {
-    return checkNativePoints({author: message.author, user, cost, loyaltyProfiles, type: 'love'});
+    return Promise.resolve(checkNativePoints({author: message.author, user, cost, loyaltyProfiles, type: 'love'}));
   }
 }
 
 function checkNativePoints(settings) {
-  const amount = settings.cost * -1;
-  const profile = settings.loyaltyProfiles.getUserProfile(settings.user.id);
+  const amount = settings.cost;
+  const profile = settings.loyaltyProfiles.getUserProfile(settings.author.id);
+
   if (profile[settings.type] >= amount) {
-    profile[settings.type] = profile[settings.type] - amount;
+    profile[settings.type] = (Number.parseInt(profile[settings.type]) || 0) - amount;
     return true;
   }
   return false;

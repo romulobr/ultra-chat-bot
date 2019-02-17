@@ -14,9 +14,14 @@ function LoyaltyOptionsForm(props) {
                 <TextOption id={'roundDuration'} label={"Round Duration (minutes)"}/>
             </fieldset>
             <fieldset>
-                <CheckBoxOption id={'enableSound'} label={'Enable Sound'}/>
-                <TextOption id={'sound'} label={"sound file or url"}/>
+                <CheckBoxOption id={'enableSound'} label={'Enable Sound when giving love'}/>
+                <TextOption id={'sound'} label={"Sound File or URL"}/>
             </fieldset>
+            <fieldset>
+                <CheckBoxOption id={'showIcon'} label={'Show Icon when giving love'}/>
+                <TextOption id={'icon'} label={"Icon Image or URL"}/>
+            </fieldset>
+            <CustomSourceFieldSet/>
         </Form>
     );
 }

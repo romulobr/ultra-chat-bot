@@ -29,14 +29,11 @@ class MediaPlayerChatApp {
       isMedia: true,
       command,
       url: mediaUrl,
-      author: message.author,
-      top: item.top || this.settings.options.video.top || 0,
-      left: item.left || this.settings.options.video.left || 0,
-      size: item.size || this.settings.options.video.size || 100
+      author: message.author
     };
     const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost, this.loyaltyProfiles);
     if (!loyaltyVerified) return;
-    sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+    sendScreenMessage(screenMessage, this.settings.options.source.customSource || this.settings.options.source);
     this.cooldownManager.addCoolDownTo(message.author);
   }
 }

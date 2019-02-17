@@ -1,19 +1,19 @@
 const server = 'http://localhost:62619';
-const api = 'http://localhost:62619/api';
-const mediaApi = 'http://localhost:62619/api/media';
-const iconsApi = 'http://localhost:62619/api/icons';
-const chickenApi = 'http://localhost:62619/api/chicken';
-const welcomeApi = 'http://localhost:62619/api/welcome';
-const welcomeMessagesApi = 'http://localhost:62619/api/welcome-messages';
-const userApi = 'http://localhost:62619/api/users';
-const media = 'http://localhost:62619/media';
-const messageApi = 'http://localhost:62619/message';
-const streamlabsDataApi = 'http://localhost:62619/api/streamlabs';
-const streamElementsTokenApi = 'http://localhost:62619/api/stream-elements-token';
-const streamElementsApiCheck = 'https://api.streamelements.com/kappa/v2/users/current';
-const newsApi = 'http://localhost:62619/api/news';
-const loyaltyApi = 'http://localhost:62619/api/loyalty';
-const loyaltyProfileApi = 'http://localhost:62619/api/loyalty-profile';
+const api = `${server}/api`;
+const mediaApi = `${server}/api/media`;
+const iconsApi = `${server}/api/icons`;
+const chickenApi = `${server}/api/chicken`;
+const welcomeApi = `${server}/api/welcome`;
+const welcomeMessagesApi = `${server}/api/welcome-messages`;
+const userApi = `${server}/api/users`;
+const media = `${server}/media`;
+const messageApi = `${server}/message`;
+const streamlabsDataApi = `${server}/api/streamlabs`;
+const streamElementsTokenApi = `${server}/api/stream-elements-token`;
+const streamElementsApiCheck = `https://api.streamelements.com/kappa/v2/users/current`;
+const newsApi = `${server}/api/news`;
+const loyaltyApi = `${server}/api/loyalty`;
+const loyaltyProfileApi = `${server}/api/loyalty-profile`;
 
 module.exports = {
   server,
