@@ -7,7 +7,7 @@ const urls = require('../../../urls');
 const mediaUrl = require('../../../urls').media;
 
 function simpleUrlOrMediaUrl(setting) {
-  return (setting.includes('http://') || setting.includes('https://')) ?
+  return (setting && (setting.includes('http://') || setting.includes('https://'))) ?
     setting : `${mediaUrl}/${setting}`
 }
 
