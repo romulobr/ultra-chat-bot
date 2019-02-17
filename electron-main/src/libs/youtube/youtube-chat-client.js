@@ -10,6 +10,12 @@ function create(user, apps, liveChatId, loyaltySystem) {
   let pageToken = null;
 
   let youtubeOauthClient = youtubeClient.oAuthClientWith(user.accessToken, user.refreshToken);
+  youtubeOauthClient.on('tokens', (tokens) => {
+    if (tokens.refresh_token) {
+      console.log(tokens.refresh_token);
+    }
+    console.log(tokens.access_token);
+  });
   const channelName = user.displayName;
 
   function say(message) {
@@ -28,7 +34,7 @@ function create(user, apps, liveChatId, loyaltySystem) {
   function stop() {
     loyaltySystem.stop();
     apps.forEach(app => {
-      app.close && app.close();
+      app.stop && app.stop();
     });
     youtubeClient
       .sendChatMessage(
