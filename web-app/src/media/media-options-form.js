@@ -10,13 +10,15 @@ function MediaOptionsForm(props) {
         <Form id="mediaForm" {...props}>
             <fieldset>
                 <Scope scope="loyalty">
-                    <CheckBoxOption id="streamElements" label="Charge points from Stream Elements"/>
-                    <CheckBoxOption id="streamlabs" label="Charge points from Streamlabs"/>
+                    <CheckBoxOption id="streamElements" label="Use StreamElements"/>
+                    <CheckBoxOption id="streamlabs" label="Use Streamlabs"/>
+                    <CheckBoxOption id="nativePower" label="Use Native Loyalty (Power)"/>
+                    <CheckBoxOption id="nativeLove" label="Use Native Loyalty (Love)"/>
                     <NumberOption id="defaultCost" label="Default Cost"/>
                 </Scope>
             </fieldset>
             <CooldownFieldset/>
-           <CustomSourceFieldSet/>
+            <CustomSourceFieldSet/>
         </Form>
     );
 }

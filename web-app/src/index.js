@@ -16,6 +16,7 @@ import chickenControlsReducer from './chicken-control/chicken-reducer'
 import iconsReducer from './icons/icons-reducer';
 import newsReducer from './news/news-reducer';
 import welcomeReducer from './welcome/welcome-reducer';
+import loyaltyReducer from './loyalty/loyalty-reducer';
 
 import createSagaMiddleware from 'redux-saga';
 
@@ -41,6 +42,8 @@ import watchFetchIcons from './icons/sagas/fetch-icons-saga';
 import watchSaveIcons from './icons/sagas/save-icons-saga';
 import watchFetchWelcome from './welcome/sagas/fetch-welcome-saga';
 import watchSaveWelcome from './welcome/sagas/save-welcome-saga';
+import watchFetchLoyalty from './loyalty/sagas/fetch-loyalty-saga';
+import watchSaveLoyalty from './loyalty/sagas/save-loyalty-saga';
 
 import navigatorReducer from './navigator/navigator-reducer';
 
@@ -60,7 +63,8 @@ const store = createStore(
         chicken: chickenControlsReducer,
         icons: iconsReducer,
         news: newsReducer,
-        welcome: welcomeReducer
+        welcome: welcomeReducer,
+        loyalty: loyaltyReducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -87,6 +91,8 @@ sagaMiddleware.run(watchFetchNews);
 sagaMiddleware.run(watchSaveNews);
 sagaMiddleware.run(watchFetchWelcome);
 sagaMiddleware.run(watchSaveWelcome);
+sagaMiddleware.run(watchFetchLoyalty);
+sagaMiddleware.run(watchSaveLoyalty);
 
 ReactDOM.render(
     <Provider store={store}>

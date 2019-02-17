@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  background-color: black;
+  background-color: white;
 }
 
 button {
@@ -42,8 +42,9 @@ button {
 }
 
 input {
-  background-color: black;
-  color: white;
+  background-color: #dddddd;
+  color: black;
+  font-weight: bold;
   border: #777777 1px solid;
 }
 
@@ -101,6 +102,7 @@ fieldset {
 }
 
 form {
+  color:#222222;
   display: flex;
   flex-direction: row;
   border-radius: 4px;

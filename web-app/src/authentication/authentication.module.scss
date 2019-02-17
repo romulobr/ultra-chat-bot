@@ -41,7 +41,6 @@
 }
 
 .information {
-  background-color: rgba(0,0,0,0.5);
   flex-wrap: wrap;
   flex-grow: 1;
   display: flex;
@@ -66,12 +65,14 @@
 
 .overlayInstructions {
   width: auto;
-  color: white;
+  font-weight: bold;
   text-align: center;
-  background-color: #000000;
-  margin: 3px 0;
+  background-color: rgba(0,0,0,0.2);
+  padding:16px;
+  border-radius: 16px;
+  margin: 32px 32px;
   line-height: 1.5em;
   span {
-    color: #FFD200;
+    color: black;
   }
 }

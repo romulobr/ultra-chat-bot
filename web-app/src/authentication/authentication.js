@@ -46,7 +46,6 @@ class AuthenticationPanel extends Component {
         const myPanel =
             <Panel initialPose={'hidden'} key="connected-panel">
                 <div className={styles.information}>
-
                     <Twitch user={this.props.user && this.props.user.twitch}
                             onDeathenticate={this.props.deauthenticate('twitch')}/>
                     <Youtube user={this.props.user && this.props.user.youtube}
@@ -57,15 +56,13 @@ class AuthenticationPanel extends Component {
                                     editToken={this.props.editToken}/>
                     <Streamlabs ref={this.streamlabs}/>
                 </div>
+                <ChatControls/>
                 <div className={styles.overlayInstructions}>Add browserSource
                     <span> http://localhost:62619/scene</span> (1280x720)
                     <br/>
                     Or with source parameter for custom sources
                     <br/> Example: <span> http://localhost:62619/scene?source=video</span>
                 </div>
-                <div className={styles.overlayInstructions}>
-                </div>
-                <ChatControls/>
             </Panel>;
 
         return (

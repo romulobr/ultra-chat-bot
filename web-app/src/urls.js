@@ -13,6 +13,7 @@ const mediaUrl = 'http://localhost:62619/media';
 const streamElementsApiCheck = 'https://api.streamelements.com/kappa/v2/users/current';
 const youtubeBroadcastsApi = 'http://localhost:62619/youtube-broadcasts';
 const settingsFileApi = 'http://localhost:62619/settings-file';
+const loyaltyApi = 'http://localhost:62619/api/loyalty';
 
 export {server};
 export {api};
@@ -29,6 +30,7 @@ export {iconsApi};
 export {settingsFileApi};
 export {welcomeApi};
 export {newsApi};
+export {loyaltyApi};
 
 export default {
     server,
@@ -44,5 +46,6 @@ export default {
     streamLabsDataApi,
     settingsFileApi,
     welcomeApi,
-    newsApi
+    newsApi,
+    loyaltyApi
 };

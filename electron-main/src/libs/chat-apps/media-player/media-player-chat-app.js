@@ -12,6 +12,7 @@ class MediaPlayerChatApp {
     this.settings.options = this.settings.options || {};
     this.commands = (settings.items && settings.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) || [];
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
+    this.loyaltyProfiles = settings.loyaltySystem.getLoyaltyProfiles();
   }
 
   async handleMessage(message) {
@@ -33,7 +34,7 @@ class MediaPlayerChatApp {
       left: item.left || this.settings.options.video.left || 0,
       size: item.size || this.settings.options.video.size || 100
     };
-    const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost);
+    const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost, this.loyaltyProfiles);
     if (!loyaltyVerified) return;
     sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
     this.cooldownManager.addCoolDownTo(message.author);

@@ -6,23 +6,25 @@
 }
 
 .mediaList {
-  width: 98%;
+  width: 100%;
   margin: auto;
   text-align: center;
+
   table {
     margin-top: 8px;
     width: 100%;
-    background-color: #222222;
-    color:white;
+    //background-color: #eeeeee;
+    //color:white;
     border: 1px solid #6441a4;
     box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 5px;
     border-collapse: collapse;
     border-radius: 8px;
+    padding:0;
 
     th {
       font-size: 0.7em;
-      color: #dddddd;
-      background-color: #6441a4;
+      //color: #dddddd;
+      //background-color: #6441a4;
       text-align: center;
       font-weight: bold;
     }
@@ -43,9 +45,9 @@
     td {
       vertical-align: middle;
       input{
-        background-color: black;
+        //background-color: black;
         border: 1px solid #6441a4;
-        color:white;
+        //color:white;
         text-align: center;
         display: inline-block;
         width: 98%;
@@ -57,7 +59,7 @@
         appearance: none;
         width: 20px;
         height: 20px;
-        background: black;
+        //background: black;
         border: 2px solid #666666;
         border-radius: 50px;
         margin: -4px;
