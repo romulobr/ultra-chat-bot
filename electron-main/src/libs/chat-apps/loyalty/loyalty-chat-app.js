@@ -67,8 +67,11 @@ module.exports = class LoyaltyChatApp {
 
     const command = commands.commandInFirstWord(message.text, ['power', 'love', 'me']);
     const splitMessage = message.text.split(' ');
-    const targetName = splitMessage[1] && splitMessage[1].replace('@', '');
-    const amount = Number.parseInt(splitMessage[2]);
+    const amount = Number.parseInt(splitMessage[1]);
+    let targetName = splitMessage.slice(2).join(' ');
+    if(targetName[0]==='@'){
+      targetName = targetName.replace('@','');
+    }
 
     if (!command) return;
 
