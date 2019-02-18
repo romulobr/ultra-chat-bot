@@ -5,14 +5,12 @@ import posed from 'react-pose';
 
 const Box = posed.div({
     hidden: {
-        position:'absolute',
-        opacity: 0, transform: 'translateY(150%) rotate(-20deg)',
-        transition: {duration: 500}
+        opacity: 0,
+        transition: {duration: 1000}
     },
     visible: {
-        position:'absolute',
-        opacity: 1, transform: 'translateY(0%) rotate(0deg)',
-        transition: {duration: 500}
+        opacity: 1,
+        transition: {duration: 1000}
     }
 
 });

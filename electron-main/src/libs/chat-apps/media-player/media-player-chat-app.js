@@ -33,7 +33,7 @@ class MediaPlayerChatApp {
     };
     const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost, this.loyaltyProfiles);
     if (!loyaltyVerified) return;
-    sendScreenMessage(screenMessage, this.settings.options.source.customSource || this.settings.options.source);
+    sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
     this.cooldownManager.addCoolDownTo(message.author);
   }
 }
