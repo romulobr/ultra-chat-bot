@@ -66,12 +66,11 @@ module.exports = class LoyaltyChatApp {
     if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
     const command = commands.commandInFirstWord(message.text, ['power', 'love', 'me']);
-    const splitMessage = message.text.split(' ');
-    const amount = Number.parseInt(splitMessage[1]);
-    let targetName = splitMessage.slice(2).join(' ');
-    if(targetName[0]==='@'){
-      targetName = targetName.replace('@','');
-    }
+    if (!command) return;
+    const parsedMessage = /!?(\w*) (\d*) (@?.*)/.exec(message.text);
+
+    const amount = parsedMessage && parsedMessage[2];
+    let targetName = parsedMessage && parsedMessage[3];
 
     if (!command) return;
 
