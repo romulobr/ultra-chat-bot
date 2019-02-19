@@ -71,6 +71,7 @@ module.exports = class LoyaltyChatApp {
 
     const amount = parsedMessage && parsedMessage[2];
     let targetName = parsedMessage && parsedMessage[3];
+    targetName = targetName.replace('@','');
 
     if (!command) return;
 
