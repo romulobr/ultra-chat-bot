@@ -67,19 +67,19 @@ module.exports = class LoyaltyChatApp {
 
     const command = commands.commandInFirstWord(message.text, ['power', 'love', 'me']);
     if (!command) return;
-    const parsedMessage = /!?(\w*) (\d*) (@?.*)/.exec(message.text);
 
-    const amount = parsedMessage && parsedMessage[2];
-    let targetName = parsedMessage && parsedMessage[3];
-    targetName = targetName.replace('@','');
-
-    if (!command) return;
-
-    if (command.command && !targetName) {
+    if (command.command === message.text) {
       const profile = this.loyaltyProfiles.getUserProfile(message.author.id);
       this.say(`@${message.author.name}: ${(profile && profile.power) || 0}⚡ ${(profile && profile.love) || 0}💖`);
 
-    } else if (command.command === 'love' && targetName && amount && amount > 0) {
+    } else if (command.command === 'love') {
+      const parsedMessage = /!?(\w*) (\d*) (@?.*)/.exec(message.text);
+      const amount = parsedMessage && parsedMessage[2];
+      let targetName = parsedMessage && parsedMessage[3];
+      targetName = targetName.replace('@', '');
+
+      if (!targetName || !amount || amount <= 0) return;
+
       const sourceProfile = this.loyaltyProfiles.getUserProfile(message.author.id);
       const targetProfile = this.loyaltyProfiles.getUserProfileByName(targetName);
       if (sourceProfile && targetProfile && (sourceProfile !== targetProfile)) {
