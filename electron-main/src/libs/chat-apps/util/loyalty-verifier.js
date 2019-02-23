@@ -21,6 +21,7 @@ async function verifyLoyalty(loyalty, message, user, itemCost, loyaltyProfiles) 
   if (loyaltyProfiles && loyalty.nativeLove && cost && cost !== 0) {
     return Promise.resolve(checkNativePoints({author: message.author, user, cost, loyaltyProfiles, type: 'love'}));
   }
+  return Promise.resolve(true);
 }
 
 function checkNativePoints(settings) {
