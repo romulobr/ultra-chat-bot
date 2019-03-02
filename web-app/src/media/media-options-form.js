@@ -18,6 +18,9 @@ function MediaOptionsForm(props) {
                 </Scope>
             </fieldset>
             <CooldownFieldset/>
+            <fieldset>
+                <NumberOption id="defaultVolume" label="Default Volume"/>
+            </fieldset>
             <CustomSourceFieldSet/>
         </Form>
     );

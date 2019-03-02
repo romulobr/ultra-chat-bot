@@ -132,13 +132,13 @@ class Navigator extends Component {
                                                 <span role="img">🥇 Loyalty</span>
                                             </div>
                                         </Link>
-                                        <Link
-                                            className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/test') ? styles.selected : '')}
-                                            to="/test">
-                                            <div>
-                                                <span role="img">🥇 Test</span>
-                                            </div>
-                                        </Link>
+                                        {/*<Link*/}
+                                            {/*className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/test') ? styles.selected : '')}*/}
+                                            {/*to="/test">*/}
+                                            {/*<div>*/}
+                                                {/*<span role="img">🥇 Test</span>*/}
+                                            {/*</div>*/}
+                                        {/*</Link>*/}
                                     </div>
                                 </div>
                             </div>

@@ -26,7 +26,7 @@ class VideoPlayer extends Component {
                         <div
                             className={(this.props.author && this.props.author.isChatSponsor ) ? 'videoPlayer__author videoPlayer__author-sponsor' : 'videoPlayer__author'}
                             pose={this.state.playing ? 'visible' : 'hidden'}>
-                            {(this.props.author && this.props.author.name) || 'Ultra v3'}
+                            💖 {(this.props.author && this.props.author.name) || ''}
                         </div>
                     </div>
                 </Box>
@@ -60,10 +60,12 @@ class VideoPlayer extends Component {
             const videoNode = this.videoRef.current;
             if (videoNode.src === this.props.url) {
                 videoNode.currentTime = 0;
+                videoNode.volume = this.props.volume || 1;
                 videoNode.play();
                 this.setState({playing: true, playerStyle: VideoPlayer.styleFromProps(this.props)})
             } else {
                 videoNode.src = this.props.url;
+                videoNode.volume = this.props.volume || 1;
                 videoNode.play();
                 this.setState({playing: true, playerStyle: VideoPlayer.styleFromProps(this.props)})
             }

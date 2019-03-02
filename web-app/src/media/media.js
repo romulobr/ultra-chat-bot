@@ -60,6 +60,7 @@ class MediaPanel extends Component {
                                 </th>
                                 <th>Command</th>
                                 <th>File/URL</th>
+                                <th>Volume Override</th>
                                 <th>Cost Override</th>
                                 <th>Source Override</th>
                             </tr>
@@ -137,10 +138,15 @@ class MediaPanel extends Component {
                         <Text field="url" id={`item-${index}-url`} initialValue={item.url}/>
                     </td>
                     <td>
-                        <Text field="costOverride" id={`item-${index}-costOverride`} initialValue={item.cost}/>
+                        <Text field={"volumeOverride"} id={`item-${index}-volumeOverride`}
+                              initialValue={item.volumeOverride}/>
                     </td>
                     <td>
-                        <Text field={"sourceOverride"} id={`item-${index}-sourceOverride`} initialValue={item.sourceOverride}/>
+                        <Text field="costOverride" id={`item-${index}-costOverride`} initialValue={item.costOverride}/>
+                    </td>
+                    <td>
+                        <Text field={"sourceOverride"} id={`item-${index}-sourceOverride`}
+                              initialValue={item.sourceOverride}/>
                     </td>
                 </Scope>
             </tr>

@@ -13,6 +13,7 @@ class MediaPlayerChatApp {
     this.commands = (settings.items && settings.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) || [];
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
     this.loyaltyProfiles = settings.loyaltySystem.getLoyaltyProfiles();
+    this.defaultVolume = settings.options.defaultVolume;
   }
 
   async handleMessage(message) {
@@ -29,6 +30,7 @@ class MediaPlayerChatApp {
       isMedia: true,
       command,
       url: mediaUrl,
+      volume: this.defaultVolume || item.volumeOverride || 1,
       author: message.author
     };
     const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost, this.loyaltyProfiles);
