@@ -17,6 +17,12 @@ import iconsReducer from './icons/icons-reducer';
 import newsReducer from './news/news-reducer';
 import welcomeReducer from './welcome/welcome-reducer';
 import loyaltyReducer from './loyalty/loyalty-reducer';
+import navigatorReducer from './navigator/navigator-reducer';
+
+import saveSettingsFor from './settings-panel/save-settings-saga';
+import fetchSettingsFor from './settings-panel/fetch-settings-saga';
+
+import reducerFor from './settings-panel/settings-reducer';
 
 import createSagaMiddleware from 'redux-saga';
 
@@ -45,7 +51,13 @@ import watchSaveWelcome from './welcome/sagas/save-welcome-saga';
 import watchFetchLoyalty from './loyalty/sagas/fetch-loyalty-saga';
 import watchSaveLoyalty from './loyalty/sagas/save-loyalty-saga';
 
-import navigatorReducer from './navigator/navigator-reducer';
+const packageFor = (key) => ({
+    watchFetch: fetchSettingsFor(key),
+    watchSave: saveSettingsFor(key),
+    reducer: reducerFor(key)
+});
+
+const testSetting = packageFor('test');
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -64,7 +76,8 @@ const store = createStore(
         icons: iconsReducer,
         news: newsReducer,
         welcome: welcomeReducer,
-        loyalty: loyaltyReducer
+        loyalty: loyaltyReducer,
+        test: testSetting.reducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -93,6 +106,8 @@ sagaMiddleware.run(watchFetchWelcome);
 sagaMiddleware.run(watchSaveWelcome);
 sagaMiddleware.run(watchFetchLoyalty);
 sagaMiddleware.run(watchSaveLoyalty);
+sagaMiddleware.run(testSetting.watchSave);
+sagaMiddleware.run(testSetting.watchFetch);
 
 ReactDOM.render(
     <Provider store={store}>

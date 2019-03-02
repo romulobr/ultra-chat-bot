@@ -10,7 +10,7 @@ import Icons from '../icons/icons';
 import News from '../news/news';
 import Welcome from '../welcome/welcome';
 import Loyalty from '../loyalty/loyalty';
-
+import settingsPanelFor from '../settings-panel/settings-panel';
 import actions from './navigation-actions';
 
 import styles from './navigator.module.scss';
@@ -33,6 +33,23 @@ const icons = () => <Icons/>;
 const welcome = () => <Welcome/>;
 const news = () => <News/>;
 const loyalty = () => <Loyalty/>;
+const testFields = [{
+    name: 'testSettings', id: 'options', fields: [
+        {
+            id: 'InternalFieldIdentifier',
+            label: 'Field 1',
+            type: 'text'
+        },
+        {
+            id: 'exampleField',
+            label: 'Something',
+            type: 'text'
+        }
+    ]
+}];
+const test = settingsPanelFor('test', testFields);
+
+// const test = <TestComponent/>;
 
 class Navigator extends Component {
     constructor(props) {
@@ -115,6 +132,13 @@ class Navigator extends Component {
                                                 <span role="img">🥇 Loyalty</span>
                                             </div>
                                         </Link>
+                                        <Link
+                                            className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/test') ? styles.selected : '')}
+                                            to="/test">
+                                            <div>
+                                                <span role="img">🥇 Test</span>
+                                            </div>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -129,6 +153,7 @@ class Navigator extends Component {
                                         <Route key={'icons'} path="/icons/" component={icons}/>
                                         <Route key={'news'} path="/news/" component={news}/>
                                         <Route key={'loyalty'} path="/loyalty/" component={loyalty}/>
+                                        <Route key={'test'} path={"/test/"} component={test}/>
                                     </Switch>
                                 </RoutesContainer>
                             </PoseGroup>

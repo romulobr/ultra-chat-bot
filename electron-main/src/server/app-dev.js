@@ -70,6 +70,7 @@ mainApp.use('*', function (req, res) {
     newUrl === baseUrl + '/news' ||
     newUrl === baseUrl + '/welcome' ||
     newUrl === baseUrl + '/loyalty' ||
+    newUrl === baseUrl + '/test' ||
     newUrl === baseUrl + '/chicken') {
     request(baseUrl).pipe(res);
   }

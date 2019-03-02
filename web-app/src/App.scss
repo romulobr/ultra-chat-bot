@@ -111,6 +111,10 @@ form {
   justify-content: space-between;
   flex-grow: 1;
 
+  fieldset:disabled{
+    background-color: gray;
+  }
+
   div{
     flex-grow: 1;
   }
@@ -123,7 +127,9 @@ form {
     span {
       margin: 8px;
     }
-
+    input:disabled{
+      background-color: gray;
+    }
     input[type='checkbox'] {
       appearance: none;
       width: 20px;
