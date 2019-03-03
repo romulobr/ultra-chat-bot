@@ -30,7 +30,7 @@ class MediaPlayerChatApp {
       isMedia: true,
       command,
       url: mediaUrl,
-      volume: this.defaultVolume || item.volumeOverride || 1,
+      volume: item.volumeOverride || this.defaultVolume || 1,
       author: message.author
     };
     const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost, this.loyaltyProfiles);
