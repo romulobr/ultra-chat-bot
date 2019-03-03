@@ -33,8 +33,8 @@ class NewsChatApp {
     settings.permissions = settings.permissions || {};
     this.settings = settings;
     this.feeds = settings.options.news || [];
-    this.refreshInterval = settings.options.refreshInterval || 60;
-    this.showInterval = settings.options.showInterval || 5;
+    this.refreshIntervalInMinutes = settings.options.refreshIntervalInMinutes || 60;
+    this.showIntervalInMinutes = settings.options.showIntervalInMinutes || 5;
     this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 1000;
     this.screenTime = settings.options.screenTime || 60;
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown || 60);
@@ -45,11 +45,11 @@ class NewsChatApp {
       this.refresh();
       this.refreshIntervalId = setInterval(() => {
         this.refresh()
-      }, (this.refreshInterval) * 60000);
+      }, this.refreshIntervalInMinutes * 60000);
 
       this.showIntervalId = setInterval(() => {
         this.showNews()
-      }, (this.showInterval) * 60000);
+      }, this.showIntervalInMinutes * 60000);
     }
   }
 

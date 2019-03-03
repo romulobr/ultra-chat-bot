@@ -11,7 +11,8 @@ function LoyaltyOptionsForm(props) {
             <CooldownFieldset/>
             <fieldset>
                 <TextOption id={'pointsPerRound'} label={"Points per round"}/>
-                <TextOption id={'roundDuration'} label={"Round Duration (minutes)"}/>
+                <TextOption id={'subscriberMultiplier'} label={"Joined/Sub Multiplier"}/>
+                <TextOption id={'roundDurationInMinutes'} label={"Round Duration (minutes)"}/>
             </fieldset>
             <fieldset>
                 <CheckBoxOption id={'enableSound'} label={'Enable Sound when giving love'}/>

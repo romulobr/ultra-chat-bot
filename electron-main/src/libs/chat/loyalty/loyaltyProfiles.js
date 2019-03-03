@@ -7,17 +7,20 @@ module.exports = class LoyaltyProfiles {
     this.jwt = settings.jwt;
     this.profiles = {};
     this.profilesByName = {};
+    this.profilesByNameLowerCase = {};
     this.fetchProfiles().then(result => {
       this.intervalInMinutes = settings.intervalInMinutes || 5;
       result.data.profiles && result.data.profiles.forEach(profile => {
         this.profiles[profile.id] = profile;
         this.profilesByName[profile.name] = profile;
+        this.profilesByNameLowerCase[profile.name.toLowerCase()] = profile;
       });
       this.intervalId = setInterval(this.saveProfiles.bind(this), this.intervalInMinutes * 60000);
     }, (e) => {
       console.log('Could not fetch loyalty profiles', e);
       this.profiles = {};
       this.profilesByName = {};
+      this.profilesByNameLowerCase = {};
     });
   }
 
@@ -62,24 +65,27 @@ module.exports = class LoyaltyProfiles {
   }
 
   getUserProfileByName(name) {
-    return this.profilesByName[name];
+    return this.profilesByName[name] || this.profilesByNameLowerCase[name.toLowerCase()];
   }
 
   createUserProfile(user) {
     this.profiles[user.id] = user;
     this.profilesByName[user.name] = user;
+    this.profilesByNameLowerCase[user.name.toLowerCase()] = user;
   }
 
   addPoints(user, points) {
+    const amount = Number.parseInt(points.amount);
     console.log(`adding ${points.amount} ${points.type} to ${user.name}`);
-    if (!this.profiles[user.id]) {
+    const profile = this.getUserProfile(user.id) || this.getUserProfileByName(user.name);
+    if (!profile) {
       this.createUserProfile(user)
     }
-    const profile = this.profiles[user.id];
-    profile[points.type] = (profile[points.type] || 0) + points.amount;
+    profile[points.type] = (profile[points.type] || 0) + amount;
   }
 
   reducePoints(user, points) {
-    this.addPoints(user, {...points, amount: points.amount * -1});
+    const amount = Number.parseInt(points.amount);
+    this.addPoints(user, {...points, amount: amount * -1});
   }
 };

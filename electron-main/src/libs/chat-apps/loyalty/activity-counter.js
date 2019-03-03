@@ -1,18 +1,18 @@
 module.exports = class ActivityCounter {
   constructor(settings) {
-    this.roundDuration = settings.roundDuration || 10000;
+    this.roundDurationInMinutes = Number.parseFloat(settings.roundDurationInMinutes) || 5;
     this.endRoundCallBack = settings.endRoundCallBack;
     this.activePeople = {};
     this.startsRounds();
   }
 
   startsRounds() {
-    console.log(`starting rounds with ${this.roundDuration} duration`);
+    console.log(`starting rounds with ${this.roundDurationInMinutes} minutes duration`);
     if (this.roundsIntervalId) {
       clearInterval(this.roundsIntervalId);
     }
     this.startsRound();
-    this.roundsIntervalId = setInterval(this.startsRound.bind(this), this.roundDuration);
+    this.roundsIntervalId = setInterval(this.startsRound.bind(this), this.roundDurationInMinutes * 60000);
   }
 
   startsRound() {

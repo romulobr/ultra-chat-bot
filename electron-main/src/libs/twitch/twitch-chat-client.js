@@ -21,7 +21,7 @@ function create(user, apps, loyaltySystem) {
   const client = new twitchJs.client(options);
 
   function say(message) {
-    client.say(channel, message);
+    client.say(channel, '.me '+message);
   }
 
   function stop() {
