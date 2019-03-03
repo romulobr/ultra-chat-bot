@@ -5,7 +5,8 @@ import actions from '../chicken-controls-actions';
 
 function* sendChickenCommand(action) {
     try {
-        yield axios.post(messageApi, {chicken: action.payload});
+        console.log('payload:', action.payload);
+        yield axios.post(messageApi, action.payload);
     } catch (e) {
         yield put(actions.mediaFetchFailed({error: e}));
         console.log('got an error:', e);

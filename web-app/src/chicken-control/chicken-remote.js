@@ -51,17 +51,33 @@ class ChickenControlsForm extends Component {
                     </label>
                     <div className={optionsFormStyles.buttonBar}>
                         <button className={styles.chickenItem} onClick={() => {
-                            this.props.sendChickenCommand({move: {x: this.state.moveX, y: this.state.moveY}})
+                            this.props.sendChickenCommand({
+                                chicken: {
+                                    move: {x: this.state.moveX, y: this.state.moveY}
+                                },
+                                source: this.props.options && this.props.options.source && this.props.options.source.customSource
+                            })
                         }}>
                             Move
                         </button>
                         <button className={styles.chickenItem} onClick={() => {
-                            this.props.sendChickenCommand({move: {x: Math.random() * 10, y: Math.random() * 10}})
+                            this.props.sendChickenCommand({
+                                chicken: {
+                                    move: {x: Math.random() * 10, y: Math.random() * 10}
+                                },
+                                source: this.props.options && this.props.options.source && this.props.options.source.customSource
+                            })
                         }}>
                             Random Move
                         </button>
                         <button className={styles.chickenItem} onClick={() => {
-                            this.props.sendChickenCommand({say: this.state.whatToSay, sound: this.props.enableSound})
+                            this.props.sendChickenCommand({
+                                chicken: {
+                                    say: this.state.whatToSay,
+                                    sound: this.props.options && this.props.options.enableSound
+                                },
+                                source: this.props.options && this.props.options.source && this.props.options.source.customSource
+                            });
                         }}>
                             Say Message
                         </button>
@@ -77,7 +93,10 @@ class ChickenControlsForm extends Component {
 }
 
 function mapStateToProps(state) {
-    return {enableSound: state.chicken.data && state.chicken.data.options && state.chicken.data.options.enableSound};
+    console.log(state.chicken);
+    return {
+        ...state.chicken.data
+    };
 }
 
 const mapDispatchToProps = dispatch => {
