@@ -22,10 +22,12 @@ class AudioPlayer extends Component {
             const audioNode = this.audioRef.current;
             if (audioNode.src === this.props.url) {
                 audioNode.currentTime = 0;
+                audioNode.volume = this.props.volume || 1;
                 audioNode.play();
                 this.setState({playing: true})
             } else {
                 audioNode.src = this.props.url;
+                audioNode.volume = this.props.volume || 1;
                 audioNode.play();
                 this.setState({playing: true})
             }
