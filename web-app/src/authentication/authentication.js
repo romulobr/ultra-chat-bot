@@ -9,6 +9,7 @@ import Twitch from './twitch/twitch';
 import Youtube from './youtube/youtube';
 import {connect} from 'react-redux';
 import ChatControls from '../chat-controls/chat-controls'
+import CurrentVersion from '../current-version/current-version';
 
 const Panel = posed.div({
     enter: {
@@ -63,6 +64,7 @@ class AuthenticationPanel extends Component {
                     Or with source parameter for custom sources
                     <br/> Example: <span> http://localhost:62619/scene?source=video</span>
                 </div>
+                <CurrentVersion/>
             </Panel>;
 
         return (
