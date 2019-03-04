@@ -1,5 +1,5 @@
 {
-  "name": "v3",
+  "name": "v3-webapp",
   "version": "0.3.8",
   "private": true,
   "dependencies": {
