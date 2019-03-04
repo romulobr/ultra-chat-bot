@@ -159,13 +159,13 @@ class Navigator extends Component {
                                                 <span role="img">🥇 Loyalty</span>
                                             </div>
                                         </Link>
-                                        <Link
-                                            className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/questions') ? styles.selected : '')}
-                                            to="/quiz">
-                                            <div>
-                                                <span role="img">🥇 Quiz</span>
-                                            </div>
-                                        </Link>
+                                        {/*<Link*/}
+                                            {/*className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/questions') ? styles.selected : '')}*/}
+                                            {/*to="/quiz">*/}
+                                            {/*<div>*/}
+                                                {/*<span role="img">🥇 Quiz</span>*/}
+                                            {/*</div>*/}
+                                        {/*</Link>*/}
                                     </div>
                                 </div>
                             </div>
