@@ -67,7 +67,7 @@ export default class SettingsForm extends React.Component {
                                 </Scope>
                             </fieldset>
                         )
-                    })});
+                    })}
                 </Form>
                 <ActionButton onClick={this.saveData} text={'Save'} enabled={enabled}> </ActionButton>
             </div>

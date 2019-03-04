@@ -33,21 +33,48 @@ const icons = () => <Icons/>;
 const welcome = () => <Welcome/>;
 const news = () => <News/>;
 const loyalty = () => <Loyalty/>;
-const testFields = [{
-    name: 'testSettings', id: 'options', fields: [
+
+const permissionsFieldSet = {
+    name: 'Permissions', id: 'permissions', fields: [
+        {id: 'simpleCommands', label: 'SimpleCommands (No !)', type: 'checkbox'},
+        {id: 'allowNormalUsers', label: 'Allow Normal Users', type: 'checkbox'},
+        {id: 'allowVips', label: 'Allow Vips', type: 'checkbox'},
+        {id: 'allowModerators', label: 'Allow Moderators', type: 'checkbox'},
+        {id: 'allowSubscribersMembers', label: 'Allow Subscribers/Members', type: 'checkbox'}
+    ]
+};
+const customSourceFieldSet = {fields: []};
+const cooldownFieldSet = {fields: []};
+
+const questionFields = [
+    permissionsFieldSet,
+    cooldownFieldSet,
+    customSourceFieldSet,
+    {
+        name: 'Quiz', id: 'options', fields: [
         {
-            id: 'InternalFieldIdentifier',
-            label: 'Field 1',
+            id: 'file',
+            label: 'Quiz file name',
             type: 'text'
         },
         {
-            id: 'exampleField',
-            label: 'Something',
-            type: 'text'
+            id: 'intervalInMinutes',
+            label: 'Interval Between Quizzes (minutes)',
+            type: 'number'
+        },
+        {
+            id: 'defaultPowerReward',
+            label: 'Default Power Reward',
+            type: 'number'
+        },
+        {
+            id: 'defaultLoveReward',
+            label: 'Default Love Reward',
+            type: 'number'
         }
     ]
-}];
-const test = settingsPanelFor('test', testFields);
+    }];
+const quiz = settingsPanelFor('quiz', questionFields);
 
 // const test = <TestComponent/>;
 
@@ -132,13 +159,13 @@ class Navigator extends Component {
                                                 <span role="img">🥇 Loyalty</span>
                                             </div>
                                         </Link>
-                                        {/*<Link*/}
-                                            {/*className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/test') ? styles.selected : '')}*/}
-                                            {/*to="/test">*/}
-                                            {/*<div>*/}
-                                                {/*<span role="img">🥇 Test</span>*/}
-                                            {/*</div>*/}
-                                        {/*</Link>*/}
+                                        <Link
+                                            className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/questions') ? styles.selected : '')}
+                                            to="/quiz">
+                                            <div>
+                                                <span role="img">🥇 Quiz</span>
+                                            </div>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +180,7 @@ class Navigator extends Component {
                                         <Route key={'icons'} path="/icons/" component={icons}/>
                                         <Route key={'news'} path="/news/" component={news}/>
                                         <Route key={'loyalty'} path="/loyalty/" component={loyalty}/>
-                                        <Route key={'test'} path={"/test/"} component={test}/>
+                                        <Route key={'quiz'} path={"/quiz/"} component={quiz}/>
                                     </Switch>
                                 </RoutesContainer>
                             </PoseGroup>

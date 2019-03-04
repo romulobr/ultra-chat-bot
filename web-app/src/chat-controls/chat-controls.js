@@ -13,7 +13,9 @@ class ChatControls extends Component {
                     <div
                         className={styles.twitchChat + (this.props.twitch.connected ? ' ' + styles.connected : '') + (this.props.twitch.loading ? ' ' + styles.loading : '')}>
                         <img src={this.props.user.twitch.profilePictureUrl} alt="twitch channel art"/>
-                        <div>Twitch Chat</div>
+                        <div className={styles.chatLink}><a
+                            href={`https://www.twitch.tv/popout/${this.props.user.twitch.name}/chat?popout=`}
+                            target="__blank">Twitch Chat</a></div>
                         <button
                             onClick={this.props.twitch.connected ? this.props.disconnectFromChat : this.props.connectToChat}
                             disabled={this.props.twitch.loading}>

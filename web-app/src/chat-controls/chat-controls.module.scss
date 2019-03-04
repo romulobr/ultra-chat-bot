@@ -10,7 +10,7 @@
   color: white;
   font-weight: bolder;
   text-shadow: black 1px 1px 1px;
-  background: linear-gradient(180deg, rgba(0,0,0,1) 20%, rgba(106, 0, 187, 1) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 20%, rgba(106, 0, 187, 1) 100%);
   border: solid 1px black;
   flex-direction: column;
   padding: 2px;
@@ -37,3 +37,7 @@
   border-color: #FFD200;
 }
 
+.chatLink a{
+  color:white;
+  text-decoration: none;
+}

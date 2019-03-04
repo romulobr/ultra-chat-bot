@@ -34,7 +34,7 @@ function connectedSettingsFor(id, fieldSets) {
         return {
             id,
             fieldSets,
-            ...state.test
+            ...state[id]
         };
     }
 

@@ -52,12 +52,13 @@ import watchFetchLoyalty from './loyalty/sagas/fetch-loyalty-saga';
 import watchSaveLoyalty from './loyalty/sagas/save-loyalty-saga';
 
 const packageFor = (key) => ({
+    key,
     watchFetch: fetchSettingsFor(key),
     watchSave: saveSettingsFor(key),
     reducer: reducerFor(key)
 });
 
-const testSetting = packageFor('test');
+const quizSettings = packageFor('quiz');
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -77,7 +78,7 @@ const store = createStore(
         news: newsReducer,
         welcome: welcomeReducer,
         loyalty: loyaltyReducer,
-        test: testSetting.reducer
+        [quizSettings.key]: quizSettings.reducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -106,8 +107,8 @@ sagaMiddleware.run(watchFetchWelcome);
 sagaMiddleware.run(watchSaveWelcome);
 sagaMiddleware.run(watchFetchLoyalty);
 sagaMiddleware.run(watchSaveLoyalty);
-sagaMiddleware.run(testSetting.watchSave);
-sagaMiddleware.run(testSetting.watchFetch);
+sagaMiddleware.run(quizSettings.watchSave);
+sagaMiddleware.run(quizSettings.watchFetch);
 
 ReactDOM.render(
     <Provider store={store}>

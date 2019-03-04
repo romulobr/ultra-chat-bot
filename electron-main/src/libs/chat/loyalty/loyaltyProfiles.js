@@ -77,9 +77,10 @@ module.exports = class LoyaltyProfiles {
   addPoints(user, points) {
     const amount = Number.parseInt(points.amount);
     console.log(`adding ${points.amount} ${points.type} to ${user.name}`);
-    const profile = this.getUserProfile(user.id) || this.getUserProfileByName(user.name);
+    let profile = this.getUserProfile(user.id) || this.getUserProfileByName(user.name);
     if (!profile) {
-      this.createUserProfile(user)
+      this.createUserProfile(user);
+      profile = this.getUserProfile(user.id) || this.getUserProfileByName(user.name);
     }
     profile[points.type] = (profile[points.type] || 0) + amount;
   }
