@@ -35,7 +35,7 @@ const news = () => <News/>;
 const loyalty = () => <Loyalty/>;
 
 const permissionsFieldSet = {
-    name: 'Permissions', id: 'permissions', fields: [
+    label: 'Permissions', id: 'permissions', fields: [
         {id: 'simpleCommands', label: 'SimpleCommands (No !)', type: 'checkbox'},
         {id: 'allowNormalUsers', label: 'Allow Normal Users', type: 'checkbox'},
         {id: 'allowVips', label: 'Allow Vips', type: 'checkbox'},
@@ -45,18 +45,8 @@ const permissionsFieldSet = {
 };
 const customSourceFieldSet = {fields: []};
 const cooldownFieldSet = {fields: []};
-
-const questionFields = [
-    permissionsFieldSet,
-    cooldownFieldSet,
-    customSourceFieldSet,
-    {
-        name: 'Quiz', id: 'options', fields: [
-        {
-            id: 'file',
-            label: 'Quiz file name',
-            type: 'text'
-        },
+const quizOptionsFieldSet = {
+    label: 'Quiz', id: 'options', fields: [
         {
             id: 'intervalInMinutes',
             label: 'Interval Between Quizzes (minutes)',
@@ -71,9 +61,42 @@ const questionFields = [
             id: 'defaultLoveReward',
             label: 'Default Love Reward',
             type: 'number'
+        },
+        {
+            id: 'questions',
+            label: 'Questions',
+            type: 'array',
+            fields: [
+                {
+                    id: 'question',
+                    label: 'Question',
+                    type: 'text'
+                },
+                {
+                    id: 'answers',
+                    label: 'Answers, separate with comma',
+                    type: 'text'
+                },
+                {
+                    id: 'reward',
+                    label: 'Reward in points',
+                    type: 'number'
+                },
+                {
+                    id: 'rewardCurrency',
+                    label: 'Reward Currency if applicable (love, power)',
+                    type: 'text'
+                }
+            ]
         }
     ]
-    }];
+};
+const questionFields = [
+    permissionsFieldSet,
+    cooldownFieldSet,
+    customSourceFieldSet,
+    quizOptionsFieldSet
+];
 const quiz = settingsPanelFor('quiz', questionFields);
 
 // const test = <TestComponent/>;
@@ -159,13 +182,13 @@ class Navigator extends Component {
                                                 <span role="img">🥇 Loyalty</span>
                                             </div>
                                         </Link>
-                                        {/*<Link*/}
-                                            {/*className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/questions') ? styles.selected : '')}*/}
-                                            {/*to="/quiz">*/}
-                                            {/*<div>*/}
-                                                {/*<span role="img">🥇 Quiz</span>*/}
-                                            {/*</div>*/}
-                                        {/*</Link>*/}
+                                        <Link
+                                            className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/questions') ? styles.selected : '')}
+                                            to="/quiz">
+                                            <div>
+                                                <span role="img">🥇 Quiz</span>
+                                            </div>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

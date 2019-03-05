@@ -12,7 +12,7 @@ function validateForm(form) {
     if (isNaN(costPerChatPlay)) {
         validation.costPerChatPlay = {hasValidationError: true, validationError: 'number'}
     }
-    items.forEach(item => {
+    items && items.forEach(item => {
         if (!item.url || !item.command) {
             validation.items.push({
                 ...item,

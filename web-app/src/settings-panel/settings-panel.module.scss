@@ -1,0 +1,27 @@
+.arraySubForm {
+  margin:8px;
+  padding:2px;
+
+  fieldset {
+    display: flex;
+    margin:4px;
+    padding:2px;
+    //background-color: darkred;
+    label{
+      display: flex;
+      flex-direction: column;
+      margin:0;
+      //background-color: greenyellow;
+    }
+    input{
+      flex-grow: 1;
+      width: 100%;
+      //background-color: goldenrod;
+    }
+  }
+
+  button{
+    margin:8px;
+
+  }
+}

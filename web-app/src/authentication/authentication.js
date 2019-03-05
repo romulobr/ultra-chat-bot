@@ -58,11 +58,14 @@ class AuthenticationPanel extends Component {
                     <Streamlabs ref={this.streamlabs}/>
                 </div>
                 <ChatControls/>
-                <div className={styles.overlayInstructions}>Add browserSource
-                    <span> http://localhost:62619/scene</span> (1280x720)
-                    <br/>
-                    Or with source parameter for custom sources
-                    <br/> Example: <span> http://localhost:62619/scene?source=video</span>
+                <div className={styles.overlayInstructions}>
+                    <ul>
+                        Your browser sources
+                        <li>http://localhost:62619/scene</li>
+                        {this.props.detectedSources.map((source, i) => {
+                            return (<li key={i}>http://localhost:62619/scene?source={source} </li>)
+                        })}
+                    </ul>
                 </div>
                 <CurrentVersion/>
             </Panel>;
@@ -77,10 +80,20 @@ class AuthenticationPanel extends Component {
     }
 }
 
+function getDetectedSources(state) {
+    const sources = [];
+    Object.keys(state).forEach(key => {
+        const source = state[key].data && state[key].data.options && state[key].data.options.source && state[key].data.options.source.customSource;
+        source && sources.push(state[key].data.options.source.customSource);
+    });
+    return sources;
+}
+
 function mapStateToProps(state) {
     return {
         ...state.authentication,
-        hasUser: !!state.authentication.user
+        hasUser: !!state.authentication.user,
+        detectedSources: getDetectedSources(state)
     };
 }
 
