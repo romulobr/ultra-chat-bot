@@ -14,9 +14,6 @@ import streamLabsReducer from './authentication/stream-labs/stream-labs-reducer'
 import youtubeChatControlsReducer from './chat-controls/youtube/youtube-chat-controls-reducer';
 import chickenControlsReducer from './chicken-control/chicken-reducer'
 import iconsReducer from './icons/icons-reducer';
-import newsReducer from './news/news-reducer';
-import welcomeReducer from './welcome/welcome-reducer';
-import loyaltyReducer from './loyalty/loyalty-reducer';
 import navigatorReducer from './navigator/navigator-reducer';
 
 import saveSettingsFor from './settings-panel/save-settings-saga';
@@ -59,6 +56,11 @@ const packageFor = (key) => ({
 });
 
 const quizSettings = packageFor('quiz');
+const loyaltySettings = packageFor('loyalty');
+const newsSettings = packageFor('news');
+const welcomeSettings = packageFor('welcome');
+const iconsSettings = packageFor('icons');
+const chickenSettings = packageFor('chicken');
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -74,11 +76,12 @@ const store = createStore(
         streamElements: streamElementsReducer,
         streamLabs: streamLabsReducer,
         chicken: chickenControlsReducer,
-        icons: iconsReducer,
-        news: newsReducer,
-        welcome: welcomeReducer,
-        loyalty: loyaltyReducer,
-        [quizSettings.key]: quizSettings.reducer
+        [chickenSettings.key]: chickenSettings.reducer,
+        [loyaltySettings.key]: loyaltySettings.reducer,
+        [quizSettings.key]: quizSettings.reducer,
+        [newsSettings.key]: newsSettings.reducer,
+        [iconsSettings.key]: iconsSettings.reducer,
+        [welcomeSettings.key]: welcomeSettings.reducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
@@ -94,21 +97,22 @@ sagaMiddleware.run(watchPlayMedia);
 sagaMiddleware.run(watchFetchStreamElementsToken);
 sagaMiddleware.run(watchSaveStreamElementsToken);
 sagaMiddleware.run(watchFetchYoutubeBroadcasts);
-sagaMiddleware.run(watchSaveChicken);
-sagaMiddleware.run(watchFetchChicken);
 sagaMiddleware.run(watchChickenCommand);
 sagaMiddleware.run(watchFetchStreamLabsData);
 sagaMiddleware.run(watchDisconnectStreamLabs);
-sagaMiddleware.run(watchFetchIcons);
-sagaMiddleware.run(watchSaveIcons);
-sagaMiddleware.run(watchFetchNews);
-sagaMiddleware.run(watchSaveNews);
-sagaMiddleware.run(watchFetchWelcome);
-sagaMiddleware.run(watchSaveWelcome);
-sagaMiddleware.run(watchFetchLoyalty);
-sagaMiddleware.run(watchSaveLoyalty);
 sagaMiddleware.run(quizSettings.watchSave);
 sagaMiddleware.run(quizSettings.watchFetch);
+sagaMiddleware.run(loyaltySettings.watchSave);
+sagaMiddleware.run(loyaltySettings.watchFetch);
+sagaMiddleware.run(newsSettings.watchSave);
+sagaMiddleware.run(newsSettings.watchFetch);
+sagaMiddleware.run(welcomeSettings.watchSave);
+sagaMiddleware.run(welcomeSettings.watchFetch);
+sagaMiddleware.run(iconsSettings.watchSave);
+sagaMiddleware.run(iconsSettings.watchFetch);
+sagaMiddleware.run(chickenSettings.watchSave);
+sagaMiddleware.run(chickenSettings.watchFetch);
+
 
 ReactDOM.render(
     <Provider store={store}>

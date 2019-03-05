@@ -1,13 +1,13 @@
 import {createAction} from 'redux-act';
 
-const sendChickenCommand = createAction('CHICKEN_COMMAND');
+const sendChickenCommand = createAction('CHICKEN_OLD_COMMAND');
 
-const saveChicken = createAction('SAVE_CHICKEN');
-const chickenSaveFailed = createAction('CHICKEN_SAVE_FAILED');
-const chickenSaved = createAction('CHICKEN_SAVED');
-const fetchChicken = createAction('FETCH_CHICKEN');
-const chickenFetched = createAction('CHICKEN_FETCHED');
-const chickenFetchFailed = createAction('CHICKEN_FETCH_FAILED');
+const saveChicken = createAction('SAVE_CHICKEN_OLD');
+const chickenSaveFailed = createAction('CHICKEN_OLD_SAVE_FAILED');
+const chickenSaved = createAction('CHICKEN_OLD_SAVED');
+const fetchChicken = createAction('FETCH_CHICKEN_OLD');
+const chickenFetched = createAction('CHICKEN_OLD_FETCHED');
+const chickenFetchFailed = createAction('CHICKEN_OLD_FETCH_FAILED');
 
 export {saveChicken};
 export {chickenFetched};

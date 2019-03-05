@@ -1,13 +1,13 @@
 import {createAction} from 'redux-act';
 
-const sendWelcomeCommand = createAction('WELCOME_COMMAND');
+const sendWelcomeCommand = createAction('WELCOME_OLD_COMMAND');
 
-const saveWelcome = createAction('SAVE_WELCOME');
-const welcomeSaveFailed = createAction('WELCOME_SAVE_FAILED');
-const welcomeSaved = createAction('WELCOME_SAVED');
-const fetchWelcome = createAction('FETCH_WELCOME');
-const welcomeFetched = createAction('WELCOME_FETCHED');
-const welcomeFetchFailed = createAction('WELCOME_FETCH_FAILED');
+const saveWelcome = createAction('SAVE_WELCOME_OLD');
+const welcomeSaveFailed = createAction('WELCOME_OLD_SAVE_FAILED');
+const welcomeSaved = createAction('WELCOME_OLD_SAVED');
+const fetchWelcome = createAction('FETCH_WELCOME_OLD');
+const welcomeFetched = createAction('WELCOME_OLD_FETCHED');
+const welcomeFetchFailed = createAction('WELCOME_OLD_FETCH_FAILED');
 
 export {saveWelcome};
 export {welcomeFetched};

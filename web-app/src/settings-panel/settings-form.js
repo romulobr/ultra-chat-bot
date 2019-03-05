@@ -24,7 +24,7 @@ export default class SettingsForm extends React.Component {
     }
 
     arrayItemSubForm(arrayField, index) {
-        return (<fieldset>
+        return (<fieldset key={index}>
             {arrayField.fields.map((field, i) => {
                 const arrayIndexField = {...field, id: `${field.id}[${index}]`};
                 return this.toFormField(arrayIndexField, i);
@@ -45,9 +45,9 @@ export default class SettingsForm extends React.Component {
         this.setState({data: {...this.state.data, [arrayField.id]: [...arrayData]}});
     }
 
-    arraySubForm(arrayField) {
+    arraySubForm(arrayField, i) {
         return (
-            <div className={styles.arraySubForm}>
+            <div className={styles.arraySubForm} key={i}>
                 <h3> {arrayField.label}</h3>
                 {/*<div>{JSON.stringify(this.state)}</div>*/}
                 {/*{JSON.stringify(this.state.data && this.state.data[arrayField.id])}*/}

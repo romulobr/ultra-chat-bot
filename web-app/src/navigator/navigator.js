@@ -5,16 +5,17 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 import AuthenticationPanel from '../authentication/authentication'
 import MediaPanel from '../media/media';
 import MediaRemote from '../remote-control/remote-control';
-import ChickenRemote from '../chicken-control/chicken-controls';
-import Icons from '../icons/icons';
-import News from '../news/news';
-import Welcome from '../welcome/welcome';
-import Loyalty from '../loyalty/loyalty';
 import settingsPanelFor from '../settings-panel/settings-panel';
 import actions from './navigation-actions';
-
 import styles from './navigator.module.scss';
 import posed, {PoseGroup} from 'react-pose';
+
+import loyaltyFields from '../settings-panel/field-sets/features/loyalty-fields';
+import quizFields from '../settings-panel/field-sets/features/quiz-fields';
+import newsFields from '../settings-panel/field-sets/features/news-fields';
+import welcomeFields from '../settings-panel/field-sets/features/welcome-fields';
+import iconFields from '../settings-panel/field-sets/features/icons-fields'
+import chickenFields from '../settings-panel/field-sets/features/chicken-fields'
 
 const RoutesContainer = posed.div({
     enter: {
@@ -28,76 +29,12 @@ const RoutesContainer = posed.div({
 const authentication = () => <AuthenticationPanel/>;
 const media = () => <MediaPanel/>;
 const mediaRemote = () => <MediaRemote/>;
-const chickenControls = () => <ChickenRemote/>;
-const icons = () => <Icons/>;
-const welcome = () => <Welcome/>;
-const news = () => <News/>;
-const loyalty = () => <Loyalty/>;
-
-const permissionsFieldSet = {
-    label: 'Permissions', id: 'permissions', fields: [
-        {id: 'simpleCommands', label: 'SimpleCommands (No !)', type: 'checkbox'},
-        {id: 'allowNormalUsers', label: 'Allow Normal Users', type: 'checkbox'},
-        {id: 'allowVips', label: 'Allow Vips', type: 'checkbox'},
-        {id: 'allowModerators', label: 'Allow Moderators', type: 'checkbox'},
-        {id: 'allowSubscribersMembers', label: 'Allow Subscribers/Members', type: 'checkbox'}
-    ]
-};
-const customSourceFieldSet = {fields: []};
-const cooldownFieldSet = {fields: []};
-const quizOptionsFieldSet = {
-    label: 'Quiz', id: 'options', fields: [
-        {
-            id: 'intervalInMinutes',
-            label: 'Interval Between Quizzes (minutes)',
-            type: 'number'
-        },
-        {
-            id: 'defaultPowerReward',
-            label: 'Default Power Reward',
-            type: 'number'
-        },
-        {
-            id: 'defaultLoveReward',
-            label: 'Default Love Reward',
-            type: 'number'
-        },
-        {
-            id: 'questions',
-            label: 'Questions',
-            type: 'array',
-            fields: [
-                {
-                    id: 'question',
-                    label: 'Question',
-                    type: 'text'
-                },
-                {
-                    id: 'answers',
-                    label: 'Answers, separate with comma',
-                    type: 'text'
-                },
-                {
-                    id: 'reward',
-                    label: 'Reward in points',
-                    type: 'number'
-                },
-                {
-                    id: 'rewardCurrency',
-                    label: 'Reward Currency if applicable (love, power)',
-                    type: 'text'
-                }
-            ]
-        }
-    ]
-};
-const questionFields = [
-    permissionsFieldSet,
-    cooldownFieldSet,
-    customSourceFieldSet,
-    quizOptionsFieldSet
-];
-const quiz = settingsPanelFor('quiz', questionFields);
+const chickenControls = settingsPanelFor('chicken', chickenFields);
+const icons = settingsPanelFor('icons', iconFields);
+const welcome = settingsPanelFor('welcome', welcomeFields);
+const news = settingsPanelFor('news', newsFields);
+const loyalty = settingsPanelFor('loyalty', loyaltyFields);
+const quiz = settingsPanelFor('quiz', quizFields);
 
 // const test = <TestComponent/>;
 

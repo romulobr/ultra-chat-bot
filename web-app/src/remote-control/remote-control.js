@@ -57,7 +57,7 @@ class MediaRemote extends Component {
         return {
             ...item, isMedia: true,
             cost: item.cost || this.props.data.options.loyalty.defaultCost || 0,
-            source: item.sourceOverride || (this.props.data.options.source && this.props.data.options.source.customSource) || 'nope',
+            source: item.sourceOverride || (this.props.data.options.source && this.props.data.options.source.customSource),
             volume: item.volumeOverride || this.props.data.options.defaultVolume || 1,
             author: {name: this.props.userDisplayName}
         };
