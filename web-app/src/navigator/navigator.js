@@ -36,8 +36,6 @@ const news = settingsPanelFor('news', newsFields);
 const loyalty = settingsPanelFor('loyalty', loyaltyFields);
 const quiz = settingsPanelFor('quiz', quizFields);
 
-// const test = <TestComponent/>;
-
 class Navigator extends Component {
     constructor(props) {
         super(props);

@@ -49,8 +49,6 @@ export default class SettingsForm extends React.Component {
         return (
             <div className={styles.arraySubForm} key={i}>
                 <h3> {arrayField.label}</h3>
-                {/*<div>{JSON.stringify(this.state)}</div>*/}
-                {/*{JSON.stringify(this.state.data && this.state.data[arrayField.id])}*/}
                 {
                     this.state.data && this.state.data[arrayField.id] && this.state.data[arrayField.id].map((item, i) => {
                         return this.arrayItemSubForm(arrayField, i);

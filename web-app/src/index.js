@@ -12,8 +12,6 @@ import chatControlsReducer from './chat-controls/chat-controls-reducer';
 import streamElementsReducer from './authentication/stream-elements/stream-elements-reducer';
 import streamLabsReducer from './authentication/stream-labs/stream-labs-reducer';
 import youtubeChatControlsReducer from './chat-controls/youtube/youtube-chat-controls-reducer';
-import chickenControlsReducer from './chicken-control/chicken-reducer'
-import iconsReducer from './icons/icons-reducer';
 import navigatorReducer from './navigator/navigator-reducer';
 
 import saveSettingsFor from './settings-panel/save-settings-saga';
@@ -36,17 +34,6 @@ import watchSaveStreamElementsToken from './authentication/stream-elements/save-
 import watchDisconnectStreamLabs from './authentication/stream-labs/disconnect-streamlabs-saga';
 import watchFetchStreamLabsData from './authentication/stream-labs/fetch-stream-labs-data-saga';
 import watchFetchYoutubeBroadcasts from './chat-controls/youtube/fetch-youtube-broadcasts-saga';
-import watchFetchChicken from './chicken-control/sagas/fetch-chicken-saga';
-import watchSaveChicken from './chicken-control/sagas/save-chicken-saga';
-import watchChickenCommand from './chicken-control/sagas/chicken-command-saga';
-import watchFetchNews from './news/sagas/fetch-news-saga';
-import watchSaveNews from './news/sagas/save-news-saga';
-import watchFetchIcons from './icons/sagas/fetch-icons-saga';
-import watchSaveIcons from './icons/sagas/save-icons-saga';
-import watchFetchWelcome from './welcome/sagas/fetch-welcome-saga';
-import watchSaveWelcome from './welcome/sagas/save-welcome-saga';
-import watchFetchLoyalty from './loyalty/sagas/fetch-loyalty-saga';
-import watchSaveLoyalty from './loyalty/sagas/save-loyalty-saga';
 
 const packageFor = (key) => ({
     key,
@@ -75,7 +62,6 @@ const store = createStore(
         navigator: navigatorReducer,
         streamElements: streamElementsReducer,
         streamLabs: streamLabsReducer,
-        chicken: chickenControlsReducer,
         [chickenSettings.key]: chickenSettings.reducer,
         [loyaltySettings.key]: loyaltySettings.reducer,
         [quizSettings.key]: quizSettings.reducer,
@@ -97,7 +83,6 @@ sagaMiddleware.run(watchPlayMedia);
 sagaMiddleware.run(watchFetchStreamElementsToken);
 sagaMiddleware.run(watchSaveStreamElementsToken);
 sagaMiddleware.run(watchFetchYoutubeBroadcasts);
-sagaMiddleware.run(watchChickenCommand);
 sagaMiddleware.run(watchFetchStreamLabsData);
 sagaMiddleware.run(watchDisconnectStreamLabs);
 sagaMiddleware.run(quizSettings.watchSave);

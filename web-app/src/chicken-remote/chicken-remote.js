@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
-import optionsFormStyles from '../forms/options-form.module.scss';
-import styles from './chicken-controls.module.scss';
 import {connect} from 'react-redux';
-import actions from './chicken-controls-actions.js';
 
 class ChickenControlsForm extends Component {
     constructor(props) {
@@ -18,7 +15,7 @@ class ChickenControlsForm extends Component {
 
     render() {
         return (
-            <div className={optionsFormStyles.settings}>
+            <div>
                 <fieldset>
                     <p>Chicken</p>
                     <label>X
@@ -49,8 +46,8 @@ class ChickenControlsForm extends Component {
                                    onChange={this.onChange}/>
                         </span>
                     </label>
-                    <div className={optionsFormStyles.buttonBar}>
-                        <button className={styles.chickenItem} onClick={() => {
+                    <div>
+                        <button onClick={() => {
                             this.props.sendChickenCommand({
                                 chicken: {
                                     move: {x: this.state.moveX, y: this.state.moveY}
@@ -60,7 +57,7 @@ class ChickenControlsForm extends Component {
                         }}>
                             Move
                         </button>
-                        <button className={styles.chickenItem} onClick={() => {
+                        <button onClick={() => {
                             this.props.sendChickenCommand({
                                 chicken: {
                                     move: {x: Math.random() * 10, y: Math.random() * 10}
@@ -70,7 +67,7 @@ class ChickenControlsForm extends Component {
                         }}>
                             Random Move
                         </button>
-                        <button className={styles.chickenItem} onClick={() => {
+                        <button onClick={() => {
                             this.props.sendChickenCommand({
                                 chicken: {
                                     say: this.state.whatToSay,
@@ -102,7 +99,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = dispatch => {
     return {
         sendChickenCommand: (command) => {
-            dispatch(actions.sendChickenCommand(command));
+            alert('not implemented');
         }
     };
 };
