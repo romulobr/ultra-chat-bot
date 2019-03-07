@@ -1,5 +1,6 @@
 const permissionsFields = {
     label: 'Permissions', id: 'permissions', fields: [
+        {id: 'enabled', label: 'Enabled', type: 'checkbox'},
         {id: 'simpleCommands', label: 'SimpleCommands (No !)', type: 'checkbox'},
         {id: 'allowNormalUsers', label: 'Allow Normal Users', type: 'checkbox'},
         {id: 'allowVips', label: 'Allow Vips', type: 'checkbox'},

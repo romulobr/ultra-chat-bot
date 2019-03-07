@@ -13,36 +13,64 @@ export default class SettingsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.arrays = {};
         this.saveData = this.saveData.bind(this);
         this.updateData = this.updateData.bind(this);
         this.toFormField = this.toFormField.bind(this);
         this.arraySubForm = this.arraySubForm.bind(this);
         this.arrayItemSubForm = this.arrayItemSubForm.bind(this);
         this.addArrayItem = this.addArrayItem.bind(this);
+        this.deleteFromArray = this.deleteFromArray.bind(this);
         this.props.onFetch();
     }
 
     arrayItemSubForm(arrayField, index) {
-        return (<fieldset key={index}>
-            {arrayField.fields.map((field, i) => {
-                const arrayIndexField = {...field, id: `${field.id}[${index}]`};
-                return this.toFormField(arrayIndexField, i);
-            })}
-            <br/>
-            <button>Delete</button>
-        </fieldset>)
+        return (
+            <div className={styles.arrayItemForm}>
+                <fieldset>
+                    <Scope scope={`${arrayField.id}[${index}]`} key={index}>
+                        {arrayField.fields.map((field, i) => {
+                            return this.toFormField(field, i);
+                        })}
+                    </Scope>
+                </fieldset>
+                <button className={styles.deleteButton} onClick={() => this.deleteFromArray(arrayField.id, index)}>
+                    Delete
+                </button>
+            </div>
+        )
     }
 
     addArrayItem(arrayField) {
-        this.arrays[arrayField.id] = this.arrays[arrayField.id] || (this.props.data && this.props.data[arrayField.id]) || [];
-        const arrayData = this.arrays[arrayField.id];
+        const formData = this.formApi.getState().values;
+        if (!formData.options) {
+            formData.options = {};
+        }
+        const arrayData = formData.options[arrayField.id];
+        let newArrayData = [];
+
+        if (arrayData) {
+            newArrayData = [...formData.options[arrayField.id]];
+        }
+
         const newArrayItem = {};
         arrayField.fields.forEach(field => {
             newArrayItem[field.id] = '';
         });
-        arrayData.push(newArrayItem);
-        this.setState({data: {...this.state.data, [arrayField.id]: [...arrayData]}});
+        newArrayData.push(newArrayItem);
+        const newState = {...this.state};
+        if (!newState.data.options) {
+            newState.data.options = {};
+        }
+        newState.data.options[arrayField.id] = newArrayData;
+        this.setState(newState);
+    }
+
+    deleteFromArray(arrayId, index) {
+        const newArrayData = [...this.formApi.getState().values.options[arrayId]];
+        newArrayData.splice(index, 1);
+        const newState = {...this.state};
+        newState.data.options[arrayId] = newArrayData;
+        this.setState(newState);
     }
 
     arraySubForm(arrayField, i) {
@@ -50,11 +78,13 @@ export default class SettingsForm extends React.Component {
             <div className={styles.arraySubForm} key={i}>
                 <h3> {arrayField.label}</h3>
                 {
-                    this.state.data && this.state.data[arrayField.id] && this.state.data[arrayField.id].map((item, i) => {
+                    this.state.data && this.state.data.options && this.state.data.options[arrayField.id] && this.state.data.options[arrayField.id].map((item, i) => {
                         return this.arrayItemSubForm(arrayField, i);
                     })
                 }
-                <button onClick={() => this.addArrayItem(arrayField)}>Add</button>
+                <div className={styles.buttonBar}>
+                    <button onClick={() => this.addArrayItem(arrayField)}>Add</button>
+                </div>
             </div>)
     }
 
@@ -80,9 +110,13 @@ export default class SettingsForm extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (JSON.stringify(prevState.data) !== JSON.stringify(this.state.data)) {
-            this.formApi.setValues(this.state.data);
-        }
+        console.log('prevProps', JSON.stringify(prevProps));
+        console.log('props', JSON.stringify(this.props));
+        console.log('prevState', JSON.stringify(prevState));
+        console.log('state', JSON.stringify(this.state));
+
+        this.formApi.setValues(this.state.data);
+
         if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
             this.setState({data: {...this.state.data, ...this.props.data}});
             this.formApi.setValues(this.props.data);
@@ -116,7 +150,9 @@ export default class SettingsForm extends React.Component {
                         )
                     })}
                 </Form>
-                <ActionButton onClick={this.saveData} text={'Save'} enabled={enabled}> </ActionButton>
+                <div className={styles.buttonBar}>
+                    <ActionButton onClick={this.saveData} text={'Save'} enabled={enabled}> </ActionButton>
+                </div>
             </div>
         );
     };

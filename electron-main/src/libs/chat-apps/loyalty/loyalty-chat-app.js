@@ -72,12 +72,12 @@ module.exports = class LoyaltyChatApp {
     if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
     if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
 
-    const command = commands.commandInFirstWord(message.text, ['power', 'love', 'me']);
+    const command = commands.commandInFirstWord(message.text, ['power', 'love', 'me', 'eu']);
     if (!command) return;
 
     if (command.command === message.text) {
       const profile = this.loyaltyProfiles.getUserProfile(message.author.id);
-      this.say(`@${message.author.name} ${(profile && profile.love) || 0}💖 ${(profile && profile.power) || 0}⚡ ${(profile && profile.xp) || 0}🎖`);
+      this.say(`@${message.author.name} ${(profile && profile.love) || 0}💖 ${(profile && profile.power) || 0}⚡ ${(profile && profile.xp) || 0}⭐`);
 
     } else if (command.command === 'love') {
       const parsedMessage = /!?(\w*) (\d*) (@?.*)/.exec(message.text);

@@ -1,27 +1,84 @@
+.settingsPanel {
+  margin-top: 50px;
+  border: none;
+  form {
+    border: none;
+    fieldset {
+      border: none;
+      display: flex;
+      label{
+        display: flex;
+        flex-direction: row;
+        padding: 2px;
+        span{
+          display: flex;
+          flex-direction: column;
+        input{
+          flex-grow: 1;
+        }}
+      }
+    }
+  }
+
+  h3, h2 {
+    margin: 0;
+  }
+}
+
 .arraySubForm {
-  margin:8px;
-  padding:2px;
+  border: solid black 1px;
+  font-size: 0.8em;
+  margin:2px;
+
+  h3 {
+    background-color: black;
+    color: white;
+    border: solid black 1px;
+  }
 
   fieldset {
     display: flex;
-    margin:4px;
-    padding:2px;
-    //background-color: darkred;
-    label{
+    margin: 16px 8px;
+    padding: 2px;
+    flex-grow: 1;
+
+    label {
       display: flex;
       flex-direction: column;
-      margin:0;
-      //background-color: greenyellow;
+      padding: 2px;
     }
-    input{
+    input {
       flex-grow: 1;
-      width: 100%;
-      //background-color: goldenrod;
     }
   }
 
-  button{
-    margin:8px;
-
+  button {
+    box-shadow: none;
+    line-height: 3em;
+    height: auto;
   }
+}
+
+.arrayItemForm{
+  border: 1px solid black;
+  padding: 2px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  span{
+    display: flex;
+    flex-grow: 1;
+  }
+}
+
+.deleteButton {
+  margin:0;
+  background-color: darkred;
+  color: white;
+}
+
+.buttonBar {
+  background-color: black;
 }

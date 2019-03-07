@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import actionsFor from './settings-actions';
-
 import SettingsForm from './settings-form';
+import styles from './settings-panel.module.scss';
 
 class SettingsPanel extends React.Component {
     render() {
         const {error, id, save, fetch, enabled, fieldSets, data} = this.props;
         return (
-            <div>
+            <div className={styles.settingsPanel}>
                 <h2>{this.props.error}</h2>
-                <SettingsForm
+                <SettingsForm className={styles.settingsForm}
                     fieldSets={fieldSets}
                     id={id}
                     onSave={save}
