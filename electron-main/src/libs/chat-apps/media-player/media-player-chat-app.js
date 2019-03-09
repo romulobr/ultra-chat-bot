@@ -9,8 +9,12 @@ class MediaPlayerChatApp {
   constructor(settings) {
     settings.options = settings.options || {};
     this.settings = settings;
+    this.user = this.settings.user;
+    this.items = settings.options.items;
+    this.loyalty = settings.loyalty;
     this.settings.options = this.settings.options || {};
-    this.commands = (settings.items && settings.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) || [];
+    this.options = this.settings.options;
+    this.commands = (settings.options.items && settings.options.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) || [];
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
     this.loyaltyProfiles = settings.loyaltySystem.getLoyaltyProfiles();
     this.defaultVolume = settings.options.defaultVolume;
@@ -24,7 +28,7 @@ class MediaPlayerChatApp {
     let command = commands.commandInText(message.text, this.commands);
     if (!command) return;
 
-    const item = this.settings.items[command.index];
+    const item = this.items[command.index];
     const mediaUrl = urls.media + '/' + item.url;
     const screenMessage = {
       isMedia: true,
@@ -33,9 +37,9 @@ class MediaPlayerChatApp {
       volume: item.volumeOverride || this.defaultVolume || 1,
       author: message.author
     };
-    const loyaltyVerified = await verifyLoyalty(this.settings.options.loyalty, message, this.settings.user, item.cost, this.loyaltyProfiles);
+    const loyaltyVerified = await verifyLoyalty(this.loyalty, message, this.user, item.cost, this.loyaltyProfiles);
     if (!loyaltyVerified) return;
-    sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+    sendScreenMessage(screenMessage, this.options.source && this.options.source.customSource);
     this.cooldownManager.addCoolDownTo(message.author);
   }
 }

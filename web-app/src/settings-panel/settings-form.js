@@ -25,7 +25,7 @@ export default class SettingsForm extends React.Component {
 
     arrayItemSubForm(arrayField, index) {
         return (
-            <div className={styles.arrayItemForm}>
+            <div className={styles.arrayItemForm} key={index}>
                 <fieldset>
                     <Scope scope={`${arrayField.id}[${index}]`} key={index}>
                         {arrayField.fields.map((field, i) => {
@@ -75,7 +75,7 @@ export default class SettingsForm extends React.Component {
 
     arraySubForm(arrayField, i) {
         return (
-            <div className={styles.arraySubForm} key={i}>
+            <div className={styles.arraySubForm} key={`${arrayField.id}-${i}`}>
                 <h3> {arrayField.label}</h3>
                 {
                     this.state.data && this.state.data.options && this.state.data.options[arrayField.id] && this.state.data.options[arrayField.id].map((item, i) => {
@@ -102,7 +102,7 @@ export default class SettingsForm extends React.Component {
             return <TextAreaOption id={field.id} label={field.label} key={i}/>
         }
         else if (field.type === 'array') {
-            return this.arraySubForm(field);
+            return this.arraySubForm(field, i);
         }
         else {
             return <div>unsupported field type</div>
@@ -110,10 +110,10 @@ export default class SettingsForm extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('prevProps', JSON.stringify(prevProps));
-        console.log('props', JSON.stringify(this.props));
-        console.log('prevState', JSON.stringify(prevState));
-        console.log('state', JSON.stringify(this.state));
+        // console.log('prevProps', JSON.stringify(prevProps));
+        // console.log('props', JSON.stringify(this.props));
+        // console.log('prevState', JSON.stringify(prevState));
+        // console.log('state', JSON.stringify(this.state));
 
         this.formApi.setValues(this.state.data);
 

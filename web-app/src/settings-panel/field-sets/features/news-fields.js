@@ -6,13 +6,13 @@ const newsFields = [
     {
         label: 'News Options', id: 'options',
         fields: [
-            {id: 'playAudio', label: 'Play Audio', type: 'checkbox'},
-            {id: 'audioUrl', label: 'Audio (file in media folder or internet url)', type: 'text'},
             {id: 'getLinkCommand', label: 'Get Link command', type: 'text'},
             {id: 'fetchIntervalInMinutes', label: 'Refresh news every X (minutes)', type: 'number'},
             {id: 'showIntervalInMinutes', label: 'Show news every X (minutes)', type: 'number'},
             {id: 'maximumDescriptionSize', label: 'Maximum description size (characters)', type: 'number'},
             {id: 'screenTime', label: 'Time on screen (seconds)', type: 'number'},
+            {id: 'audioUrl', label: 'Audio (file in media folder or internet url)', type: 'text'},
+            {id: 'playAudio', label: 'Play Audio', type: 'checkbox'},
             {
                 id: 'newsFeeds', label: 'RSS News Feeds', type: 'array',
                 fields: [
@@ -21,5 +21,5 @@ const newsFields = [
                 ]
             }
         ]
-    },permissionFields, cooldownFields, customSourceFields];
+    }, permissionFields, cooldownFields, customSourceFields];
 export default newsFields;

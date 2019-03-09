@@ -3,14 +3,8 @@ import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from './jwt';
 import actions from './authentication-actions';
-import {fetchMedia} from '../media/media-actions'
 import {fetchToken} from './stream-elements/stream-elements-actions';
-// import {fetchChicken} from '../chicken-control/chicken-controls-actions';
-// import {fetchStreamlabs} from './stream-labs/stream-labs-actions';
-// import {fetchIcons} from '../icons/icons-actions';
-// import {fetchWelcome} from '../welcome/welcome-actions';
-// import {fetchNews} from '../news/news-actions';
-// import {fetchLoyalty} from '../loyalty/loyalty-actions';
+
 
 function userFrom(data, originalUser) {
     const newUser = {origin: 'multi'};
@@ -55,14 +49,7 @@ function* authenticate(action) {
             });
         }
         yield put(actions.authenticationSuccess({user: upToDateUser}));
-        yield put(fetchMedia());
-        // yield put(fetchChicken());
         yield put(fetchToken());
-        // yield put(fetchStreamlabs());
-        // yield put(fetchIcons());
-        // yield put(fetchWelcome());
-        // yield put(fetchNews());
-        // yield put(fetchLoyalty());
     } catch (e) {
         yield put(actions.authenticationFailed({error: e}));
         console.log('got an error:', e);

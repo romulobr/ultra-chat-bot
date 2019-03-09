@@ -4,24 +4,15 @@ import {connect} from 'react-redux';
 import registerRendererEvents from './media-message-handlers';
 import actions from './media-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner'
-import MediaOptionsForm from './media-options-form';
-import {Link} from 'react-router-dom';
-import PermissionsForm from "../forms/permissions-form";
-import {Form, Scope, Text, Checkbox} from 'informed';
+import mediaFields from '../settings-panel/field-sets/features/media-fields';
+import settingsPanelFor from '../settings-panel/settings-panel';
+
+const MediaSettingsPanel = settingsPanelFor('media', mediaFields, ['mediaExtras']);
 
 class MediaPanel extends Component {
     constructor(props) {
         super(props);
-        this.createMediaItem = this.createMediaItem.bind(this);
-        this.deleteMediaItems = this.deleteMediaItems.bind(this);
-        this.renderItems = this.renderItems.bind(this);
-        this.toMediaItemJSX = this.toMediaItemJSX.bind(this);
-        this.saveMedia = this.saveMedia.bind(this);
-        this.toggleAllCheckedForDeletion = this.toggleAllCheckedForDeletion.bind(this);
-        this.state = {
-            items: (this.props.data && this.props.data.items) || [],
-            options: {}
-        };
+        this.props.registerRendererEvents();
     }
 
     render() {
@@ -36,173 +27,27 @@ class MediaPanel extends Component {
                     <button type="button" onClick={this.props.importMedia}>
                         Import files
                     </button>
-                    <button type="button"
-                            disabled={this.props.loading || !this.props.user}
-                            onClick={() => this.saveMedia()}>
-                        Save Settings
-                    </button>
                 </div>
-
-                <PermissionsForm getApi={(formApi) => this.permissionsForm = formApi}/>
-                <MediaOptionsForm getApi={(formApi) => this.optionsForm = formApi}/>
-
-                {!this.props.user && (
-                    <h2 className="warning">
-                        You need to <Link to="/">connect a streaming account</Link> to be able to save your settings.
-                    </h2>)}
-                <div className={styles.mediaList}>
-                    <Form getApi={(formApi) => this.itemsForm = formApi}>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>
-                                    <button type="button" onClick={this.toggleAllCheckedForDeletion}>All</button>
-                                </th>
-                                <th>Command</th>
-                                <th>File/URL</th>
-                                <th>Volume Override</th>
-                                <th>Cost Override</th>
-                                <th>Source Override</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.renderItems(this.state.items)}
-                            </tbody>
-                        </table>
-                    </Form>
-                </div>
-                {this.renderButtonBar()}
+                <MediaSettingsPanel/>
             </div>
         );
-    }
-
-    renderButtonBar() {
-        return (
-            <div>
-                <div className='button-bar'>
-                    <button type="button"
-                            onClick={this.deleteMediaItems}>
-                        Delete
-                    </button>
-                    <button type="button"
-                            onClick={this.createMediaItem}>
-                        New
-                    </button>
-
-                    <button type="button"
-                            disabled={this.props.loading || !this.props.user}
-                            onClick={() => this.saveMedia()}>
-                        Save Settings
-                    </button>
-                </div>
-            </div>
-        )
-    }
-
-    saveMedia() {
-        const permissions = this.permissionsForm.getState().values;
-        const options = this.optionsForm.getState().values;
-        const items = this.itemsForm.getState().values.items;
-        this.props.saveMedia({permissions, options, items})
-    }
-
-    componentDidMount() {
-        this.props.registerRendererEvents();
-        this.props.data && this.props.data.permissions && this.permissionsForm.setValues(this.props.data.permissions);
-        this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        return {
-            ...state,
-            ...props
-        }
-    }
-
-    componentDidUpdate() {
-        this.props.data && this.props.data.permissions && this.permissionsForm.setValues(this.props.data.permissions);
-        this.props.data && this.props.data.options && this.optionsForm.setValues(this.props.data.options);
-    }
-
-    toMediaItemJSX(item, index) {
-        return (
-            <tr key={`media-item-${JSON.stringify(item)}`}>
-                <Scope scope={`items[${index}]`}>
-                    <td>
-                        <Checkbox field="delete" id={`item-${index}-delete`}/>
-                    </td>
-                    <td>
-                        <Text field="command" id={`item-${index}-command`} initialValue={item.command}/>
-                    </td>
-                    <td>
-                        <Text field="url" id={`item-${index}-url`} initialValue={item.url}/>
-                    </td>
-                    <td>
-                        <Text field={"volumeOverride"} id={`item-${index}-volumeOverride`}
-                              initialValue={item.volumeOverride}/>
-                    </td>
-                    <td>
-                        <Text field="costOverride" id={`item-${index}-costOverride`} initialValue={item.costOverride}/>
-                    </td>
-                    <td>
-                        <Text field={"sourceOverride"} id={`item-${index}-sourceOverride`}
-                              initialValue={item.sourceOverride}/>
-                    </td>
-                </Scope>
-            </tr>
-        );
-    }
-
-    createMediaItem() {
-        const items = this.state.items;
-        items.push({});
-        this.setState({...this.state, items});
-    }
-
-    deleteMediaItems() {
-        const newItems = this.itemsForm.getState().values.items.filter(item => !item.delete);
-        this.setState({
-            items: newItems
-        });
-    }
-
-    toggleAllCheckedForDeletion() {
-        const originalItems = this.itemsForm.getState().values.items;
-        let items = originalItems;
-        if (originalItems.every(item => item.delete)) {
-            items = originalItems.map(item => {
-                item.delete = false;
-                return item;
-            })
-        } else {
-            items = originalItems.map(item => {
-                item.delete = true;
-                return item;
-            });
-        }
-        this.itemsForm.setValues({items});
-    };
-
-    renderItems(items) {
-        return items ? items.map(this.toMediaItemJSX) : null;
     }
 }
 
 function mapStateToProps(state) {
-    return {
-        ...state.media,
-        user: state.authentication.user,
+    const newData = {
+        ...state.media.data
     };
+    if (state.mediaExtras.items) {
+        newData.options = newData.options || {};
+        newData.options.items = state.mediaExtras.items;
+    }
+    return {...state.media, user: state.authentication.user, data: newData};
+
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        saveMedia: form => {
-            dispatch(actions.saveMedia(form));
-        },
-        fetchMedia: () => {
-            dispatch(actions.fetchMedia());
-        },
         importMedia: () => {
             dispatch(actions.importMedia());
         },

@@ -6,13 +6,10 @@ const initialState = {
 };
 
 const mediaReducer = createReducer({
-        [actions.saveMedia]: (state, payload) => ({...state, data:payload, loading: true}),
-        [actions.mediaValidationFailed]: (state, payload) => ({...state, loading: false}),
-        [actions.mediaSaved]: (state, payload) => ({data: payload, loading: false}),
-        [actions.mediaSaveFailed]: (state, payload) => ({...state, loading: false, error: payload}),
         [actions.fetchMedia]: (state, payload) => ({...state, loading: true}),
-        [actions.mediaFetched]: (state, payload) => ({...state, data: payload, loading: false}),
-        [actions.mediaImported]: (state, payload) => ({...state, items: payload.items, loading: false})
+        [actions.mediaImported]: (state, payload) => {
+            return {data: {options: {...payload}}};
+        }
     }, initialState
 );
 

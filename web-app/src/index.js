@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
 import authenticationReducer from './authentication/authentication-reducer';
-import mediaReducer from './media/media-reducer';
+import mediaExtrasReducer from './media/media-reducer';
 import environmentReducer from './environment/environment-reducer';
 import chatControlsReducer from './chat-controls/chat-controls-reducer';
 import streamElementsReducer from './authentication/stream-elements/stream-elements-reducer';
@@ -22,9 +22,7 @@ import reducerFor from './settings-panel/settings-reducer';
 import createSagaMiddleware from 'redux-saga';
 
 import watchAuthentication from './authentication/authentication-saga';
-import watchSaveMedia from './media/sagas/save-media-saga';
 import watchOpenMediaFolder from './media/sagas/open-media-folder-saga';
-import watchFetchMedia from './media/sagas/fetch-media-saga';
 import watchImportMedia from './media/sagas/import-media-saga';
 import watchStartChat from './chat-controls/start-chat-saga';
 import watchStopChat from './chat-controls/stop-chat-saga';
@@ -48,6 +46,7 @@ const newsSettings = packageFor('news');
 const welcomeSettings = packageFor('welcome');
 const iconsSettings = packageFor('icons');
 const chickenSettings = packageFor('chicken');
+const mediaSettings = packageFor('media');
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -55,7 +54,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     combineReducers({
         authentication: authenticationReducer,
-        media: mediaReducer,
+        mediaExtras: mediaExtrasReducer,
         environment: environmentReducer,
         chatControls: chatControlsReducer,
         youtubeChatControls: youtubeChatControlsReducer,
@@ -67,14 +66,13 @@ const store = createStore(
         [quizSettings.key]: quizSettings.reducer,
         [newsSettings.key]: newsSettings.reducer,
         [iconsSettings.key]: iconsSettings.reducer,
-        [welcomeSettings.key]: welcomeSettings.reducer
+        [welcomeSettings.key]: welcomeSettings.reducer,
+        [mediaSettings.key]: mediaSettings.reducer
     }),
     composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(watchAuthentication);
-sagaMiddleware.run(watchSaveMedia);
-sagaMiddleware.run(watchFetchMedia);
 sagaMiddleware.run(watchStartChat);
 sagaMiddleware.run(watchStopChat);
 sagaMiddleware.run(watchImportMedia);
@@ -97,7 +95,8 @@ sagaMiddleware.run(iconsSettings.watchSave);
 sagaMiddleware.run(iconsSettings.watchFetch);
 sagaMiddleware.run(chickenSettings.watchSave);
 sagaMiddleware.run(chickenSettings.watchFetch);
-
+sagaMiddleware.run(mediaSettings.watchSave);
+sagaMiddleware.run(mediaSettings.watchFetch);
 
 ReactDOM.render(
     <Provider store={store}>

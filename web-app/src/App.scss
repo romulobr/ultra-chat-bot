@@ -20,7 +20,6 @@ button {
   box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
   transition: all 0.2s ease-in;
   cursor: pointer;
-  box-shadow: none;
   line-height: 3em;
   height: auto;
 
@@ -38,7 +37,7 @@ button {
   &:disabled, &[disabled] {
     border: 1px solid #111111;
     background-color: #444444;
-    color: #999999;
+    color: #eeeeee;
     transition: all 0.2s ease-in;
   }
 }

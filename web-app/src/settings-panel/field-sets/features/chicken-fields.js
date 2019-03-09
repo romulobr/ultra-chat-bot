@@ -6,9 +6,9 @@ const chickenFields = [
     {
         label: 'Chicken Options', id: 'options',
         fields: [
-            {id: 'enableSound', label: 'Enable Sound', type: 'checkbox'},
             {id: 'sayCommand', label: 'Say Command', type: 'text'},
-            {id: 'moveCommand', label: 'Move Command', type: 'text'}
+            {id: 'moveCommand', label: 'Move Command', type: 'text'},
+            {id: 'enableSound', label: 'Enable Sound', type: 'checkbox'}
         ]
     },
     permissionFields, cooldownFields, customSourceFields];

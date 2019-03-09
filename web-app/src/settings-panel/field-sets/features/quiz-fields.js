@@ -15,6 +15,7 @@ const quizFields = [
                     {id: 'question', label: 'Question', type: 'text'},
                     {id: 'answers', label: 'Answers, separate with comma', type: 'text'},
                     {id: 'reward', label: 'Reward in points', type: 'number'},
+                    {id: 'audio', label: 'audio file', type: 'text'},
                     {id: 'rewardCurrency', label: 'Reward Currency if applicable (love, power)', type: 'text'}
                 ]
             }
