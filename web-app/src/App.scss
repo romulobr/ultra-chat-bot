@@ -5,28 +5,7 @@ body {
 .App {
   margin: 0;
   padding: 0;
-  width: 100vw;
+  width: 100%;
   background-color: white;
-}
-
-button {
-  background-color: #222222;
-  color: white;
-  text-align: center;
-  padding: 0 20px;
-  margin: 10px 5px;
-  font-size: 1em;
-  border: none;
-  box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
-  transition: all 0.2s ease-in;
-  cursor: pointer;
-  line-height: 2em;
-  height: auto;
-
-  &:disabled, &[disabled] {
-    border: 1px solid #111111;
-    background-color: #444444;
-    color: #eeeeee;
-    transition: all 0.2s ease-in;
-  }
+  font-size: 12px;
 }
