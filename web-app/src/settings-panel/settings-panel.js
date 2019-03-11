@@ -4,8 +4,6 @@ import actionsFor from './settings-actions';
 import SettingsForm from './settings-form';
 import styles from './settings-panel.module.scss';
 
-const deepmerge = require('deepmerge');
-
 class SettingsPanel extends React.Component {
     render() {
         const {error, id, save, fetch, enabled, fieldSets, data} = this.props;
@@ -33,20 +31,11 @@ function connectedSettingsFor(id, fieldSets, extraIds) {
     const actions = actionsFor(id);
 
     function mapStateToProps(state) {
-        let newProps = {
+        return {
             id,
             fieldSets,
             ...state[id]
         };
-        if (extraIds) {
-            const objectsToMerge = [newProps];
-            extraIds.forEach(extraId => {
-                objectsToMerge.push(state[extraId]);
-            });
-            deepmerge.all(objectsToMerge);
-            console.log('new props', newProps);
-        }
-        return newProps;
     }
 
     const mapDispatchToProps = dispatch => {

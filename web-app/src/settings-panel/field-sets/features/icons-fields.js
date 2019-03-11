@@ -10,7 +10,7 @@ const iconsFields = [
                 id: 'icons', label: 'Icons', type: 'array',
                 fields: [
                     {id: 'words', label: 'Words', type: 'text'},
-                    {id: 'image', label: 'Image: (file in media folder or internet url)', type: 'text'}
+                    {id: 'image', label: 'Image', type: 'text'}
                 ]
             }
         ]

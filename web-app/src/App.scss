@@ -10,8 +10,8 @@ body {
 }
 
 button {
-  background-color: #dddddd;
-  color: black;
+  background-color: #222222;
+  color: white;
   text-align: center;
   padding: 0 20px;
   margin: 10px 5px;
@@ -20,7 +20,7 @@ button {
   box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
   transition: all 0.2s ease-in;
   cursor: pointer;
-  line-height: 3em;
+  line-height: 2em;
   height: auto;
 
   span {

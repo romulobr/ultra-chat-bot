@@ -12,7 +12,7 @@ function CheckBoxOption(props) {
         <React.Fragment>
             <label htmlFor={props.id}>
                 <Checkbox field={props.id} id={props.id}/>
-                <span>{props.label}</span>
+                {props.label}
             </label>
         </React.Fragment>);
 }

@@ -13,6 +13,7 @@ export default class SettingsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.state.arrays = {};
         this.saveData = this.saveData.bind(this);
         this.updateData = this.updateData.bind(this);
         this.toFormField = this.toFormField.bind(this);
@@ -20,6 +21,9 @@ export default class SettingsForm extends React.Component {
         this.arrayItemSubForm = this.arrayItemSubForm.bind(this);
         this.addArrayItem = this.addArrayItem.bind(this);
         this.deleteFromArray = this.deleteFromArray.bind(this);
+        this.editArrayItem = this.editArrayItem.bind(this);
+        this.closeEditForm = this.closeEditForm.bind(this);
+        this.handleEscapePress = this.handleEscapePress.bind(this);
         this.props.onFetch();
     }
 
@@ -65,6 +69,14 @@ export default class SettingsForm extends React.Component {
         this.setState(newState);
     }
 
+    editArrayItem(arrayField, index) {
+        this.setState({isEditing: {arrayField, index}});
+    }
+
+    closeEditForm() {
+        this.setState({isEditing: false});
+    }
+
     deleteFromArray(arrayId, index) {
         const newArrayData = [...this.formApi.getState().values.options[arrayId]];
         newArrayData.splice(index, 1);
@@ -79,11 +91,30 @@ export default class SettingsForm extends React.Component {
                 <h3> {arrayField.label}</h3>
                 {
                     this.state.data && this.state.data.options && this.state.data.options[arrayField.id] && this.state.data.options[arrayField.id].map((item, i) => {
-                        return this.arrayItemSubForm(arrayField, i);
+                        return (
+                            <div className={styles.arrayItem} key={`${arrayField.id}-${i}`}>
+
+                                {arrayField.fields.map((field, i) => {
+                                    return item[field.id] ? (<div key={i} className={styles.arrayItemContent}>
+                                        <span>{item[field.id]}</span>
+                                    </div>) : ''
+                                })}
+
+                                <div className={styles.arrayItemButtons}>
+                                    <button type="button" className={styles.editButton}
+                                            onClick={() => this.editArrayItem(arrayField, i)}>
+                                        Edit
+                                    </button>
+                                    <button type="button" className={styles.deleteButton}
+                                            onClick={() => this.deleteFromArray(arrayField.id, i)}>
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>)
                     })
                 }
                 <div className={styles.buttonBar}>
-                    <button onClick={() => this.addArrayItem(arrayField)}>Add</button>
+                    <button className={styles.primary} onClick={() => this.addArrayItem(arrayField)}>Add</button>
                 </div>
             </div>)
     }
@@ -109,11 +140,21 @@ export default class SettingsForm extends React.Component {
         }
     }
 
+    handleEscapePress(event) {
+        if (event.keyCode === 27) {
+            this.closeEditForm();
+        }
+    }
+
+    componentDidMount() {
+        document.addEventListener("keydown", this.handleEscapePress, false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.handleEscapePress, false);
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('prevProps', JSON.stringify(prevProps));
-        // console.log('props', JSON.stringify(this.props));
-        // console.log('prevState', JSON.stringify(prevState));
-        // console.log('state', JSON.stringify(this.state));
 
         this.formApi.setValues(this.state.data);
 
@@ -134,8 +175,32 @@ export default class SettingsForm extends React.Component {
 
     render() {
         const {id, enabled, fieldSets} = this.props;
+        const initialValues = (this.state.isEditing && this.formApi && this.formApi.getState().values.options[this.state.isEditing.arrayField.id] && this.formApi.getState().values.options[this.state.isEditing.arrayField.id][this.state.isEditing.index]);
+        console.log('initial values', initialValues);
         return (
             <div>
+                {this.state.isEditing && <div className={styles.arrayItemBackground}>
+                    <div className={styles.arrayItemFormContainer}>
+                        <div className={styles.arrayItemFormTitle}>
+                            <span>Editing</span>
+                            <button onClick={() => {
+                                this.closeEditForm();
+                            }}>X
+                            </button>
+                        </div>
+                        <div className={styles.arrayItemForm}>
+                            <Form initialValues={initialValues}
+                                  id={this.state.isEditing.arrayField.id}
+                                  getApi={(formApi) => this.editingForm = formApi}>
+                                {this.state.isEditing.arrayField.fields.map((fields, i) => {
+                                    return this.toFormField(fields, i);
+                                })}
+                                <ActionButton primary text={'Confirm Changes'} enabled={enabled}/>
+                                <ActionButton onClick={this.closeEditForm} text={'Cancel'} enabled={enabled}/>
+                            </Form>
+                        </div>
+                    </div>
+                </div>}
                 <Form id={id} getApi={(formApi) => this.formApi = formApi}>
                     {fieldSets.map((fieldSet, i) => {
                         return (
@@ -151,7 +216,7 @@ export default class SettingsForm extends React.Component {
                     })}
                 </Form>
                 <div className={styles.buttonBar}>
-                    <ActionButton onClick={this.saveData} text={'Save'} enabled={enabled}> </ActionButton>
+                    <ActionButton primary onClick={this.saveData} text={'Save'} enabled={enabled}> </ActionButton>
                 </div>
             </div>
         );

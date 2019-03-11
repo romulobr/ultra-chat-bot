@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom';
 
 import AuthenticationPanel from '../authentication/authentication'
 import MediaPanel from '../media/media';
-import MediaRemote from '../remote-control/remote-control';
 import settingsPanelFor from '../settings-panel/settings-panel';
 import actions from './navigation-actions';
 import styles from './navigator.module.scss';
@@ -16,6 +15,7 @@ import newsFields from '../settings-panel/field-sets/features/news-fields';
 import welcomeFields from '../settings-panel/field-sets/features/welcome-fields';
 import iconFields from '../settings-panel/field-sets/features/icons-fields'
 import chickenFields from '../settings-panel/field-sets/features/chicken-fields'
+const pjson = require('../../package.json');
 
 const RoutesContainer = posed.div({
     enter: {
@@ -28,7 +28,6 @@ const RoutesContainer = posed.div({
 
 const authentication = () => <AuthenticationPanel/>;
 const media = () => <MediaPanel/>;
-const mediaRemote = () => <MediaRemote/>;
 const chickenControls = settingsPanelFor('chicken', chickenFields);
 const icons = settingsPanelFor('icons', iconFields);
 const welcome = settingsPanelFor('welcome', welcomeFields);
@@ -49,20 +48,6 @@ class Navigator extends Component {
                     render={({location}) => (
                         <div className={styles.navigator}>
                             <div className={styles.viewPicker}>
-                                <Link
-                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/') ? styles.selected : '')}
-                                    to="/">
-                                    <div>
-                                        <span role="img">🌍 Connection</span>
-                                    </div>
-                                </Link>
-                                <Link
-                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/remote') ? styles.selected : '')}
-                                    to="/remote">
-                                    <div>
-                                        <span role="img" aria-label={"remote"}>📱 Remote</span>
-                                    </div>
-                                </Link>
                                 <div className={styles.navigationItem + ' ' + styles.settingsMenu}
                                      onMouseEnter={() => {
                                          this.setState({showSettings: true})
@@ -71,10 +56,16 @@ class Navigator extends Component {
                                          this.setState({showSettings: false})
                                      }}
                                 >
-
-                                    <span role="img" aria-label={"settings"}>⚙ Settings</span>
+                                    <span role="img" aria-label={"settings"}>Ultra Vaca Chat Bot - <a href="https://twitch.tv/romulinotv" target="__blank">by RomulinoTV</a> (v{pjson.version})⚙</span>
                                     <div
                                         className={this.state.showSettings ? styles.settings : styles.settings + ' ' + styles.hidden}>
+                                        <Link
+                                            className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/') ? styles.selected : '')}
+                                            to="/">
+                                            <div>
+                                                <span role="img">🌍 Connections</span>
+                                            </div>
+                                        </Link>
                                         <Link
                                             className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/media-controls') ? styles.selected : '')}
                                             to="/media-controls">
@@ -132,7 +123,6 @@ class Navigator extends Component {
                                     <Switch location={location}>
                                         <Route key={'connections'} exact path="/" component={authentication}/>
                                         <Route key={'media-controls'} path="/media-controls/" component={media}/>
-                                        <Route key={'remote'} path="/remote/" component={mediaRemote}/>
                                         <Route key={'chicken'} path="/chicken/" component={chickenControls}/>
                                         <Route key={'welcome'} path="/welcome/" component={welcome}/>
                                         <Route key={'icons'} path="/icons/" component={icons}/>

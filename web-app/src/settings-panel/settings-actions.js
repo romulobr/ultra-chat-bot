@@ -9,7 +9,8 @@ function getSettingActionsFor(key) {
             saved: createAction('SAVED_' + key.toUpperCase()),
             fetch: createAction('FETCH_' + key.toUpperCase()),
             fetched: createAction('FETCHED_' + key.toUpperCase()),
-            error: createAction('ERROR_' + key.toUpperCase())
+            error: createAction('ERROR_' + key.toUpperCase()),
+            updateExtras: createAction('UPDATE_EXTRAS_' + key.toUpperCase())
         };
     }
     return actions[key];

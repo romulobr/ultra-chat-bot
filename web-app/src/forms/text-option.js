@@ -11,11 +11,9 @@ function TextOption(props) {
     return (
         <React.Fragment>
             <label htmlFor={props.id}>
-                <span>{props.label}
-                    <Text field={props.id} id={props.id}/>
-                </span>
+                {props.label}
             </label>
-
+            <Text field={props.id} id={props.id}/>
         </React.Fragment>);
 }
 

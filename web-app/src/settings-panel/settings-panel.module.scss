@@ -6,16 +6,17 @@
     fieldset {
       border: none;
       display: flex;
-      label{
+      label {
         display: flex;
         flex-direction: row;
         padding: 2px;
-        span{
+        span {
           display: flex;
           flex-direction: column;
-        input{
-          flex-grow: 1;
-        }}
+          input {
+            flex-grow: 1;
+          }
+        }
       }
     }
   }
@@ -28,7 +29,7 @@
 .arraySubForm {
   border: solid black 1px;
   font-size: 0.8em;
-  margin:2px;
+  margin: 2px;
 
   h3 {
     background-color: black;
@@ -59,7 +60,7 @@
   }
 }
 
-.arrayItemForm{
+.arrayItemForm {
   border: 1px solid black;
   padding: 2px;
   display: flex;
@@ -67,18 +68,117 @@
   align-items: center;
   justify-content: center;
 
-  span{
+  span {
     display: flex;
     flex-grow: 1;
   }
 }
 
-.deleteButton {
-  margin:0;
-  background-color: darkred;
-  color: white;
+.arrayItem {
+  display: flex;
+  flex-direction: row;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.arrayItemContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 1.2em;
+  line-height: 2em;
+}
+
+.arrayItemButtons {
+  flex-shrink: 1;
+  min-width: 180px;
+  justify-content: flex-end;
 }
 
 .buttonBar {
   background-color: black;
+}
+
+.arrayItemFormContainer {
+  margin: 5%;
+  width: 90%;
+  background-color: whitesmoke;
+  flex-direction: column;
+  padding: 0;
+
+  form {
+    width: 100%;
+    margin: 16px;
+    display: flex;
+    flex-direction: column;
+
+    span {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    input {
+      margin: 4px 0;
+      font-size: 1.2em;
+      line-height: 1.5em;
+    }
+    button {
+      font-size: 1.2em;
+      line-height: 2em;
+    }
+  }
+}
+
+.arrayItemForm {
+  width: 100%;
+}
+
+.arrayItemBackground {
+  top: 0;
+  left: 0;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.9);
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.primary {
+  background-color: #0057e7;
+}
+
+.arrayItemFormTitle {
+  background-color: #222222;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  line-height: 2em;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: row;
+
+  span {
+    padding-left: 8px;
+    align-items: flex-start;
+    flex-grow: 1;
+    text-overflow: ellipsis;
+  }
+
+  button {
+    flex-shrink: 1;
+    margin: 0;
+    padding: 0;
+    height: 2em;
+    width: 50px;
+    position: relative;
+    line-height: 0.5em;
+    box-shadow: none;
+  }
 }

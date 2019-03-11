@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import styles from './stream-elements.module.scss';
-import authenticationStyles from '../authentication.module.scss';
 import posed from 'react-pose';
 import actions from './stream-elements-actions';
 import {connect} from 'react-redux';
@@ -54,19 +53,11 @@ class SteamElements extends Component {
                         </div>
                     </div>
                 </Box>
-                <div className={authenticationStyles.accountInformation} style={{
-                    backgroundImage: 'url(img/stream-elements.jpg)',
-                    filter: this.props.token ? '' : 'grayscale(100%)'
-                }}>
-                    <div className={styles.token}>
-                        {!this.props.user ? 'Not available' :
-                            (this.props.isLoading ? 'Loading...' : (this.props.tokenUser) || (this.props.token ? 'Ready' : 'No Token'))}
-                    </div>
-                </div>
+
                 <div>
                     {!this.props.isEditing && (
                         <button disabled={this.props.isLoading} onClick={this.props.editToken}>
-                            {this.props.token ? 'Change Token' : 'Add Token'}
+                            {this.props.token ? 'Change StreamElements Token' : 'Add StreamElements Token (FIX ME)'}
                         </button>
                     )}
                 </div>

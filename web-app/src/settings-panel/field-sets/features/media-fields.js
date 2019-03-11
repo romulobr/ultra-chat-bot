@@ -2,7 +2,7 @@ import permissionFields from '../permissions-fields';
 import cooldownFields from '../cooldown-fields';
 import customSourceFields from '../custom-source-fields';
 
-const quizFields = [
+const mediaFields = [
     {
         label: 'Media Options', id: 'options',
         fields: [
@@ -24,9 +24,9 @@ const quizFields = [
         fields: [
             {id: 'streamElements', label: 'Use StreamElements Loyalty', type: 'checkbox'},
             {id: 'streamlabs', label: 'Use StreamLabs Loyalty', type: 'checkbox'},
-            {id: 'nativePower', label: 'Use Native Loyalty Power', type: 'checkbox'},
-            {id: 'nativeLove', label: 'Use Native Loyalty Love', type: 'checkbox'}]
+            {id: 'nativePower', label: 'Use Native Loyalty - ⚡Power', type: 'checkbox'},
+            {id: 'nativeLove', label: 'Use Native Loyalty - 💖Love', type: 'checkbox'}]
     },
     permissionFields, cooldownFields, customSourceFields];
-export default quizFields;
+export default mediaFields;
 

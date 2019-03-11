@@ -1,10 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import styles from './settings-panel.module.scss';
 
 class ActionButton extends React.Component {
     render() {
         return (
-            <button onClick={this.props.onClick} disabled={!this.props.enabled}>
+            <button className={this.props.primary ? styles.primary : ''} onClick={this.props.onClick}
+                    disabled={!this.props.enabled}>
                 {this.props.text}
             </button>);
     }

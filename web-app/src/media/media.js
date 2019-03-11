@@ -43,7 +43,6 @@ function mapStateToProps(state) {
         newData.options.items = state.mediaExtras.items;
     }
     return {...state.media, user: state.authentication.user, data: newData};
-
 }
 
 const mapDispatchToProps = dispatch => {

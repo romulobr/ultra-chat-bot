@@ -9,7 +9,6 @@ import Twitch from './twitch/twitch';
 import Youtube from './youtube/youtube';
 import {connect} from 'react-redux';
 import ChatControls from '../chat-controls/chat-controls'
-import CurrentVersion from '../current-version/current-version';
 
 const Panel = posed.div({
     enter: {
@@ -47,16 +46,22 @@ class AuthenticationPanel extends Component {
         const myPanel =
             <Panel initialPose={'hidden'} key="connected-panel">
                 <div className={styles.information}>
-                    <Twitch user={this.props.user && this.props.user.twitch}
-                            onDeathenticate={this.props.deauthenticate('twitch')}/>
-                    <Youtube user={this.props.user && this.props.user.youtube}
-                             onDeathenticate={this.props.deauthenticate('youtube')}/>
-
-                    <StreamElements isEditing={this.props.isEditing}
-                                    token={this.props.token}
-                                    editToken={this.props.editToken}/>
-                    <Streamlabs ref={this.streamlabs}/>
+                    <div>
+                        <h3>Streaming Services</h3>
+                        <Twitch user={this.props.user && this.props.user.twitch}
+                                onDeathenticate={this.props.deauthenticate('twitch')}/>
+                        <Youtube user={this.props.user && this.props.user.youtube}
+                                 onDeathenticate={this.props.deauthenticate('youtube')}/>
+                    </div>
+                    <div>
+                        <h3>Loyalty Systems</h3>
+                        <StreamElements isEditing={this.props.isEditing}
+                                        token={this.props.token}
+                                        editToken={this.props.editToken}/>
+                        <Streamlabs ref={this.streamlabs}/>
+                    </div>
                 </div>
+                <h3>Chat Bot </h3>
                 <ChatControls/>
                 <div className={styles.overlayInstructions}>
                     <ul>
@@ -67,7 +72,7 @@ class AuthenticationPanel extends Component {
                         })}
                     </ul>
                 </div>
-                <CurrentVersion/>
+
             </Panel>;
 
         return (

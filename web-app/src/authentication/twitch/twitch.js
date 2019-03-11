@@ -19,21 +19,13 @@ class Twitch extends Component {
     render() {
         return (
             <div>
-                <div className={authenticationStyles.accountInformation} style={{
-                    backgroundImage: 'url(img/twitch-logo.png)',
-                    filter: this.props.user ? '' : 'grayscale(100%)'
-                }}>
-                    <div>
-                        {this.props.isLoading ? 'Loading...' : (this.props.user ? this.props.displayName : 'Not Connected')}
-                    </div>
-                </div>
                 <div>
                     <button
                         disabled={this.props.isLoading}
                         onClick={this.props.user ? this.disconnect : this.connect}
                         className={this.props.user ? 'button-danger' : 'button-important'}
                     >
-                        {this.props.user ? 'Disconnect' : 'Connect'}
+                        {this.props.user ? 'Disconnect Twitch Account' : 'Connect Twitch Account'}
                     </button>
                 </div>
             </div>)

@@ -23,20 +23,11 @@ class Streamlabs extends Component {
     render() {
         return (
             <div>
-                <div className={authenticationStyles.accountInformation} style={{
-                    backgroundImage: 'url(img/stream-labs-logo.png)',
-                    filter: this.props.access_token ? '' : 'grayscale(100%)'
-                }}>
-                    <div className={styles.token}>
-                        {!this.props.hasUser? 'Not available' :
-                            this.props.isLoading ? 'Loading...' : (this.props.user) || (this.props.access_token ? 'Ready' : 'Not connected')}
-                    </div>
-                </div>
                 <div>
                     {!this.props.isEditing && (
                         <button disabled={this.props.isLoading}
                                 onClick={this.props.access_token && this.props.access_token !== '' ? this.props.disconnect : this.connect}>
-                            {this.props.access_token && this.props.access_token !== '' ? 'Disconnect' : 'Connect'}
+                            {this.props.access_token && this.props.access_token !== '' ? 'Disconnect StreamLabs Account' : 'Connect StreamLabs Account'}
                         </button>
                     )}
                 </div>
