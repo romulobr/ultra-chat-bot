@@ -23,17 +23,6 @@ button {
   line-height: 2em;
   height: auto;
 
-  span {
-    background-color: white;
-    color: black;
-    display: inline-block;
-    line-height: 20px;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    font-weight: bolder;
-  }
-
   &:disabled, &[disabled] {
     border: 1px solid #111111;
     background-color: #444444;
@@ -41,44 +30,3 @@ button {
     transition: all 0.2s ease-in;
   }
 }
-
-input {
-  background-color: #dddddd;
-  color: black;
-  font-weight: bold;
-  border: #777777 1px solid;
-}
-
-.button-danger {
-  background-color: #ff14B0;
-}
-
-.button-important {
-  background-color: #aaffaa;
-  color: black;
-}
-
-.button-bar {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #111111;
-  border-radius: 10px;
-  line-height: 50px;
-  margin: 5px 0;
-  box-sizing: content-box;
-  justify-content: space-around;
-}
-
-.warning {
-  text-align: center;
-  line-height: 2em;
-  font-size: 1.1em;
-  margin: 0;
-  padding: 0;
-  color: #FFD200;
-  a {
-    color: #aaffaa;
-  }
-}
-

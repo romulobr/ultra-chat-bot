@@ -23,6 +23,7 @@ export default class SettingsForm extends React.Component {
         this.deleteFromArray = this.deleteFromArray.bind(this);
         this.editArrayItem = this.editArrayItem.bind(this);
         this.closeEditForm = this.closeEditForm.bind(this);
+        this.updateArrayItem = this.updateArrayItem.bind(this);
         this.handleEscapePress = this.handleEscapePress.bind(this);
         this.props.onFetch();
     }
@@ -37,9 +38,7 @@ export default class SettingsForm extends React.Component {
                         })}
                     </Scope>
                 </fieldset>
-                <button className={styles.deleteButton} onClick={() => this.deleteFromArray(arrayField.id, index)}>
-                    Delete
-                </button>
+                <ActionButton onClick={() => this.deleteFromArray(arrayField.id, index)} text={'Delete'}/>
             </div>
         )
     }
@@ -60,13 +59,15 @@ export default class SettingsForm extends React.Component {
         arrayField.fields.forEach(field => {
             newArrayItem[field.id] = '';
         });
+
         newArrayData.push(newArrayItem);
         const newState = {...this.state};
         if (!newState.data.options) {
             newState.data.options = {};
         }
         newState.data.options[arrayField.id] = newArrayData;
-        this.setState(newState);
+        this.editArrayItem(arrayField, newArrayData.length - 1);
+        // this.setState(newState);
     }
 
     editArrayItem(arrayField, index) {
@@ -75,6 +76,13 @@ export default class SettingsForm extends React.Component {
 
     closeEditForm() {
         this.setState({isEditing: false});
+    }
+
+    updateArrayItem() {
+        const newState = {...this.state};
+        newState.data.options[this.state.isEditing.arrayField.id][this.state.isEditing.index] = this.editingForm.getState().values;
+        newState.isEditing = false;
+        this.setState(newState);
     }
 
     deleteFromArray(arrayId, index) {
@@ -114,7 +122,8 @@ export default class SettingsForm extends React.Component {
                     })
                 }
                 <div className={styles.buttonBar}>
-                    <button className={styles.primary} onClick={() => this.addArrayItem(arrayField)}>Add</button>
+                    <ActionButton primary enabled={this.props.enabled} onClick={() => this.addArrayItem(arrayField)}
+                                  text={'Add'}/>
                 </div>
             </div>)
     }
@@ -195,7 +204,8 @@ export default class SettingsForm extends React.Component {
                                 {this.state.isEditing.arrayField.fields.map((fields, i) => {
                                     return this.toFormField(fields, i);
                                 })}
-                                <ActionButton primary text={'Confirm Changes'} enabled={enabled}/>
+                                <ActionButton onClick={this.updateArrayItem} primary text={'Confirm Changes'}
+                                              enabled={enabled}/>
                                 <ActionButton onClick={this.closeEditForm} text={'Cancel'} enabled={enabled}/>
                             </Form>
                         </div>
