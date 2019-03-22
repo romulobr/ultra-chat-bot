@@ -1,7 +1,7 @@
 import {createReducer} from 'redux-act';
 import actions from './stream-labs-actions';
 
-const streamElementsReducer = createReducer({
+const streamLabsReducer = createReducer({
     [actions.fetch]: (state, payload) => (
         {
             ...state,
@@ -22,12 +22,11 @@ const streamElementsReducer = createReducer({
         }),
     [actions.disconnectStreamlabs]: (state, payload) => (
         {
-            isLoading: true,
-            tokenUser: ''
+            isLoading: true
         })
 
 }, {
     isLoading: true
 });
 
-export default streamElementsReducer;
+export default streamLabsReducer;

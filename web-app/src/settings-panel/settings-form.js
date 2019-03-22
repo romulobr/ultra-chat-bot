@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {mediaUrl} from '../urls';
 import NumberOption from '../forms/number-option';
 import TextOption from '../forms/text-option';
 import CheckBoxOption from '../forms/checkbox-option';
 import TextAreaOption from "../forms/text-area-option";
+import CollapsiblePanel from '../collapsible-panel/collapsible-panel';
 import {Form} from 'informed';
 import {Scope} from 'informed';
-import ActionButton from './action-button';
 import styles from './settings-panel.module.scss';
+import {
+    Button, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader,
+    Typography
+} from "@smooth-ui/core-sc/dist/smooth-ui-core-sc";
 
 export default class SettingsForm extends React.Component {
     constructor(props) {
@@ -38,9 +43,23 @@ export default class SettingsForm extends React.Component {
                         })}
                     </Scope>
                 </fieldset>
-                <ActionButton onClick={() => this.deleteFromArray(arrayField.id, index)} text={'Delete'}/>
+                <Button onClick={() => this.deleteFromArray(arrayField.id, index)}>Delete</Button>
             </div>
         )
+    }
+
+    renderContent(content) {
+        const url = content.startsWith('http') ? content : `${mediaUrl}/${content}`;
+        if (content.endsWith('.webm') || content.endsWith('.mp4')) {
+            return (<video src={url} controls className={styles.arrayItemThumb}/>);
+        }
+        if (content.endsWith('.ogg') || content.endsWith('.mp3') || content.endsWith('.wav')) {
+            return (<video src={url} controls poster="img/audio.png" className={styles.arrayItemThumb}/>);
+        }
+        if (content.endsWith('.jpg') || content.endsWith('.png') || content.endsWith('.webp') || content.endsWith('.gif') || content.endsWith('.jpeg')) {
+            return (<img src={url} alt="thumbnail" controls className={styles.arrayItemThumb}/>);
+        }
+        return content;
     }
 
     addArrayItem(arrayField) {
@@ -95,35 +114,35 @@ export default class SettingsForm extends React.Component {
 
     arraySubForm(arrayField, i) {
         return (
-            <div className={styles.arraySubForm} key={`${arrayField.id}-${i}`}>
-                <h3> {arrayField.label}</h3>
-                {
-                    this.state.data && this.state.data.options && this.state.data.options[arrayField.id] && this.state.data.options[arrayField.id].map((item, i) => {
-                        return (
-                            <div className={styles.arrayItem} key={`${arrayField.id}-${i}`}>
+            <div className={styles.array} key={`${arrayField.id}-${i}`}>
+                <div className={styles.arrayHeader}><h2>{arrayField.label}<Button variant="success"
+                                                                                  enabled={this.props.enabled}
+                                                                                  onClick={() => this.addArrayItem(arrayField)}>Add</Button>
+                </h2></div>
+                <div className={styles.arrayBody}>
+                    {
+                        this.state.data && this.state.data.options && this.state.data.options[arrayField.id] && this.state.data.options[arrayField.id].map((item, i) => {
+                            return (
+                                <div className={styles.arrayItem} key={`${arrayField.id}-${i}`}>
+                                    {arrayField.fields.map((field, i) => {
+                                        return item[field.id] ? (<div key={i} className={styles.arrayItemContent}>
+                                            {this.renderContent(item[field.id])}
+                                        </div>) : ''
+                                    })}
 
-                                {arrayField.fields.map((field, i) => {
-                                    return item[field.id] ? (<div key={i} className={styles.arrayItemContent}>
-                                        <span>{item[field.id]}</span>
-                                    </div>) : ''
-                                })}
-
-                                <div className={styles.arrayItemButtons}>
-                                    <button type="button" className={styles.editButton}
-                                            onClick={() => this.editArrayItem(arrayField, i)}>
-                                        Edit
-                                    </button>
-                                    <button type="button" className={styles.deleteButton}
-                                            onClick={() => this.deleteFromArray(arrayField.id, i)}>
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>)
-                    })
-                }
-                <div className={styles.buttonBar}>
-                    <ActionButton primary enabled={this.props.enabled} onClick={() => this.addArrayItem(arrayField)}
-                                  text={'Add'}/>
+                                    <div className={styles.arrayItemButtons}>
+                                        <Button type="button" variant="dark" size="sm"
+                                                onClick={() => this.editArrayItem(arrayField, i)}>
+                                            Edit
+                                        </Button>
+                                        <Button type="button" variant="danger" size="sm"
+                                                onClick={() => this.deleteFromArray(arrayField.id, i)}>
+                                            Delete
+                                        </Button>
+                                    </div>
+                                </div>)
+                        })
+                    }
                 </div>
             </div>)
     }
@@ -185,48 +204,63 @@ export default class SettingsForm extends React.Component {
     render() {
         const {id, enabled, fieldSets} = this.props;
         const initialValues = (this.state.isEditing && this.formApi && this.formApi.getState().values.options[this.state.isEditing.arrayField.id] && this.formApi.getState().values.options[this.state.isEditing.arrayField.id][this.state.isEditing.index]);
-        console.log('initial values', initialValues);
         return (
             <div>
                 {this.state.isEditing && <div className={styles.arrayItemBackground}>
                     <div className={styles.arrayItemFormContainer}>
-                        <div className={styles.arrayItemFormTitle}>
-                            <span>Editing</span>
-                            <button onClick={() => {
+                        <ModalContent>
+                            <ModalCloseButton onClick={() => {
                                 this.closeEditForm();
-                            }}>X
-                            </button>
+                            }}/>
+                            <ModalHeader>
+                                <Typography variant="h5" m={0}>
+                                    Editing
+                                </Typography>
+                            </ModalHeader>
+                            <ModalBody>
+                                <Form initialValues={initialValues}
+                                      id={this.state.isEditing.arrayField.id}
+                                      getApi={(formApi) => this.editingForm = formApi}>
+                                    {this.state.isEditing.arrayField.fields.map((fields, i) => {
+                                        return this.toFormField(fields, i);
+                                    })}
+                                </Form>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button onClick={this.updateArrayItem}
+                                        variant="success"
+                                        enabled={enabled}
+                                        size="sm"
+                                >
+                                    Confirm Changes
+                                </Button>
+                                <Button variant="black" onClick={this.closeEditForm} enabled={enabled} size="sm">
+                                    Cancel
+                                </Button>
+                            </ModalFooter>
+                        </ModalContent>
+                        <div className={styles.arrayItemFormTitle}>
                         </div>
                         <div className={styles.arrayItemForm}>
-                            <Form initialValues={initialValues}
-                                  id={this.state.isEditing.arrayField.id}
-                                  getApi={(formApi) => this.editingForm = formApi}>
-                                {this.state.isEditing.arrayField.fields.map((fields, i) => {
-                                    return this.toFormField(fields, i);
-                                })}
-                                <ActionButton onClick={this.updateArrayItem} primary text={'Confirm Changes'}
-                                              enabled={enabled}/>
-                                <ActionButton onClick={this.closeEditForm} text={'Cancel'} enabled={enabled}/>
-                            </Form>
                         </div>
                     </div>
                 </div>}
                 <Form id={id} getApi={(formApi) => this.formApi = formApi}>
                     {fieldSets.map((fieldSet, i) => {
                         return (
-                            <fieldset key={i} disabled={!enabled}>
+                            <div className={styles.fields}>
                                 <h3>{fieldSet.label}</h3>
                                 <Scope scope={fieldSet.id}>
                                     <fieldset>
                                         {fieldSet.fields.map(this.toFormField)}
                                     </fieldset>
                                 </Scope>
-                            </fieldset>
+                            </div>
                         )
                     })}
                 </Form>
-                <div className={styles.buttonBar}>
-                    <ActionButton primary onClick={this.saveData} text={'Save'} enabled={enabled}> </ActionButton>
+                <div className={styles.settingsButtonBar}>
+                    <Button variant="success" onClick={this.saveData} enabled={enabled}> Save</Button>
                 </div>
             </div>
         );

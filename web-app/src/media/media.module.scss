@@ -1,9 +1,13 @@
 .mediaPanel {
-  padding-top: 40px;
   width: auto;
   color: black;
-  margin: 0 10px;
-  font-size: 0.8em;
+}
+
+.mediaPanelButtonsBar{
+  background-color: #222222;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .mediaList {

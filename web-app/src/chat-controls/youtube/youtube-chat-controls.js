@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import styles from './youtube-chat-controls.module.scss';
-import LoadingSpinner from '../../loading-spinner/loading-spinner';
 import {connect} from 'react-redux';
 import actions from './youtube-chat-controls-actions';
 import chatControlActions from '../chat-control-actions';
+import {Button, FormCheckLabel, Switch} from "@smooth-ui/core-sc/dist/smooth-ui-core-sc";
 
 class YoutubeChatControl extends Component {
     constructor() {
@@ -26,27 +26,27 @@ class YoutubeChatControl extends Component {
 
     render() {
         return (
-            <div className={styles.youtubeChatControls}>
-                <div className={styles.broadcasts}>
-                    {this.props.broadcasts.map(broadcast => (
-                        <div key={broadcast.id}
-                             className={styles.broadcast + (this.isConnected(broadcast.snippet.liveChatId) ? ' ' + styles.connected : '') + (this.isLoading(broadcast.snippet.liveChatId) ? ' ' + styles.loading : '')}>
-                            <img src={broadcast.snippet.thumbnails.medium.url} alt="thumbnail"/>
-                            {broadcast.snippet.title}
-                            <button
-                                disabled={this.isLoading(broadcast.snippet.liveChatId) ? ' ' + styles.loading : ''}
-                                onClick={
-                                    this.isConnected(broadcast.snippet.liveChatId) ?
-                                        this.props.disconnectFromChat(broadcast.snippet.liveChatId) :
-                                        this.props.connectToChat(broadcast.snippet.liveChatId)
-                                }
-                            >{this.isConnected(broadcast.snippet.liveChatId) ?
-                                'Disconnect' : 'Connect'}
-                            </button>
-                        </div>
-                    ))}
+            <>
+            {this.props.broadcasts.map(broadcast => (
+                <div key={broadcast.id}
+                     className={styles.broadcast + (this.isConnected(broadcast.snippet.liveChatId) ? ' ' + styles.connected : '') + (this.isLoading(broadcast.snippet.liveChatId) ? ' ' + styles.loading : '')}>
+                    <img src={this.props.user && this.props.user.profilePictureUrl}
+                         alt="thumbnail"/>
+
+                    <Switch labeled checked={this.props.youtube.connected}
+                            onClick={
+                                this.isConnected(broadcast.snippet.liveChatId) ?
+                                    this.props.disconnectFromChat(broadcast.snippet.liveChatId) :
+                                    this.props.connectToChat(broadcast.snippet.liveChatId)
+                            }
+                            disabled={this.props.youtube.loading}
+                    />
+                    <FormCheckLabel>
+                        {broadcast.snippet.title}
+                    </FormCheckLabel>
                 </div>
-            </div>
+            ))}
+            </>
         );
     }
 }
@@ -55,7 +55,7 @@ function mapStateToProps(state) {
     return {
         ...state.chatControls,
         ...state.youtubeChatControls,
-        user: state.user && state.user.youtube,
+        user: state.authentication.user && state.authentication.user.youtube,
     };
 }
 

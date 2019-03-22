@@ -1,31 +1,32 @@
 .youtubeChatControls {
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .broadcasts {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .broadcast {
   box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
   color: white;
-  font-size: 0.8em;
   font-weight: bolder;
-  text-shadow: black 1px 1px 1px;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 70%, rgba(124, 0, 0, 1) 100%);
+  background: linear-gradient(180deg, rgba(255, 0, 0, 1) 20%, rgba(106, 0, 0, 1) 100%);
   border: solid 1px black;
-  display: flex;
-  flex-direction: column;
   padding: 2px;
-  margin: 10px;
-  max-width: 200px;
-  border-radius: 16px;
+  display: flex;
+  width: 196px;
+  border-radius: 4px;
   text-align: center;
-
+  justify-content: space-around;
+  margin: 8px 2px;
+  a{
+    color:white;
+  }
   img {
-    width: 100%;
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
     border-radius: 16px;
     box-shadow: rgba(0, 0, 0, 0.8) 1px 4px 1px;
   }

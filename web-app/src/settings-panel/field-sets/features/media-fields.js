@@ -4,7 +4,7 @@ import customSourceFields from '../custom-source-fields';
 
 const mediaFields = [
     {
-        label: 'Media Options', id: 'options',
+        label: 'Media', id: 'options',
         fields: [
             {id: 'defaultCost', label: 'Cost', type: 'number'},
             {id: 'defaultVolume', label: 'Volume (from 0 to 1)', type: 'number'},

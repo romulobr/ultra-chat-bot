@@ -11,17 +11,16 @@ const streamElementsReducer = createReducer({
     [actions.fetchTokenSuccess]: (state, payload) => (
         {
             ...state,
+            ...payload,
             isEditing: false,
-            isLoading: false,
-            token: payload.token
+            isLoading: false
         }),
     [actions.fetchTokenFailed]: (state, payload) => (
         {
             ...state,
             error: payload,
             isEditing: false,
-            isLoading: false,
-            tokenUser:''
+            isLoading: false
         }),
     [actions.editToken]: (state) => (
         {
@@ -42,9 +41,9 @@ const streamElementsReducer = createReducer({
     [actions.saveTokenSuccess]: (state, payload) => (
         {
             ...state,
-            token: payload,
+            ...payload,
             isEditing: false,
-            tokenUser:''
+            tokenUser: ''
         }),
     [actions.saveTokenFailed]: (state, payload) => (
         {
@@ -56,13 +55,14 @@ const streamElementsReducer = createReducer({
         {
             ...state,
             isEditing: false,
-            tokenUser: payload
+            tokenUser: payload,
+            tokenVerified: true,
         }),
     [actions.tokenVerificationFailed]: (state, payload) => (
         {
             ...state,
             isEditing: false,
-            tokenUser: 'Bad Token?'
+            tokenVerified: false,
         })
 }, {
     token: '',

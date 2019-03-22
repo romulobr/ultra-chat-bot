@@ -1,70 +1,42 @@
-.navigator {
-  top: 0;
-  left: 0;
-  position: absolute;
-  padding: 0;
-  width: 100%;
-  z-index: 2;
-  color: #222222;
-  background-color: #cccccc;
-  min-height: 100%;
-}
-
-.viewPicker {
-  justify-content: space-around;
+.navigator{
   width: 100vw;
-  line-height: 40px;
+  height: 100vh;
   display: flex;
-  flex-direction: row;
-  text-align: center;
-  font-weight: bold;
-  background-color: black;
+}
+
+.navigatorContent{
+  position: absolute;
+  left:200px;
+  height: 100vh;
+  padding: 4px;
+  width: calc(100% - 200px);
+}
+
+.sideBar{
   position: fixed;
-  z-index: 2;
-
-  a {
-    text-decoration: none;
-  }
-}
-
-.settingsMenu {
-  .hidden {
-    max-height: 1px;
-    overflow: hidden;
-  }
-}
-
-.settings {
-  display: flex;
-  flex-direction: column;
-  background-color: black;
-  position: relative;
-  top: 0;
-  width: 100%;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  opacity: 1;
-  transition: 0.5s;
-}
-
-.hidden {
-  opacity: 0.5;
-  transition: 0.5s;
-}
-
-.navigationItem {
-  text-align: center;
-  color: #888888;
-  border-bottom: #222222 5px solid;
-  width: 100%;
-  height: 35px;
-  font-size: 12px;
-  flex-grow: 1;
-}
-
-.selected {
+  background-color: #000000;
   color: white;
-  border-bottom: #FFD200 5px solid;
+  min-width: 200px;
+  height: 100vh;
+}
+.viewPicker{
+  background-color: #222222;
+  color: white;
+}
+
+.navigationItem{
+  a{
+    color: white;
+    text-decoration: none;
+    line-height: 3em;
+  }
+  span{
+    padding: 8px;
+  }
+  transition: all 1s;
+}
+
+.selected{
+  background-color: #6441a4;
   transition: all 1s;
 }

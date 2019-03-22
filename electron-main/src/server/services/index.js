@@ -7,7 +7,6 @@ const streamElementsToken = require('./stream-elements-token/stream-elements-tok
 const streamLabsToken = require('./stream-labs/stream-labs.service');
 const icons = require('./icons/icons.service');
 const news = require('./news/news.service');
-const test = require('./test/test.service');
 const loyalty = require('./loyalty/loyalty.service');
 const loyaltyProfile = require('./loyalty/loyalty-profile.service');
 const quiz = require('./quiz/quiz.service');

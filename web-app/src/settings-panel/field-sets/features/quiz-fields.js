@@ -4,7 +4,7 @@ import customSourceFields from '../custom-source-fields';
 
 const quizFields = [
     {
-        label: 'Quiz Options', id: 'options',
+        label: 'Quiz', id: 'options',
         fields: [
             {id: 'intervalInMinutes', label: 'Interval Between Quizzes (minutes)', type: 'number'},
             {id: 'defaultPowerReward', label: 'Default Power Reward', type: 'number'},
@@ -16,11 +16,10 @@ const quizFields = [
                     {id: 'answers', label: 'Answers, separate with comma', type: 'text'},
                     {id: 'reward', label: 'Reward in points', type: 'number'},
                     {id: 'audio', label: 'audio file', type: 'text'},
-                    {id: 'rewardCurrency', label: 'Reward Currency if applicable (love, power)', type: 'text'}
+                    {id: 'rewardCurrency', label: 'Reward Currency', type: 'text'}
                 ]
             }
         ]
-    },
-    permissionFields, cooldownFields, customSourceFields];
+    }, permissionFields, cooldownFields, customSourceFields];
 export default quizFields;
 

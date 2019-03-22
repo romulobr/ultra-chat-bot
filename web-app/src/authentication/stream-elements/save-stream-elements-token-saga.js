@@ -14,10 +14,10 @@ function* saveToken(action) {
             return;
         }
         console.log('saving token: ', action);
-        const response = yield axios.put(streamElementsTokenApi, {token: action.payload}, {
+        const response = yield axios.put(streamElementsTokenApi, action.payload, {
             headers: {Authorization: 'Bearer ' + jwt}
         });
-        yield put(actions.saveTokenSuccess(response.data.token));
+        yield put(actions.saveTokenSuccess(response));
         try {
             if (response.data.token !== '') {
                 const streamElementsUser = yield axios.get(streamElementsApiCheck, {
@@ -26,12 +26,24 @@ function* saveToken(action) {
                 yield put(actions.tokenVerificationSuccess(streamElementsUser.data.channels["0"].displayName));
             }
         } catch (e) {
-            yield put(actions.tokenVerificationFailed({error: e}));
+            yield put(actions.tokenVerificationFailed(e.response));
         }
 
     } catch (e) {
-        console.log('error saving token', e);
-        yield put(actions.saveTokenFailed({error: e}));
+        if (e.response.status === 404) {
+            try {
+                const response = yield axios.post(streamElementsTokenApi, action.payload, {
+                    headers: {Authorization: 'Bearer ' + getSavedToken()}
+                });
+                yield put(actions.saveTokenSuccess(response));
+            } catch (e) {
+                console.log('error saving token', e);
+                yield put(actions.saveTokenFailed(e.response));
+            }
+        } else {
+            console.log('error saving token', e);
+            yield put(actions.saveTokenFailed(e.response));
+        }
     }
 }
 

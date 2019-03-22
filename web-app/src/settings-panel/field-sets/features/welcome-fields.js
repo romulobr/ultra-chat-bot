@@ -4,7 +4,7 @@ import customSourceFields from '../custom-source-fields';
 
 const welcomeFields = [
     {
-        label: 'Welcome Options', id: 'options',
+        label: 'Welcome', id: 'options',
         fields: [
             {id: 'saveCommand', label: 'Save Command', type: 'text'},
             {id: 'showCommand', label: 'Show Command', type: 'text'}

@@ -4,7 +4,7 @@ import customSourceFields from '../custom-source-fields';
 
 const loyaltyFields = [
     {
-        label: 'Loyalty Options', id: 'options',
+        label: 'Loyalty', id: 'options',
         fields: [
             {id: 'pointsPerRound', label: 'Points per round', type: 'number'},
             {id: 'subscriberMultiplier', label: 'Joined/Sub Multiplier', type: 'number'},

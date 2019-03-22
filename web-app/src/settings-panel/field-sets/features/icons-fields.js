@@ -3,8 +3,9 @@ import cooldownFields from '../cooldown-fields';
 import customSourceFields from '../custom-source-fields';
 
 const iconsFields = [
+    permissionFields, cooldownFields, customSourceFields,
     {
-        label: 'Icons Options', id: 'options',
+        label: 'Icons', id: 'options',
         fields: [
             {
                 id: 'icons', label: 'Icons', type: 'array',
@@ -14,5 +15,5 @@ const iconsFields = [
                 ]
             }
         ]
-    }, permissionFields, cooldownFields, customSourceFields];
+    }];
 export default iconsFields;

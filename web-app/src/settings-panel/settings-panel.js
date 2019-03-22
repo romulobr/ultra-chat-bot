@@ -2,16 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import actionsFor from './settings-actions';
 import SettingsForm from './settings-form';
-import styles from './settings-panel.module.scss';
+import {Alert} from "@smooth-ui/core-sc/dist/smooth-ui-core-sc";
 
 class SettingsPanel extends React.Component {
     render() {
         const {error, id, save, fetch, enabled, fieldSets, data} = this.props;
         return (
-            <div className={styles.settingsPanel}>
-                <h2>{this.props.error}</h2>
-                <SettingsForm className={styles.settingsForm}
-                              fieldSets={fieldSets}
+            <>
+                {this.props.error && <Alert variant="danger">{JSON.stringify(this.props.error)}</Alert>}
+                <SettingsForm fieldSets={fieldSets}
                               id={id}
                               onSave={save}
                               onFetch={fetch}
@@ -22,7 +21,7 @@ class SettingsPanel extends React.Component {
                                   console.log('got data')
                               }
                               }/>
-            </div>
+            </>
         );
     }
 }

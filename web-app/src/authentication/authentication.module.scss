@@ -1,85 +1,48 @@
-.welcomePanel {
-  padding-top:50px;
-  flex-direction: column;
-  text-align: center;
-
-  margin: 0;
-  width: 100vw;
-  transition: all 0.5s ease-in;
-
-  h2{
-    font-size: 1em;
-  }
-}
-
-.accountInformation {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 0;
-  border-radius: 10px;
-  padding: 0;
-  text-align: center;
-  background: no-repeat center;
-  background-size: cover;
-  height: 50px;
-  width: 50px;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  font-size: 1.3em;
-}
-
-.userName {
-  color: black;
-  background-color: rgba(255, 255, 255, 1);
-  font-weight: bolder;
-  padding: 8px 24px;
-  border-radius: 8px;
-  transform: rotate(-5deg) translate(0, 70px);
-  border: 2px solid rgba(0, 0, 0, 1);
-}
-
-.information {
-  flex-wrap: wrap;
-  flex-grow: 1;
+.streamService {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  align-content: center;
+  justify-content: flex-start;
+  margin: 4px 8px;
 
-  div {
-    margin: 10px 0;
-  }
-}
+  div.streamServiceName {
+    font-size: 0.8em;
+    margin-left: 4px;
+    display: flex;
+    line-height: 1.8;
+    flex-grow: 1;
 
-.profilePicture {
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  background: no-repeat center;
-  background-size: contain;
-  width: 100%;
-  display: inline-block;
-  height: 200px;
-}
-
-.overlayInstructions {
-  width: auto;
-  font-weight: bold;
-  text-align: center;
-  background-color: darkslateblue;
-  padding:4px;
-  margin: auto;
-  line-height: 1.5em;
-  span {
-    color: black;
-  }
-  ul{
-    color:white;
-    li{
-      color:yellow;
-      list-style: none;
-      font-size: 0.8em;
+    .streamServiceSwitch {
+      input {
+        cursor: pointer;
+      }
     }
   }
+}
+
+.streamServiceImage {
+  display: flex;
+  width: 2em;
+  height: 2em;
+  margin-right: 4px;
+  border-radius: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: white 1px solid;
+  background-color: #111111;
+}
+
+.streamElementsTokenLabel {
+  padding: 0;
+  margin: -8px 8px 8px 8px;
+  font-size: 0.8em;
+  input {
+    font-size: 0.9em;
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+input {
+  margin: 2px;
 }

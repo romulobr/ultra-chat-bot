@@ -1,4 +1,4 @@
-import {streamElementsTokenApi, streamElementsApiCheck, settingsFileApi} from '../../urls';
+import {streamElementsTokenApi, streamElementsApiCheck, settingsFileUrlFor} from '../../urls';
 import {put, takeEvery} from 'redux-saga/effects';
 import axios from 'axios';
 import getSavedToken from '../../authentication/jwt';
@@ -15,26 +15,24 @@ function* fetchToken() {
         const getResponse = yield axios.get(streamElementsTokenApi, {
             headers: {Authorization: 'Bearer ' + jwt}
         });
-        if (getResponse.data && getResponse.data[0] && getResponse.data[0].token !== undefined) {
-            yield put(actions.fetchTokenSuccess({token: getResponse.data[0].token}));
+        if (getResponse.data) {
+            yield put(actions.fetchTokenSuccess({data: getResponse.data[0]}));
             try {
-                if (getResponse.data[0].token !== '') {
-                    const streamElementsUser = yield axios.get(streamElementsApiCheck, {
-                        headers: {Authorization: 'Bearer ' + getResponse.data[0].token}
-                    });
-                    yield put(actions.tokenVerificationSuccess(streamElementsUser.data.channels["0"].displayName));
-                }
+                const streamElementsUser = yield axios.get(streamElementsApiCheck, {
+                    headers: {Authorization: 'Bearer ' + getResponse.data[0].token}
+                });
+                yield put(actions.tokenVerificationSuccess(streamElementsUser.data.channels["0"].displayName));
             } catch (e) {
-                yield put(actions.tokenVerificationFailed({error: e}));
+                yield put(actions.tokenVerificationFailed(e.response));
             }
         } else {
-            const savedData = yield axios.get(settingsFileApi + '/stream-elements-token');
+            const savedData = yield axios.get(settingsFileUrlFor('stream-elements-token'));
             delete savedData.data._id;
-            yield axios.post(streamElementsTokenApi, savedData.data || {token: ''}, {headers: {Authorization: 'Bearer ' + jwt}});
-            yield put(actions.fetchToken());
+            yield axios.post(streamElementsTokenApi, savedData.data, {headers: {Authorization: 'Bearer ' + jwt}});
+            yield put(actions.fetchTokenSuccess({data: savedData[0]}));
         }
     } catch (e) {
-        yield put(actions.fetchTokenFailed({error: e}));
+        yield put(actions.error(e));
         console.log('got an error:', e);
     }
 }

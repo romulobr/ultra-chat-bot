@@ -1,117 +1,84 @@
-.settingsPanel {
-  margin-top: 50px;
-  border: none;
-  form {
-    border: none;
-    fieldset {
-      border: none;
-      display: flex;
-      label {
-        display: flex;
-        flex-direction: row;
-        padding: 2px;
-        span {
-          display: flex;
-          flex-direction: column;
-          input {
-            flex-grow: 1;
-          }
-        }
-      }
-    }
-  }
-
-  h3, h2 {
-    margin: 0;
-  }
+.array {
+  margin: 4px 0;
+  max-height: 400px;
+  overflow-y: scroll;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
 }
 
-.arraySubForm {
-  border: solid black 1px;
-  font-size: 0.8em;
-  margin: 2px;
-
-  h3 {
-    background-color: black;
-    color: white;
-    border: solid black 1px;
-  }
-
-  fieldset {
-    display: flex;
-    margin: 16px 8px;
-    padding: 2px;
-    flex-grow: 1;
-
-    label {
-      display: flex;
-      flex-direction: column;
-      padding: 2px;
-    }
-    input {
-      flex-grow: 1;
-    }
-  }
-
-  button {
-    box-shadow: none;
-    line-height: 3em;
-    height: auto;
-  }
+.fields {
+  float: left;
+  border: #eeeeee solid 1px;
+  margin: 4px;
+  border-radius: 4px;
+  padding:4px;
 }
 
-.arrayItemForm {
-  border: 1px solid black;
-  padding: 2px;
+fieldset {
+  margin: 2px !important;
+  padding: 0 !important;
+  display: inline-block;
+}
+
+label {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+}
+.arrayHeader {
+  width: 100%;
+  h2 {
+    position: relative;
+    width: 100%;
+    font-weight: bolder;
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-bottom: #222222;
 
-  span {
-    display: flex;
-    flex-grow: 1;
+    button {
+      margin: 0 8px;
+    }
   }
+}
+
+.arrayBody {
 }
 
 .arrayItem {
-  display: flex;
-  flex-direction: row;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.arrayItemContent {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  font-size: 1.2em;
-  line-height: 2em;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  margin: 4px;
+  padding: 4px;
+  display: inline-grid;
+  text-align: center;
+  &:hover {
+    background-color: #dddddd;
+    transition: all 0.3s;
+  }
+  span {
+    font-weight: bolder;
+  }
 }
 
 .arrayItemButtons {
-  flex-shrink: 1;
-  min-width: 180px;
-  justify-content: flex-end;
+  button {
+    margin: 0 4px 2px 2px;
+  }
+}
+
+h3 {
+  font-weight: bolder;
+  border-bottom: #222222;
 }
 
 .buttonBar {
-  background-color: black;
+  color: white;
+  display: grid;
 }
 
-.arrayItemFormContainer {
-  margin: 5%;
-  width: 90%;
-  background-color: whitesmoke;
-  flex-direction: column;
-  padding: 0;
-
-
-}
-
-.arrayItemForm {
-  width: 100%;
+.arrayItemThumb {
+  height: 100px;
+  max-width: 100px;
 }
 
 .arrayItemBackground {
@@ -128,37 +95,28 @@
   padding: 0;
 }
 
-.primary {
-  background-color: #0057e7;
+.arrayItemFormContainer {
+  margin: 100px;
 }
 
-.arrayItemFormTitle {
-  background-color: #222222;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  font-size: 1.2em;
-  line-height: 2em;
-  text-align: center;
-  color: white;
+.settingsButtonBar {
   display: flex;
   flex-direction: row;
-
-  span {
-    padding-left: 8px;
-    align-items: flex-start;
-    flex-grow: 1;
-    text-overflow: ellipsis;
-  }
+  justify-content: center;
+  position: fixed;
+  width: calc(100% - 208px);
+  top: 2px;
 
   button {
-    flex-shrink: 1;
-    margin: 0;
-    padding: 0;
-    height: 2em;
-    width: 50px;
-    position: relative;
-    line-height: 0.5em;
-    box-shadow: none;
+    opacity: 0.9;
+    margin: 0 8px;
+    border-radius: 100%;
+    min-height: 80px;
+    min-width: 80px;
+    position: absolute;
+    box-shadow: black 5px 5px ;
+    background-color: #222222;
+    right: 0;
+    top: calc(100vh - 90px);
   }
 }

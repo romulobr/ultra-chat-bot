@@ -4,7 +4,7 @@ import customSourceFields from '../custom-source-fields';
 
 const newsFields = [
     {
-        label: 'News Options', id: 'options',
+        label: 'News', id: 'options',
         fields: [
             {id: 'getLinkCommand', label: 'Get Link command', type: 'text'},
             {id: 'fetchIntervalInMinutes', label: 'Refresh news every X (minutes)', type: 'number'},

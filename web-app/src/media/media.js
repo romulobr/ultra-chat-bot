@@ -6,6 +6,7 @@ import actions from './media-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner'
 import mediaFields from '../settings-panel/field-sets/features/media-fields';
 import settingsPanelFor from '../settings-panel/settings-panel';
+import {Button} from "@smooth-ui/core-sc/dist/smooth-ui-core-sc";
 
 const MediaSettingsPanel = settingsPanelFor('media', mediaFields, ['mediaExtras']);
 
@@ -19,14 +20,17 @@ class MediaPanel extends Component {
         return (
             <div className={styles.mediaPanel}>
                 {this.props.isLoading && (<LoadingSpinner/>)}
-                <div className='button-bar'>
-                    <button type="button"
+                <div className={styles.mediaPanelButtonsBar}>
+                    <Button type="button"
+                            variant="dark"
                             onClick={this.props.openMediaFolder}>
                         Copy files
-                    </button>
-                    <button type="button" onClick={this.props.importMedia}>
+                    </Button>
+                    <Button type="button"
+                            variant="dark"
+                            onClick={this.props.importMedia}>
                         Import files
-                    </button>
+                    </Button>
                 </div>
                 <MediaSettingsPanel/>
             </div>

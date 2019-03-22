@@ -1,0 +1,49 @@
+.collapsiblePanel {
+  height: auto;
+  margin: 8px 0;
+  background-color: #222222;
+  color: white;
+  .header {
+    min-height: 1.5em;
+    padding: 4px;
+    line-height: 1.5em;
+    cursor: pointer;
+  }
+  .icon {
+    height: 1.5em;
+    width: 1.5em;
+    transform: rotate(180deg);
+    transition: all 1s;
+  }
+}
+
+.collapsed {
+  .icon {
+    transform: rotate(0deg);
+    transition: all 1s;
+  }
+}
+
+.content {
+  max-height: 400px;
+  overflow: scroll;
+  transition: max-height 1s;
+}
+
+.content.hidden {
+  max-height: 0;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  float: right;
+  border-radius: 100%;
+  background: #dddddd url('./img/expand.svg') no-repeat;
+  background-size: cover;
+  transition: all 0.5s;
+
+  &:hover {
+    background-color: white;
+  }
+}

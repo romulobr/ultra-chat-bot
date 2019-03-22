@@ -4,7 +4,7 @@ import customSourceFields from '../custom-source-fields';
 
 const chickenFields = [
     {
-        label: 'Chicken Options', id: 'options',
+        label: 'Chicken', id: 'options',
         fields: [
             {id: 'sayCommand', label: 'Say Command', type: 'text'},
             {id: 'moveCommand', label: 'Move Command', type: 'text'},

@@ -71,12 +71,12 @@ mainApp.use('*', function (req, res) {
     newUrl === baseUrl + '/welcome' ||
     newUrl === baseUrl + '/loyalty' ||
     newUrl === baseUrl + '/quiz' ||
+    newUrl === baseUrl + '/help' ||
     newUrl === baseUrl + '/chicken') {
     request(baseUrl).pipe(res);
   }
   request(newUrl).pipe(res);
 });
-
 
 mainApp.use(express.notFound());
 mainApp.use(express.errorHandler({logger}));
