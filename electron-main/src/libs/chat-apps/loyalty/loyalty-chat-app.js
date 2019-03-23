@@ -19,7 +19,7 @@ module.exports = class LoyaltyChatApp {
     this.subscriberMultiplier = (Number.parseFloat(settings.options.subscriberMultiplier)) || 2;
     const subscriberMultiplier = this.subscriberMultiplier;
     this.source = settings.options.source;
-    this.customSource = settings.options.customSource;
+    this.customSource = settings.source && settings.source.customSource;
 
     this.permissions = settings.permissions;
 
@@ -53,7 +53,7 @@ module.exports = class LoyaltyChatApp {
       isMedia: true,
       url: urls.media + '/' + this.sound
     };
-    sendScreenMessage(screenAudioMessage, this.source && this.customSource);
+    sendScreenMessage(screenAudioMessage, this.customSource);
   }
 
   sendIconMessages(amount) {
@@ -61,7 +61,7 @@ module.exports = class LoyaltyChatApp {
     const iconMessage = {isIcons: true, icon: this.icon};
     let i;
     for (i = 0; i < limit; i++) {
-      sendScreenMessage(iconMessage, this.source && this.customSource);
+      sendScreenMessage(iconMessage, this.customSource);
     }
   }
 

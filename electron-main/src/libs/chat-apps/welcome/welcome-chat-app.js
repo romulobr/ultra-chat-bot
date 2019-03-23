@@ -13,6 +13,7 @@ class WelcomeChatApp {
     this.saveCommand = settings.options.saveCommand;
     this.showCommand = settings.options.showCommand;
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
+    this.customSource = this.settings.source && this.settings.source.customSource;
   }
 
   async saveMessage(newMessage, id) {

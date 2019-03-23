@@ -36,6 +36,7 @@ class NewsChatApp {
     this.refreshIntervalInMinutes = settings.options.refreshIntervalInMinutes || 60;
     this.showIntervalInMinutes = settings.options.showIntervalInMinutes || 5;
     this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 1000;
+    this.customSource = this.settings.source && this.settings.source.customSource;
     this.screenTime = settings.options.screenTime || 60;
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown || 60);
     this.playAudio = settings.options.playAudio;
@@ -79,13 +80,13 @@ class NewsChatApp {
       "duration": this.screenTime
     };
 
-    sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+    sendScreenMessage(screenMessage, this.customSource);
     if (this.playAudio) {
       const audioScreenMessage = {
         isMedia: true,
         url: urls.media + '/' + this.audioUrl
       };
-      sendScreenMessage(audioScreenMessage, this.settings.options.source && this.settings.options.source.customSource);
+      sendScreenMessage(audioScreenMessage, this.customSource);
     }
   }
 

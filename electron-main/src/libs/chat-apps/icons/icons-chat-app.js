@@ -11,11 +11,12 @@ class IconsChatApp {
     this.wordList = (settings.options.icons && settings.options.icons.map(icon => {
       return {
         image: icon.image,
-        words: icon.words.split(' ')
+        words: icon.words && icon.words.trim().split(' ')
       }
     })) || [];
     // this.settings.wordList = settings.;
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
+    this.customSource = this.settings.source && this.settings.source.customSource;
   }
 
   iconsInText(text) {
@@ -39,7 +40,7 @@ class IconsChatApp {
       icons.forEach(icon => {
         console.log(`icon ${icon} found in message: ${message.text}`);
         const screenMessage = {isIcons: true, icon};
-        sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+        sendScreenMessage(screenMessage, this.customSource);
       });
       this.cooldownManager.addCoolDownTo(message.author);
     }

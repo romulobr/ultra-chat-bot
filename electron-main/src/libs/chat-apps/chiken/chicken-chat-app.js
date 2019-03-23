@@ -8,6 +8,7 @@ class ChickenChatApp {
   constructor(settings) {
     this.settings = settings;
     this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
+    this.customSource = this.settings.source && this.settings.source.customSource;
   }
 
   async handleMessage(message) {
@@ -28,7 +29,7 @@ class ChickenChatApp {
     else if (command.command === this.settings.options.sayCommand) {
       const theMessage = message.text.replace('!' + this.settings.options.sayCommand, '').replace(this.settings.options.sayCommand, '').substr(0, 75);
       const screenMessage = {chicken: {say: theMessage, sound: this.settings.options.enableSound}};
-      sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+      sendScreenMessage(screenMessage, this.customSource);
     }
   }
 }
