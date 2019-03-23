@@ -1,6 +1,6 @@
 {
   "name": "v3-webapp",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.0",

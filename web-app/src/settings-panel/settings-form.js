@@ -219,7 +219,7 @@ export default class SettingsForm extends React.Component {
 
     render() {
         const {id, enabled, fieldSets} = this.props;
-        const initialValues = (this.state.isEditing && this.formApi && this.formApi.getState().values.options[this.state.isEditing.arrayField.id] && this.formApi.getState().values.options[this.state.isEditing.arrayField.id][this.state.isEditing.index]);
+        const initialValues = (this.state.isEditing && this.formApi && this.formApi.getState().values.options && this.formApi.getState().values.options[this.state.isEditing.arrayField.id] && this.formApi.getState().values.options[this.state.isEditing.arrayField.id][this.state.isEditing.index]);
         return (
             <div>
                 {this.state.isEditing && <div className={styles.arrayItemBackground}>

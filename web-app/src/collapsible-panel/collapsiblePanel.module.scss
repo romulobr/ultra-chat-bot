@@ -26,7 +26,7 @@
 
 .content {
   max-height: 400px;
-  overflow: scroll;
+  overflow: hidden;
   transition: max-height 1s;
 }
 
