@@ -6,18 +6,18 @@
 }
 
 .twitchChat {
-  box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 3px;
   color: white;
   font-weight: bolder;
-  background: linear-gradient(180deg, rgba(206, 0, 287, 1) 20%, rgba(106, 0, 187, 1) 100%);
-  border: solid 1px black;
-  padding: 2px;
+  min-height: 50px;
+  padding: 10px 2px;
+
   display: flex;
-  width: 196px;
-  margin: 8px 2px;
+  width: 184px;
+  margin: 8px 8px;
   border-radius: 4px;
   text-align: center;
   justify-content: space-around;
+  border: 1px solid #444444;
   a{
     color:white;
   }
@@ -28,16 +28,16 @@
     border-radius: 16px;
     box-shadow: rgba(0, 0, 0, 0.8) 1px 4px 1px;
   }
+  transition: all 0.2s ease-in;
 }
 
 .connected {
   transition: all 0.2s ease-in;
-  background-color: #aaffaa;
-  border-color: #00dd00;
+  background-color: #6441a4;
 }
 
 .loading {
   transition: all 0.2s ease-in;
-  background-color: #ffffaa;
-  border-color: #FFD200;
+  background-color: #444444;
 }
+

@@ -30,6 +30,7 @@ export default class SettingsForm extends React.Component {
         this.closeEditForm = this.closeEditForm.bind(this);
         this.updateArrayItem = this.updateArrayItem.bind(this);
         this.handleEscapePress = this.handleEscapePress.bind(this);
+        this.cleanEmpty = this.cleanEmpty.bind(this);
         this.props.onFetch();
     }
 
@@ -86,7 +87,6 @@ export default class SettingsForm extends React.Component {
         }
         newState.data.options[arrayField.id] = newArrayData;
         this.editArrayItem(arrayField, newArrayData.length - 1);
-        // this.setState(newState);
     }
 
     editArrayItem(arrayField, index) {
@@ -94,14 +94,30 @@ export default class SettingsForm extends React.Component {
     }
 
     closeEditForm() {
-        this.setState({isEditing: false});
+        const index = this.state.isEditing.index;
+        const field = this.state.isEditing.arrayField;
+        this.setState({isEditing: false}, () => this.cleanEmpty(field, index));
+    }
+
+    cleanEmpty(field, index) {
+        const possiblyEmptyArrayItem = this.state.data.options[field.id][index];
+        const isEmpty = Object.values(possiblyEmptyArrayItem).reduce((isEmpty, currentValue) => {
+            return isEmpty || !(currentValue)
+        }, false);
+        if (isEmpty) {
+            const newState = {...this.state};
+            newState.data.options[field.id].pop();
+            this.setState(newState);
+        }
     }
 
     updateArrayItem() {
         const newState = {...this.state};
         newState.data.options[this.state.isEditing.arrayField.id][this.state.isEditing.index] = this.editingForm.getState().values;
         newState.isEditing = false;
-        this.setState(newState);
+        const index = this.state.isEditing.index;
+        const field = this.state.isEditing.arrayField;
+        this.setState(newState, () => this.cleanEmpty(field, index));
     }
 
     deleteFromArray(arrayId, index) {

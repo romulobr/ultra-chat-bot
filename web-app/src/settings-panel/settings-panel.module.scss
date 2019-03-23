@@ -115,8 +115,15 @@ h3 {
     min-width: 80px;
     position: absolute;
     box-shadow: black 5px 5px ;
-    background-color: #222222;
-    right: 0;
-    top: calc(100vh - 90px);
+    background-color: #229922;
+    color:white;
+    font-weight: bolder;
+    right: 20px;
+    top: calc(20px);
   }
+}
+
+.settingsPanel{
+  margin:0 20px;
+  font-size: 1.2em;
 }

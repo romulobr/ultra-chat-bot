@@ -1,21 +1,21 @@
-.instructions{
-  margin:20px;
-  h1{
+.instructions {
+  margin: 20px;
+  h1 {
     font-size: 1.8em;
     padding: 0;
     margin: 0;
     line-height: 1.8em;
   }
 
-  h2{
+  h2 {
     color: yellow;
     font-size: 1.2em;
     margin: 4px;
   }
-  p{
-    margin:4px;
+  p {
+    margin: 4px;
   }
-  ul{
+  ul {
     margin: 8px 0;
     background-color: #111111;
     color: white;
@@ -29,4 +29,14 @@
       border-radius: 4px;
     }
   }
+  .donation {
+    display: flex;
+    justify-content: center;
+    margin:20px;
+    button{
+      display: block;
+      text-align: center;
+    }
+  }
 }
+

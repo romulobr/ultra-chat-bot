@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 import actionsFor from './settings-actions';
 import SettingsForm from './settings-form';
 import {Alert} from "@smooth-ui/core-sc/dist/smooth-ui-core-sc";
+import styles from './settings-panel.module.scss';
 
 class SettingsPanel extends React.Component {
     render() {
         const {error, id, save, fetch, enabled, fieldSets, data} = this.props;
         return (
-            <>
+            <div className={styles.settingsPanel}>
                 {this.props.error && <Alert variant="danger">{JSON.stringify(this.props.error)}</Alert>}
                 <SettingsForm fieldSets={fieldSets}
                               id={id}
@@ -21,7 +22,7 @@ class SettingsPanel extends React.Component {
                                   console.log('got data')
                               }
                               }/>
-            </>
+            </div>
         );
     }
 }

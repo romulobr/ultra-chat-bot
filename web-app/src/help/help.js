@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import getSettingActionsFor from '../settings-panel/settings-actions';
 import {Button} from "@smooth-ui/core-sc/dist/smooth-ui-core-sc";
 import CollapsiblePanel from "../collapsible-panel/collapsible-panel";
+import {shell} from 'electron';
 
 const pjson = require('../../package.json');
 
@@ -14,6 +15,18 @@ const welcomeActions = getSettingActionsFor('welcome');
 const newsActions = getSettingActionsFor('news');
 const loyaltyActions = getSettingActionsFor('loyalty');
 const quizActions = getSettingActionsFor('quiz');
+
+
+function openNative(url, event) {
+    if (url && url.preventDefault) {
+        event = url;
+        event.preventDefault();
+        shell.openExternal(event.target.href);
+    } else {
+        event.preventDefault();
+        shell.openExternal(url);
+    }
+};
 
 function getDetectedSources(state) {
     const sources = [];
@@ -37,19 +50,44 @@ class Help extends React.Component {
             <>
             <div className={styles.instructions}>
                 <h1>Ultra v3 {pjson.version}</h1>
-                <p>This software is developed on my spare time and is is provided for free, I made because I have fun
-                    coding and like to help other streamers</p>
                 <p>If you have any problems, questions, suggestions or recommendations to help us make this software
-                    better, please let me know by filling this <a href={'https://google.com'}>support request magic
-                        scroll</a>, this will go directly
-                    to my e-mail, and you can add your contact information there if you so desire</p>
+                    better, please let me know by filling this <a href="null" onClick={(e) => {
+                        openNative('https://docs.google.com/forms/d/1BDicWspl-a80XYZKxSfTW96GVJtb-Hmo8gRzdsb0McY', e);
+                    }}>Support Request</a>, this will go directly
+                    me, and you can add your contact information there if you so desire, feel free to also stop by the
+                    stream and ask any question you feel like</p>
             </div>
             <div className={styles.instructions}>
                 <h1>Keep this project alive</h1>
-                <p>If you like this work and would like to help it keep going, feel free to
-                    use the following <a href="https://twitch.com/romulinotv">donation link</a>, or simply show up at <a
-                        href="https://streamlabs.com/romulinotv">my stream</a> to chat for a while, both would be very
-                    appreciated</p>
+                <p>This software is developed in my spare time and is provided for free, I made because I have fun
+                    coding and like to help other streamers.</p>
+                <p>That said, it feels awesome when our hard work is appreciated and it really motivates me to keep
+                    working and moving things further. </p>
+                <p>If you like this work and would like to help it keep
+                    going, please consider donating any amount.</p>
+                <div className={styles.donation}>
+                    <Button variant={"success"} onClick={(e) => {
+                        openNative('https://donorbox.org/keep-the-project-alive', e);
+                    }}>Donate to keep the project alive</Button>
+                </div>
+                Or just come to <a href="null" onClick={(e) => {
+                openNative('https://twitch.com/romulinotv', e);
+            }}> my twitch stream</a> to chat for a while, both would be very
+                appreciated.
+            </div>
+            <div className={styles.instructions}>
+                <h1>Browser Sources: OBS / XSPLIT / ETC</h1>
+                <p>All the apps will show up in the same source unless they are set up with a <strong>custom
+                    source</strong></p>
+                <p>Each custom source requires a browser source in your app</p>
+                <p>All your sources urls will be displayed bellow, add them to your streaming app and size it in any way
+                    you like</p>
+                <ul>
+                    <li>http://localhost:62619/scene</li>
+                    {this.props.detectedSources.map((source, i) => {
+                        return (<li key={i}>http://localhost:62619/scene?source={source} </li>)
+                    })}
+                </ul>
             </div>
             <div className={styles.instructions}>
                 <h1>Chat Bot & Connections</h1>
@@ -87,20 +125,6 @@ class Help extends React.Component {
                 </CollapsiblePanel>
 
 
-            </div>
-            <div className={styles.instructions}>
-                <h1>Browser Sources: OBS / XSPLIT / ETC</h1>
-                <p>All the apps will show up in the same source unless they are set up with a <strong>custom
-                    source</strong></p>
-                <p>Each custom source requires a browser source in your app</p>
-                <p>All your sources urls will be displayed bellow, add them to your streaming app and size it in any way
-                    you like</p>
-                <ul>
-                    <li>http://localhost:62619/scene</li>
-                    {this.props.detectedSources.map((source, i) => {
-                        return (<li key={i}>http://localhost:62619/scene?source={source} </li>)
-                    })}
-                </ul>
             </div>
             </>)
     }
