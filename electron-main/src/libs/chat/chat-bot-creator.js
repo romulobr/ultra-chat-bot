@@ -1,10 +1,10 @@
 const urls = require('../../urls');
-const MediaPlayerApp = require('../chat-apps/media-player/media-player-chat-app');
-const ChickenApp = require('../chat-apps/chiken/chicken-chat-app');
-const IconsApp = require('../chat-apps/icons/icons-chat-app');
-const WelcomeApp = require('../chat-apps/welcome/welcome-chat-app');
-const NewsApp = require('../chat-apps/news/news-chat-app');
-const LoyaltyApp = require('../chat-apps/loyalty/loyalty-chat-app');
+const MediaPlayerApp = require('./chat-apps/media-player/media-player-chat-app');
+const ChickenApp = require('./chat-apps/chiken/chicken-chat-app');
+const IconsApp = require('./chat-apps/icons/icons-chat-app');
+const WelcomeApp = require('./chat-apps/welcome/welcome-chat-app');
+const NewsApp = require('./chat-apps/news/news-chat-app');
+const LoyaltyApp = require('./chat-apps/loyalty/loyalty-chat-app');
 
 const twitchChatClient = require('../twitch/twitch-chat-client');
 const youtubeChatClient = require('../youtube/youtube-chat-client');

@@ -1,10 +1,7 @@
-const sendScreenMessage = require('../util/send-screen-message');
-const getNews = require('../../news-feed/news-feed-parser');
-const flatten = require('array-flatten');
-const commands = require('../util/command-in-text');
-const {verifyPermissions} = require('../util/permission-verifier');
-const {CoolDownManager} = require('../util/cool-down-manager');
-const urls = require('../../../urls');
+const ChatApp = require("../../ChatApp");
+const getNews = require('../../../news-feed/news-feed-parser');
+const commands = require('../../util/command-in-text');
+const urls = require('../../../../urls');
 
 let shuffle = function (array) {
 
@@ -27,18 +24,15 @@ let shuffle = function (array) {
 
 };
 
-class NewsChatApp {
-  constructor(settings) {
-    settings.options = settings.options || {};
-    settings.permissions = settings.permissions || {};
-    this.settings = settings;
-    this.feeds = settings.options.news || [];
+class NewsChatApp extends ChatApp {
+
+  setUp(settings) {
+    this.feeds = settings.options.newsFeeds || [];
     this.refreshIntervalInMinutes = settings.options.refreshIntervalInMinutes || 60;
     this.showIntervalInMinutes = settings.options.showIntervalInMinutes || 5;
     this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 1000;
     this.customSource = this.settings.source && this.settings.source.customSource;
     this.screenTime = settings.options.screenTime || 60;
-    this.cooldownManager = new CoolDownManager(this.settings.options.cooldown || 60);
     this.playAudio = settings.options.playAudio;
     this.audioUrl = settings.options.audioUrl;
 
@@ -80,13 +74,14 @@ class NewsChatApp {
       "duration": this.screenTime
     };
 
-    sendScreenMessage(screenMessage, this.customSource);
+    this.sendScreenMessage(screenMessage);
+
     if (this.playAudio) {
       const audioScreenMessage = {
         isMedia: true,
         url: urls.media + '/' + this.audioUrl
       };
-      sendScreenMessage(audioScreenMessage, this.customSource);
+      this.sendScreenMessage(audioScreenMessage);
     }
   }
 
@@ -107,14 +102,9 @@ class NewsChatApp {
     clearInterval(this.showIntervalId);
   }
 
-  async handleMessage(message) {
-    if (!verifyPermissions(this.settings.permissions, message)) return;
-    if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
-    if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
-
+  messageHandler(message) {
     let command = commands.commandInFirstWord(message.text, [this.settings.options.getLinkCommand]);
     if (!command) return;
-
     if (command.command === this.settings.options.getLinkCommand || 'news') {
       console.log('showing link', this.newsLink);
       this.newsLink && this.say('read more at ' + this.newsLink);

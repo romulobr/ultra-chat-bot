@@ -89,19 +89,19 @@ class Navigator extends Component {
                                                     <span role="img">📰 News</span>
                                                 </div>
                                             </Link>
-                                            {/*<Link to="/welcome">*/}
-                                                {/*<div*/}
-                                                    {/*className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/welcome') ? styles.selected : '')}>*/}
-                                                    {/*<span role="img" aria-label={"welcome"}>🙋‍ Welcome</span>*/}
-                                                {/*</div>*/}
-                                            {/*</Link>*/}
+                                            <Link to="/welcome">
+                                                <div
+                                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/welcome') ? styles.selected : '')}>
+                                                    <span role="img" aria-label={"welcome"}>🙋‍ Welcome</span>
+                                                </div>
+                                            </Link>
 
-                                            {/*<Link to="/quiz">*/}
-                                                {/*<div*/}
-                                                    {/*className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/quiz') ? styles.selected : '')}>*/}
-                                                    {/*<span role="img">🥇 Quiz</span>*/}
-                                                {/*</div>*/}
-                                            {/*</Link>*/}
+                                            <Link to="/quiz">
+                                                <div
+                                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/quiz') ? styles.selected : '')}>
+                                                    <span role="img">🥇 Quiz</span>
+                                                </div>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -110,11 +110,11 @@ class Navigator extends Component {
                                 <div className={styles.navigatorContent}>
                                     <Route key={'media-controls'} path="/media-controls/" component={media}/>
                                     <Route key={'chicken'} path="/chicken/" component={chickenControls}/>
-                                    {/*<Route key={'welcome'} path="/welcome/" component={welcome}/>*/}
+                                    <Route key={'welcome'} path="/welcome/" component={welcome}/>
                                     <Route key={'icons'} path="/icons/" component={icons}/>
                                     <Route key={'news'} path="/news/" component={news}/>
                                     <Route key={'loyalty'} path="/loyalty/" component={loyalty}/>
-                                    {/*<Route key={'quiz'} path={"/quiz/"} component={quiz}/>*/}
+                                    <Route key={'quiz'} path={"/quiz/"} component={quiz}/>
                                     <Route key={'help'} exact path={"/"} component={help}/>
                                 </div>
                             </Switch>

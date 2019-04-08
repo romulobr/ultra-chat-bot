@@ -6,7 +6,7 @@ import Chicken from './chicken/chicken';
 import Icons from './icons/icons';
 import Welcome from './welcome/welcome';
 import News from './news/news';
-
+// import Chests from './chests/chests';
 class App extends Component {
     render() {
         return (
@@ -17,6 +17,7 @@ class App extends Component {
                 <AudioPlayer/>
                 <Welcome/>
                 <News/>
+                {/*<Chests/>*/}
             </div>
         );
     }

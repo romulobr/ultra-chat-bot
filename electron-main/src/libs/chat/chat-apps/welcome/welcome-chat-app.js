@@ -1,19 +1,14 @@
-const {CoolDownManager} = require('../util/cool-down-manager');
-const commands = require('../util/command-in-text');
-const sendScreenMessage = require('../util/send-screen-message');
-const permissionVerifier = require('../util/permission-verifier');
+const ChatApp = require("../../ChatApp");
+const commands = require('../../util/command-in-text');
 const axios = require('axios');
-const welcomeMessagesApi = require('../../../urls').welcomeMessagesApi;
+const welcomeMessagesApi = require('../../../../urls').welcomeMessagesApi;
 
-class WelcomeChatApp {
+class WelcomeChatApp extends ChatApp {
 
-  constructor(settings) {
-    this.settings = settings;
+  setUp(settings) {
     this.jwt = settings.user.jwt;
     this.saveCommand = settings.options.saveCommand;
     this.showCommand = settings.options.showCommand;
-    this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
-    this.customSource = this.settings.source && this.settings.source.customSource;
   }
 
   async saveMessage(newMessage, id) {
@@ -33,11 +28,7 @@ class WelcomeChatApp {
     return axios.get(`${welcomeMessagesApi}?author=${id}`, {headers: {Authorization: 'Bearer ' + this.jwt}});
   }
 
-  async handleMessage(message) {
-    if (!permissionVerifier.verifyPermissions(this.settings.permissions, message)) return;
-    if (this.cooldownManager.isBlockedByGlobalCoolDown()) return;
-    if (this.cooldownManager.isAuthorBlockedByCoolDown(message.author)) return;
-
+  async messageHandler(message) {
     let command = commands.commandInFirstWord(message.text, [this.saveCommand, this.showCommand]);
     if (!command) return;
 
@@ -60,7 +51,7 @@ class WelcomeChatApp {
           ...authorWelcomeMessage.data[0],
           author: message.author
         };
-        sendScreenMessage(screenMessage, this.settings.options.source && this.settings.options.source.customSource);
+        this.sendScreenMessage(screenMessage);
       }
     }
   }

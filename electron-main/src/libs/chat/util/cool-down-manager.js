@@ -28,7 +28,6 @@ class CoolDownManager {
     this.blockedByCooldown.global = false;
   }
 
-
   addCoolDownTo(author) {
     if (this.cooldown.user &&
       !isNaN(this.cooldown.user) &&

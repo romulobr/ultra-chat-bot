@@ -1,22 +1,17 @@
-const cleanText = require('../util/command-in-text').cleanText;
-const sendScreenMessage = require('../util/send-screen-message');
-const {CoolDownManager} = require('../util/cool-down-manager');
-const mediaUrl = require('../../../urls').media;
+const mediaUrl = require('../../../../urls').media;
+const ChatApp = require("../../ChatApp");
+const cleanText = require('../../util/command-in-text').cleanText;
 
-class IconsChatApp {
+class IconsChatApp extends ChatApp {
 
-  constructor(settings) {
-    settings.options = settings.options || {};
-    this.settings = settings;
+  setUp(settings) {
+    super.setUp(settings);
     this.wordList = (settings.options.icons && settings.options.icons.map(icon => {
       return {
         image: icon.image,
         words: icon.words && icon.words.trim().split(' ')
       }
     })) || [];
-    // this.settings.wordList = settings.;
-    this.cooldownManager = new CoolDownManager(this.settings.options.cooldown);
-    this.customSource = this.settings.source && this.settings.source.customSource;
   }
 
   iconsInText(text) {
@@ -34,13 +29,13 @@ class IconsChatApp {
     return icons;
   }
 
-  async handleMessage(message) {
+  messageHandler(message) {
     const icons = this.iconsInText(cleanText(message.text));
     if (icons.length > 0) {
       icons.forEach(icon => {
         console.log(`icon ${icon} found in message: ${message.text}`);
         const screenMessage = {isIcons: true, icon};
-        sendScreenMessage(screenMessage, this.customSource);
+        this.sendScreenMessage(screenMessage);
       });
       this.cooldownManager.addCoolDownTo(message.author);
     }

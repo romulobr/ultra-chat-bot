@@ -9,8 +9,11 @@ const loyaltyFields = [
             {id: 'pointsPerRound', label: 'Points per round', type: 'number'},
             {id: 'subscriberMultiplier', label: 'Joined/Sub Multiplier', type: 'number'},
             {id: 'roundDurationInMinutes', label: 'Round Duration (minutes)', type: 'number'},
+            {id: 'showIcons', label: 'Show Icons', type: 'checkbox'},
             {id: 'icon', label: 'Icon Image or URL', type: 'text'},
-            {id: 'sound', label: 'Sound File or URL', type: 'text'}
+            {id: 'playAudio', label: 'Play Audio', type: 'checkbox'},
+            {id: 'audioVolume', label: 'Audio Volume', type: 'checkbox'},
+            {id: 'audio', label: 'Audio File or URL', type: 'text'}
         ]
     }, permissionFields, cooldownFields, customSourceFields];
 export default loyaltyFields;
