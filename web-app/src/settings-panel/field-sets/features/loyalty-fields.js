@@ -12,8 +12,8 @@ const loyaltyFields = [
             {id: 'showIcons', label: 'Show Icons', type: 'checkbox'},
             {id: 'icon', label: 'Icon Image or URL', type: 'text'},
             {id: 'playAudio', label: 'Play Audio', type: 'checkbox'},
-            {id: 'audioVolume', label: 'Audio Volume', type: 'checkbox'},
-            {id: 'audio', label: 'Audio File or URL', type: 'text'}
+            {id: 'audio', label: 'Audio File or URL', type: 'text'},
+            {id: 'audioVolume', label: 'Audio Volume', type: 'number'},
         ]
     }, permissionFields, cooldownFields, customSourceFields];
 export default loyaltyFields;

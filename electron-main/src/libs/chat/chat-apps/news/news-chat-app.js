@@ -31,7 +31,6 @@ class NewsChatApp extends ChatApp {
     this.refreshIntervalInMinutes = settings.options.refreshIntervalInMinutes || 60;
     this.showIntervalInMinutes = settings.options.showIntervalInMinutes || 5;
     this.maximumDescriptionSize = settings.options.maximumDescriptionSize || 1000;
-    this.customSource = this.settings.source && this.settings.source.customSource;
     this.screenTime = settings.options.screenTime || 60;
     this.playAudio = settings.options.playAudio;
     this.audioUrl = settings.options.audioUrl;
