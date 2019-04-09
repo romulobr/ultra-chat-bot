@@ -50,6 +50,9 @@ class Help extends React.Component {
             <>
             <div className={styles.instructions}>
                 <h1>Ultra v3 {pjson.version}</h1>
+                <a href="null" onClick={(e) => {
+                    openNative('http://www.romulino.com/bem-vindo-ao-beta-fechado/', e);
+                }}>Guia Básico em português</a>
                 <p>If you have any problems, questions, suggestions or recommendations to help us make this software
                     better, please let me know by filling this <a href="null" onClick={(e) => {
                         openNative('https://docs.google.com/forms/d/1BDicWspl-a80XYZKxSfTW96GVJtb-Hmo8gRzdsb0McY', e);
