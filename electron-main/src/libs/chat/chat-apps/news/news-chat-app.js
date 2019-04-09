@@ -27,6 +27,7 @@ let shuffle = function (array) {
 class NewsChatApp extends ChatApp {
 
   setUp(settings) {
+    super.setUp(settings);
     this.feeds = settings.options.newsFeeds || [];
     this.refreshIntervalInMinutes = settings.options.refreshIntervalInMinutes || 60;
     this.showIntervalInMinutes = settings.options.showIntervalInMinutes || 5;

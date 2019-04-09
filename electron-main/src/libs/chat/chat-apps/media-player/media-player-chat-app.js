@@ -5,6 +5,7 @@ const urls = require('../../../../urls');
 class MediaPlayerChatApp extends ChatApp {
 
   setUp(settings) {
+    super.setUp(settings);
     settings.options = settings.options || {};
     this.items = settings.options.items;
     this.commands = (settings.options.items && settings.options.items.map(mediaItem => mediaItem.command.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) || [];
@@ -24,6 +25,7 @@ class MediaPlayerChatApp extends ChatApp {
   }
 
   messageHandler(message) {
+    if(!message.item){return;}
     const mediaUrl = urls.media + '/' + message.item.url;
     const screenMessage = {
       isMedia: true,
@@ -32,7 +34,7 @@ class MediaPlayerChatApp extends ChatApp {
       volume: message.item.volumeOverride || this.defaultVolume || 1,
       author: message.author
     };
-    this.sendScreenMessage(screenMessage);
+    this.sendScreenMessage(screenMessage, message.item.sourceOverride);
     this.cooldownManager.addCoolDownTo(message.author);
   }
 }

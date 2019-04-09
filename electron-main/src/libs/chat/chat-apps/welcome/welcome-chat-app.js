@@ -6,6 +6,7 @@ const welcomeMessagesApi = require('../../../../urls').welcomeMessagesApi;
 class WelcomeChatApp extends ChatApp {
 
   setUp(settings) {
+    super.setUp(settings);
     this.jwt = settings.user.jwt;
     this.saveCommand = settings.options.saveCommand;
     this.showCommand = settings.options.showCommand;

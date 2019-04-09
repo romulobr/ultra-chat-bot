@@ -15,17 +15,15 @@ class ChatApp {
       this.cooldownManager = new CoolDownManager(settings.cooldown);
     }
     this.permissions = settings.permissions;
-    this.source = settings.options && settings.options.source;
-    this.customSource = settings.options && settings.options.customSource;
+    this.source = settings.source && settings.source.customSource;
     this.options = settings.options;
     this.loyalty = settings.loyalty;
     this.user = settings.user;
-    this.sendScreenMessage = sendScreenMessage;
   }
 
-  sendScreenMessage(payload) {
+  sendScreenMessage(payload, sourceOverride) {
     console.log('sending screen message');
-    sendScreenMessage(payload, this.source && this.customSource)
+    sendScreenMessage(payload, sourceOverride || this.source);
   }
 
   permissionGranted(message) {
