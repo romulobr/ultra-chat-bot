@@ -89,19 +89,19 @@ class Navigator extends Component {
                                                     <span role="img">📰 News</span>
                                                 </div>
                                             </Link>
-                                            <Link to="/welcome">
-                                                <div
-                                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/welcome') ? styles.selected : '')}>
-                                                    <span role="img" aria-label={"welcome"}>🙋‍ Welcome</span>
-                                                </div>
-                                            </Link>
+                                            {/*<Link to="/welcome">*/}
+                                            {/*    <div*/}
+                                            {/*        className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/welcome') ? styles.selected : '')}>*/}
+                                            {/*        <span role="img" aria-label={"welcome"}>🙋‍ Welcome</span>*/}
+                                            {/*    </div>*/}
+                                            {/*</Link>*/}
 
-                                            <Link to="/quiz">
-                                                <div
-                                                    className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/quiz') ? styles.selected : '')}>
-                                                    <span role="img">🥇 Quiz</span>
-                                                </div>
-                                            </Link>
+                                            {/*<Link to="/quiz">*/}
+                                            {/*    <div*/}
+                                            {/*        className={styles.navigationItem + ' ' + (Navigator.isSelected(location, '/quiz') ? styles.selected : '')}>*/}
+                                            {/*        <span role="img">🥇 Quiz</span>*/}
+                                            {/*    </div>*/}
+                                            {/*</Link>*/}
                                         </div>
                                     </div>
                                 </div>
