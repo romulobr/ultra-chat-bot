@@ -1,0 +1,60 @@
+{
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "sDjzzmJ5v7RQxH7dQ4r38EQv5jCbdyvEKCVkthXK9Wjb3RJP24L5hYUgceKxLe8y",
+    "strategies": [
+      "jwt"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://localhost:62619",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "7d"
+    },
+    "twitch": {
+      "chatBotUsername": "ultravaca",
+      "chatBotOauthToken": "oauth:9bdas8nne63y5wjbuqwfpfcxtikdc8",
+      "username": "romulinoTV",
+      "clientID": "8pn492ntwzaws6e5ra4hge467ltdbh",
+      "clientSecret": "6tb5ztel82uel20inocd02vmdvqwfr",
+      "successRedirect": "/auth-success",
+      "callbackURL": "http://localhost:62619/api/auth/twitch/callback",
+      "scope": [
+        "user:read:email user_read"
+      ]
+    },
+    "youtube": {
+      "clientID": "255569712867-litipt715qsigm8rqbnrtt0b13n90qcu.apps.googleusercontent.com",
+      "clientSecret": "leC9qcUULHS7949Q4VJuVAhS",
+      "callbackURL": "http://localhost:62619/api/auth/youtube/callback",
+      "successRedirect": "/auth-success",
+      "scope": [
+        "https://www.googleapis.com/auth/youtube"
+      ]
+    },
+    "streamlabs": {
+      "clientID": "TTq9QJMhJAbRFZJR6xKjn1jQvLQfzky7UNg7mr6p",
+      "clientSecret": "DKCROmPYasUkqL7FwLeQ3ZniXiKjSQVJk3bWpUCk",
+      "callbackURL": "http://localhost:62619/streamlabs/callback",
+      "successRedirect": "/auth-success",
+      "scope": [
+        "points.read points.write"
+      ]
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
+    }
+  }
+}
