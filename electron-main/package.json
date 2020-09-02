@@ -24,7 +24,7 @@
     "feedme": "^1.2.0",
     "feedparser": "^2.2.9",
     "feedparser-promised": "^2.0.0",
-    "googleapis": "^37.2.0",
+    "googleapis": "^39.1.0",
     "helmet": "^3.14.0",
     "htmlparser2": "^3.10.0",
     "iconv-lite": "^0.4.24",
