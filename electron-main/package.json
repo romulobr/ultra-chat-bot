@@ -14,7 +14,7 @@
     "@feathersjs/feathers": "^3.2.3",
     "@feathersjs/socketio": "^3.2.6",
     "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "electron-window-state": "^5.0.2",
